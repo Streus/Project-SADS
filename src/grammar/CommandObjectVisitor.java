@@ -136,7 +136,7 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 		String str = visit(ctx.expr());
 		
 		if(debugFlag == true){
-			System.out.println("expr = " + expr);
+			System.out.println("expr = " + str);
 		}
 		
 		BuildCommand buildCommand = new BuildCommand(str);
