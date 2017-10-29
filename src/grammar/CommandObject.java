@@ -11,6 +11,7 @@ import engine.command.CommandResponse;
 //COMMAND HIERARCHY LEVEL 0
 public abstract class CommandObject{										
 	public String commandType;
+	public boolean debugFlag = true;
 	
 	public CommandObject(){//default constructor
 		commandType = "";
@@ -71,6 +72,9 @@ class VariableAssignmentCommand extends VarDefCommand{
 		commandType = "VariableAssignmentCommand";
 		this.varName = varName;
 		this.value = value;
+		
+		if(debugFlag == true)
+			System.out.println("VariableAssignmentCommand constructed");
 	}
 }
 
@@ -86,6 +90,9 @@ class AlphabetDefinitionCommand extends VarDefCommand{
 		commandType = "AlphabetDefinitionCommand";
 		this.alphabetName = alphabetName;
 		this.charList = charList;
+		
+		if(debugFlag == true)
+			System.out.println("AlphabetDefinitionCommand constructed");
 	}
 	
 }
@@ -101,6 +108,9 @@ class SubstitutionCommand extends StringCommand{
 		commandType = "SubstitutionCommand";
 		this.target = target;
 		this.replacement = replacement;
+		
+		if(debugFlag == true)
+			System.out.println("SubstitutionCommand constructed");
 	}
 }
 
@@ -115,6 +125,9 @@ class CompareCommand extends StringCommand{
 		commandType = "CompareCommand";
 		this.str1 = str1;
 		this.str2 = str2;
+		
+		if(debugFlag == true)
+			System.out.println("CompareCommand constructed");
 	}
 }
 
@@ -129,6 +142,9 @@ class CuttingTimesCommand extends PredefinedFunctionCommand{
 	public CuttingTimesCommand (String expr){
 		commandType = "CuttingTimesCommand";
 		this.expr = expr;
+		
+		if(debugFlag == true)
+			System.out.println("CuttingTimesCommand constructed");
 	}
 	
 	@Override
@@ -152,6 +168,9 @@ class StarProductCommand extends PredefinedFunctionCommand{
 		commandType = "StarProductCommand";
 		this.str1 = str1;
 		this.str2 = str2;
+		
+		if(debugFlag == true)
+			System.out.println("StarProductCommand constructed");
 	}
 	
 	@Override
@@ -173,6 +192,9 @@ class ShiftMaximalityCommand extends PredefinedFunctionCommand{
 	public ShiftMaximalityCommand (String operand){
 		commandType = "ShiftMaximalityCommand";
 		this.operand = operand;
+		
+		if(debugFlag == true)
+			System.out.println("ShiftMaximalityCommand constructed");
 	}
 	
 	@Override
@@ -197,6 +219,9 @@ class WordCountCommand extends PredefinedFunctionCommand{
 		commandType = "WordCountCommand";
 		this.str = str;
 		//this.subL = i;
+		
+		if(debugFlag == true)
+			System.out.println("WordCountCommand constructed");
 	}
 	
 	@Override 
@@ -221,6 +246,9 @@ class BuildCommand extends PredefinedFunctionCommand{
 	public BuildCommand (String str){
 		commandType = "BuildCommand";
 		this.str = str;
+		
+		if(debugFlag == true)
+			System.out.println("BuildCommand constructed");
 	}
 }
 
@@ -236,6 +264,9 @@ class ConcatenationCommand extends PredefinedFunctionCommand{
 		commandType = "ConcatenationCommand";
 		this.baseStr = baseStr;
 		this.concatStr = concatStr;
+		
+		if(debugFlag == true)
+			System.out.println("ConcatenationCommand constructed");
 	}
 	
 	public ConcatenationCommand (String baseStr, String concatStr, int index){//concatenate concatStr to baseStr at index
@@ -243,5 +274,8 @@ class ConcatenationCommand extends PredefinedFunctionCommand{
 		this.baseStr = baseStr;
 		this.concatStr = concatStr;
 		this.index = index;
+		
+		if(debugFlag == true)
+			System.out.println("CompareCommand constructed");
 	}
 }
