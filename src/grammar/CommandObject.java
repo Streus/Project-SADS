@@ -1,6 +1,12 @@
 package grammar;
 import java.util.List;
-//Command Objects to be passed to the Engine
+//Command Objects to processed in the Engine
+
+import engine.PredefinedFunctions.CuttingTimes;
+import engine.PredefinedFunctions.ShiftMaximality;
+import engine.PredefinedFunctions.StarProduct;
+import engine.PredefinedFunctions.WordCount;
+import engine.command.CommandResponse;
 
 //COMMAND HIERARCHY LEVEL 0
 public abstract class CommandObject{										
@@ -9,27 +15,46 @@ public abstract class CommandObject{
 	public CommandObject(){//default constructor
 		commandType = "";
 	}
+
+	public CommandResponse execute() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }
 
 //COMMAND HIERARCHY LEVEL 1
 
-class VarDefCommand extends CommandObject{					
+abstract class VarDefCommand extends CommandObject{					
 	public VarDefCommand (){//default constructor
 		commandType = "";
 	}
+	
+	public CommandResponse execute() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
 
-class StringCommand extends CommandObject{					
+abstract class StringCommand extends CommandObject{					
 	public StringCommand (){//default constructor
 		commandType = "";
 	}
 	
+	public CommandResponse execute() {
+		// TODO Auto-generated method stub
+		return null;
+	}	
 }
 
 class PredefinedFunctionCommand extends CommandObject{		
 	public PredefinedFunctionCommand (){//default constructor
 		commandType = "";
+	}
+	
+	public CommandResponse execute() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
 
@@ -93,6 +118,7 @@ class CompareCommand extends StringCommand{
 	}
 }
 
+//////////////////PREDEFINED FUNCTIONS//////////////////
 class CuttingTimesCommand extends PredefinedFunctionCommand{	
 	String expr;
 	
@@ -103,6 +129,15 @@ class CuttingTimesCommand extends PredefinedFunctionCommand{
 	public CuttingTimesCommand (String expr){
 		commandType = "CuttingTimesCommand";
 		this.expr = expr;
+	}
+	
+	@Override
+	public CommandResponse execute() {
+		
+		CuttingTimes ct = new CuttingTimes();		
+		CommandResponse resp = new CommandResponse(ct.cuttingTimes(expr));
+		
+		return resp;
 	}
 }
 
@@ -118,18 +153,13 @@ class StarProductCommand extends PredefinedFunctionCommand{
 		this.str1 = str1;
 		this.str2 = str2;
 	}
-}
-
-class BuildCommand extends PredefinedFunctionCommand{	
-	String str;
-		
-	public BuildCommand (){//default constructor
-		commandType = "";
-	}
 	
-	public BuildCommand (String str){
-		commandType = "BuildCommand";
-		this.str = str;
+	@Override
+	public CommandResponse execute() {
+		
+		StarProduct sp = new StarProduct();
+		CommandResponse resp = new CommandResponse(sp.starProduct(str1,str2));
+		return resp;
 	}
 }
 
@@ -144,10 +174,20 @@ class ShiftMaximalityCommand extends PredefinedFunctionCommand{
 		commandType = "ShiftMaximalityCommand";
 		this.operand = operand;
 	}
+	
+	@Override
+	public CommandResponse execute() {
+		
+		ShiftMaximality sm = new ShiftMaximality();
+		CommandResponse resp = new CommandResponse(sm.shiftMaximal(operand));
+		
+		return resp;	
+	}
 }
 
 class WordCountCommand extends PredefinedFunctionCommand{	
 	String str;
+	//int subL;
 	
 	public WordCountCommand (){//default constructor
 		commandType = "";
@@ -155,6 +195,31 @@ class WordCountCommand extends PredefinedFunctionCommand{
 	
 	public WordCountCommand (String str){
 		commandType = "WordCountCommand";
+		this.str = str;
+		//this.subL = i;
+	}
+	
+	@Override 
+	public CommandResponse execute() {
+		
+		WordCount wc = new WordCount();
+		CommandResponse resp = new CommandResponse(wc.wordCount(str, 0)); //need an int parameter
+		
+		return resp;	
+	}
+}
+
+//////////////////END PREDEFINED FUNCTIONS//////////////////
+
+class BuildCommand extends PredefinedFunctionCommand{	
+	String str;
+		
+	public BuildCommand (){//default constructor
+		commandType = "";
+	}
+	
+	public BuildCommand (String str){
+		commandType = "BuildCommand";
 		this.str = str;
 	}
 }
