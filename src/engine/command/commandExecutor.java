@@ -6,7 +6,10 @@ public class commandExecutor {
 		
 		ShiftMaximalityCommand smCommand = new ShiftMaximalityCommand("101110101011101*");
 		
-		System.out.println(smCommand.execute()); 
+		CommandResponse smResp = smCommand.execute();
+		
+		System.out.println(smResp.returnVal);
+		
 
 	}
 
