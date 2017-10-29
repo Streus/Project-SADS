@@ -9,20 +9,28 @@ import java.util.Map;
  */
 public class CommandResponse {
 	
+	public String responseType;
+	
+	//default constructor
+	public CommandResponse() {
+		responseType = "default";
+	}
+	
+	//predefined function constructors
 	public CommandResponse(Map<String, Integer> input) {
-		
+		responseType = "WordCount";
 	}
 	
 	public CommandResponse(int[] input) {
-		
+		responseType = "CuttingTimes";
 	}
 	
-	public CommandResponse(int input ) {
-		
+	public CommandResponse(int input) {
+		responseType = "ShiftMaximality";
 	}
 	
 	public CommandResponse(String input) {
-		
+		responseType = "StarProduct";
 	}	 
 	
 }
