@@ -15,8 +15,8 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 
 	@Override
     public CommandObject visitSubstitutionOfExpression(SequenceAnalyzerParser.SubstitutionOfExpressionContext ctx){
-		String target = visit(ctx.expr(1));
-		String replacement = visit(ctx.expr(2));
+		String target = ctx.expr(1).getText();
+		String replacement = ctx.expr(2).getText();
 		
 		if(debugFlag == true){
 			System.out.println("target = " + target);
@@ -36,8 +36,8 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 
 	@Override
     public CommandObject visitComparisonOfExpression(SequenceAnalyzerParser.ComparisonOfExpressionContext ctx){
-		String str1 = visit(ctx.expr(1));
-		String str2 = visit(ctx.expr(2)); 
+		String str1 = ctx.expr(1).getText();
+		String str2 = ctx.expr(2).getText(); 
 		
 		if(debugFlag == true){
 			System.out.println("str1 = " + str1);
@@ -62,7 +62,7 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 
 	@Override
     public CommandObject visitCuttingTimesOfExpression(SequenceAnalyzerParser.CuttingTimesOfExpressionContext ctx){
-		String expr = visit(ctx.expr());
+		String expr = ctx.expr().getText();
 		
 		if(debugFlag == true){
 			System.out.println("expr = " + expr);
@@ -76,7 +76,7 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 
 	@Override
     public CommandObject  visitCuttingTimesOfExpressionInParens(SequenceAnalyzerParser.CuttingTimesOfExpressionInParensContext ctx){
-		String expr = visit(ctx.expr());
+		String expr = ctx.expr().getText();
 		
 		if(debugFlag == true){
 			System.out.println("expr = " + expr);
@@ -94,9 +94,9 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 //	}
 
 	@Override
-    public void  visitStarProductOfExpressions(SequenceAnalyzerParser.StarProductOfExpressionsContext ctx){
-		String str1 = visit(ctx.expr(1));
-		String str2 = visit(ctx.expr(2)); 
+    public CommandObject  visitStarProductOfExpressions(SequenceAnalyzerParser.StarProductOfExpressionsContext ctx){
+		String str1 = ctx.expr(1).getText();
+		String str2 = ctx.expr(2).getText(); 
 		
 		if(debugFlag == true){
 			System.out.println("str1 = " + str1);
@@ -105,6 +105,8 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 		
 		StarProductCommand spCommand = new StarProductCommand(str1, str2); 
 		commandObjectStack.push(spCommand);
+		
+		return spCommand;
 	}
 
 //	@Override
@@ -119,7 +121,7 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 
 	@Override
     public CommandObject  visitBuildExpression(SequenceAnalyzerParser.BuildExpressionContext ctx){
-		String str = visit(ctx.expr());
+		String str = ctx.expr().getText();
 		
 		if(debugFlag == true){
 			System.out.println("expr = " + str);
@@ -133,7 +135,7 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 
 	@Override
     public CommandObject  visitBuildExpressionInParens(SequenceAnalyzerParser.BuildExpressionInParensContext ctx){
-		String str = visit(ctx.expr());
+		String str = ctx.expr().getText();
 		
 		if(debugFlag == true){
 			System.out.println("expr = " + str);
@@ -157,7 +159,7 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 
 	@Override
     public CommandObject  visitShiftMaximalityOfExpression(SequenceAnalyzerParser.ShiftMaximalityOfExpressionContext ctx){
-		String operand = visit(ctx.expr());
+		String operand = ctx.expr().getText();
 		
 		if(debugFlag == true){
 			System.out.println("operand = " + operand);
@@ -171,7 +173,7 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 
 	@Override
     public CommandObject  visitShiftMaximalityOfExpressionInParens(SequenceAnalyzerParser.ShiftMaximalityOfExpressionInParensContext ctx){
-		String operand = visit(ctx.expr());
+		String operand = ctx.expr().getText();
 		
 		if(debugFlag == true){
 			System.out.println("operand = " + operand);
@@ -195,7 +197,7 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 
 	@Override
     public CommandObject  visitWordCountOfExpression(SequenceAnalyzerParser.WordCountOfExpressionContext ctx){
-		String str = visit(ctx.expr());
+		String str = ctx.expr().getText();
 		
 		if(debugFlag == true){
 			System.out.println("str = " + str);
@@ -209,7 +211,7 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 
 	@Override
     public CommandObject  visitWordCountOfExpressionInParens(SequenceAnalyzerParser.WordCountOfExpressionInParensContext ctx){
-		String str = visit(ctx.expr());
+		String str = ctx.expr().getText();
 		
 		if(debugFlag == true){
 			System.out.println("str = " + str);
@@ -233,8 +235,8 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 	
 	@Override
     public CommandObject visitConcatOn2Expressions(SequenceAnalyzerParser.ConcatOn2ExpressionsContext ctx){
-		String baseStr = visit(ctx.expr(1));
-		String concatStr = visit(ctx.expr(2));
+		String baseStr = ctx.expr(1).getText();
+		String concatStr = ctx.expr(2).getText();
 		
 		if(debugFlag == true){
 			System.out.println("baseStr = " + baseStr);
@@ -249,9 +251,9 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 	
 	@Override
     public CommandObject visitConcatOn2ExpressionsAtIndex(SequenceAnalyzerParser.ConcatOn2ExpressionsAtIndexContext ctx){
-		String baseStr = visit(ctx.expr(1));
-		String concatStr = visit(ctx.expr(2));
-		int index = ctx.INT().getText();
+		String baseStr = ctx.expr(1).getText();
+		String concatStr = ctx.expr(2).getText();
+		int index = Integer.parseInt(ctx.INT().getText());
 		
 		if(debugFlag == true){
 			System.out.println("baseStr = " + baseStr);
