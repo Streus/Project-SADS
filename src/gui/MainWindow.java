@@ -592,7 +592,7 @@ public class MainWindow
 		{
 			outputArea.setText(outputArea.getText() + "~ " + inputLine.getText() + "\n");
 			
-			AntlrBridge a = new AntlrBridge(inputLine.getText());
+			AntlrBridge a = new AntlrBridge(inputLine.getText() + "\n");
 		}
 		
 		Console.instance().addToHistory(inputLine.getText());
