@@ -3,6 +3,7 @@ package grammar;
 import java.util.*;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.ParseTree;
+import engine.command.*;
 
 public class AntlrBridge {
 
@@ -21,6 +22,8 @@ public class AntlrBridge {
 		coVisitor.visit(tree);
 		
 		Stack<CommandObject> commandObjectStack = coVisitor.commandObjectStack;
+		
+		commandExecutor.executeStack(commandObjectStack);
 	}
 	
 	

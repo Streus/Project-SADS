@@ -19,7 +19,7 @@ public class commandExecutor {
 		
 		CommandResponse resp = obj.execute();
 		
-		Console.print("Response from commandExecutor: " + resp.returnVal);
+		Console.println("Response from commandExecutor: " + resp.returnVal);
 	}
 
 }
