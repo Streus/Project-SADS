@@ -180,26 +180,12 @@ public interface SequenceAnalyzerVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitWordCountOfFile(SequenceAnalyzerParser.WordCountOfFileContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code WordCountOfFileInParens}
-	 * labeled alternative in {@link SequenceAnalyzerParser#wordct}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitWordCountOfFileInParens(SequenceAnalyzerParser.WordCountOfFileInParensContext ctx);
-	/**
 	 * Visit a parse tree produced by the {@code WordCountOfExpression}
 	 * labeled alternative in {@link SequenceAnalyzerParser#wordct}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitWordCountOfExpression(SequenceAnalyzerParser.WordCountOfExpressionContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code WordCountOfExpressionInParens}
-	 * labeled alternative in {@link SequenceAnalyzerParser#wordct}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitWordCountOfExpressionInParens(SequenceAnalyzerParser.WordCountOfExpressionInParensContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code ConcatOn2files}
 	 * labeled alternative in {@link SequenceAnalyzerParser#concat}.
@@ -268,11 +254,4 @@ public interface SequenceAnalyzerVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitCommand(SequenceAnalyzerParser.CommandContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code parens}
-	 * labeled alternative in {@link SequenceAnalyzerParser#expr}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitParens(SequenceAnalyzerParser.ParensContext ctx);
 }

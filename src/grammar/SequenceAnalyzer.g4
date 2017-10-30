@@ -69,11 +69,9 @@ sm		:	'sm' file NEWLINE			#ShiftMaximalityOfFile
 		|	'sm' LP expr RP NEWLINE		#ShiftMaximalityOfExpressionInParens
 		;
 	
-//input must be in format wordcount data or wordcount (data)	
-wordct	:	'wordcount' file NEWLINE			#WordCountOfFile
-		|	'wordcount' LP file RP NEWLINE		#WordCountOfFileInParens
-		|	'wordcount' expr NEWLINE			#WordCountOfExpression
-		|	'wordcount' LP expr RP NEWLINE		#WordCountOfExpressionInParens
+//input must be in format wordcount data or wordcount (data, data)	
+wordct	:	'wordcount' LP file COMMA file RP NEWLINE		#WordCountOfFile
+		|	'wordcount' LP expr COMMA INT RP NEWLINE		#WordCountOfExpression
 		;
 		
 //input must be in format concat (data , data) or concat (data , data , index)	
@@ -118,7 +116,6 @@ expr	:
 			ID					   # id			//expression as single ID
 		|   INT                    # int        //expression as single Int 
 		|	cmd					   # command
-		|   '(' expr ')'           # parens		//expression within parenthesis
 		;
 
 

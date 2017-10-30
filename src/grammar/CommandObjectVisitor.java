@@ -166,6 +166,7 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 		String operand = ctx.expr().getText();
 		
 		if(debugFlag == true){
+			System.out.println("ShiftMaximalityNoParens");
 			System.out.println("operand = " + operand);
 		}
 		
@@ -180,6 +181,7 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 		String operand = ctx.expr().getText();
 		
 		if(debugFlag == true){
+			System.out.println("ShiftMaximalityInParens");
 			System.out.println("operand = " + operand);
 		}
 		
@@ -194,38 +196,23 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 //		
 //	}
 //
-//	@Override
-//    public void  visitWordCountOfFileInParens(SequenceAnalyzerParser.WordCountOfFileInParensContext ctx){
-//		
-//	}
 
 	@Override
     public CommandObject  visitWordCountOfExpression(SequenceAnalyzerParser.WordCountOfExpressionContext ctx){
 		String str = ctx.expr().getText();
+		int index = Integer.parseInt(ctx.INT().getText());
 		
 		if(debugFlag == true){
 			System.out.println("str = " + str);
+			System.out.println("index = " + index);
 		}
 		
-		WordCountCommand wordcountCommand = new WordCountCommand(str);
+		WordCountCommand wordcountCommand = new WordCountCommand(str,index);
 		commandObjectStack.push(wordcountCommand);
 		
 		return wordcountCommand;
 	}
 
-	@Override
-    public CommandObject  visitWordCountOfExpressionInParens(SequenceAnalyzerParser.WordCountOfExpressionInParensContext ctx){
-		String str = ctx.expr().getText();
-		
-		if(debugFlag == true){
-			System.out.println("str = " + str);
-		}
-		
-		WordCountCommand wordcountCommand = new WordCountCommand(str);
-		commandObjectStack.push(wordcountCommand);
-		
-		return wordcountCommand;
-	}
 
 //	@Override
 //    public void  visitConcatOn2files(SequenceAnalyzerParser.ConcatOn2filesContext ctx){

@@ -209,16 +209,16 @@ class ShiftMaximalityCommand extends PredefinedFunctionCommand{
 
 class WordCountCommand extends PredefinedFunctionCommand{	
 	String str;
-	//int subL;
+	int index;
 	
 	public WordCountCommand (){//default constructor
 		commandType = "";
 	}
 	
-	public WordCountCommand (String str){
+	public WordCountCommand (String str, int index){
 		commandType = "WordCountCommand";
 		this.str = str;
-		//this.subL = i;
+		this.index = index;
 		
 		if(debugFlag == true)
 			System.out.println("WordCountCommand constructed");
