@@ -18,8 +18,8 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 
 	@Override
     public CommandObject visitSubstitutionOfExpression(SequenceAnalyzerParser.SubstitutionOfExpressionContext ctx){
-		String target = ctx.expr(1).getText();
-		String replacement = ctx.expr(2).getText();
+		String target = ctx.expr(0).getText();
+		String replacement = ctx.expr(1).getText();
 		
 		if(debugFlag == true){
 			System.out.println("target = " + target);
@@ -39,8 +39,8 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 
 	@Override
     public CommandObject visitComparisonOfExpression(SequenceAnalyzerParser.ComparisonOfExpressionContext ctx){
-		String str1 = ctx.expr(1).getText();
-		String str2 = ctx.expr(2).getText(); 
+		String str1 = ctx.expr(0).getText();
+		String str2 = ctx.expr(1).getText(); 
 		
 		if(debugFlag == true){
 			System.out.println("str1 = " + str1);
@@ -98,8 +98,9 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 
 	@Override
     public CommandObject  visitStarProductOfExpressions(SequenceAnalyzerParser.StarProductOfExpressionsContext ctx){
-		String str1 = ctx.expr(1).getText();
-		String str2 = ctx.expr(2).getText(); 
+		System.out.println("Visiting StarProductOfExpressions");
+		String str1 = ctx.expr(0).getText();
+		String str2 = ctx.expr(1).getText(); 
 		
 		if(debugFlag == true){
 			System.out.println("str1 = " + str1);
@@ -238,8 +239,8 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 	
 	@Override
     public CommandObject visitConcatOn2Expressions(SequenceAnalyzerParser.ConcatOn2ExpressionsContext ctx){
-		String baseStr = ctx.expr(1).getText();
-		String concatStr = ctx.expr(2).getText();
+		String baseStr = ctx.expr(0).getText();
+		String concatStr = ctx.expr(1).getText();
 		
 		if(debugFlag == true){
 			System.out.println("baseStr = " + baseStr);
@@ -254,8 +255,8 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 	
 	@Override
     public CommandObject visitConcatOn2ExpressionsAtIndex(SequenceAnalyzerParser.ConcatOn2ExpressionsAtIndexContext ctx){
-		String baseStr = ctx.expr(1).getText();
-		String concatStr = ctx.expr(2).getText();
+		String baseStr = ctx.expr(0).getText();
+		String concatStr = ctx.expr(1).getText();
 		int index = Integer.parseInt(ctx.INT().getText());
 		
 		if(debugFlag == true){
