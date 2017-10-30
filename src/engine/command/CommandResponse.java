@@ -10,7 +10,7 @@ import java.util.Map;
 public class CommandResponse {
 	
 	public String responseType;
-	public String returnVal;
+	public String returnVal = "";
 	
 	//default constructor
 	public CommandResponse() {
@@ -26,7 +26,16 @@ public class CommandResponse {
 	
 	public CommandResponse(int[] input) {
 		responseType = "CuttingTimes";
-		this.returnVal = input.toString();
+		
+		
+		for (int i=0; i<input.length; i++) {
+			if (i == input.length - 1) {
+				returnVal += input[i];
+			}
+			else {
+				returnVal += input[i] + ",";
+			}
+		}
 	}
 	
 	public CommandResponse(int input) {
