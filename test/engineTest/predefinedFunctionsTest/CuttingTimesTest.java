@@ -1,4 +1,4 @@
-package predefinedFunctionsTest;
+package engineTest.predefinedFunctionsTest;
 
 import static org.junit.Assert.*;
 import org.junit.Test;

@@ -1,4 +1,4 @@
-package predefinedFunctionsTest;
+package engineTest.predefinedFunctionsTest;
 
 import static org.junit.Assert.*;
 import org.junit.Test;
@@ -15,7 +15,7 @@ public class ShiftMaximalityTest {
 		assertEquals(tester.shiftMaximal("101110101011101"), CONSTS.SUCCESS);
 		
 		//shift maximal = false
-		//assertEquals(tester.shiftMaximal("101001*"), CONSTS.FAILURE);
+		assertEquals(tester.shiftMaximal("101001*"), CONSTS.FAILURE);
 	}
 
 }

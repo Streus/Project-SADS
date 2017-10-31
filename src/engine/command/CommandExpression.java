@@ -29,9 +29,7 @@ public class CommandExpression {
 		_intExec = input2;
 	}
 	
-	public <T> T[] getParams() {
-		return null;
-		
+	public CommandExpression(CommandResponse cr) {
 		
 	}
 }
