@@ -228,7 +228,7 @@ class WordCountCommand extends PredefinedFunctionCommand{
 	public CommandResponse execute() {
 		
 		WordCount wc = new WordCount();
-		CommandResponse resp = new CommandResponse(wc.wordCount(str, 0)); //need an int parameter
+		CommandResponse resp = new CommandResponse(wc.wordCount(str, index));
 		
 		return resp;	
 	}
