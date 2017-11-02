@@ -82,10 +82,6 @@ public class ShiftMaximality {
 				else {
 					if (subDisagreement == '0' || subDisagreement == '*' && sDisagreement == '1') return CONSTS.FAILURE;
 				}
-//				if (even) {
-//					if (subDisagreement == 1) return CONSTS.FAILURE;
-//				}
-//				else if (subDisagreement == 0) return CONSTS.FAILURE;
 			}
 			else {
 				//if there is no disagreement it can still be shift maximal if the 

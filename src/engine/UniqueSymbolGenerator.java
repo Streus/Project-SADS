@@ -20,8 +20,8 @@ public class UniqueSymbolGenerator {
 	}
 	
 	//basic generate command with no arguments
-	public void Generate() {
-		Generate("");
+	public String Generate() {
+		return Generate("");
 	}
 	
 	//overloaded Generate() with String argument 
