@@ -1,5 +1,5 @@
-package grammar;
 // Generated from SequenceAnalyzer.g4 by ANTLR 4.7
+package grammar;
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**
@@ -356,17 +356,17 @@ public interface SequenceAnalyzerListener extends ParseTreeListener {
 	 */
 	void exitConcatOn2ExpressionsAtIndex(SequenceAnalyzerParser.ConcatOn2ExpressionsAtIndexContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code assign}
+	 * Enter a parse tree produced by the {@code AssignVariable}
 	 * labeled alternative in {@link SequenceAnalyzerParser#assignment}.
 	 * @param ctx the parse tree
 	 */
-	void enterAssign(SequenceAnalyzerParser.AssignContext ctx);
+	void enterAssignVariable(SequenceAnalyzerParser.AssignVariableContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code assign}
+	 * Exit a parse tree produced by the {@code AssignVariable}
 	 * labeled alternative in {@link SequenceAnalyzerParser#assignment}.
 	 * @param ctx the parse tree
 	 */
-	void exitAssign(SequenceAnalyzerParser.AssignContext ctx);
+	void exitAssignVariable(SequenceAnalyzerParser.AssignVariableContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link SequenceAnalyzerParser#func}.
 	 * @param ctx the parse tree

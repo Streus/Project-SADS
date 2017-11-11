@@ -70,8 +70,8 @@ sm		:	'sm' file NEWLINE			#ShiftMaximalityOfFile
 		;
 	
 //input must be in format wordcount data or wordcount (data, data)	
-wordct	:	'wordcount' LP file COMMA file RP NEWLINE		#WordCountOfFile
-		|	'wordcount' LP expr COMMA INT RP NEWLINE		#WordCountOfExpression
+wordct	:	'wc' LP file COMMA file RP NEWLINE		#WordCountOfFile
+		|	'wc' LP expr COMMA INT RP NEWLINE		#WordCountOfExpression
 		;
 		
 //input must be in format concat (data , data) or concat (data , data , index)	
@@ -81,7 +81,7 @@ concat	:	'concat' LP file COMMA file RP NEWLINE				#ConcatOn2files
 		|	'concat' LP expr COMMA expr COMMA INT RP NEWLINE	#ConcatOn2ExpressionsAtIndex
 		;
 		
-assignment	:	ID ':=' expr NEWLINE  	# assign		//variable assignment syntax
+assignment	:	ID ':=' expr NEWLINE  	#AssignVariable		//variable assignment syntax
 			;
 		
 /*//For assignment by visitor

@@ -1,5 +1,5 @@
-package grammar;
 // Generated from SequenceAnalyzer.g4 by ANTLR 4.7
+package grammar;
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
@@ -33,9 +33,9 @@ public class SequenceAnalyzerParser extends Parser {
 	};
 
 	private static final String[] _LITERAL_NAMES = {
-		null, "'sub'", "'cmp'", "'ct'", "'sp'", "'build'", "'sm'", "'wordcount'", 
-		"'concat'", "':='", null, null, null, null, "'('", "')'", "','", "'*'", 
-		"'/'", "'+'", "'-'"
+		null, "'sub'", "'cmp'", "'ct'", "'sp'", "'build'", "'sm'", "'wc'", "'concat'", 
+		"':='", null, null, null, null, "'('", "')'", "','", "'*'", "'/'", "'+'", 
+		"'-'"
 	};
 	private static final String[] _SYMBOLIC_NAMES = {
 		null, null, null, null, null, null, null, null, null, null, "ID", "INT", 
@@ -1768,24 +1768,24 @@ public class SequenceAnalyzerParser extends Parser {
 			super.copyFrom(ctx);
 		}
 	}
-	public static class AssignContext extends AssignmentContext {
+	public static class AssignVariableContext extends AssignmentContext {
 		public TerminalNode ID() { return getToken(SequenceAnalyzerParser.ID, 0); }
 		public ExprContext expr() {
 			return getRuleContext(ExprContext.class,0);
 		}
 		public TerminalNode NEWLINE() { return getToken(SequenceAnalyzerParser.NEWLINE, 0); }
-		public AssignContext(AssignmentContext ctx) { copyFrom(ctx); }
+		public AssignVariableContext(AssignmentContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SequenceAnalyzerListener ) ((SequenceAnalyzerListener)listener).enterAssign(this);
+			if ( listener instanceof SequenceAnalyzerListener ) ((SequenceAnalyzerListener)listener).enterAssignVariable(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SequenceAnalyzerListener ) ((SequenceAnalyzerListener)listener).exitAssign(this);
+			if ( listener instanceof SequenceAnalyzerListener ) ((SequenceAnalyzerListener)listener).exitAssignVariable(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SequenceAnalyzerVisitor ) return ((SequenceAnalyzerVisitor<? extends T>)visitor).visitAssign(this);
+			if ( visitor instanceof SequenceAnalyzerVisitor ) return ((SequenceAnalyzerVisitor<? extends T>)visitor).visitAssignVariable(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1794,7 +1794,7 @@ public class SequenceAnalyzerParser extends Parser {
 		AssignmentContext _localctx = new AssignmentContext(_ctx, getState());
 		enterRule(_localctx, 28, RULE_assignment);
 		try {
-			_localctx = new AssignContext(_localctx);
+			_localctx = new AssignVariableContext(_localctx);
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(242);
