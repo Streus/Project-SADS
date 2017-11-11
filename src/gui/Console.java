@@ -1,7 +1,13 @@
 package gui;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import javax.swing.text.BadLocationException;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
 
 import gui.commands.*;
 
@@ -24,6 +30,18 @@ public final class Console
 		commandList.put("clear", new ClearCommand());
 		commandList.put("debug", new DebugCommand());
 		commandList.put("exit", new ExitCommand());
+	}
+	
+	private static SimpleAttributeSet outputStyle;
+	private static SimpleAttributeSet errorStyle;
+	
+	static
+	{
+		outputStyle = new SimpleAttributeSet();
+		StyleConstants.setForeground(outputStyle, Color.blue);
+		
+		errorStyle = new SimpleAttributeSet();
+		StyleConstants.setForeground(errorStyle, Color.red);
 	}
 	
 	/* Instance Vars */
@@ -49,21 +67,37 @@ public final class Console
 	}
 	
 	/**
-	 * Print to the current Console instance's output
+	 * Print to the current Console instance UI output
 	 * @param s - the text to print
 	 */
 	public static void print(String s)
 	{
-		instance().front.printToOut(s);
+		print(s, StreamType.out);
+	}
+	public static void print(String s, StreamType type)
+	{
+		switch(type)
+		{
+		case err:
+			sendToFront(s, errorStyle);
+			break;
+		case out:
+			sendToFront(s, outputStyle);
+			break;
+		}
 	}
 	
 	/**
-	 * Print to the current Console instance's output, appending a newline
+	 * Print to the current Console instance UI, appending a newline
 	 * @param s - the text to print
 	 */
 	public static void println(String s)
 	{
-		instance().front.printlnToOut(s);
+		println(s, StreamType.out);
+	}
+	public static void println(String s, StreamType type)
+	{
+		print(s + "\n", type);
 	}
 	
 	/**
@@ -72,6 +106,16 @@ public final class Console
 	public static void clear()
 	{
 		instance().front.clearOut();
+	}
+	
+	private static void sendToFront(String text, SimpleAttributeSet set)
+	{
+		try
+		{
+			StyledDocument frontDoc = instance().front.getOutput().getStyledDocument();
+			frontDoc.insertString(frontDoc.getLength(), text, set);
+		}
+		catch(BadLocationException ble) { }
 	}
 	
 	
@@ -109,9 +153,11 @@ public final class Console
 			}
 			catch(Exception e)
 			{
-				//TODO print error message out to console
+				println("Command \"" + args[0] + "\" encountered a problem.\n" + e.getMessage(), StreamType.err);
 			}
 		}
+		else
+			println("Command \"" + args[0] + "\" could not be found.", StreamType.err);
 		
 		return success;
 	}
@@ -150,4 +196,9 @@ public final class Console
 	{
 		this.front = front;
 	}
+	
+	/**
+	 * TODO
+	 */
+	public enum StreamType { out, err }
 }
