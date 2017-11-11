@@ -1,5 +1,6 @@
 // Generated from SequenceAnalyzer.g4 by ANTLR 4.7
 package grammar;
+
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
@@ -18,9 +19,8 @@ public class SequenceAnalyzerParser extends Parser {
 		new PredictionContextCache();
 	public static final int
 		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, T__5=6, T__6=7, T__7=8, T__8=9, 
-		ID=10, INT=11, USER_ALPHA=12, FILE_EXT=13, LP=14, RP=15, COMMA=16, MUL=17, 
-		DIV=18, ADD=19, SUB=20, LETTER=21, NEWLINE=22, LN_COMMENT=23, COMMENT=24, 
-		WS=25;
+		ID=10, INT=11, USER_ALPHA=12, FILE_EXT=13, LP=14, RP=15, COMMA=16, LETTER=17, 
+		NEWLINE=18, LN_COMMENT=19, COMMENT=20, WS=21;
 	public static final int
 		RULE_prog = 0, RULE_init = 1, RULE_cmd = 2, RULE_vardef = 3, RULE_strcmd = 4, 
 		RULE_predef = 5, RULE_sub = 6, RULE_cmp = 7, RULE_ct = 8, RULE_sp = 9, 
@@ -33,13 +33,12 @@ public class SequenceAnalyzerParser extends Parser {
 
 	private static final String[] _LITERAL_NAMES = {
 		null, "'sub'", "'cmp'", "'ct'", "'sp'", "'build'", "'sm'", "'wc'", "'concat'", 
-		"':='", null, null, null, null, "'('", "')'", "','", "'*'", "'/'", "'+'", 
-		"'-'"
+		"':='", null, null, null, null, "'('", "')'", "','"
 	};
 	private static final String[] _SYMBOLIC_NAMES = {
 		null, null, null, null, null, null, null, null, null, null, "ID", "INT", 
-		"USER_ALPHA", "FILE_EXT", "LP", "RP", "COMMA", "MUL", "DIV", "ADD", "SUB", 
-		"LETTER", "NEWLINE", "LN_COMMENT", "COMMENT", "WS"
+		"USER_ALPHA", "FILE_EXT", "LP", "RP", "COMMA", "LETTER", "NEWLINE", "LN_COMMENT", 
+		"COMMENT", "WS"
 	};
 	public static final Vocabulary VOCABULARY = new VocabularyImpl(_LITERAL_NAMES, _SYMBOLIC_NAMES);
 
@@ -2173,7 +2172,7 @@ public class SequenceAnalyzerParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\33\u010d\4\2\t\2"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\27\u010d\4\2\t\2"+
 		"\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13"+
 		"\t\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22"+
 		"\3\2\6\2&\n\2\r\2\16\2\'\3\3\3\3\3\3\5\3-\n\3\3\4\3\4\3\4\5\4\62\n\4\3"+

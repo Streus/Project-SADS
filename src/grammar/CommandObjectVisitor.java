@@ -12,6 +12,21 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 	Stack<CommandObject> commandObjectStack = new Stack<CommandObject>();
 	public boolean debugFlag = true;
 	
+	@Override public CommandObject visitAssignVariableOfCommand(SequenceAnalyzerParser.AssignVariableOfCommandContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public CommandObject visitAssignVariableOfExpression(SequenceAnalyzerParser.AssignVariableOfExpressionContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	
 //	@Override
 //    public CommandObject visitSubstitutionOfFiles(SequenceAnalyzerParser.SubstitutionOfFilesContext ctx){
 //		
@@ -91,6 +106,20 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 		
 		return ctCommand;
 	}
+	
+	@Override public CommandObject visitCuttingTimesOfCommand(SequenceAnalyzerParser.CuttingTimesOfCommandContext ctx) { 
+		if(debugFlag == true) {
+			System.out.println("visiting CuttingTimesOfCommand");
+		}
+		return null; 
+	}
+	
+	@Override public CommandObject visitCuttingTimesOfCommandInParens(SequenceAnalyzerParser.CuttingTimesOfCommandInParensContext ctx) { 
+		if(debugFlag == true) {
+			System.out.println("visiting CuttingTimesOfCommand");
+		}
+		return null; 
+	}
 
 //	@Override
 //    public void  visitStarProductOfFiles(SequenceAnalyzerParser.StarProductOfFilesContext ctx){
@@ -112,6 +141,13 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 		commandObjectStack.push(spCommand);
 		
 		return spCommand;
+	}
+	
+	@Override public CommandObject visitStarProductOfCommands(SequenceAnalyzerParser.StarProductOfCommandsContext ctx) { 
+		if(debugFlag == true) {
+			System.out.println("visiting StarProductOfCommands");
+		}
+		return null; 
 	}
 
 //	@Override
@@ -167,7 +203,7 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 		String operand = ctx.expr().getText();
 		
 		if(debugFlag == true){
-			System.out.println("ShiftMaximalityNoParens");
+			System.out.println("visiting ShiftMaximalityNoParens");
 			System.out.println("operand = " + operand);
 		}
 		
@@ -191,6 +227,26 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 		
 		return smCommand;
 	}
+	
+	@Override public CommandObject visitShiftMaximalityOfCommand(SequenceAnalyzerParser.ShiftMaximalityOfCommandContext ctx) { 
+		String command = ctx.cmd().getText();
+		if(debugFlag == true) {
+			System.out.println("visiting ShiftMaximalityOfCommand");
+			System.out.println("command = " + command);
+		}
+		
+		
+		
+		return null;
+	}
+
+	@Override public CommandObject visitShiftMaximalityOfCommandInParens(SequenceAnalyzerParser.ShiftMaximalityOfCommandInParensContext ctx) { 
+		
+		if(debugFlag == true) {
+			System.out.println("visiting ShiftMaximalityOfCommand");
+		}
+		return null;
+	}
 
 //	@Override
 //    public void  visitWordCountOfFile(SequenceAnalyzerParser.WordCountOfFileContext ctx){
@@ -213,6 +269,14 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 		
 		return wordcountCommand;
 	}
+	
+	@Override public CommandObject visitWordCountOfCommand(SequenceAnalyzerParser.WordCountOfCommandContext ctx) { 
+		if(debugFlag == true) {
+			System.out.println("visiting WordCountOfCommand");
+		}
+		return null;
+	}
+
 
 
 //	@Override
@@ -258,7 +322,19 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 		
 		return concatCommand;
 	}
-
-
+	
+	@Override public CommandObject visitConcatOn2Commands(SequenceAnalyzerParser.ConcatOn2CommandsContext ctx) { 
+		if(debugFlag == true) {
+			System.out.println("visiting ConcatOn2Commands");
+		}
+		return null;
+	}
+	
+	@Override public CommandObject visitConcatOn2CommandsAtIndex(SequenceAnalyzerParser.ConcatOn2CommandsAtIndexContext ctx) { 
+		if(debugFlag == true) {
+			System.out.println("visiting ConcatOn2CommandsAtIndex");
+		}
+		return null;
+	}
 }
 
