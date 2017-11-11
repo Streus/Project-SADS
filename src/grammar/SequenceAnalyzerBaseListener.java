@@ -159,6 +159,30 @@ public class SequenceAnalyzerBaseListener implements SequenceAnalyzerListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterCuttingTimesOfCommand(SequenceAnalyzerParser.CuttingTimesOfCommandContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCuttingTimesOfCommand(SequenceAnalyzerParser.CuttingTimesOfCommandContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterCuttingTimesOfCommandInParens(SequenceAnalyzerParser.CuttingTimesOfCommandInParensContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCuttingTimesOfCommandInParens(SequenceAnalyzerParser.CuttingTimesOfCommandInParensContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterCuttingTimesOfExpression(SequenceAnalyzerParser.CuttingTimesOfExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -190,6 +214,18 @@ public class SequenceAnalyzerBaseListener implements SequenceAnalyzerListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitStarProductOfFiles(SequenceAnalyzerParser.StarProductOfFilesContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterStarProductOfCommands(SequenceAnalyzerParser.StarProductOfCommandsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitStarProductOfCommands(SequenceAnalyzerParser.StarProductOfCommandsContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -279,6 +315,30 @@ public class SequenceAnalyzerBaseListener implements SequenceAnalyzerListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterShiftMaximalityOfCommand(SequenceAnalyzerParser.ShiftMaximalityOfCommandContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitShiftMaximalityOfCommand(SequenceAnalyzerParser.ShiftMaximalityOfCommandContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterShiftMaximalityOfCommandInParens(SequenceAnalyzerParser.ShiftMaximalityOfCommandInParensContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitShiftMaximalityOfCommandInParens(SequenceAnalyzerParser.ShiftMaximalityOfCommandInParensContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterShiftMaximalityOfExpression(SequenceAnalyzerParser.ShiftMaximalityOfExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -310,6 +370,18 @@ public class SequenceAnalyzerBaseListener implements SequenceAnalyzerListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitWordCountOfFile(SequenceAnalyzerParser.WordCountOfFileContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterWordCountOfCommand(SequenceAnalyzerParser.WordCountOfCommandContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitWordCountOfCommand(SequenceAnalyzerParser.WordCountOfCommandContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -351,6 +423,30 @@ public class SequenceAnalyzerBaseListener implements SequenceAnalyzerListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterConcatOn2Commands(SequenceAnalyzerParser.ConcatOn2CommandsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitConcatOn2Commands(SequenceAnalyzerParser.ConcatOn2CommandsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterConcatOn2CommandsAtIndex(SequenceAnalyzerParser.ConcatOn2CommandsAtIndexContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitConcatOn2CommandsAtIndex(SequenceAnalyzerParser.ConcatOn2CommandsAtIndexContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterConcatOn2Expressions(SequenceAnalyzerParser.ConcatOn2ExpressionsContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -375,25 +471,25 @@ public class SequenceAnalyzerBaseListener implements SequenceAnalyzerListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterAssignVariable(SequenceAnalyzerParser.AssignVariableContext ctx) { }
+	@Override public void enterAssignVariableOfCommand(SequenceAnalyzerParser.AssignVariableOfCommandContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitAssignVariable(SequenceAnalyzerParser.AssignVariableContext ctx) { }
+	@Override public void exitAssignVariableOfCommand(SequenceAnalyzerParser.AssignVariableOfCommandContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterFunc(SequenceAnalyzerParser.FuncContext ctx) { }
+	@Override public void enterAssignVariableOfExpression(SequenceAnalyzerParser.AssignVariableOfExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitFunc(SequenceAnalyzerParser.FuncContext ctx) { }
+	@Override public void exitAssignVariableOfExpression(SequenceAnalyzerParser.AssignVariableOfExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -411,18 +507,6 @@ public class SequenceAnalyzerBaseListener implements SequenceAnalyzerListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterId(SequenceAnalyzerParser.IdContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitId(SequenceAnalyzerParser.IdContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterInt(SequenceAnalyzerParser.IntContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -430,18 +514,6 @@ public class SequenceAnalyzerBaseListener implements SequenceAnalyzerListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitInt(SequenceAnalyzerParser.IntContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterCommand(SequenceAnalyzerParser.CommandContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitCommand(SequenceAnalyzerParser.CommandContext ctx) { }
 
 	/**
 	 * {@inheritDoc}
