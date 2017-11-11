@@ -1,4 +1,5 @@
 package gui;
+import java.awt.Color;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -22,7 +23,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
@@ -34,8 +34,11 @@ import javax.swing.SwingConstants;
 import javax.swing.event.CaretListener;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import javax.swing.text.BadLocationException;
 import javax.swing.text.JTextComponent;
-import javax.swing.event.AncestorListener;
+import javax.swing.text.Style;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
 import javax.swing.event.CaretEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -599,17 +602,9 @@ public class MainWindow
 		inputLine.setText("");
 	}
 	
-	/**
-	 * Print some text to the output pane, appending to the existing content
-	 * @param output - The text to append to the output pane
-	 */
-	public void printToOut(String output)
+	public JTextPane getOutput()
 	{
-		outputArea.setText(outputArea.getText() + output);
-	}
-	public void printlnToOut(String output)
-	{
-		printToOut(output + "\n");
+		return outputArea;
 	}
 	
 	/**
