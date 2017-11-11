@@ -70,6 +70,18 @@ public final class Console
 		StyleConstants.setBold(styles[HDR], true);
 	}
 	
+	private static SimpleAttributeSet outputStyle;
+	private static SimpleAttributeSet errorStyle;
+	
+	static
+	{
+		outputStyle = new SimpleAttributeSet();
+		StyleConstants.setForeground(outputStyle, Color.blue);
+		
+		errorStyle = new SimpleAttributeSet();
+		StyleConstants.setForeground(errorStyle, Color.red);
+	}
+	
 	/* Instance Vars */
 	
 	// The history of commands entered in this session
@@ -192,7 +204,6 @@ public final class Console
 		catch(BadLocationException ble) { }
 	}
 	
-	
 	/* Instance Methods */
 	private Console()
 	{
@@ -279,4 +290,9 @@ public final class Console
 		front.addStyle("wrn", null).addAttribute("wrnStyle", styles[WRN]);
 		front.addStyle("hdr", null).addAttribute("hdrStyle", styles[HDR]);
 	}
+	
+	/**
+	 * TODO
+	 */
+	public enum StreamType { out, err }
 }
