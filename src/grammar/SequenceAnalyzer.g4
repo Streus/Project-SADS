@@ -5,7 +5,6 @@ prog	:	cmd+;			//allows for multiple branches in tree
 
 init	:	//declares options for beginning of parse tree
 			cmd				
-		|	func
 		|	expr
 		|	ID
 		;
@@ -34,88 +33,70 @@ predef	:	ct		//cutting times
 		;
 		
 //input must be in format sub (data , data)
-sub		:	'sub' LP file COMMA file RP	NEWLINE	#SubstitutionOfFiles
-		|	'sub' LP expr COMMA expr RP	NEWLINE	#SubstitutionOfExpression
+sub		:	'sub' LP file COMMA file RP	#SubstitutionOfFiles
+		|	'sub' LP expr COMMA expr RP	#SubstitutionOfExpression
 		;
 		
 //input must be in format cmp (data , data)
-cmp		:	'cmp' LP file COMMA file RP	NEWLINE	#ComparisonOfFiles
-		|	'cmp' LP expr COMMA expr RP	NEWLINE	#ComparisonOfExpression
+cmp		:	'cmp' LP file COMMA file RP	#ComparisonOfFiles
+		|	'cmp' LP expr COMMA expr RP	#ComparisonOfExpression
 		;
 		
 //input must be in format ct data or ct (data)		
-ct		:	'ct' file NEWLINE			#CuttingTimesOfFile
-		|	'ct' LP file RP	NEWLINE		#CuttingTimesOfFileInParens
-		|	'ct' expr NEWLINE			#CuttingTimesOfExpression
-		|	'ct' LP expr RP NEWLINE		#CuttingTimesOfExpressionInParens
+ct		:	'ct' file			#CuttingTimesOfFile
+		|	'ct' LP file RP		#CuttingTimesOfFileInParens
+		|	'ct' cmd			#CuttingTimesOfCommand
+		|	'ct' LP cmd RP		#CuttingTimesOfCommandInParens
+		|	'ct' expr			#CuttingTimesOfExpression
+		|	'ct' LP expr RP		#CuttingTimesOfExpressionInParens
 		;
 		
 //input must be in format sp (data , data)		
-sp		:	'sp' LP file COMMA file RP NEWLINE		#StarProductOfFiles
-		|	'sp' LP expr COMMA expr RP NEWLINE		#StarProductOfExpressions
+sp		:	'sp' LP file COMMA file RP		#StarProductOfFiles
+		|	'sp' LP cmd COMMA cmd RP		#StarProductOfCommands
+		|	'sp' LP expr COMMA expr RP		#StarProductOfExpressions
 		;	
 		
 //input must be in format build data or build (data)
-build	:	'build' file NEWLINE			#BuildFile
-		|	'build' LP file RP NEWLINE		#BuildFileInParens
-		|	'build'  expr NEWLINE			#BuildExpression
-		|	'build' LP expr RP NEWLINE		#BuildExpressionInParens
+build	:	'build' file			#BuildFile
+		|	'build' LP file RP		#BuildFileInParens
+		|	'build'  expr			#BuildExpression
+		|	'build' LP expr RP		#BuildExpressionInParens
 		;
 		
 //input must be in format sm data or sm (data)
-sm		:	'sm' file NEWLINE			#ShiftMaximalityOfFile
-		|	'sm' LP file RP NEWLINE		#ShiftMaximalityOfFileInParens
-		|	'sm' expr NEWLINE			#ShiftMaximalityOfExpression
-		|	'sm' LP expr RP NEWLINE		#ShiftMaximalityOfExpressionInParens
+sm		:	'sm' file			#ShiftMaximalityOfFile
+		|	'sm' LP file RP		#ShiftMaximalityOfFileInParens
+		|	'sm' cmd			#ShiftMaximalityOfCommand
+		|	'sm' LP cmd RP		#ShiftMaximalityOfCommandInParens
+		|	'sm' expr			#ShiftMaximalityOfExpression
+		|	'sm' LP expr RP		#ShiftMaximalityOfExpressionInParens
 		;
 	
 //input must be in format wordcount data or wordcount (data, data)	
-wordct	:	'wc' LP file COMMA file RP NEWLINE		#WordCountOfFile
-		|	'wc' LP expr COMMA INT RP NEWLINE		#WordCountOfExpression
+wordct	:	'wc' LP file COMMA file RP		#WordCountOfFile
+		|	'wc' LP cmd COMMA INT RP		#WordCountOfCommand
+		|	'wc' LP expr COMMA INT RP		#WordCountOfExpression
 		;
 		
 //input must be in format concat (data , data) or concat (data , data , index)	
-concat	:	'concat' LP file COMMA file RP NEWLINE				#ConcatOn2files	
-		|	'concat' LP file COMMA file COMMA INT RP NEWLINE	#ConcatOn2FilesAtIndex
-		|	'concat' LP expr COMMA expr RP NEWLINE				#ConcatOn2Expressions
-		|	'concat' LP expr COMMA expr COMMA INT RP NEWLINE	#ConcatOn2ExpressionsAtIndex
+concat	:	'concat' LP file COMMA file RP				#ConcatOn2files	
+		|	'concat' LP file COMMA file COMMA INT RP	#ConcatOn2FilesAtIndex
+		|	'concat' LP cmd COMMA cmd RP				#ConcatOn2Commands
+		|	'concat' LP cmd COMMA cmd COMMA INT RP		#ConcatOn2CommandsAtIndex
+		|	'concat' LP expr COMMA expr RP				#ConcatOn2Expressions
+		|	'concat' LP expr COMMA expr COMMA INT RP	#ConcatOn2ExpressionsAtIndex
 		;
 		
-assignment	:	ID ':=' expr NEWLINE  	#AssignVariable		//variable assignment syntax
+assignment	:	ID ':=' cmd  	#AssignVariableOfCommand		//variable assignment syntax
+			|	ID ':=' expr  	#AssignVariableOfExpression	
 			;
-		
-/*//For assignment by visitor
-assignment	:	expr NEWLINE        # printExpr		//alternative to allow printing of assignment
-		|	ID ':=' expr NEWLINE  	# assign		//variable assignment syntax
-		|   NEWLINE                 # blank
-		;
-*/
-		
-func	:	assignment					//assignment function
-		|	cmd file					//command on single file
-		|	cmd file file				//command on 2 files
-		|	cmd LP file RP				//command on file within parenthesis
-		|	cmd LP file RP LP file RP	//command on 2 files within parenthesis
-		|	cmd expr					//command on single expression
-		|	cmd expr expr				//command on 2 expressions
-		|	cmd LP expr RP 				//command on expression within parenthesis
-		|	cmd LP expr RP LP expr RP	//command on 2 expressions within parenthesis
-		|	cmd func					//command on single function
-		|	cmd LP func RP				//command on function within parenthesis
-		|	cmd LP func RP LP func RP	//command on function within parenthesis
-		|	LP func RP					//generic function within parenthesis
-		;
-		
-
 
 
 file	:	ID FILE_EXT;		 //file name with . extension
 
-expr	:
+expr	:	INT                    # int        //expression as single Int 
 		/*|	USER_ALPHA			   # UserAlpha*///for later implementation of user defined alphabet
-			ID					   # id			//expression as single ID
-		|   INT                    # int        //expression as single Int 
-		|	cmd					   # command
 		;
 
 
