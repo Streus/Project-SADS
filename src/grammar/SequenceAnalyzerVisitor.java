@@ -1,5 +1,5 @@
-package grammar;
 // Generated from SequenceAnalyzer.g4 by ANTLR 4.7
+package grammar;
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
 /**
@@ -215,12 +215,12 @@ public interface SequenceAnalyzerVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitConcatOn2ExpressionsAtIndex(SequenceAnalyzerParser.ConcatOn2ExpressionsAtIndexContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code assign}
+	 * Visit a parse tree produced by the {@code AssignVariable}
 	 * labeled alternative in {@link SequenceAnalyzerParser#assignment}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitAssign(SequenceAnalyzerParser.AssignContext ctx);
+	T visitAssignVariable(SequenceAnalyzerParser.AssignVariableContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link SequenceAnalyzerParser#func}.
 	 * @param ctx the parse tree

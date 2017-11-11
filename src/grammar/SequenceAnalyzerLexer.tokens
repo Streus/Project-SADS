@@ -29,7 +29,7 @@ WS=25
 'sp'=4
 'build'=5
 'sm'=6
-'wordcount'=7
+'wc'=7
 'concat'=8
 ':='=9
 '('=14

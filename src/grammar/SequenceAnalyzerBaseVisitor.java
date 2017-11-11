@@ -1,5 +1,5 @@
-package grammar;
 // Generated from SequenceAnalyzer.g4 by ANTLR 4.7
+package grammar;
 import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
 
 /**
@@ -227,7 +227,7 @@ public class SequenceAnalyzerBaseVisitor<T> extends AbstractParseTreeVisitor<T> 
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitAssign(SequenceAnalyzerParser.AssignContext ctx) { return visitChildren(ctx); }
+	@Override public T visitAssignVariable(SequenceAnalyzerParser.AssignVariableContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
