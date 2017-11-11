@@ -13,13 +13,13 @@ public class commandExecutor {
 
 	public static void executeStack(Stack<CommandObject> cmdObj) {
 		
-		Console.instance();
-		
-		CommandObject obj = cmdObj.pop();
-		
-		CommandResponse resp = obj.execute();
-		
-		Console.println("Response from commandExecutor: " + resp.returnVal.toString());
+//		Console.instance();
+//		
+//		CommandObject obj = cmdObj.pop();
+//		
+//		CommandResponse resp = obj.execute();
+//		
+//		Console.println("Response from commandExecutor: " + resp.returnVal.toString());
 		
 		
 	}

@@ -104,14 +104,18 @@ expr	:	INT                    # int        //expression as single Int
 ID  	:   LETTER (LETTER | INT)* ;	//defines ID as one letter and 0 or many letters or digits
 INT 	:   [0-9]+ ;         // match integers
 USER_ALPHA	:	[0-1]+;		 // user defined
-FILE_EXT:	'.' ID+ ;		//defines file extension as a '.' follwed by one or more IDs
+FILE_EXT:	'.' ID+ ;		//defines file extension as a '.' followed by one or more IDs
 LP		:	'(';			//assigns token name to left parenthesis
 RP		:	')';			//assigns token name to right parenthesis
 COMMA	:	',';			//assigns token name to comma
-MUL 	:   '*' ; 			//assigns token name to '*' for multiplication
-DIV 	:   '/' ;			//assigns token name to '/' for division
-ADD 	:   '+' ;			//assigns token name to '+' for addition
-SUB 	:   '-' ;			//assigns token name to '-' for subtraction
+//SUB		:	'sub';
+//CMP		:	'cmp';
+//CT		:	'ct';
+//SP		:	'sp';
+//BUILD	:	'build';
+//SM		:	'sm';
+//WC		:	'wc';
+//CONCAT	:	'concat';
 LETTER	: 	[a-zA-Z]+ ;		//defines letters as lowercase and uppercase
 NEWLINE	:	'\r'? '\n' ;    //return newlines to parser (end-statement signal)
 LN_COMMENT :   '//' .*? '\n' -> skip;	//skips single line comments

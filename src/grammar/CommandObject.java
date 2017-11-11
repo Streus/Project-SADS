@@ -17,10 +17,10 @@ public abstract class CommandObject{
 		commandType = "";
 	}
 
-	public CommandResponse execute() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+//	public CommandResponse execute() {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 	
 }
 
@@ -31,10 +31,10 @@ abstract class VarDefCommand extends CommandObject{
 		commandType = "";
 	}
 	
-	public CommandResponse execute() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+//	public CommandResponse execute() {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 }
 
 abstract class StringCommand extends CommandObject{					
@@ -42,10 +42,10 @@ abstract class StringCommand extends CommandObject{
 		commandType = "";
 	}
 	
-	public CommandResponse execute() {
-		// TODO Auto-generated method stub
-		return null;
-	}	
+//	public CommandResponse execute() {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}	
 }
 
 class PredefinedFunctionCommand extends CommandObject{		
@@ -53,10 +53,10 @@ class PredefinedFunctionCommand extends CommandObject{
 		commandType = "";
 	}
 	
-	public CommandResponse execute() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+//	public CommandResponse execute() {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 }
 
 //COMMAND HIERARCHY LEVEL 2
@@ -134,6 +134,7 @@ class CompareCommand extends StringCommand{
 //////////////////PREDEFINED FUNCTIONS//////////////////
 class CuttingTimesCommand extends PredefinedFunctionCommand{	
 	String expr;
+	CommandObject cmd = new PredefinedFunctionCommand();
 	
 	public CuttingTimesCommand (){//default constructor
 		commandType = "";
@@ -147,7 +148,15 @@ class CuttingTimesCommand extends PredefinedFunctionCommand{
 			System.out.println("CuttingTimesCommand constructed");
 	}
 	
-	@Override
+	public CuttingTimesCommand (CommandObject cmd){
+		commandType = "CuttingTimesCommand";
+		this.expr = expr;
+		
+		if(debugFlag == true)
+			System.out.println("CuttingTimesCommand constructed");
+	}
+	
+//	@Override
 	public CommandResponse execute() {
 		
 		CuttingTimes ct = new CuttingTimes();		
@@ -173,7 +182,7 @@ class StarProductCommand extends PredefinedFunctionCommand{
 			System.out.println("StarProductCommand constructed");
 	}
 	
-	@Override
+//	@Override
 	public CommandResponse execute() {
 		
 		StarProduct sp = new StarProduct();
@@ -197,7 +206,7 @@ class ShiftMaximalityCommand extends PredefinedFunctionCommand{
 			System.out.println("ShiftMaximalityCommand constructed");
 	}
 	
-	@Override
+//	@Override
 	public CommandResponse execute() {
 		
 		ShiftMaximality sm = new ShiftMaximality();
@@ -224,7 +233,7 @@ class WordCountCommand extends PredefinedFunctionCommand{
 			System.out.println("WordCountCommand constructed");
 	}
 	
-	@Override 
+//	@Override 
 	public CommandResponse execute() {
 		
 		WordCount wc = new WordCount();

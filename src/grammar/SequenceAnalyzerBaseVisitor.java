@@ -1,5 +1,5 @@
-// Generated from SequenceAnalyzer.g4 by ANTLR 4.7
 package grammar;
+// Generated from SequenceAnalyzer.g4 by ANTLR 4.7
 import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
 
 /**
