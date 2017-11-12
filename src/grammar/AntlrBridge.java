@@ -23,6 +23,10 @@ public class AntlrBridge {
 		
 		Stack<CommandObject> commandObjectStack = coVisitor.commandObjectStack;
 		
+		while(commandObjectStack.isEmpty() == false) {
+			System.out.println(commandObjectStack.pop().commandType + " popped from stack");
+		}
+		
 		//commandExecutor.executeStack(commandObjectStack);
 	}
 	

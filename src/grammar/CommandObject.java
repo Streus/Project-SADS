@@ -183,13 +183,13 @@ class StarProductCommand extends PredefinedFunctionCommand{
 			System.out.println("StarProductCommand constructed");
 	}
 	
-	public StarProductCommand (CommandObject command){
-		commandType = "NestedStarProductCommand";
-		this.command = command;
-		
-		if(debugFlag == true)
-			System.out.println("NestedStarProductCommand constructed");
-	}
+//	public StarProductCommand (CommandObject command){
+//		commandType = "NestedStarProductCommand";
+//		this.command = command;
+//		
+//		if(debugFlag == true)
+//			System.out.println("NestedStarProductCommand constructed");
+//	}
 	
 //	@Override
 	public CommandResponse execute() {

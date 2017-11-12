@@ -45,7 +45,7 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 		SubstitutionCommand subCommand = new SubstitutionCommand(target, replacement);
 		commandObjectStack.push(subCommand);
 		
-		return subCommand;
+		return visitChildren(ctx);
 	}
 
 //	@Override
@@ -66,7 +66,7 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 		CompareCommand cmpCommand = new CompareCommand(str1, str2);
 		commandObjectStack.push(cmpCommand);
 		
-		return cmpCommand;
+		return visitChildren(ctx);
 	}
 
 //	@Override
@@ -90,7 +90,7 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 		CuttingTimesCommand ctCommand = new CuttingTimesCommand(expr);
 		commandObjectStack.push(ctCommand);
 		
-		return ctCommand;
+		return visitChildren(ctx);
 	}
 
 	@Override
@@ -104,21 +104,21 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 		CuttingTimesCommand ctCommand = new CuttingTimesCommand(expr);
 		commandObjectStack.push(ctCommand);
 		
-		return ctCommand;
+		return visitChildren(ctx);
 	}
 	
 	@Override public CommandObject visitCuttingTimesOfCommand(SequenceAnalyzerParser.CuttingTimesOfCommandContext ctx) { 
 		if(debugFlag == true) {
 			System.out.println("visiting CuttingTimesOfCommand");
 		}
-		return null; 
+		return visitChildren(ctx); 
 	}
 	
 	@Override public CommandObject visitCuttingTimesOfCommandInParens(SequenceAnalyzerParser.CuttingTimesOfCommandInParensContext ctx) { 
 		if(debugFlag == true) {
 			System.out.println("visiting CuttingTimesOfCommand");
 		}
-		return null; 
+		return visitChildren(ctx); 
 	}
 
 //	@Override
@@ -140,14 +140,14 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 		StarProductCommand spCommand = new StarProductCommand(str1, str2); 
 		commandObjectStack.push(spCommand);
 		
-		return spCommand;
+		return visitChildren(ctx);
 	}
 	
 	@Override public CommandObject visitStarProductOfCommands(SequenceAnalyzerParser.StarProductOfCommandsContext ctx) { 
 		if(debugFlag == true) {
 			System.out.println("visiting StarProductOfCommands");
 		}
-		return null; 
+		return visitChildren(ctx); 
 	}
 
 //	@Override
@@ -171,7 +171,7 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 		BuildCommand buildCommand = new BuildCommand(str);
 		commandObjectStack.push(buildCommand);
 		
-		return buildCommand;
+		return visitChildren(ctx);
 	}
 
 	@Override
@@ -185,7 +185,7 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 		BuildCommand buildCommand = new BuildCommand(str);
 		commandObjectStack.push(buildCommand);
 		
-		return buildCommand;
+		return visitChildren(ctx);
 	}
 
 //	@Override
@@ -229,24 +229,79 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 	}
 	
 	@Override public CommandObject visitShiftMaximalityOfCommand(SequenceAnalyzerParser.ShiftMaximalityOfCommandContext ctx) { 
-		String command = ctx.cmd().getText();
+		String context = ctx.getText();
+		String cmd = context.substring(0,2);
+		String operand;
+		
 		if(debugFlag == true) {
 			System.out.println("visiting ShiftMaximalityOfCommand");
-			System.out.println("command = " + command);
+			System.out.println("ctx = " + context);
 		}
 		
-		AntlrBridge nestedCommand = new AntlrBridge(command);
+		switch(cmd) {
+		case "sm":
+			operand = context.replace(cmd, "");
+			ShiftMaximalityCommand smCommand = new ShiftMaximalityCommand(operand);
+			ShiftMaximalityCommand nestedCommand = new ShiftMaximalityCommand(smCommand);
+			commandObjectStack.push(nestedCommand);
+			break;
+		case "wc":
+//			operand = context.replace(cmd, "");
+//			WordCountCommand wordcountCommand = new WordCountCommand(operand,index);
+//			commandObjectStack.push(wordcountCommand);
+			break;
+		case "ct":
+			
+			break;
+		case "bu":
+			
+			break;
+		case "sp":
+			
+			break;
+		default:
+			break;
+		}
+		//AntlrBridge nestedCommand = new AntlrBridge(command);
 		
 		return visitChildren(ctx);
 	}
 
 	@Override public CommandObject visitShiftMaximalityOfCommandInParens(SequenceAnalyzerParser.ShiftMaximalityOfCommandInParensContext ctx) { 
-		String command = ctx.cmd().getText();
+		String context = ctx.getText();
+		String cmd = context.substring(0,2);
+		String operand;
+		
 		if(debugFlag == true) {
 			System.out.println("visiting ShiftMaximalityOfCommandInParens");
+			System.out.println("ctx = "+context);
 		}
 		
-		AntlrBridge nestedCommand = new AntlrBridge(command);
+		switch(cmd) {
+		case "sm":
+			operand = context.replace(cmd, "");
+			ShiftMaximalityCommand smCommand = new ShiftMaximalityCommand(operand);
+			ShiftMaximalityCommand nestedCommand = new ShiftMaximalityCommand(smCommand);
+			commandObjectStack.push(nestedCommand);
+			break;
+		case "wc":
+//			operand = context.replace(cmd, "");
+//			WordCountCommand wordcountCommand = new WordCountCommand(operand,index);
+//			commandObjectStack.push(wordcountCommand);
+			break;
+		case "ct":
+			
+			break;
+		case "bu":
+			
+			break;
+		case "sp":
+			
+			break;			
+		default:
+			break;
+		}
+		//AntlrBridge nestedCommand = new AntlrBridge(command);
 		
 		return visitChildren(ctx);
 	}
@@ -270,14 +325,14 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 		WordCountCommand wordcountCommand = new WordCountCommand(str,index);
 		commandObjectStack.push(wordcountCommand);
 		
-		return wordcountCommand;
+		return visitChildren(ctx);
 	}
 	
 	@Override public CommandObject visitWordCountOfCommand(SequenceAnalyzerParser.WordCountOfCommandContext ctx) { 
 		if(debugFlag == true) {
 			System.out.println("visiting WordCountOfCommand");
 		}
-		return null;
+		return visitChildren(ctx);
 	}
 
 
@@ -305,7 +360,7 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 		ConcatenationCommand concatCommand = new ConcatenationCommand(baseStr, concatStr);
 		commandObjectStack.push(concatCommand);
 		
-		return concatCommand;
+		return visitChildren(ctx);
 	}
 	
 	@Override
@@ -323,21 +378,21 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 		ConcatenationCommand concatCommand = new ConcatenationCommand(baseStr, concatStr, index);
 		commandObjectStack.push(concatCommand);
 		
-		return concatCommand;
+		return visitChildren(ctx);
 	}
 	
 	@Override public CommandObject visitConcatOn2Commands(SequenceAnalyzerParser.ConcatOn2CommandsContext ctx) { 
 		if(debugFlag == true) {
 			System.out.println("visiting ConcatOn2Commands");
 		}
-		return null;
+		return visitChildren(ctx);
 	}
 	
 	@Override public CommandObject visitConcatOn2CommandsAtIndex(SequenceAnalyzerParser.ConcatOn2CommandsAtIndexContext ctx) { 
 		if(debugFlag == true) {
 			System.out.println("visiting ConcatOn2CommandsAtIndex");
 		}
-		return null;
+		return visitChildren(ctx);
 	}
 }
 
