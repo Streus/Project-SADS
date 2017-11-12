@@ -235,16 +235,19 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 			System.out.println("command = " + command);
 		}
 		
-		
+		AntlrBridge nestedCommand = new AntlrBridge(command);
 		
 		return visitChildren(ctx);
 	}
 
 	@Override public CommandObject visitShiftMaximalityOfCommandInParens(SequenceAnalyzerParser.ShiftMaximalityOfCommandInParensContext ctx) { 
-		
+		String command = ctx.cmd().getText();
 		if(debugFlag == true) {
 			System.out.println("visiting ShiftMaximalityOfCommandInParens");
 		}
+		
+		AntlrBridge nestedCommand = new AntlrBridge(command);
+		
 		return visitChildren(ctx);
 	}
 
