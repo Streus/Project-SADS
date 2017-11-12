@@ -4,6 +4,11 @@ import gui.Console;
 
 public class ClearCommand extends Command
 {
+	public ClearCommand(String name)
+	{
+		super(name);
+	}
+
 	@Override
 	public String getHelp()
 	{

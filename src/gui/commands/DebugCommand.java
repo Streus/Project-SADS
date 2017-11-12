@@ -5,6 +5,11 @@ import gui.MainWindow;
 
 public class DebugCommand extends Command
 {
+	public DebugCommand(String name)
+	{
+		super(name);
+	}
+
 	@Override
 	public String getHelp()
 	{

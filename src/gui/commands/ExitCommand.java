@@ -4,6 +4,11 @@ import gui.Console;
 
 public class ExitCommand extends Command
 {
+	public ExitCommand(String name)
+	{
+		super(name);
+	}
+
 	@Override
 	public String getHelp()
 	{
