@@ -23,7 +23,7 @@ public class AntlrBridge {
 		
 		Stack<CommandObject> commandObjectStack = coVisitor.commandObjectStack;
 		
-		commandExecutor.executeStack(commandObjectStack);
+		//commandExecutor.executeStack(commandObjectStack);
 	}
 	
 	
