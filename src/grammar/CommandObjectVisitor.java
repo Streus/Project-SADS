@@ -203,14 +203,14 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 		String operand = ctx.expr().getText();
 		
 		if(debugFlag == true){
-			System.out.println("visiting ShiftMaximalityNoParens");
+			System.out.println("visiting ShiftMaximalityOfExpression");
 			System.out.println("operand = " + operand);
 		}
 		
 		ShiftMaximalityCommand smCommand = new ShiftMaximalityCommand(operand);
 		commandObjectStack.push(smCommand);
 		
-		return smCommand;
+		return visitChildren(ctx);
 	}
 
 	@Override
@@ -225,7 +225,7 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 		ShiftMaximalityCommand smCommand = new ShiftMaximalityCommand(operand);
 		commandObjectStack.push(smCommand);
 		
-		return smCommand;
+		return visitChildren(ctx);
 	}
 	
 	@Override public CommandObject visitShiftMaximalityOfCommand(SequenceAnalyzerParser.ShiftMaximalityOfCommandContext ctx) { 
@@ -237,15 +237,15 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 		
 		
 		
-		return null;
+		return visitChildren(ctx);
 	}
 
 	@Override public CommandObject visitShiftMaximalityOfCommandInParens(SequenceAnalyzerParser.ShiftMaximalityOfCommandInParensContext ctx) { 
 		
 		if(debugFlag == true) {
-			System.out.println("visiting ShiftMaximalityOfCommand");
+			System.out.println("visiting ShiftMaximalityOfCommandInParens");
 		}
-		return null;
+		return visitChildren(ctx);
 	}
 
 //	@Override

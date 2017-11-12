@@ -31,7 +31,10 @@ public class SequenceAnalyzerBaseVisitor<T> extends AbstractParseTreeVisitor<T> 
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitCmd(SequenceAnalyzerParser.CmdContext ctx) { return visitChildren(ctx); }
+	@Override public T visitCmd(SequenceAnalyzerParser.CmdContext ctx) { 
+		System.out.println("Visiting cmd\nctx = "+ctx.getText());
+		return visitChildren(ctx); 
+	}
 	/**
 	 * {@inheritDoc}
 	 *
@@ -52,7 +55,10 @@ public class SequenceAnalyzerBaseVisitor<T> extends AbstractParseTreeVisitor<T> 
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitPredef(SequenceAnalyzerParser.PredefContext ctx) { return visitChildren(ctx); }
+	@Override public T visitPredef(SequenceAnalyzerParser.PredefContext ctx) { 
+		System.out.println("Visiting predef\nctx = "+ctx.getText());
+		return visitChildren(ctx); 
+	}
 	/**
 	 * {@inheritDoc}
 	 *
