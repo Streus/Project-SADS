@@ -136,7 +136,7 @@ public class MainWindow
 		};
 		
 		//Create a Console singleton if one has not already been instantiated
-		Console.instance().setFront(this);
+		Console.instance().setFront(outputArea);
 	}
 
 	/**
@@ -360,6 +360,8 @@ public class MainWindow
 		cli_view.add(scrollPane, "cell 0 1 3 2,grow");
 		
 		outputArea = new JTextPane();
+		outputArea.setForeground(Color.WHITE);
+		outputArea.setBackground(Color.BLACK);
 		outputArea.setFont(new Font("Courier New", Font.PLAIN, 13));
 		outputArea.setEditable(false);
 		scrollPane.setViewportView(outputArea);
@@ -593,7 +595,7 @@ public class MainWindow
 	{
 		if(Console.instance().processInput(inputLine.getText()) == -1)
 		{
-			outputArea.setText(outputArea.getText() + "~ " + inputLine.getText() + "\n");
+			Console.println("~ " + inputLine.getText());
 			
 			AntlrBridge a = new AntlrBridge(inputLine.getText() + "\n");
 		}

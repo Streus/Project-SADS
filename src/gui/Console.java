@@ -4,7 +4,9 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.swing.JTextPane;
 import javax.swing.text.BadLocationException;
+import javax.swing.text.Document;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
@@ -14,6 +16,11 @@ import gui.commands.*;
 public final class Console
 {
 	private static final String COMMAND_FLAG = "/";
+	
+	// Identify unique styles used in the Console output
+	public static final int OUT = 0;
+	public static final int ERR = 1;
+	public static final int WRN = 2;
 	
 	/* Static Vars */
 	
@@ -32,16 +39,19 @@ public final class Console
 		commandList.put("exit", new ExitCommand());
 	}
 	
-	private static SimpleAttributeSet outputStyle;
-	private static SimpleAttributeSet errorStyle;
+	private static SimpleAttributeSet[] styles;
 	
 	static
 	{
-		outputStyle = new SimpleAttributeSet();
-		StyleConstants.setForeground(outputStyle, Color.blue);
+		styles = new SimpleAttributeSet[3];
+		styles[OUT] = new SimpleAttributeSet();
+		StyleConstants.setForeground(styles[OUT], Color.white);
 		
-		errorStyle = new SimpleAttributeSet();
-		StyleConstants.setForeground(errorStyle, Color.red);
+		styles[ERR] = new SimpleAttributeSet();
+		StyleConstants.setForeground(styles[ERR], Color.red);
+		
+		styles[WRN] = new SimpleAttributeSet();
+		StyleConstants.setForeground(styles[WRN], Color.yellow);
 	}
 	
 	/* Instance Vars */
@@ -51,7 +61,7 @@ public final class Console
 	private int historyIndex;
 	
 	// The GUI the Console operates upon
-	private MainWindow front;
+	private JTextPane front;
 	
 	/* Static Methods */
 	
@@ -72,18 +82,17 @@ public final class Console
 	 */
 	public static void print(String s)
 	{
-		print(s, StreamType.out);
+		print(s, OUT);
 	}
-	public static void print(String s, StreamType type)
+	public static void print(String s, int type)
 	{
-		switch(type)
+		try
 		{
-		case err:
-			sendToFront(s, errorStyle);
-			break;
-		case out:
-			sendToFront(s, outputStyle);
-			break;
+			sendToFront(s, styles[type]);
+		}
+		catch(IndexOutOfBoundsException ioobe)
+		{
+			System.err.println("Invalid text style " + ioobe.getMessage() + ".");
 		}
 	}
 	
@@ -93,9 +102,9 @@ public final class Console
 	 */
 	public static void println(String s)
 	{
-		println(s, StreamType.out);
+		println(s, OUT);
 	}
-	public static void println(String s, StreamType type)
+	public static void println(String s, int type)
 	{
 		print(s + "\n", type);
 	}
@@ -105,14 +114,19 @@ public final class Console
 	 */
 	public static void clear()
 	{
-		instance().front.clearOut();
+		Document d = instance().front.getDocument();
+		try { d.remove(0, d.getLength()); }
+		catch (BadLocationException e)
+		{
+			System.err.println("Encountered an error clearing the console. " + e.getMessage());
+		}
 	}
 	
 	private static void sendToFront(String text, SimpleAttributeSet set)
 	{
 		try
 		{
-			StyledDocument frontDoc = instance().front.getOutput().getStyledDocument();
+			StyledDocument frontDoc = instance().front.getStyledDocument();
 			frontDoc.insertString(frontDoc.getLength(), text, set);
 		}
 		catch(BadLocationException ble) { }
@@ -153,11 +167,11 @@ public final class Console
 			}
 			catch(Exception e)
 			{
-				println("Command \"" + args[0] + "\" encountered a problem.\n" + e.getMessage(), StreamType.err);
+				println("Command \"" + args[0] + "\" encountered a problem.\n" + e.getMessage(), ERR);
 			}
 		}
 		else
-			println("Command \"" + args[0] + "\" could not be found.", StreamType.err);
+			println("Command \"" + args[0] + "\" could not be found.", ERR);
 		
 		return success;
 	}
@@ -192,13 +206,14 @@ public final class Console
 	 * Tie the singleton instance to a GUI instance
 	 * @param front - a reference to the GUI instance
 	 */
-	public void setFront(MainWindow front)
+	public void setFront(JTextPane front)
 	{
+		front.removeStyle("out");
+		front.removeStyle("err");
+		front.removeStyle("wrn");
 		this.front = front;
+		front.addStyle("out", null).addAttribute("outStyle", styles[OUT]);
+		front.addStyle("err", null).addAttribute("errStyle", styles[ERR]);
+		front.addStyle("wrn", null).addAttribute("wrnStyle", styles[WRN]);
 	}
-	
-	/**
-	 * TODO
-	 */
-	public enum StreamType { out, err }
 }
