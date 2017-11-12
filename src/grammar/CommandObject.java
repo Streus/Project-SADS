@@ -134,7 +134,7 @@ class CompareCommand extends StringCommand{
 //////////////////PREDEFINED FUNCTIONS//////////////////
 class CuttingTimesCommand extends PredefinedFunctionCommand{	
 	String expr;
-	CommandObject cmd = new PredefinedFunctionCommand();
+	CommandObject command;
 	
 	public CuttingTimesCommand (){//default constructor
 		commandType = "";
@@ -148,12 +148,12 @@ class CuttingTimesCommand extends PredefinedFunctionCommand{
 			System.out.println("CuttingTimesCommand constructed");
 	}
 	
-	public CuttingTimesCommand (CommandObject cmd){
-		commandType = "CuttingTimesCommand";
-		this.expr = expr;
+	public CuttingTimesCommand (CommandObject command){
+		commandType = "NestedCuttingTimesCommand";
+		this.command = command;
 		
 		if(debugFlag == true)
-			System.out.println("CuttingTimesCommand constructed");
+			System.out.println("NestedCuttingTimesCommand constructed");
 	}
 	
 //	@Override
@@ -168,6 +168,7 @@ class CuttingTimesCommand extends PredefinedFunctionCommand{
 
 class StarProductCommand extends PredefinedFunctionCommand{	
 	String str1, str2;
+	CommandObject command;
 	
 	public StarProductCommand (){//default constructor
 		commandType = "";
@@ -182,6 +183,14 @@ class StarProductCommand extends PredefinedFunctionCommand{
 			System.out.println("StarProductCommand constructed");
 	}
 	
+	public StarProductCommand (CommandObject command){
+		commandType = "NestedStarProductCommand";
+		this.command = command;
+		
+		if(debugFlag == true)
+			System.out.println("NestedStarProductCommand constructed");
+	}
+	
 //	@Override
 	public CommandResponse execute() {
 		
@@ -193,17 +202,27 @@ class StarProductCommand extends PredefinedFunctionCommand{
 
 class ShiftMaximalityCommand extends PredefinedFunctionCommand{	
 	String operand;
+	CommandObject command;
 	
 	public ShiftMaximalityCommand (){//default constructor
 		commandType = "";
 	}
 	
+	//constructor for string
 	public ShiftMaximalityCommand (String operand){
 		commandType = "ShiftMaximalityCommand";
 		this.operand = operand;
 		
 		if(debugFlag == true)
 			System.out.println("ShiftMaximalityCommand constructed");
+	}
+	//constructor for command
+	public ShiftMaximalityCommand (CommandObject command){
+		commandType = "ShiftMaximalityNestedCommand";
+		this.command = command;
+		
+		if(debugFlag == true)
+			System.out.println("NestedShiftMaximalityCommand constructed");
 	}
 	
 //	@Override
@@ -219,6 +238,7 @@ class ShiftMaximalityCommand extends PredefinedFunctionCommand{
 class WordCountCommand extends PredefinedFunctionCommand{	
 	String str;
 	int index;
+	CommandObject command;
 	
 	public WordCountCommand (){//default constructor
 		commandType = "";
@@ -231,6 +251,15 @@ class WordCountCommand extends PredefinedFunctionCommand{
 		
 		if(debugFlag == true)
 			System.out.println("WordCountCommand constructed");
+	}
+	
+	public WordCountCommand (CommandObject command, int index){
+		commandType = "NestedWordCountCommand";
+		this.command = command;
+		this.index = index;
+		
+		if(debugFlag == true)
+			System.out.println("NestedWordCountCommand constructed");
 	}
 	
 //	@Override 
