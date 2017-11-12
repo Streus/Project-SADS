@@ -597,7 +597,15 @@ public class MainWindow
 		{
 			Console.println("~ " + inputLine.getText());
 			
-			AntlrBridge a = new AntlrBridge(inputLine.getText() + "\n");
+			try
+			{
+				AntlrBridge a = new AntlrBridge(inputLine.getText() + "\n");
+			}
+			catch(Exception e)
+			{
+				Console.println("ANTLR interpretation engine encountered an error.", Console.ERR);
+				e.printStackTrace();
+			}
 		}
 		
 		Console.instance().addToHistory(inputLine.getText());

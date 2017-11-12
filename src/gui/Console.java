@@ -2,7 +2,10 @@ package gui;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 import javax.swing.JTextPane;
 import javax.swing.text.BadLocationException;
@@ -18,9 +21,10 @@ public final class Console
 	private static final String COMMAND_FLAG = "/";
 	
 	// Identify unique styles used in the Console output
-	public static final int OUT = 0;
-	public static final int ERR = 1;
-	public static final int WRN = 2;
+	public static final int OUT = 0; //output
+	public static final int ERR = 1; //error
+	public static final int WRN = 2; //warning
+	public static final int HDR = 3; //header
 	
 	/* Static Vars */
 	
@@ -34,24 +38,36 @@ public final class Console
 		//build the command list
 		commandList = new HashMap<String, Command>();
 		
-		commandList.put("clear", new ClearCommand());
-		commandList.put("debug", new DebugCommand());
-		commandList.put("exit", new ExitCommand());
+		commandList.put("clear", new ClearCommand("clear"));
+		commandList.put("debug", new DebugCommand("debug"));
+		commandList.put("exit", new ExitCommand("exit"));
+		commandList.put("help", new HelpCommand("help"));
 	}
 	
+	// All available styles in the CLI
 	private static SimpleAttributeSet[] styles;
-	
 	static
 	{
-		styles = new SimpleAttributeSet[3];
+		//output
+		styles = new SimpleAttributeSet[4];
 		styles[OUT] = new SimpleAttributeSet();
 		StyleConstants.setForeground(styles[OUT], Color.white);
 		
+		//error
 		styles[ERR] = new SimpleAttributeSet();
 		StyleConstants.setForeground(styles[ERR], Color.red);
+		StyleConstants.setBold(styles[ERR], true);
 		
+		//warning
 		styles[WRN] = new SimpleAttributeSet();
 		StyleConstants.setForeground(styles[WRN], Color.yellow);
+		StyleConstants.setItalic(styles[WRN], true);
+		
+		//header
+		styles[HDR] = new SimpleAttributeSet();
+		StyleConstants.setForeground(styles[HDR], Color.cyan);
+		StyleConstants.setBold(styles[HDR], true);
+		StyleConstants.setUnderline(styles[HDR], true);
 	}
 	
 	/* Instance Vars */
@@ -74,6 +90,18 @@ public final class Console
 		if(inst == null)
 			inst = new Console();
 		return inst;
+	}
+	
+	/**
+	 * Get a list of all the commands that can be run by the Console
+	 * @return a list of Command objects being managed by this Console
+	 */
+	public static Command[] getCommands()
+	{
+		Collection<Command> set = commandList.values();
+		Command[] commands = new Command[set.size()];
+		commands = set.toArray(commands);
+		return commands;
 	}
 	
 	/**
@@ -167,7 +195,8 @@ public final class Console
 			}
 			catch(Exception e)
 			{
-				println("Command \"" + args[0] + "\" encountered a problem.\n" + e.getMessage(), ERR);
+				println("Command \"" + args[0] + "\" encountered a problem.\n" + e.toString(), ERR);
+				e.printStackTrace();
 			}
 		}
 		else
