@@ -11,10 +11,17 @@ public class CuttingTimesTest {
 		
 		CuttingTimes tester = new CuttingTimes();
 		
-		int[] calcCuttingX = tester.cuttingTimes("1011011");
-		int[] actualCuttingX = new int[]{1,2,4,5,7};
+		int[] calcCutting1 = tester.cuttingTimes("1011011");
+		int[] actualCutting1 = new int[]{1,2,4,5,7};
 
-		assertArrayEquals(calcCuttingX, actualCuttingX);
+		assertArrayEquals(calcCutting1, actualCutting1);
+		
+		CuttingTimes tester2 = new CuttingTimes();
+		
+		int[] calcCutting2 = tester2.cuttingTimes("1011101010111011");
+		int[] actualCutting2 = new int[]{1,2,4,8,16};
+
+		assertArrayEquals(calcCutting2, actualCutting2);
 	
 	}
 

@@ -5,6 +5,9 @@ import java.util.List;
 
 public class CuttingTimes {
 	
+	List<Integer> cuttingList = new ArrayList<Integer>();	
+	boolean disagreement = true;
+	int curDisagreement = 2;
 	
 	/**
 	 * This method iterates through a string to find a list of all cutting times 
@@ -17,24 +20,51 @@ public class CuttingTimes {
 	 */
 	public int[] cuttingTimes(String s) {
 		
-		List<Integer> cuttingList = new ArrayList<Integer>();	
-		
 		//1,2 are always considered cutting times
 		//Note: 1,2 correspond to s.charAt(0) and s.charAt(1)
 		cuttingList.add(1);
 		cuttingList.add(2);
 		
-		//take off the first two digits and compare with original
-		String cutString = s.substring(2);
 		
-		for (int i = 0; i<cutString.length(); i++) {
-			if (s.charAt(i) != cutString.charAt(i)) cuttingList.add(i+3);
+		while (disagreement) {
+			disagreement = false;
+			String cutString = s.substring(curDisagreement);
+			int j = curDisagreement;
+			
+			for (int i=0; i<cutString.length(); i++) {
+				if (s.charAt(i) != cutString.charAt(i)) {
+					disagreement = true;
+					cuttingList.add(curDisagreement+=(i+1));
+					break;
+				}
+			}
 		}
+		
 		
 		int[] cuttingTimes = cuttingList.stream().mapToInt(i->i).toArray();
 		
 		return cuttingTimes;
 		
+	}
+	
+	/**
+	 * 
+	 * @param original
+	 * @param startingPosition
+	 * @return
+	 */
+	public void findDisagreement(String original) {
+		String cutString = original.substring(curDisagreement);
+		int j = curDisagreement;
+		
+		for (int i=0; i<cutString.length(); i++) {
+			if (original.charAt(i) != cutString.charAt(i)) {
+				cuttingList.add(i+j+1);
+				curDisagreement+=(i);
+				return;
+			}	
+		}
+		disagreement = false;
 	}
 
 }
