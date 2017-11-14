@@ -18,13 +18,15 @@ import gui.commands.*;
 
 public final class Console
 {
+	/* Constants */
+	
 	private static final String COMMAND_FLAG = "/";
 	
 	// Identify unique styles used in the Console output
-	public static final int OUT = 0; //output
-	public static final int ERR = 1; //error
-	public static final int WRN = 2; //warning
-	public static final int HDR = 3; //header
+	private static final int OUT = 0; //output
+	private static final int ERR = 1; //error
+	private static final int WRN = 2; //warning
+	private static final int HDR = 3; //header
 	
 	/* Static Vars */
 	
@@ -148,6 +150,38 @@ public final class Console
 		{
 			System.err.println("Encountered an error clearing the console. " + e.getMessage());
 		}
+	}
+	
+	/**
+	 * @return - the default output type
+	 */
+	public static int getOut()
+	{
+		return OUT;
+	}
+	
+	/**
+	 * @return - the error output type
+	 */
+	public static int getErr()
+	{
+		return ERR;
+	}
+	
+	/**
+	 * @return - the output type for warnings
+	 */
+	public static int getWrn()
+	{
+		return WRN;
+	}
+	
+	/**
+	 * @return - the output type for headers
+	 */
+	public static int getHdr()
+	{
+		return HDR;
 	}
 	
 	private static void sendToFront(String text, SimpleAttributeSet set)
