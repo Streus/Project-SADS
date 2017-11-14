@@ -33,7 +33,7 @@ public class HelpCommand extends Command
 					return 0;
 				}
 			}
-			Console.println("Command: " + args[1] + " does not exist.", Console.ERR);
+			Console.println("Command: " + args[1] + " does not exist.", Console.getErr());
 			return 1;
 		}
 		//print out help for all commands
@@ -41,7 +41,7 @@ public class HelpCommand extends Command
 		{
 			for(int i = 0; i < commands.length; i++)
 			{
-				Console.println("[" + commands[i].getName() + "]", Console.HDR);
+				Console.println("[" + commands[i].getName() + "]", Console.getHdr());
 				Console.println("  " + commands[i].getHelp());
 			}
 			return 0;

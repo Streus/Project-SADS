@@ -603,7 +603,7 @@ public class MainWindow
 			}
 			catch(Exception e)
 			{
-				Console.println("ANTLR interpretation engine encountered an error.", Console.ERR);
+				Console.println("ANTLR interpretation engine encountered an error.", Console.getErr());
 				e.printStackTrace();
 			}
 		}

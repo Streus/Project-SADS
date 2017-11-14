@@ -21,7 +21,7 @@ public class DebugCommand extends Command
 	{
 		MainWindow.DEBUG = !MainWindow.DEBUG;
 		Console.println("Debug Mode is now " + (MainWindow.DEBUG ? "on" : "off") + ".");
-		Console.println("[WARNING] Debug Mode is not fully implemented. Use at your own risk.", Console.WRN);
+		Console.println("[WARNING] Debug Mode is not fully implemented. Use at your own risk.", Console.getWrn());
 		return 0;
 	}
 
