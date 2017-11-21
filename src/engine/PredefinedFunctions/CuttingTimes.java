@@ -20,51 +20,43 @@ public class CuttingTimes {
 	 */
 	public int[] cuttingTimes(String s) {
 		
-		//1,2 are always considered cutting times
-		//Note: 1,2 correspond to s.charAt(0) and s.charAt(1)
-		cuttingList.add(1);
-		cuttingList.add(2);
+		if (s != null && !s.isEmpty()) {
 		
-		
-		while (disagreement) {
-			disagreement = false;
-			String cutString = s.substring(curDisagreement);
-			int j = curDisagreement;
+			List<Integer> cuttingList = new ArrayList<Integer>();	
 			
-			for (int i=0; i<cutString.length(); i++) {
-				if (s.charAt(i) != cutString.charAt(i)) {
-					disagreement = true;
-					cuttingList.add(curDisagreement+=(i+1));
-					break;
+			//1,2 are always considered cutting times
+			//Note: 1,2 correspond to s.charAt(0) and s.charAt(1)
+			cuttingList.add(1);
+			cuttingList.add(2);
+			
+			
+			while (disagreement) {
+				disagreement = false;
+				String cutString = s.substring(curDisagreement);
+				int j = curDisagreement;
+				
+				for (int i=0; i<cutString.length(); i++) {
+					if (s.charAt(i) != cutString.charAt(i)) {
+						disagreement = true;
+						cuttingList.add(curDisagreement+=(i+1));
+						break;
+					}
 				}
 			}
+			
+			int[] cuttingTimes = cuttingList.stream().mapToInt(i->i).toArray();
+			
+			return cuttingTimes;
+			
+		} else { //maybe throw custom exception here?
+			int[] invalidInput = new int[1];
+			invalidInput[0] = -1;
+			return invalidInput;
 		}
+
 		
 		
-		int[] cuttingTimes = cuttingList.stream().mapToInt(i->i).toArray();
 		
-		return cuttingTimes;
-		
-	}
-	
-	/**
-	 * 
-	 * @param original
-	 * @param startingPosition
-	 * @return
-	 */
-	public void findDisagreement(String original) {
-		String cutString = original.substring(curDisagreement);
-		int j = curDisagreement;
-		
-		for (int i=0; i<cutString.length(); i++) {
-			if (original.charAt(i) != cutString.charAt(i)) {
-				cuttingList.add(i+j+1);
-				curDisagreement+=(i);
-				return;
-			}	
-		}
-		disagreement = false;
 	}
 
 }

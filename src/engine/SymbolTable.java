@@ -14,7 +14,7 @@ import java.util.*;
  *  when associating a value with a key that is already in the symbol table,
  *  the convention is to replace the old value with the new value.
  *  Unlike {@link java.util.Map}, this class uses the convention that
- *  values cannot be {@code null}—setting the
+ *  values cannot be {@code null}ï¿½setting the
  *  value associated with a key to {@code null} is equivalent to deleting the key
  *  from the symbol table.
  *  <p>
@@ -60,6 +60,7 @@ public class SymbolTable<Key extends Comparable<Key>, Value> {
      * Initializes an empty symbol table.
      */
     public SymbolTable() {
+    	
     }
 
    /***************************************************************************
@@ -485,7 +486,7 @@ public class SymbolTable<Key extends Comparable<Key>, Value> {
      * @param k the order statistic
      * @return the {@code k}th smallest key in the symbol table
      * @throws IllegalArgumentException unless {@code k} is between 0 and
-     *     <em>n</em>–1
+     *     <em>n</em>ï¿½1
      */
     public Key select(int k) {
         if (k < 0 || k >= size()) {
