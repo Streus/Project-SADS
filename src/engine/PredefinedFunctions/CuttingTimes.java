@@ -17,24 +17,31 @@ public class CuttingTimes {
 	 */
 	public int[] cuttingTimes(String s) {
 		
-		List<Integer> cuttingList = new ArrayList<Integer>();	
+		if (s != null && !s.isEmpty()) {
 		
-		//1,2 are always considered cutting times
-		//Note: 1,2 correspond to s.charAt(0) and s.charAt(1)
-		cuttingList.add(1);
-		cuttingList.add(2);
-		
-		//take off the first two digits and compare with original
-		String cutString = s.substring(2);
-		
-		for (int i = 0; i<cutString.length(); i++) {
-			if (s.charAt(i) != cutString.charAt(i)) cuttingList.add(i+3);
+			List<Integer> cuttingList = new ArrayList<Integer>();	
+			
+			//1,2 are always considered cutting times
+			//Note: 1,2 correspond to s.charAt(0) and s.charAt(1)
+			cuttingList.add(1);
+			cuttingList.add(2);
+			
+			//take off the first two digits and compare with original
+			String cutString = s.substring(2);
+			
+			for (int i = 0; i<cutString.length(); i++) {
+				if (s.charAt(i) != cutString.charAt(i)) cuttingList.add(i+3);
+			}
+			
+			int[] cuttingTimes = cuttingList.stream().mapToInt(i->i).toArray();
+			
+			return cuttingTimes;
+			
+		} else {
+			int[] invalidInput = new int[1];
+			invalidInput[0] = -1;
+			return invalidInput;
 		}
-		
-		int[] cuttingTimes = cuttingList.stream().mapToInt(i->i).toArray();
-		
-		return cuttingTimes;
-		
 	}
 
 }

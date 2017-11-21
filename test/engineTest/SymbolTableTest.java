@@ -48,8 +48,14 @@ public class SymbolTableTest {
             st.put(key, i);
         }
         
+        assertEquals(10, st.size());
+        assertEquals(st.max(), "9");
+        
         for (String s : st.keys()) {
-        	assertEquals(Integer.valueOf(s), st.get(s));
+        		assertEquals(Integer.valueOf(s), st.get(s));
+        		st.delete(s);
         }
+        
+        assertEquals(st.isEmpty(), true);
 	}
 }
