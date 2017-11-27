@@ -25,11 +25,6 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
 	
-//	@Override
-//    public CommandObject visitSubstitutionOfFiles(SequenceAnalyzerParser.SubstitutionOfFilesContext ctx){
-//		
-//	}
-
 	@Override
     public CommandObject visitSubstitutionOfExpression(SequenceAnalyzerParser.SubstitutionOfExpressionContext ctx){
 		String target = ctx.expr(0).getText();
@@ -45,11 +40,6 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 		return visitChildren(ctx);
 	}
 
-//	@Override
-//    public void visitComparisonOfFiles(SequenceAnalyzerParser.ComparisonOfFilesContext ctx){
-//		
-//	}
-
 	@Override
     public CommandObject visitComparisonOfExpression(SequenceAnalyzerParser.ComparisonOfExpressionContext ctx){
 		String str1 = ctx.expr(0).getText();
@@ -64,16 +54,6 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 		
 		return visitChildren(ctx);
 	}
-
-//	@Override
-//    public void  visitCuttingTimesOfFile(SequenceAnalyzerParser.CuttingTimesOfFileContext ctx){
-//		
-//	}
-
-//	@Override
-//    public void  visitCuttingTimesOfFileInParens(SequenceAnalyzerParser.CuttingTimesOfFileInParensContext ctx){
-//		
-//	}
 
 	@Override
     public CommandObject visitCuttingTimesOfExpression(SequenceAnalyzerParser.CuttingTimesOfExpressionContext ctx){
@@ -115,11 +95,6 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 		return visitChildren(ctx); 
 	}
 
-//	@Override
-//    public void  visitStarProductOfFiles(SequenceAnalyzerParser.StarProductOfFilesContext ctx){
-//		
-//	}
-
 	@Override
     public CommandObject  visitStarProductOfExpressions(SequenceAnalyzerParser.StarProductOfExpressionsContext ctx){
 		System.out.println("Visiting StarProductOfExpressions");
@@ -142,16 +117,6 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 		}
 		return visitChildren(ctx); 
 	}
-
-//	@Override
-//    public void  visitBuildFile(SequenceAnalyzerParser.BuildFileContext ctx){
-//		
-//	}
-//
-//	@Override
-//    public void  visitBuildFileInParens(SequenceAnalyzerParser.BuildFileInParensContext ctx){
-//		
-//	}
 
 	@Override
     public CommandObject  visitBuildExpression(SequenceAnalyzerParser.BuildExpressionContext ctx){
@@ -178,16 +143,6 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 		
 		return visitChildren(ctx);
 	}
-
-//	@Override
-//    public void  visitShiftMaximalityOfFile(SequenceAnalyzerParser.ShiftMaximalityOfFileContext ctx){
-//		
-//	}
-//
-//	@Override
-//    public void  visitShiftMaximalityOfFileInParens(SequenceAnalyzerParser.ShiftMaximalityOfFileInParensContext ctx){
-//		
-//	}
 
 	@Override
     public CommandObject  visitShiftMaximalityOfExpression(SequenceAnalyzerParser.ShiftMaximalityOfExpressionContext ctx){
@@ -236,7 +191,6 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 		case "wc":
 //			operand = context.replace(cmd, "");
 //			WordCountCommand wordcountCommand = new WordCountCommand(operand,index);
-//			commandObjectStack.push(wordcountCommand);
 			break;
 		case "ct":
 			
@@ -257,7 +211,7 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 
 	@Override public CommandObject visitShiftMaximalityOfCommandInParens(SequenceAnalyzerParser.ShiftMaximalityOfCommandInParensContext ctx) { 
 		String context = ctx.getText();
-		String cmd = context.substring(0,2);
+		String cmd = ctx.command.getText();
 		String operand;
 		
 		if(debugFlag == true) {
@@ -292,12 +246,6 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 		return visitChildren(ctx);
 	}
 
-//	@Override
-//    public void  visitWordCountOfFile(SequenceAnalyzerParser.WordCountOfFileContext ctx){
-//		
-//	}
-//
-
 	@Override
     public CommandObject  visitWordCountOfExpression(SequenceAnalyzerParser.WordCountOfExpressionContext ctx){
 		String str = ctx.expr().getText();
@@ -319,18 +267,6 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 		}
 		return visitChildren(ctx);
 	}
-
-
-
-//	@Override
-//    public void  visitConcatOn2files(SequenceAnalyzerParser.ConcatOn2filesContext ctx){
-//		
-//	}
-//
-//	@Override
-//    public void  visitConcatOn2FilesAtIndex(SequenceAnalyzerParser.ConcatOn2FilesAtIndexContext ctx){
-//		
-//	}
 	
 	@Override
     public CommandObject visitConcatOn2Expressions(SequenceAnalyzerParser.ConcatOn2ExpressionsContext ctx){

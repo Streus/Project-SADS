@@ -47,13 +47,6 @@ public interface SequenceAnalyzerVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitPredef(SequenceAnalyzerParser.PredefContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code SubstitutionOfFiles}
-	 * labeled alternative in {@link SequenceAnalyzerParser#sub}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitSubstitutionOfFiles(SequenceAnalyzerParser.SubstitutionOfFilesContext ctx);
-	/**
 	 * Visit a parse tree produced by the {@code SubstitutionOfCommands}
 	 * labeled alternative in {@link SequenceAnalyzerParser#sub}.
 	 * @param ctx the parse tree
@@ -75,12 +68,19 @@ public interface SequenceAnalyzerVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitSubstitutionOfExpression(SequenceAnalyzerParser.SubstitutionOfExpressionContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code ComparisonOfFiles}
+	 * Visit a parse tree produced by the {@code ComparisonOfCommands}
 	 * labeled alternative in {@link SequenceAnalyzerParser#cmp}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitComparisonOfFiles(SequenceAnalyzerParser.ComparisonOfFilesContext ctx);
+	T visitComparisonOfCommands(SequenceAnalyzerParser.ComparisonOfCommandsContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code ComparisonOfCmdAndExpr}
+	 * labeled alternative in {@link SequenceAnalyzerParser#cmp}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitComparisonOfCmdAndExpr(SequenceAnalyzerParser.ComparisonOfCmdAndExprContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code ComparisonOfExpression}
 	 * labeled alternative in {@link SequenceAnalyzerParser#cmp}.
@@ -88,20 +88,6 @@ public interface SequenceAnalyzerVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitComparisonOfExpression(SequenceAnalyzerParser.ComparisonOfExpressionContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code CuttingTimesOfFile}
-	 * labeled alternative in {@link SequenceAnalyzerParser#ct}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitCuttingTimesOfFile(SequenceAnalyzerParser.CuttingTimesOfFileContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code CuttingTimesOfFileInParens}
-	 * labeled alternative in {@link SequenceAnalyzerParser#ct}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitCuttingTimesOfFileInParens(SequenceAnalyzerParser.CuttingTimesOfFileInParensContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code CuttingTimesOfCommand}
 	 * labeled alternative in {@link SequenceAnalyzerParser#ct}.
@@ -131,13 +117,6 @@ public interface SequenceAnalyzerVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitCuttingTimesOfExpressionInParens(SequenceAnalyzerParser.CuttingTimesOfExpressionInParensContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code StarProductOfFiles}
-	 * labeled alternative in {@link SequenceAnalyzerParser#sp}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitStarProductOfFiles(SequenceAnalyzerParser.StarProductOfFilesContext ctx);
-	/**
 	 * Visit a parse tree produced by the {@code StarProductOfCommands}
 	 * labeled alternative in {@link SequenceAnalyzerParser#sp}.
 	 * @param ctx the parse tree
@@ -152,20 +131,6 @@ public interface SequenceAnalyzerVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitStarProductOfExpressions(SequenceAnalyzerParser.StarProductOfExpressionsContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code BuildFile}
-	 * labeled alternative in {@link SequenceAnalyzerParser#build}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitBuildFile(SequenceAnalyzerParser.BuildFileContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code BuildFileInParens}
-	 * labeled alternative in {@link SequenceAnalyzerParser#build}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitBuildFileInParens(SequenceAnalyzerParser.BuildFileInParensContext ctx);
-	/**
 	 * Visit a parse tree produced by the {@code BuildExpression}
 	 * labeled alternative in {@link SequenceAnalyzerParser#build}.
 	 * @param ctx the parse tree
@@ -179,20 +144,6 @@ public interface SequenceAnalyzerVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitBuildExpressionInParens(SequenceAnalyzerParser.BuildExpressionInParensContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code ShiftMaximalityOfFile}
-	 * labeled alternative in {@link SequenceAnalyzerParser#sm}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitShiftMaximalityOfFile(SequenceAnalyzerParser.ShiftMaximalityOfFileContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code ShiftMaximalityOfFileInParens}
-	 * labeled alternative in {@link SequenceAnalyzerParser#sm}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitShiftMaximalityOfFileInParens(SequenceAnalyzerParser.ShiftMaximalityOfFileInParensContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code ShiftMaximalityOfCommand}
 	 * labeled alternative in {@link SequenceAnalyzerParser#sm}.
@@ -222,13 +173,6 @@ public interface SequenceAnalyzerVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitShiftMaximalityOfExpressionInParens(SequenceAnalyzerParser.ShiftMaximalityOfExpressionInParensContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code WordCountOfFile}
-	 * labeled alternative in {@link SequenceAnalyzerParser#wordct}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitWordCountOfFile(SequenceAnalyzerParser.WordCountOfFileContext ctx);
-	/**
 	 * Visit a parse tree produced by the {@code WordCountOfCommand}
 	 * labeled alternative in {@link SequenceAnalyzerParser#wordct}.
 	 * @param ctx the parse tree
@@ -243,20 +187,6 @@ public interface SequenceAnalyzerVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitWordCountOfExpression(SequenceAnalyzerParser.WordCountOfExpressionContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code ConcatOn2files}
-	 * labeled alternative in {@link SequenceAnalyzerParser#concat}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitConcatOn2files(SequenceAnalyzerParser.ConcatOn2filesContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code ConcatOn2FilesAtIndex}
-	 * labeled alternative in {@link SequenceAnalyzerParser#concat}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitConcatOn2FilesAtIndex(SequenceAnalyzerParser.ConcatOn2FilesAtIndexContext ctx);
-	/**
 	 * Visit a parse tree produced by the {@code ConcatOn2Commands}
 	 * labeled alternative in {@link SequenceAnalyzerParser#concat}.
 	 * @param ctx the parse tree
@@ -270,6 +200,34 @@ public interface SequenceAnalyzerVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitConcatOn2CommandsAtIndex(SequenceAnalyzerParser.ConcatOn2CommandsAtIndexContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code ConcatOfCmdOnExpr}
+	 * labeled alternative in {@link SequenceAnalyzerParser#concat}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitConcatOfCmdOnExpr(SequenceAnalyzerParser.ConcatOfCmdOnExprContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code ConcatOfCmdOnExprAtIndex}
+	 * labeled alternative in {@link SequenceAnalyzerParser#concat}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitConcatOfCmdOnExprAtIndex(SequenceAnalyzerParser.ConcatOfCmdOnExprAtIndexContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code ConcatOfExprOnCommand}
+	 * labeled alternative in {@link SequenceAnalyzerParser#concat}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitConcatOfExprOnCommand(SequenceAnalyzerParser.ConcatOfExprOnCommandContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code ConcatOfExprOnCommandAtIndex}
+	 * labeled alternative in {@link SequenceAnalyzerParser#concat}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitConcatOfExprOnCommandAtIndex(SequenceAnalyzerParser.ConcatOfExprOnCommandAtIndexContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code ConcatOn2Expressions}
 	 * labeled alternative in {@link SequenceAnalyzerParser#concat}.
