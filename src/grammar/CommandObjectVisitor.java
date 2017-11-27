@@ -2,14 +2,12 @@ package grammar;
 
 
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
-import java.util.Stack;
 import engine.command.*;
 
 
 
 
 public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObject> {
-	Stack<CommandObject> commandObjectStack = new Stack<CommandObject>();
 	public boolean debugFlag = true;
 	
 	@Override public CommandObject visitAssignVariableOfCommand(SequenceAnalyzerParser.AssignVariableOfCommandContext ctx) { return visitChildren(ctx); }
@@ -43,7 +41,6 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 		}
 		
 		SubstitutionCommand subCommand = new SubstitutionCommand(target, replacement);
-		commandObjectStack.push(subCommand);
 		
 		return visitChildren(ctx);
 	}
@@ -64,7 +61,6 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 		}
 		
 		CompareCommand cmpCommand = new CompareCommand(str1, str2);
-		commandObjectStack.push(cmpCommand);
 		
 		return visitChildren(ctx);
 	}
@@ -88,7 +84,6 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 		}
 		
 		CuttingTimesCommand ctCommand = new CuttingTimesCommand(expr);
-		commandObjectStack.push(ctCommand);
 		
 		return visitChildren(ctx);
 	}
@@ -102,7 +97,6 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 		}
 		
 		CuttingTimesCommand ctCommand = new CuttingTimesCommand(expr);
-		commandObjectStack.push(ctCommand);
 		
 		return visitChildren(ctx);
 	}
@@ -138,7 +132,6 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 		}
 		
 		StarProductCommand spCommand = new StarProductCommand(str1, str2); 
-		commandObjectStack.push(spCommand);
 		
 		return visitChildren(ctx);
 	}
@@ -169,7 +162,6 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 		}
 		
 		BuildCommand buildCommand = new BuildCommand(str);
-		commandObjectStack.push(buildCommand);
 		
 		return visitChildren(ctx);
 	}
@@ -183,7 +175,6 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 		}
 		
 		BuildCommand buildCommand = new BuildCommand(str);
-		commandObjectStack.push(buildCommand);
 		
 		return visitChildren(ctx);
 	}
@@ -208,7 +199,6 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 		}
 		
 		ShiftMaximalityCommand smCommand = new ShiftMaximalityCommand(operand);
-		commandObjectStack.push(smCommand);
 		
 		return visitChildren(ctx);
 	}
@@ -223,7 +213,6 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 		}
 		
 		ShiftMaximalityCommand smCommand = new ShiftMaximalityCommand(operand);
-		commandObjectStack.push(smCommand);
 		
 		return visitChildren(ctx);
 	}
@@ -243,7 +232,6 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 			operand = context.replace(cmd, "");
 			ShiftMaximalityCommand smCommand = new ShiftMaximalityCommand(operand);
 			ShiftMaximalityCommand nestedCommand = new ShiftMaximalityCommand(smCommand);
-			commandObjectStack.push(nestedCommand);
 			break;
 		case "wc":
 //			operand = context.replace(cmd, "");
@@ -282,12 +270,10 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 			operand = context.replace(cmd, "");
 			ShiftMaximalityCommand smCommand = new ShiftMaximalityCommand(operand);
 			ShiftMaximalityCommand nestedCommand = new ShiftMaximalityCommand(smCommand);
-			commandObjectStack.push(nestedCommand);
 			break;
 		case "wc":
 //			operand = context.replace(cmd, "");
 //			WordCountCommand wordcountCommand = new WordCountCommand(operand,index);
-//			commandObjectStack.push(wordcountCommand);
 			break;
 		case "ct":
 			
@@ -323,7 +309,6 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 		}
 		
 		WordCountCommand wordcountCommand = new WordCountCommand(str,index);
-		commandObjectStack.push(wordcountCommand);
 		
 		return visitChildren(ctx);
 	}
@@ -358,7 +343,6 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 		}
 		
 		ConcatenationCommand concatCommand = new ConcatenationCommand(baseStr, concatStr);
-		commandObjectStack.push(concatCommand);
 		
 		return visitChildren(ctx);
 	}
@@ -376,7 +360,6 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 		}
 		
 		ConcatenationCommand concatCommand = new ConcatenationCommand(baseStr, concatStr, index);
-		commandObjectStack.push(concatCommand);
 		
 		return visitChildren(ctx);
 	}
