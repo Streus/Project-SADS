@@ -1,6 +1,5 @@
-// Generated from SequenceAnalyzer.g4 by ANTLR 4.7
 package grammar;
-
+// Generated from SequenceAnalyzer.g4 by ANTLR 4.7
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**
@@ -80,6 +79,30 @@ public interface SequenceAnalyzerListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitSubstitutionOfFiles(SequenceAnalyzerParser.SubstitutionOfFilesContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code SubstitutionOfCommands}
+	 * labeled alternative in {@link SequenceAnalyzerParser#sub}.
+	 * @param ctx the parse tree
+	 */
+	void enterSubstitutionOfCommands(SequenceAnalyzerParser.SubstitutionOfCommandsContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code SubstitutionOfCommands}
+	 * labeled alternative in {@link SequenceAnalyzerParser#sub}.
+	 * @param ctx the parse tree
+	 */
+	void exitSubstitutionOfCommands(SequenceAnalyzerParser.SubstitutionOfCommandsContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code SubstitutionOfCmdAndExpr}
+	 * labeled alternative in {@link SequenceAnalyzerParser#sub}.
+	 * @param ctx the parse tree
+	 */
+	void enterSubstitutionOfCmdAndExpr(SequenceAnalyzerParser.SubstitutionOfCmdAndExprContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code SubstitutionOfCmdAndExpr}
+	 * labeled alternative in {@link SequenceAnalyzerParser#sub}.
+	 * @param ctx the parse tree
+	 */
+	void exitSubstitutionOfCmdAndExpr(SequenceAnalyzerParser.SubstitutionOfCmdAndExprContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code SubstitutionOfExpression}
 	 * labeled alternative in {@link SequenceAnalyzerParser#sub}.
