@@ -543,15 +543,16 @@ public class SequenceAnalyzerParser extends Parser {
 	}
 	public static class SubstitutionOfCmdAndExprContext extends SubContext {
 		public Token command;
-		public CmdContext nestedCmd1;
+		public CmdContext nestedCmd;
+		public ExprContext expression;
 		public TerminalNode LP() { return getToken(SequenceAnalyzerParser.LP, 0); }
 		public TerminalNode COMMA() { return getToken(SequenceAnalyzerParser.COMMA, 0); }
-		public ExprContext expr() {
-			return getRuleContext(ExprContext.class,0);
-		}
 		public TerminalNode RP() { return getToken(SequenceAnalyzerParser.RP, 0); }
 		public CmdContext cmd() {
 			return getRuleContext(CmdContext.class,0);
+		}
+		public ExprContext expr() {
+			return getRuleContext(ExprContext.class,0);
 		}
 		public SubstitutionOfCmdAndExprContext(SubContext ctx) { copyFrom(ctx); }
 		@Override
@@ -593,108 +594,65 @@ public class SequenceAnalyzerParser extends Parser {
 			else return visitor.visitChildren(this);
 		}
 	}
-	public static class SubstitutionOfFilesContext extends SubContext {
-		public TerminalNode LP() { return getToken(SequenceAnalyzerParser.LP, 0); }
-		public List<FileContext> file() {
-			return getRuleContexts(FileContext.class);
-		}
-		public FileContext file(int i) {
-			return getRuleContext(FileContext.class,i);
-		}
-		public TerminalNode COMMA() { return getToken(SequenceAnalyzerParser.COMMA, 0); }
-		public TerminalNode RP() { return getToken(SequenceAnalyzerParser.RP, 0); }
-		public SubstitutionOfFilesContext(SubContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SequenceAnalyzerListener ) ((SequenceAnalyzerListener)listener).enterSubstitutionOfFiles(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SequenceAnalyzerListener ) ((SequenceAnalyzerListener)listener).exitSubstitutionOfFiles(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SequenceAnalyzerVisitor ) return ((SequenceAnalyzerVisitor<? extends T>)visitor).visitSubstitutionOfFiles(this);
-			else return visitor.visitChildren(this);
-		}
-	}
 
 	public final SubContext sub() throws RecognitionException {
 		SubContext _localctx = new SubContext(_ctx, getState());
 		enterRule(_localctx, 12, RULE_sub);
 		try {
-			setState(91);
+			setState(84);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,5,_ctx) ) {
 			case 1:
-				_localctx = new SubstitutionOfFilesContext(_localctx);
+				_localctx = new SubstitutionOfCommandsContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(63);
-				match(T__0);
+				((SubstitutionOfCommandsContext)_localctx).command = match(T__0);
 				setState(64);
 				match(LP);
 				setState(65);
-				file();
+				((SubstitutionOfCommandsContext)_localctx).nestedCmd1 = cmd();
 				setState(66);
 				match(COMMA);
 				setState(67);
-				file();
+				((SubstitutionOfCommandsContext)_localctx).nestedCmd2 = cmd();
 				setState(68);
 				match(RP);
 				}
 				break;
 			case 2:
-				_localctx = new SubstitutionOfCommandsContext(_localctx);
+				_localctx = new SubstitutionOfCmdAndExprContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
 				setState(70);
-				((SubstitutionOfCommandsContext)_localctx).command = match(T__0);
+				((SubstitutionOfCmdAndExprContext)_localctx).command = match(T__0);
 				setState(71);
 				match(LP);
 				setState(72);
-				((SubstitutionOfCommandsContext)_localctx).nestedCmd1 = cmd();
+				((SubstitutionOfCmdAndExprContext)_localctx).nestedCmd = cmd();
 				setState(73);
 				match(COMMA);
 				setState(74);
-				((SubstitutionOfCommandsContext)_localctx).nestedCmd2 = cmd();
+				((SubstitutionOfCmdAndExprContext)_localctx).expression = expr();
 				setState(75);
 				match(RP);
 				}
 				break;
 			case 3:
-				_localctx = new SubstitutionOfCmdAndExprContext(_localctx);
+				_localctx = new SubstitutionOfExpressionContext(_localctx);
 				enterOuterAlt(_localctx, 3);
 				{
 				setState(77);
-				((SubstitutionOfCmdAndExprContext)_localctx).command = match(T__0);
+				match(T__0);
 				setState(78);
 				match(LP);
 				setState(79);
-				((SubstitutionOfCmdAndExprContext)_localctx).nestedCmd1 = cmd();
+				expr();
 				setState(80);
 				match(COMMA);
 				setState(81);
 				expr();
 				setState(82);
-				match(RP);
-				}
-				break;
-			case 4:
-				_localctx = new SubstitutionOfExpressionContext(_localctx);
-				enterOuterAlt(_localctx, 4);
-				{
-				setState(84);
-				match(T__0);
-				setState(85);
-				match(LP);
-				setState(86);
-				expr();
-				setState(87);
-				match(COMMA);
-				setState(88);
-				expr();
-				setState(89);
 				match(RP);
 				}
 				break;
@@ -747,28 +705,59 @@ public class SequenceAnalyzerParser extends Parser {
 			else return visitor.visitChildren(this);
 		}
 	}
-	public static class ComparisonOfFilesContext extends CmpContext {
+	public static class ComparisonOfCommandsContext extends CmpContext {
+		public Token command;
+		public CmdContext nestedCmd1;
+		public CmdContext nestedCmd2;
 		public TerminalNode LP() { return getToken(SequenceAnalyzerParser.LP, 0); }
-		public List<FileContext> file() {
-			return getRuleContexts(FileContext.class);
-		}
-		public FileContext file(int i) {
-			return getRuleContext(FileContext.class,i);
-		}
 		public TerminalNode COMMA() { return getToken(SequenceAnalyzerParser.COMMA, 0); }
 		public TerminalNode RP() { return getToken(SequenceAnalyzerParser.RP, 0); }
-		public ComparisonOfFilesContext(CmpContext ctx) { copyFrom(ctx); }
+		public List<CmdContext> cmd() {
+			return getRuleContexts(CmdContext.class);
+		}
+		public CmdContext cmd(int i) {
+			return getRuleContext(CmdContext.class,i);
+		}
+		public ComparisonOfCommandsContext(CmpContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SequenceAnalyzerListener ) ((SequenceAnalyzerListener)listener).enterComparisonOfFiles(this);
+			if ( listener instanceof SequenceAnalyzerListener ) ((SequenceAnalyzerListener)listener).enterComparisonOfCommands(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SequenceAnalyzerListener ) ((SequenceAnalyzerListener)listener).exitComparisonOfFiles(this);
+			if ( listener instanceof SequenceAnalyzerListener ) ((SequenceAnalyzerListener)listener).exitComparisonOfCommands(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SequenceAnalyzerVisitor ) return ((SequenceAnalyzerVisitor<? extends T>)visitor).visitComparisonOfFiles(this);
+			if ( visitor instanceof SequenceAnalyzerVisitor ) return ((SequenceAnalyzerVisitor<? extends T>)visitor).visitComparisonOfCommands(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class ComparisonOfCmdAndExprContext extends CmpContext {
+		public Token command;
+		public CmdContext nestedCmd;
+		public ExprContext expression;
+		public TerminalNode LP() { return getToken(SequenceAnalyzerParser.LP, 0); }
+		public TerminalNode COMMA() { return getToken(SequenceAnalyzerParser.COMMA, 0); }
+		public TerminalNode RP() { return getToken(SequenceAnalyzerParser.RP, 0); }
+		public CmdContext cmd() {
+			return getRuleContext(CmdContext.class,0);
+		}
+		public ExprContext expr() {
+			return getRuleContext(ExprContext.class,0);
+		}
+		public ComparisonOfCmdAndExprContext(CmpContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SequenceAnalyzerListener ) ((SequenceAnalyzerListener)listener).enterComparisonOfCmdAndExpr(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SequenceAnalyzerListener ) ((SequenceAnalyzerListener)listener).exitComparisonOfCmdAndExpr(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof SequenceAnalyzerVisitor ) return ((SequenceAnalyzerVisitor<? extends T>)visitor).visitComparisonOfCmdAndExpr(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -781,26 +770,44 @@ public class SequenceAnalyzerParser extends Parser {
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,6,_ctx) ) {
 			case 1:
-				_localctx = new ComparisonOfFilesContext(_localctx);
+				_localctx = new ComparisonOfCommandsContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(93);
-				match(T__1);
-				setState(94);
+				setState(86);
+				((ComparisonOfCommandsContext)_localctx).command = match(T__1);
+				setState(87);
 				match(LP);
-				setState(95);
-				file();
-				setState(96);
+				setState(88);
+				((ComparisonOfCommandsContext)_localctx).nestedCmd1 = cmd();
+				setState(89);
 				match(COMMA);
-				setState(97);
-				file();
-				setState(98);
+				setState(90);
+				((ComparisonOfCommandsContext)_localctx).nestedCmd2 = cmd();
+				setState(91);
 				match(RP);
 				}
 				break;
 			case 2:
-				_localctx = new ComparisonOfExpressionContext(_localctx);
+				_localctx = new ComparisonOfCmdAndExprContext(_localctx);
 				enterOuterAlt(_localctx, 2);
+				{
+				setState(93);
+				((ComparisonOfCmdAndExprContext)_localctx).command = match(T__1);
+				setState(94);
+				match(LP);
+				setState(95);
+				((ComparisonOfCmdAndExprContext)_localctx).nestedCmd = cmd();
+				setState(96);
+				match(COMMA);
+				setState(97);
+				((ComparisonOfCmdAndExprContext)_localctx).expression = expr();
+				setState(98);
+				match(RP);
+				}
+				break;
+			case 3:
+				_localctx = new ComparisonOfExpressionContext(_localctx);
+				enterOuterAlt(_localctx, 3);
 				{
 				setState(100);
 				match(T__1);
@@ -840,27 +847,6 @@ public class SequenceAnalyzerParser extends Parser {
 			super.copyFrom(ctx);
 		}
 	}
-	public static class CuttingTimesOfFileInParensContext extends CtContext {
-		public TerminalNode LP() { return getToken(SequenceAnalyzerParser.LP, 0); }
-		public FileContext file() {
-			return getRuleContext(FileContext.class,0);
-		}
-		public TerminalNode RP() { return getToken(SequenceAnalyzerParser.RP, 0); }
-		public CuttingTimesOfFileInParensContext(CtContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SequenceAnalyzerListener ) ((SequenceAnalyzerListener)listener).enterCuttingTimesOfFileInParens(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SequenceAnalyzerListener ) ((SequenceAnalyzerListener)listener).exitCuttingTimesOfFileInParens(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SequenceAnalyzerVisitor ) return ((SequenceAnalyzerVisitor<? extends T>)visitor).visitCuttingTimesOfFileInParens(this);
-			else return visitor.visitChildren(this);
-		}
-	}
 	public static class CuttingTimesOfExpressionInParensContext extends CtContext {
 		public TerminalNode LP() { return getToken(SequenceAnalyzerParser.LP, 0); }
 		public ExprContext expr() {
@@ -879,25 +865,6 @@ public class SequenceAnalyzerParser extends Parser {
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof SequenceAnalyzerVisitor ) return ((SequenceAnalyzerVisitor<? extends T>)visitor).visitCuttingTimesOfExpressionInParens(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	public static class CuttingTimesOfFileContext extends CtContext {
-		public FileContext file() {
-			return getRuleContext(FileContext.class,0);
-		}
-		public CuttingTimesOfFileContext(CtContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SequenceAnalyzerListener ) ((SequenceAnalyzerListener)listener).enterCuttingTimesOfFile(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SequenceAnalyzerListener ) ((SequenceAnalyzerListener)listener).exitCuttingTimesOfFile(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SequenceAnalyzerVisitor ) return ((SequenceAnalyzerVisitor<? extends T>)visitor).visitCuttingTimesOfFile(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -969,78 +936,54 @@ public class SequenceAnalyzerParser extends Parser {
 		CtContext _localctx = new CtContext(_ctx, getState());
 		enterRule(_localctx, 16, RULE_ct);
 		try {
-			setState(130);
+			setState(123);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,7,_ctx) ) {
 			case 1:
-				_localctx = new CuttingTimesOfFileContext(_localctx);
+				_localctx = new CuttingTimesOfCommandContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(109);
-				match(T__2);
+				((CuttingTimesOfCommandContext)_localctx).command = match(T__2);
 				setState(110);
-				file();
+				((CuttingTimesOfCommandContext)_localctx).nestedCmd = cmd();
 				}
 				break;
 			case 2:
-				_localctx = new CuttingTimesOfFileInParensContext(_localctx);
+				_localctx = new CuttingTimesOfCommandInParensContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
 				setState(111);
-				match(T__2);
+				((CuttingTimesOfCommandInParensContext)_localctx).command = match(T__2);
 				setState(112);
 				match(LP);
 				setState(113);
-				file();
+				((CuttingTimesOfCommandInParensContext)_localctx).nestedCmd = cmd();
 				setState(114);
 				match(RP);
 				}
 				break;
 			case 3:
-				_localctx = new CuttingTimesOfCommandContext(_localctx);
+				_localctx = new CuttingTimesOfExpressionContext(_localctx);
 				enterOuterAlt(_localctx, 3);
 				{
 				setState(116);
-				((CuttingTimesOfCommandContext)_localctx).command = match(T__2);
+				match(T__2);
 				setState(117);
-				((CuttingTimesOfCommandContext)_localctx).nestedCmd = cmd();
+				expr();
 				}
 				break;
 			case 4:
-				_localctx = new CuttingTimesOfCommandInParensContext(_localctx);
+				_localctx = new CuttingTimesOfExpressionInParensContext(_localctx);
 				enterOuterAlt(_localctx, 4);
 				{
 				setState(118);
-				((CuttingTimesOfCommandInParensContext)_localctx).command = match(T__2);
+				match(T__2);
 				setState(119);
 				match(LP);
 				setState(120);
-				((CuttingTimesOfCommandInParensContext)_localctx).nestedCmd = cmd();
+				expr();
 				setState(121);
-				match(RP);
-				}
-				break;
-			case 5:
-				_localctx = new CuttingTimesOfExpressionContext(_localctx);
-				enterOuterAlt(_localctx, 5);
-				{
-				setState(123);
-				match(T__2);
-				setState(124);
-				expr();
-				}
-				break;
-			case 6:
-				_localctx = new CuttingTimesOfExpressionInParensContext(_localctx);
-				enterOuterAlt(_localctx, 6);
-				{
-				setState(125);
-				match(T__2);
-				setState(126);
-				match(LP);
-				setState(127);
-				expr();
-				setState(128);
 				match(RP);
 				}
 				break;
@@ -1066,31 +1009,6 @@ public class SequenceAnalyzerParser extends Parser {
 		public SpContext() { }
 		public void copyFrom(SpContext ctx) {
 			super.copyFrom(ctx);
-		}
-	}
-	public static class StarProductOfFilesContext extends SpContext {
-		public TerminalNode LP() { return getToken(SequenceAnalyzerParser.LP, 0); }
-		public List<FileContext> file() {
-			return getRuleContexts(FileContext.class);
-		}
-		public FileContext file(int i) {
-			return getRuleContext(FileContext.class,i);
-		}
-		public TerminalNode COMMA() { return getToken(SequenceAnalyzerParser.COMMA, 0); }
-		public TerminalNode RP() { return getToken(SequenceAnalyzerParser.RP, 0); }
-		public StarProductOfFilesContext(SpContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SequenceAnalyzerListener ) ((SequenceAnalyzerListener)listener).enterStarProductOfFiles(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SequenceAnalyzerListener ) ((SequenceAnalyzerListener)listener).exitStarProductOfFiles(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SequenceAnalyzerVisitor ) return ((SequenceAnalyzerVisitor<? extends T>)visitor).visitStarProductOfFiles(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 	public static class StarProductOfCommandsContext extends SpContext {
@@ -1151,60 +1069,42 @@ public class SequenceAnalyzerParser extends Parser {
 		SpContext _localctx = new SpContext(_ctx, getState());
 		enterRule(_localctx, 18, RULE_sp);
 		try {
-			setState(153);
+			setState(139);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,8,_ctx) ) {
 			case 1:
-				_localctx = new StarProductOfFilesContext(_localctx);
+				_localctx = new StarProductOfCommandsContext(_localctx);
 				enterOuterAlt(_localctx, 1);
+				{
+				setState(125);
+				((StarProductOfCommandsContext)_localctx).command = match(T__3);
+				setState(126);
+				match(LP);
+				setState(127);
+				((StarProductOfCommandsContext)_localctx).nestedCmd1 = cmd();
+				setState(128);
+				match(COMMA);
+				setState(129);
+				((StarProductOfCommandsContext)_localctx).nestedCmd2 = cmd();
+				setState(130);
+				match(RP);
+				}
+				break;
+			case 2:
+				_localctx = new StarProductOfExpressionsContext(_localctx);
+				enterOuterAlt(_localctx, 2);
 				{
 				setState(132);
 				match(T__3);
 				setState(133);
 				match(LP);
 				setState(134);
-				file();
+				expr();
 				setState(135);
 				match(COMMA);
 				setState(136);
-				file();
+				expr();
 				setState(137);
-				match(RP);
-				}
-				break;
-			case 2:
-				_localctx = new StarProductOfCommandsContext(_localctx);
-				enterOuterAlt(_localctx, 2);
-				{
-				setState(139);
-				((StarProductOfCommandsContext)_localctx).command = match(T__3);
-				setState(140);
-				match(LP);
-				setState(141);
-				((StarProductOfCommandsContext)_localctx).nestedCmd1 = cmd();
-				setState(142);
-				match(COMMA);
-				setState(143);
-				((StarProductOfCommandsContext)_localctx).nestedCmd2 = cmd();
-				setState(144);
-				match(RP);
-				}
-				break;
-			case 3:
-				_localctx = new StarProductOfExpressionsContext(_localctx);
-				enterOuterAlt(_localctx, 3);
-				{
-				setState(146);
-				match(T__3);
-				setState(147);
-				match(LP);
-				setState(148);
-				expr();
-				setState(149);
-				match(COMMA);
-				setState(150);
-				expr();
-				setState(151);
 				match(RP);
 				}
 				break;
@@ -1232,25 +1132,6 @@ public class SequenceAnalyzerParser extends Parser {
 			super.copyFrom(ctx);
 		}
 	}
-	public static class BuildFileContext extends BuildContext {
-		public FileContext file() {
-			return getRuleContext(FileContext.class,0);
-		}
-		public BuildFileContext(BuildContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SequenceAnalyzerListener ) ((SequenceAnalyzerListener)listener).enterBuildFile(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SequenceAnalyzerListener ) ((SequenceAnalyzerListener)listener).exitBuildFile(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SequenceAnalyzerVisitor ) return ((SequenceAnalyzerVisitor<? extends T>)visitor).visitBuildFile(this);
-			else return visitor.visitChildren(this);
-		}
-	}
 	public static class BuildExpressionContext extends BuildContext {
 		public ExprContext expr() {
 			return getRuleContext(ExprContext.class,0);
@@ -1267,27 +1148,6 @@ public class SequenceAnalyzerParser extends Parser {
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof SequenceAnalyzerVisitor ) return ((SequenceAnalyzerVisitor<? extends T>)visitor).visitBuildExpression(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	public static class BuildFileInParensContext extends BuildContext {
-		public TerminalNode LP() { return getToken(SequenceAnalyzerParser.LP, 0); }
-		public FileContext file() {
-			return getRuleContext(FileContext.class,0);
-		}
-		public TerminalNode RP() { return getToken(SequenceAnalyzerParser.RP, 0); }
-		public BuildFileInParensContext(BuildContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SequenceAnalyzerListener ) ((SequenceAnalyzerListener)listener).enterBuildFileInParens(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SequenceAnalyzerListener ) ((SequenceAnalyzerListener)listener).exitBuildFileInParens(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SequenceAnalyzerVisitor ) return ((SequenceAnalyzerVisitor<? extends T>)visitor).visitBuildFileInParens(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1317,54 +1177,30 @@ public class SequenceAnalyzerParser extends Parser {
 		BuildContext _localctx = new BuildContext(_ctx, getState());
 		enterRule(_localctx, 20, RULE_build);
 		try {
-			setState(169);
+			setState(148);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,9,_ctx) ) {
 			case 1:
-				_localctx = new BuildFileContext(_localctx);
+				_localctx = new BuildExpressionContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(155);
+				setState(141);
 				match(T__4);
-				setState(156);
-				file();
+				setState(142);
+				expr();
 				}
 				break;
 			case 2:
-				_localctx = new BuildFileInParensContext(_localctx);
+				_localctx = new BuildExpressionInParensContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(157);
+				setState(143);
 				match(T__4);
-				setState(158);
+				setState(144);
 				match(LP);
-				setState(159);
-				file();
-				setState(160);
-				match(RP);
-				}
-				break;
-			case 3:
-				_localctx = new BuildExpressionContext(_localctx);
-				enterOuterAlt(_localctx, 3);
-				{
-				setState(162);
-				match(T__4);
-				setState(163);
+				setState(145);
 				expr();
-				}
-				break;
-			case 4:
-				_localctx = new BuildExpressionInParensContext(_localctx);
-				enterOuterAlt(_localctx, 4);
-				{
-				setState(164);
-				match(T__4);
-				setState(165);
-				match(LP);
-				setState(166);
-				expr();
-				setState(167);
+				setState(146);
 				match(RP);
 				}
 				break;
@@ -1414,7 +1250,7 @@ public class SequenceAnalyzerParser extends Parser {
 		}
 	}
 	public static class ShiftMaximalityOfCommandInParensContext extends SmContext {
-		public Token cmmand;
+		public Token command;
 		public CmdContext nestedCmd;
 		public TerminalNode LP() { return getToken(SequenceAnalyzerParser.LP, 0); }
 		public TerminalNode RP() { return getToken(SequenceAnalyzerParser.RP, 0); }
@@ -1436,27 +1272,6 @@ public class SequenceAnalyzerParser extends Parser {
 			else return visitor.visitChildren(this);
 		}
 	}
-	public static class ShiftMaximalityOfFileInParensContext extends SmContext {
-		public TerminalNode LP() { return getToken(SequenceAnalyzerParser.LP, 0); }
-		public FileContext file() {
-			return getRuleContext(FileContext.class,0);
-		}
-		public TerminalNode RP() { return getToken(SequenceAnalyzerParser.RP, 0); }
-		public ShiftMaximalityOfFileInParensContext(SmContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SequenceAnalyzerListener ) ((SequenceAnalyzerListener)listener).enterShiftMaximalityOfFileInParens(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SequenceAnalyzerListener ) ((SequenceAnalyzerListener)listener).exitShiftMaximalityOfFileInParens(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SequenceAnalyzerVisitor ) return ((SequenceAnalyzerVisitor<? extends T>)visitor).visitShiftMaximalityOfFileInParens(this);
-			else return visitor.visitChildren(this);
-		}
-	}
 	public static class ShiftMaximalityOfExpressionInParensContext extends SmContext {
 		public TerminalNode LP() { return getToken(SequenceAnalyzerParser.LP, 0); }
 		public ExprContext expr() {
@@ -1475,25 +1290,6 @@ public class SequenceAnalyzerParser extends Parser {
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof SequenceAnalyzerVisitor ) return ((SequenceAnalyzerVisitor<? extends T>)visitor).visitShiftMaximalityOfExpressionInParens(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	public static class ShiftMaximalityOfFileContext extends SmContext {
-		public FileContext file() {
-			return getRuleContext(FileContext.class,0);
-		}
-		public ShiftMaximalityOfFileContext(SmContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SequenceAnalyzerListener ) ((SequenceAnalyzerListener)listener).enterShiftMaximalityOfFile(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SequenceAnalyzerListener ) ((SequenceAnalyzerListener)listener).exitShiftMaximalityOfFile(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SequenceAnalyzerVisitor ) return ((SequenceAnalyzerVisitor<? extends T>)visitor).visitShiftMaximalityOfFile(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1521,78 +1317,54 @@ public class SequenceAnalyzerParser extends Parser {
 		SmContext _localctx = new SmContext(_ctx, getState());
 		enterRule(_localctx, 22, RULE_sm);
 		try {
-			setState(192);
+			setState(164);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,10,_ctx) ) {
 			case 1:
-				_localctx = new ShiftMaximalityOfFileContext(_localctx);
+				_localctx = new ShiftMaximalityOfCommandContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(171);
-				match(T__5);
-				setState(172);
-				file();
+				setState(150);
+				((ShiftMaximalityOfCommandContext)_localctx).command = match(T__5);
+				setState(151);
+				((ShiftMaximalityOfCommandContext)_localctx).nestedCmd = cmd();
 				}
 				break;
 			case 2:
-				_localctx = new ShiftMaximalityOfFileInParensContext(_localctx);
+				_localctx = new ShiftMaximalityOfCommandInParensContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(173);
-				match(T__5);
-				setState(174);
+				setState(152);
+				((ShiftMaximalityOfCommandInParensContext)_localctx).command = match(T__5);
+				setState(153);
 				match(LP);
-				setState(175);
-				file();
-				setState(176);
+				setState(154);
+				((ShiftMaximalityOfCommandInParensContext)_localctx).nestedCmd = cmd();
+				setState(155);
 				match(RP);
 				}
 				break;
 			case 3:
-				_localctx = new ShiftMaximalityOfCommandContext(_localctx);
+				_localctx = new ShiftMaximalityOfExpressionContext(_localctx);
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(178);
-				((ShiftMaximalityOfCommandContext)_localctx).command = match(T__5);
-				setState(179);
-				((ShiftMaximalityOfCommandContext)_localctx).nestedCmd = cmd();
+				setState(157);
+				match(T__5);
+				setState(158);
+				expr();
 				}
 				break;
 			case 4:
-				_localctx = new ShiftMaximalityOfCommandInParensContext(_localctx);
+				_localctx = new ShiftMaximalityOfExpressionInParensContext(_localctx);
 				enterOuterAlt(_localctx, 4);
 				{
-				setState(180);
-				((ShiftMaximalityOfCommandInParensContext)_localctx).cmmand = match(T__5);
-				setState(181);
-				match(LP);
-				setState(182);
-				((ShiftMaximalityOfCommandInParensContext)_localctx).nestedCmd = cmd();
-				setState(183);
-				match(RP);
-				}
-				break;
-			case 5:
-				_localctx = new ShiftMaximalityOfExpressionContext(_localctx);
-				enterOuterAlt(_localctx, 5);
-				{
-				setState(185);
+				setState(159);
 				match(T__5);
-				setState(186);
-				expr();
-				}
-				break;
-			case 6:
-				_localctx = new ShiftMaximalityOfExpressionInParensContext(_localctx);
-				enterOuterAlt(_localctx, 6);
-				{
-				setState(187);
-				match(T__5);
-				setState(188);
+				setState(160);
 				match(LP);
-				setState(189);
+				setState(161);
 				expr();
-				setState(190);
+				setState(162);
 				match(RP);
 				}
 				break;
@@ -1618,31 +1390,6 @@ public class SequenceAnalyzerParser extends Parser {
 		public WordctContext() { }
 		public void copyFrom(WordctContext ctx) {
 			super.copyFrom(ctx);
-		}
-	}
-	public static class WordCountOfFileContext extends WordctContext {
-		public TerminalNode LP() { return getToken(SequenceAnalyzerParser.LP, 0); }
-		public List<FileContext> file() {
-			return getRuleContexts(FileContext.class);
-		}
-		public FileContext file(int i) {
-			return getRuleContext(FileContext.class,i);
-		}
-		public TerminalNode COMMA() { return getToken(SequenceAnalyzerParser.COMMA, 0); }
-		public TerminalNode RP() { return getToken(SequenceAnalyzerParser.RP, 0); }
-		public WordCountOfFileContext(WordctContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SequenceAnalyzerListener ) ((SequenceAnalyzerListener)listener).enterWordCountOfFile(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SequenceAnalyzerListener ) ((SequenceAnalyzerListener)listener).exitWordCountOfFile(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SequenceAnalyzerVisitor ) return ((SequenceAnalyzerVisitor<? extends T>)visitor).visitWordCountOfFile(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 	public static class WordCountOfCommandContext extends WordctContext {
@@ -1698,60 +1445,42 @@ public class SequenceAnalyzerParser extends Parser {
 		WordctContext _localctx = new WordctContext(_ctx, getState());
 		enterRule(_localctx, 24, RULE_wordct);
 		try {
-			setState(215);
+			setState(180);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,11,_ctx) ) {
 			case 1:
-				_localctx = new WordCountOfFileContext(_localctx);
+				_localctx = new WordCountOfCommandContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(194);
-				match(T__6);
-				setState(195);
+				setState(166);
+				((WordCountOfCommandContext)_localctx).command = match(T__6);
+				setState(167);
 				match(LP);
-				setState(196);
-				file();
-				setState(197);
+				setState(168);
+				((WordCountOfCommandContext)_localctx).nestedCmd = cmd();
+				setState(169);
 				match(COMMA);
-				setState(198);
-				file();
-				setState(199);
+				setState(170);
+				match(INT);
+				setState(171);
 				match(RP);
 				}
 				break;
 			case 2:
-				_localctx = new WordCountOfCommandContext(_localctx);
+				_localctx = new WordCountOfExpressionContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(201);
-				((WordCountOfCommandContext)_localctx).command = match(T__6);
-				setState(202);
-				match(LP);
-				setState(203);
-				((WordCountOfCommandContext)_localctx).nestedCmd = cmd();
-				setState(204);
-				match(COMMA);
-				setState(205);
-				match(INT);
-				setState(206);
-				match(RP);
-				}
-				break;
-			case 3:
-				_localctx = new WordCountOfExpressionContext(_localctx);
-				enterOuterAlt(_localctx, 3);
-				{
-				setState(208);
+				setState(173);
 				match(T__6);
-				setState(209);
+				setState(174);
 				match(LP);
-				setState(210);
+				setState(175);
 				expr();
-				setState(211);
+				setState(176);
 				match(COMMA);
-				setState(212);
+				setState(177);
 				match(INT);
-				setState(213);
+				setState(178);
 				match(RP);
 				}
 				break;
@@ -1777,35 +1506,6 @@ public class SequenceAnalyzerParser extends Parser {
 		public ConcatContext() { }
 		public void copyFrom(ConcatContext ctx) {
 			super.copyFrom(ctx);
-		}
-	}
-	public static class ConcatOn2FilesAtIndexContext extends ConcatContext {
-		public TerminalNode LP() { return getToken(SequenceAnalyzerParser.LP, 0); }
-		public List<FileContext> file() {
-			return getRuleContexts(FileContext.class);
-		}
-		public FileContext file(int i) {
-			return getRuleContext(FileContext.class,i);
-		}
-		public List<TerminalNode> COMMA() { return getTokens(SequenceAnalyzerParser.COMMA); }
-		public TerminalNode COMMA(int i) {
-			return getToken(SequenceAnalyzerParser.COMMA, i);
-		}
-		public TerminalNode INT() { return getToken(SequenceAnalyzerParser.INT, 0); }
-		public TerminalNode RP() { return getToken(SequenceAnalyzerParser.RP, 0); }
-		public ConcatOn2FilesAtIndexContext(ConcatContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SequenceAnalyzerListener ) ((SequenceAnalyzerListener)listener).enterConcatOn2FilesAtIndex(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SequenceAnalyzerListener ) ((SequenceAnalyzerListener)listener).exitConcatOn2FilesAtIndex(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SequenceAnalyzerVisitor ) return ((SequenceAnalyzerVisitor<? extends T>)visitor).visitConcatOn2FilesAtIndex(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 	public static class ConcatOn2CommandsAtIndexContext extends ConcatContext {
@@ -1893,28 +1593,123 @@ public class SequenceAnalyzerParser extends Parser {
 			else return visitor.visitChildren(this);
 		}
 	}
-	public static class ConcatOn2filesContext extends ConcatContext {
+	public static class ConcatOfCmdOnExprContext extends ConcatContext {
+		public Token command;
+		public ExprContext expression;
+		public CmdContext nestedCmd;
 		public TerminalNode LP() { return getToken(SequenceAnalyzerParser.LP, 0); }
-		public List<FileContext> file() {
-			return getRuleContexts(FileContext.class);
-		}
-		public FileContext file(int i) {
-			return getRuleContext(FileContext.class,i);
-		}
 		public TerminalNode COMMA() { return getToken(SequenceAnalyzerParser.COMMA, 0); }
 		public TerminalNode RP() { return getToken(SequenceAnalyzerParser.RP, 0); }
-		public ConcatOn2filesContext(ConcatContext ctx) { copyFrom(ctx); }
+		public ExprContext expr() {
+			return getRuleContext(ExprContext.class,0);
+		}
+		public CmdContext cmd() {
+			return getRuleContext(CmdContext.class,0);
+		}
+		public ConcatOfCmdOnExprContext(ConcatContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SequenceAnalyzerListener ) ((SequenceAnalyzerListener)listener).enterConcatOn2files(this);
+			if ( listener instanceof SequenceAnalyzerListener ) ((SequenceAnalyzerListener)listener).enterConcatOfCmdOnExpr(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SequenceAnalyzerListener ) ((SequenceAnalyzerListener)listener).exitConcatOn2files(this);
+			if ( listener instanceof SequenceAnalyzerListener ) ((SequenceAnalyzerListener)listener).exitConcatOfCmdOnExpr(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SequenceAnalyzerVisitor ) return ((SequenceAnalyzerVisitor<? extends T>)visitor).visitConcatOn2files(this);
+			if ( visitor instanceof SequenceAnalyzerVisitor ) return ((SequenceAnalyzerVisitor<? extends T>)visitor).visitConcatOfCmdOnExpr(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class ConcatOfExprOnCommandAtIndexContext extends ConcatContext {
+		public Token command;
+		public CmdContext nestedCmd;
+		public ExprContext expression;
+		public TerminalNode LP() { return getToken(SequenceAnalyzerParser.LP, 0); }
+		public List<TerminalNode> COMMA() { return getTokens(SequenceAnalyzerParser.COMMA); }
+		public TerminalNode COMMA(int i) {
+			return getToken(SequenceAnalyzerParser.COMMA, i);
+		}
+		public TerminalNode INT() { return getToken(SequenceAnalyzerParser.INT, 0); }
+		public TerminalNode RP() { return getToken(SequenceAnalyzerParser.RP, 0); }
+		public CmdContext cmd() {
+			return getRuleContext(CmdContext.class,0);
+		}
+		public ExprContext expr() {
+			return getRuleContext(ExprContext.class,0);
+		}
+		public ConcatOfExprOnCommandAtIndexContext(ConcatContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SequenceAnalyzerListener ) ((SequenceAnalyzerListener)listener).enterConcatOfExprOnCommandAtIndex(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SequenceAnalyzerListener ) ((SequenceAnalyzerListener)listener).exitConcatOfExprOnCommandAtIndex(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof SequenceAnalyzerVisitor ) return ((SequenceAnalyzerVisitor<? extends T>)visitor).visitConcatOfExprOnCommandAtIndex(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class ConcatOfCmdOnExprAtIndexContext extends ConcatContext {
+		public Token command;
+		public ExprContext expression;
+		public CmdContext nestedCmd;
+		public TerminalNode LP() { return getToken(SequenceAnalyzerParser.LP, 0); }
+		public List<TerminalNode> COMMA() { return getTokens(SequenceAnalyzerParser.COMMA); }
+		public TerminalNode COMMA(int i) {
+			return getToken(SequenceAnalyzerParser.COMMA, i);
+		}
+		public TerminalNode INT() { return getToken(SequenceAnalyzerParser.INT, 0); }
+		public TerminalNode RP() { return getToken(SequenceAnalyzerParser.RP, 0); }
+		public ExprContext expr() {
+			return getRuleContext(ExprContext.class,0);
+		}
+		public CmdContext cmd() {
+			return getRuleContext(CmdContext.class,0);
+		}
+		public ConcatOfCmdOnExprAtIndexContext(ConcatContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SequenceAnalyzerListener ) ((SequenceAnalyzerListener)listener).enterConcatOfCmdOnExprAtIndex(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SequenceAnalyzerListener ) ((SequenceAnalyzerListener)listener).exitConcatOfCmdOnExprAtIndex(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof SequenceAnalyzerVisitor ) return ((SequenceAnalyzerVisitor<? extends T>)visitor).visitConcatOfCmdOnExprAtIndex(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class ConcatOfExprOnCommandContext extends ConcatContext {
+		public Token command;
+		public CmdContext nestedCmd;
+		public ExprContext expression;
+		public TerminalNode LP() { return getToken(SequenceAnalyzerParser.LP, 0); }
+		public TerminalNode COMMA() { return getToken(SequenceAnalyzerParser.COMMA, 0); }
+		public TerminalNode RP() { return getToken(SequenceAnalyzerParser.RP, 0); }
+		public CmdContext cmd() {
+			return getRuleContext(CmdContext.class,0);
+		}
+		public ExprContext expr() {
+			return getRuleContext(ExprContext.class,0);
+		}
+		public ConcatOfExprOnCommandContext(ConcatContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SequenceAnalyzerListener ) ((SequenceAnalyzerListener)listener).enterConcatOfExprOnCommand(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SequenceAnalyzerListener ) ((SequenceAnalyzerListener)listener).exitConcatOfExprOnCommand(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof SequenceAnalyzerVisitor ) return ((SequenceAnalyzerVisitor<? extends T>)visitor).visitConcatOfExprOnCommand(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1952,126 +1747,166 @@ public class SequenceAnalyzerParser extends Parser {
 		ConcatContext _localctx = new ConcatContext(_ctx, getState());
 		enterRule(_localctx, 26, RULE_concat);
 		try {
-			setState(265);
+			setState(246);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,12,_ctx) ) {
 			case 1:
-				_localctx = new ConcatOn2filesContext(_localctx);
+				_localctx = new ConcatOn2CommandsContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(217);
-				match(T__7);
-				setState(218);
+				setState(182);
+				((ConcatOn2CommandsContext)_localctx).command = match(T__7);
+				setState(183);
 				match(LP);
-				setState(219);
-				file();
-				setState(220);
+				setState(184);
+				((ConcatOn2CommandsContext)_localctx).nestedCmd1 = cmd();
+				setState(185);
 				match(COMMA);
-				setState(221);
-				file();
-				setState(222);
+				setState(186);
+				((ConcatOn2CommandsContext)_localctx).nestedCmd2 = cmd();
+				setState(187);
 				match(RP);
 				}
 				break;
 			case 2:
-				_localctx = new ConcatOn2FilesAtIndexContext(_localctx);
+				_localctx = new ConcatOn2CommandsAtIndexContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(224);
-				match(T__7);
-				setState(225);
+				setState(189);
+				((ConcatOn2CommandsAtIndexContext)_localctx).command = match(T__7);
+				setState(190);
 				match(LP);
-				setState(226);
-				file();
-				setState(227);
+				setState(191);
+				((ConcatOn2CommandsAtIndexContext)_localctx).nestedCmd1 = cmd();
+				setState(192);
 				match(COMMA);
-				setState(228);
-				file();
-				setState(229);
+				setState(193);
+				((ConcatOn2CommandsAtIndexContext)_localctx).nestedCmd2 = cmd();
+				setState(194);
 				match(COMMA);
-				setState(230);
+				setState(195);
 				match(INT);
-				setState(231);
+				setState(196);
 				match(RP);
 				}
 				break;
 			case 3:
-				_localctx = new ConcatOn2CommandsContext(_localctx);
+				_localctx = new ConcatOfCmdOnExprContext(_localctx);
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(233);
-				((ConcatOn2CommandsContext)_localctx).command = match(T__7);
-				setState(234);
+				setState(198);
+				((ConcatOfCmdOnExprContext)_localctx).command = match(T__7);
+				setState(199);
 				match(LP);
-				setState(235);
-				((ConcatOn2CommandsContext)_localctx).nestedCmd1 = cmd();
-				setState(236);
+				setState(200);
+				((ConcatOfCmdOnExprContext)_localctx).expression = expr();
+				setState(201);
 				match(COMMA);
-				setState(237);
-				((ConcatOn2CommandsContext)_localctx).nestedCmd2 = cmd();
-				setState(238);
+				setState(202);
+				((ConcatOfCmdOnExprContext)_localctx).nestedCmd = cmd();
+				setState(203);
 				match(RP);
 				}
 				break;
 			case 4:
-				_localctx = new ConcatOn2CommandsAtIndexContext(_localctx);
+				_localctx = new ConcatOfCmdOnExprAtIndexContext(_localctx);
 				enterOuterAlt(_localctx, 4);
 				{
-				setState(240);
-				((ConcatOn2CommandsAtIndexContext)_localctx).command = match(T__7);
-				setState(241);
+				setState(205);
+				((ConcatOfCmdOnExprAtIndexContext)_localctx).command = match(T__7);
+				setState(206);
 				match(LP);
-				setState(242);
-				((ConcatOn2CommandsAtIndexContext)_localctx).nestedCmd1 = cmd();
-				setState(243);
+				setState(207);
+				((ConcatOfCmdOnExprAtIndexContext)_localctx).expression = expr();
+				setState(208);
 				match(COMMA);
-				setState(244);
-				((ConcatOn2CommandsAtIndexContext)_localctx).nestedCmd2 = cmd();
-				setState(245);
+				setState(209);
+				((ConcatOfCmdOnExprAtIndexContext)_localctx).nestedCmd = cmd();
+				setState(210);
 				match(COMMA);
-				setState(246);
+				setState(211);
 				match(INT);
-				setState(247);
+				setState(212);
 				match(RP);
 				}
 				break;
 			case 5:
-				_localctx = new ConcatOn2ExpressionsContext(_localctx);
+				_localctx = new ConcatOfExprOnCommandContext(_localctx);
 				enterOuterAlt(_localctx, 5);
 				{
-				setState(249);
-				match(T__7);
-				setState(250);
+				setState(214);
+				((ConcatOfExprOnCommandContext)_localctx).command = match(T__7);
+				setState(215);
 				match(LP);
-				setState(251);
-				expr();
-				setState(252);
+				setState(216);
+				((ConcatOfExprOnCommandContext)_localctx).nestedCmd = cmd();
+				setState(217);
 				match(COMMA);
-				setState(253);
-				expr();
-				setState(254);
+				setState(218);
+				((ConcatOfExprOnCommandContext)_localctx).expression = expr();
+				setState(219);
 				match(RP);
 				}
 				break;
 			case 6:
-				_localctx = new ConcatOn2ExpressionsAtIndexContext(_localctx);
+				_localctx = new ConcatOfExprOnCommandAtIndexContext(_localctx);
 				enterOuterAlt(_localctx, 6);
 				{
-				setState(256);
-				match(T__7);
-				setState(257);
+				setState(221);
+				((ConcatOfExprOnCommandAtIndexContext)_localctx).command = match(T__7);
+				setState(222);
 				match(LP);
-				setState(258);
-				expr();
-				setState(259);
+				setState(223);
+				((ConcatOfExprOnCommandAtIndexContext)_localctx).nestedCmd = cmd();
+				setState(224);
 				match(COMMA);
-				setState(260);
-				expr();
-				setState(261);
+				setState(225);
+				((ConcatOfExprOnCommandAtIndexContext)_localctx).expression = expr();
+				setState(226);
 				match(COMMA);
-				setState(262);
+				setState(227);
 				match(INT);
-				setState(263);
+				setState(228);
+				match(RP);
+				}
+				break;
+			case 7:
+				_localctx = new ConcatOn2ExpressionsContext(_localctx);
+				enterOuterAlt(_localctx, 7);
+				{
+				setState(230);
+				match(T__7);
+				setState(231);
+				match(LP);
+				setState(232);
+				expr();
+				setState(233);
+				match(COMMA);
+				setState(234);
+				expr();
+				setState(235);
+				match(RP);
+				}
+				break;
+			case 8:
+				_localctx = new ConcatOn2ExpressionsAtIndexContext(_localctx);
+				enterOuterAlt(_localctx, 8);
+				{
+				setState(237);
+				match(T__7);
+				setState(238);
+				match(LP);
+				setState(239);
+				expr();
+				setState(240);
+				match(COMMA);
+				setState(241);
+				expr();
+				setState(242);
+				match(COMMA);
+				setState(243);
+				match(INT);
+				setState(244);
 				match(RP);
 				}
 				break;
@@ -2145,18 +1980,18 @@ public class SequenceAnalyzerParser extends Parser {
 		AssignmentContext _localctx = new AssignmentContext(_ctx, getState());
 		enterRule(_localctx, 28, RULE_assignment);
 		try {
-			setState(273);
+			setState(254);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,13,_ctx) ) {
 			case 1:
 				_localctx = new AssignVariableOfCommandContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(267);
+				setState(248);
 				match(ID);
-				setState(268);
+				setState(249);
 				match(T__8);
-				setState(269);
+				setState(250);
 				((AssignVariableOfCommandContext)_localctx).command = cmd();
 				}
 				break;
@@ -2164,11 +1999,11 @@ public class SequenceAnalyzerParser extends Parser {
 				_localctx = new AssignVariableOfExpressionContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(270);
+				setState(251);
 				match(ID);
-				setState(271);
+				setState(252);
 				match(T__8);
-				setState(272);
+				setState(253);
 				expr();
 				}
 				break;
@@ -2213,9 +2048,9 @@ public class SequenceAnalyzerParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(275);
+			setState(256);
 			match(ID);
-			setState(276);
+			setState(257);
 			match(FILE_EXT);
 			}
 		}
@@ -2266,7 +2101,7 @@ public class SequenceAnalyzerParser extends Parser {
 			_localctx = new IntContext(_localctx);
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(278);
+			setState(259);
 			match(INT);
 			}
 		}
@@ -2282,98 +2117,90 @@ public class SequenceAnalyzerParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\27\u011b\4\2\t\2"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\27\u0108\4\2\t\2"+
 		"\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13"+
 		"\t\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22"+
 		"\3\2\6\2&\n\2\r\2\16\2\'\3\3\3\3\3\3\5\3-\n\3\3\4\3\4\3\4\5\4\62\n\4\3"+
 		"\5\3\5\3\6\3\6\5\68\n\6\3\7\3\7\3\7\3\7\3\7\3\7\5\7@\n\7\3\b\3\b\3\b\3"+
 		"\b\3\b\3\b\3\b\3\b\3\b\3\b\3\b\3\b\3\b\3\b\3\b\3\b\3\b\3\b\3\b\3\b\3\b"+
-		"\3\b\3\b\3\b\3\b\3\b\3\b\3\b\5\b^\n\b\3\t\3\t\3\t\3\t\3\t\3\t\3\t\3\t"+
+		"\5\bW\n\b\3\t\3\t\3\t\3\t\3\t\3\t\3\t\3\t\3\t\3\t\3\t\3\t\3\t\3\t\3\t"+
 		"\3\t\3\t\3\t\3\t\3\t\3\t\5\tn\n\t\3\n\3\n\3\n\3\n\3\n\3\n\3\n\3\n\3\n"+
-		"\3\n\3\n\3\n\3\n\3\n\3\n\3\n\3\n\3\n\3\n\3\n\3\n\5\n\u0085\n\n\3\13\3"+
-		"\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3"+
-		"\13\3\13\3\13\3\13\3\13\3\13\5\13\u009c\n\13\3\f\3\f\3\f\3\f\3\f\3\f\3"+
-		"\f\3\f\3\f\3\f\3\f\3\f\3\f\3\f\5\f\u00ac\n\f\3\r\3\r\3\r\3\r\3\r\3\r\3"+
-		"\r\3\r\3\r\3\r\3\r\3\r\3\r\3\r\3\r\3\r\3\r\3\r\3\r\3\r\3\r\5\r\u00c3\n"+
-		"\r\3\16\3\16\3\16\3\16\3\16\3\16\3\16\3\16\3\16\3\16\3\16\3\16\3\16\3"+
-		"\16\3\16\3\16\3\16\3\16\3\16\3\16\3\16\5\16\u00da\n\16\3\17\3\17\3\17"+
+		"\3\n\3\n\3\n\3\n\3\n\5\n~\n\n\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13"+
+		"\3\13\3\13\3\13\3\13\3\13\3\13\5\13\u008e\n\13\3\f\3\f\3\f\3\f\3\f\3\f"+
+		"\3\f\5\f\u0097\n\f\3\r\3\r\3\r\3\r\3\r\3\r\3\r\3\r\3\r\3\r\3\r\3\r\3\r"+
+		"\3\r\5\r\u00a7\n\r\3\16\3\16\3\16\3\16\3\16\3\16\3\16\3\16\3\16\3\16\3"+
+		"\16\3\16\3\16\3\16\5\16\u00b7\n\16\3\17\3\17\3\17\3\17\3\17\3\17\3\17"+
 		"\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17"+
 		"\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17"+
 		"\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17"+
-		"\3\17\3\17\3\17\5\17\u010c\n\17\3\20\3\20\3\20\3\20\3\20\3\20\5\20\u0114"+
-		"\n\20\3\21\3\21\3\21\3\22\3\22\3\22\2\2\23\2\4\6\b\n\f\16\20\22\24\26"+
-		"\30\32\34\36 \"\2\2\2\u012f\2%\3\2\2\2\4,\3\2\2\2\6\61\3\2\2\2\b\63\3"+
-		"\2\2\2\n\67\3\2\2\2\f?\3\2\2\2\16]\3\2\2\2\20m\3\2\2\2\22\u0084\3\2\2"+
-		"\2\24\u009b\3\2\2\2\26\u00ab\3\2\2\2\30\u00c2\3\2\2\2\32\u00d9\3\2\2\2"+
-		"\34\u010b\3\2\2\2\36\u0113\3\2\2\2 \u0115\3\2\2\2\"\u0118\3\2\2\2$&\5"+
-		"\6\4\2%$\3\2\2\2&\'\3\2\2\2\'%\3\2\2\2\'(\3\2\2\2(\3\3\2\2\2)-\5\6\4\2"+
-		"*-\5\"\22\2+-\7\f\2\2,)\3\2\2\2,*\3\2\2\2,+\3\2\2\2-\5\3\2\2\2.\62\5\b"+
-		"\5\2/\62\5\n\6\2\60\62\5\f\7\2\61.\3\2\2\2\61/\3\2\2\2\61\60\3\2\2\2\62"+
-		"\7\3\2\2\2\63\64\5\36\20\2\64\t\3\2\2\2\658\5\16\b\2\668\5\20\t\2\67\65"+
-		"\3\2\2\2\67\66\3\2\2\28\13\3\2\2\29@\5\22\n\2:@\5\24\13\2;@\5\26\f\2<"+
-		"@\5\30\r\2=@\5\32\16\2>@\5\34\17\2?9\3\2\2\2?:\3\2\2\2?;\3\2\2\2?<\3\2"+
-		"\2\2?=\3\2\2\2?>\3\2\2\2@\r\3\2\2\2AB\7\3\2\2BC\7\20\2\2CD\5 \21\2DE\7"+
-		"\22\2\2EF\5 \21\2FG\7\21\2\2G^\3\2\2\2HI\7\3\2\2IJ\7\20\2\2JK\5\6\4\2"+
-		"KL\7\22\2\2LM\5\6\4\2MN\7\21\2\2N^\3\2\2\2OP\7\3\2\2PQ\7\20\2\2QR\5\6"+
-		"\4\2RS\7\22\2\2ST\5\"\22\2TU\7\21\2\2U^\3\2\2\2VW\7\3\2\2WX\7\20\2\2X"+
-		"Y\5\"\22\2YZ\7\22\2\2Z[\5\"\22\2[\\\7\21\2\2\\^\3\2\2\2]A\3\2\2\2]H\3"+
-		"\2\2\2]O\3\2\2\2]V\3\2\2\2^\17\3\2\2\2_`\7\4\2\2`a\7\20\2\2ab\5 \21\2"+
-		"bc\7\22\2\2cd\5 \21\2de\7\21\2\2en\3\2\2\2fg\7\4\2\2gh\7\20\2\2hi\5\""+
-		"\22\2ij\7\22\2\2jk\5\"\22\2kl\7\21\2\2ln\3\2\2\2m_\3\2\2\2mf\3\2\2\2n"+
-		"\21\3\2\2\2op\7\5\2\2p\u0085\5 \21\2qr\7\5\2\2rs\7\20\2\2st\5 \21\2tu"+
-		"\7\21\2\2u\u0085\3\2\2\2vw\7\5\2\2w\u0085\5\6\4\2xy\7\5\2\2yz\7\20\2\2"+
-		"z{\5\6\4\2{|\7\21\2\2|\u0085\3\2\2\2}~\7\5\2\2~\u0085\5\"\22\2\177\u0080"+
-		"\7\5\2\2\u0080\u0081\7\20\2\2\u0081\u0082\5\"\22\2\u0082\u0083\7\21\2"+
-		"\2\u0083\u0085\3\2\2\2\u0084o\3\2\2\2\u0084q\3\2\2\2\u0084v\3\2\2\2\u0084"+
-		"x\3\2\2\2\u0084}\3\2\2\2\u0084\177\3\2\2\2\u0085\23\3\2\2\2\u0086\u0087"+
-		"\7\6\2\2\u0087\u0088\7\20\2\2\u0088\u0089\5 \21\2\u0089\u008a\7\22\2\2"+
-		"\u008a\u008b\5 \21\2\u008b\u008c\7\21\2\2\u008c\u009c\3\2\2\2\u008d\u008e"+
-		"\7\6\2\2\u008e\u008f\7\20\2\2\u008f\u0090\5\6\4\2\u0090\u0091\7\22\2\2"+
-		"\u0091\u0092\5\6\4\2\u0092\u0093\7\21\2\2\u0093\u009c\3\2\2\2\u0094\u0095"+
-		"\7\6\2\2\u0095\u0096\7\20\2\2\u0096\u0097\5\"\22\2\u0097\u0098\7\22\2"+
-		"\2\u0098\u0099\5\"\22\2\u0099\u009a\7\21\2\2\u009a\u009c\3\2\2\2\u009b"+
-		"\u0086\3\2\2\2\u009b\u008d\3\2\2\2\u009b\u0094\3\2\2\2\u009c\25\3\2\2"+
-		"\2\u009d\u009e\7\7\2\2\u009e\u00ac\5 \21\2\u009f\u00a0\7\7\2\2\u00a0\u00a1"+
-		"\7\20\2\2\u00a1\u00a2\5 \21\2\u00a2\u00a3\7\21\2\2\u00a3\u00ac\3\2\2\2"+
-		"\u00a4\u00a5\7\7\2\2\u00a5\u00ac\5\"\22\2\u00a6\u00a7\7\7\2\2\u00a7\u00a8"+
-		"\7\20\2\2\u00a8\u00a9\5\"\22\2\u00a9\u00aa\7\21\2\2\u00aa\u00ac\3\2\2"+
-		"\2\u00ab\u009d\3\2\2\2\u00ab\u009f\3\2\2\2\u00ab\u00a4\3\2\2\2\u00ab\u00a6"+
-		"\3\2\2\2\u00ac\27\3\2\2\2\u00ad\u00ae\7\b\2\2\u00ae\u00c3\5 \21\2\u00af"+
-		"\u00b0\7\b\2\2\u00b0\u00b1\7\20\2\2\u00b1\u00b2\5 \21\2\u00b2\u00b3\7"+
-		"\21\2\2\u00b3\u00c3\3\2\2\2\u00b4\u00b5\7\b\2\2\u00b5\u00c3\5\6\4\2\u00b6"+
-		"\u00b7\7\b\2\2\u00b7\u00b8\7\20\2\2\u00b8\u00b9\5\6\4\2\u00b9\u00ba\7"+
-		"\21\2\2\u00ba\u00c3\3\2\2\2\u00bb\u00bc\7\b\2\2\u00bc\u00c3\5\"\22\2\u00bd"+
-		"\u00be\7\b\2\2\u00be\u00bf\7\20\2\2\u00bf\u00c0\5\"\22\2\u00c0\u00c1\7"+
-		"\21\2\2\u00c1\u00c3\3\2\2\2\u00c2\u00ad\3\2\2\2\u00c2\u00af\3\2\2\2\u00c2"+
-		"\u00b4\3\2\2\2\u00c2\u00b6\3\2\2\2\u00c2\u00bb\3\2\2\2\u00c2\u00bd\3\2"+
-		"\2\2\u00c3\31\3\2\2\2\u00c4\u00c5\7\t\2\2\u00c5\u00c6\7\20\2\2\u00c6\u00c7"+
-		"\5 \21\2\u00c7\u00c8\7\22\2\2\u00c8\u00c9\5 \21\2\u00c9\u00ca\7\21\2\2"+
-		"\u00ca\u00da\3\2\2\2\u00cb\u00cc\7\t\2\2\u00cc\u00cd\7\20\2\2\u00cd\u00ce"+
-		"\5\6\4\2\u00ce\u00cf\7\22\2\2\u00cf\u00d0\7\r\2\2\u00d0\u00d1\7\21\2\2"+
-		"\u00d1\u00da\3\2\2\2\u00d2\u00d3\7\t\2\2\u00d3\u00d4\7\20\2\2\u00d4\u00d5"+
-		"\5\"\22\2\u00d5\u00d6\7\22\2\2\u00d6\u00d7\7\r\2\2\u00d7\u00d8\7\21\2"+
-		"\2\u00d8\u00da\3\2\2\2\u00d9\u00c4\3\2\2\2\u00d9\u00cb\3\2\2\2\u00d9\u00d2"+
-		"\3\2\2\2\u00da\33\3\2\2\2\u00db\u00dc\7\n\2\2\u00dc\u00dd\7\20\2\2\u00dd"+
-		"\u00de\5 \21\2\u00de\u00df\7\22\2\2\u00df\u00e0\5 \21\2\u00e0\u00e1\7"+
-		"\21\2\2\u00e1\u010c\3\2\2\2\u00e2\u00e3\7\n\2\2\u00e3\u00e4\7\20\2\2\u00e4"+
-		"\u00e5\5 \21\2\u00e5\u00e6\7\22\2\2\u00e6\u00e7\5 \21\2\u00e7\u00e8\7"+
-		"\22\2\2\u00e8\u00e9\7\r\2\2\u00e9\u00ea\7\21\2\2\u00ea\u010c\3\2\2\2\u00eb"+
-		"\u00ec\7\n\2\2\u00ec\u00ed\7\20\2\2\u00ed\u00ee\5\6\4\2\u00ee\u00ef\7"+
-		"\22\2\2\u00ef\u00f0\5\6\4\2\u00f0\u00f1\7\21\2\2\u00f1\u010c\3\2\2\2\u00f2"+
-		"\u00f3\7\n\2\2\u00f3\u00f4\7\20\2\2\u00f4\u00f5\5\6\4\2\u00f5\u00f6\7"+
-		"\22\2\2\u00f6\u00f7\5\6\4\2\u00f7\u00f8\7\22\2\2\u00f8\u00f9\7\r\2\2\u00f9"+
-		"\u00fa\7\21\2\2\u00fa\u010c\3\2\2\2\u00fb\u00fc\7\n\2\2\u00fc\u00fd\7"+
-		"\20\2\2\u00fd\u00fe\5\"\22\2\u00fe\u00ff\7\22\2\2\u00ff\u0100\5\"\22\2"+
-		"\u0100\u0101\7\21\2\2\u0101\u010c\3\2\2\2\u0102\u0103\7\n\2\2\u0103\u0104"+
-		"\7\20\2\2\u0104\u0105\5\"\22\2\u0105\u0106\7\22\2\2\u0106\u0107\5\"\22"+
-		"\2\u0107\u0108\7\22\2\2\u0108\u0109\7\r\2\2\u0109\u010a\7\21\2\2\u010a"+
-		"\u010c\3\2\2\2\u010b\u00db\3\2\2\2\u010b\u00e2\3\2\2\2\u010b\u00eb\3\2"+
-		"\2\2\u010b\u00f2\3\2\2\2\u010b\u00fb\3\2\2\2\u010b\u0102\3\2\2\2\u010c"+
-		"\35\3\2\2\2\u010d\u010e\7\f\2\2\u010e\u010f\7\13\2\2\u010f\u0114\5\6\4"+
-		"\2\u0110\u0111\7\f\2\2\u0111\u0112\7\13\2\2\u0112\u0114\5\"\22\2\u0113"+
-		"\u010d\3\2\2\2\u0113\u0110\3\2\2\2\u0114\37\3\2\2\2\u0115\u0116\7\f\2"+
-		"\2\u0116\u0117\7\17\2\2\u0117!\3\2\2\2\u0118\u0119\7\r\2\2\u0119#\3\2"+
-		"\2\2\20\',\61\67?]m\u0084\u009b\u00ab\u00c2\u00d9\u010b\u0113";
+		"\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17"+
+		"\3\17\5\17\u00f9\n\17\3\20\3\20\3\20\3\20\3\20\3\20\5\20\u0101\n\20\3"+
+		"\21\3\21\3\21\3\22\3\22\3\22\2\2\23\2\4\6\b\n\f\16\20\22\24\26\30\32\34"+
+		"\36 \"\2\2\2\u0116\2%\3\2\2\2\4,\3\2\2\2\6\61\3\2\2\2\b\63\3\2\2\2\n\67"+
+		"\3\2\2\2\f?\3\2\2\2\16V\3\2\2\2\20m\3\2\2\2\22}\3\2\2\2\24\u008d\3\2\2"+
+		"\2\26\u0096\3\2\2\2\30\u00a6\3\2\2\2\32\u00b6\3\2\2\2\34\u00f8\3\2\2\2"+
+		"\36\u0100\3\2\2\2 \u0102\3\2\2\2\"\u0105\3\2\2\2$&\5\6\4\2%$\3\2\2\2&"+
+		"\'\3\2\2\2\'%\3\2\2\2\'(\3\2\2\2(\3\3\2\2\2)-\5\6\4\2*-\5\"\22\2+-\7\f"+
+		"\2\2,)\3\2\2\2,*\3\2\2\2,+\3\2\2\2-\5\3\2\2\2.\62\5\b\5\2/\62\5\n\6\2"+
+		"\60\62\5\f\7\2\61.\3\2\2\2\61/\3\2\2\2\61\60\3\2\2\2\62\7\3\2\2\2\63\64"+
+		"\5\36\20\2\64\t\3\2\2\2\658\5\16\b\2\668\5\20\t\2\67\65\3\2\2\2\67\66"+
+		"\3\2\2\28\13\3\2\2\29@\5\22\n\2:@\5\24\13\2;@\5\26\f\2<@\5\30\r\2=@\5"+
+		"\32\16\2>@\5\34\17\2?9\3\2\2\2?:\3\2\2\2?;\3\2\2\2?<\3\2\2\2?=\3\2\2\2"+
+		"?>\3\2\2\2@\r\3\2\2\2AB\7\3\2\2BC\7\20\2\2CD\5\6\4\2DE\7\22\2\2EF\5\6"+
+		"\4\2FG\7\21\2\2GW\3\2\2\2HI\7\3\2\2IJ\7\20\2\2JK\5\6\4\2KL\7\22\2\2LM"+
+		"\5\"\22\2MN\7\21\2\2NW\3\2\2\2OP\7\3\2\2PQ\7\20\2\2QR\5\"\22\2RS\7\22"+
+		"\2\2ST\5\"\22\2TU\7\21\2\2UW\3\2\2\2VA\3\2\2\2VH\3\2\2\2VO\3\2\2\2W\17"+
+		"\3\2\2\2XY\7\4\2\2YZ\7\20\2\2Z[\5\6\4\2[\\\7\22\2\2\\]\5\6\4\2]^\7\21"+
+		"\2\2^n\3\2\2\2_`\7\4\2\2`a\7\20\2\2ab\5\6\4\2bc\7\22\2\2cd\5\"\22\2de"+
+		"\7\21\2\2en\3\2\2\2fg\7\4\2\2gh\7\20\2\2hi\5\"\22\2ij\7\22\2\2jk\5\"\22"+
+		"\2kl\7\21\2\2ln\3\2\2\2mX\3\2\2\2m_\3\2\2\2mf\3\2\2\2n\21\3\2\2\2op\7"+
+		"\5\2\2p~\5\6\4\2qr\7\5\2\2rs\7\20\2\2st\5\6\4\2tu\7\21\2\2u~\3\2\2\2v"+
+		"w\7\5\2\2w~\5\"\22\2xy\7\5\2\2yz\7\20\2\2z{\5\"\22\2{|\7\21\2\2|~\3\2"+
+		"\2\2}o\3\2\2\2}q\3\2\2\2}v\3\2\2\2}x\3\2\2\2~\23\3\2\2\2\177\u0080\7\6"+
+		"\2\2\u0080\u0081\7\20\2\2\u0081\u0082\5\6\4\2\u0082\u0083\7\22\2\2\u0083"+
+		"\u0084\5\6\4\2\u0084\u0085\7\21\2\2\u0085\u008e\3\2\2\2\u0086\u0087\7"+
+		"\6\2\2\u0087\u0088\7\20\2\2\u0088\u0089\5\"\22\2\u0089\u008a\7\22\2\2"+
+		"\u008a\u008b\5\"\22\2\u008b\u008c\7\21\2\2\u008c\u008e\3\2\2\2\u008d\177"+
+		"\3\2\2\2\u008d\u0086\3\2\2\2\u008e\25\3\2\2\2\u008f\u0090\7\7\2\2\u0090"+
+		"\u0097\5\"\22\2\u0091\u0092\7\7\2\2\u0092\u0093\7\20\2\2\u0093\u0094\5"+
+		"\"\22\2\u0094\u0095\7\21\2\2\u0095\u0097\3\2\2\2\u0096\u008f\3\2\2\2\u0096"+
+		"\u0091\3\2\2\2\u0097\27\3\2\2\2\u0098\u0099\7\b\2\2\u0099\u00a7\5\6\4"+
+		"\2\u009a\u009b\7\b\2\2\u009b\u009c\7\20\2\2\u009c\u009d\5\6\4\2\u009d"+
+		"\u009e\7\21\2\2\u009e\u00a7\3\2\2\2\u009f\u00a0\7\b\2\2\u00a0\u00a7\5"+
+		"\"\22\2\u00a1\u00a2\7\b\2\2\u00a2\u00a3\7\20\2\2\u00a3\u00a4\5\"\22\2"+
+		"\u00a4\u00a5\7\21\2\2\u00a5\u00a7\3\2\2\2\u00a6\u0098\3\2\2\2\u00a6\u009a"+
+		"\3\2\2\2\u00a6\u009f\3\2\2\2\u00a6\u00a1\3\2\2\2\u00a7\31\3\2\2\2\u00a8"+
+		"\u00a9\7\t\2\2\u00a9\u00aa\7\20\2\2\u00aa\u00ab\5\6\4\2\u00ab\u00ac\7"+
+		"\22\2\2\u00ac\u00ad\7\r\2\2\u00ad\u00ae\7\21\2\2\u00ae\u00b7\3\2\2\2\u00af"+
+		"\u00b0\7\t\2\2\u00b0\u00b1\7\20\2\2\u00b1\u00b2\5\"\22\2\u00b2\u00b3\7"+
+		"\22\2\2\u00b3\u00b4\7\r\2\2\u00b4\u00b5\7\21\2\2\u00b5\u00b7\3\2\2\2\u00b6"+
+		"\u00a8\3\2\2\2\u00b6\u00af\3\2\2\2\u00b7\33\3\2\2\2\u00b8\u00b9\7\n\2"+
+		"\2\u00b9\u00ba\7\20\2\2\u00ba\u00bb\5\6\4\2\u00bb\u00bc\7\22\2\2\u00bc"+
+		"\u00bd\5\6\4\2\u00bd\u00be\7\21\2\2\u00be\u00f9\3\2\2\2\u00bf\u00c0\7"+
+		"\n\2\2\u00c0\u00c1\7\20\2\2\u00c1\u00c2\5\6\4\2\u00c2\u00c3\7\22\2\2\u00c3"+
+		"\u00c4\5\6\4\2\u00c4\u00c5\7\22\2\2\u00c5\u00c6\7\r\2\2\u00c6\u00c7\7"+
+		"\21\2\2\u00c7\u00f9\3\2\2\2\u00c8\u00c9\7\n\2\2\u00c9\u00ca\7\20\2\2\u00ca"+
+		"\u00cb\5\"\22\2\u00cb\u00cc\7\22\2\2\u00cc\u00cd\5\6\4\2\u00cd\u00ce\7"+
+		"\21\2\2\u00ce\u00f9\3\2\2\2\u00cf\u00d0\7\n\2\2\u00d0\u00d1\7\20\2\2\u00d1"+
+		"\u00d2\5\"\22\2\u00d2\u00d3\7\22\2\2\u00d3\u00d4\5\6\4\2\u00d4\u00d5\7"+
+		"\22\2\2\u00d5\u00d6\7\r\2\2\u00d6\u00d7\7\21\2\2\u00d7\u00f9\3\2\2\2\u00d8"+
+		"\u00d9\7\n\2\2\u00d9\u00da\7\20\2\2\u00da\u00db\5\6\4\2\u00db\u00dc\7"+
+		"\22\2\2\u00dc\u00dd\5\"\22\2\u00dd\u00de\7\21\2\2\u00de\u00f9\3\2\2\2"+
+		"\u00df\u00e0\7\n\2\2\u00e0\u00e1\7\20\2\2\u00e1\u00e2\5\6\4\2\u00e2\u00e3"+
+		"\7\22\2\2\u00e3\u00e4\5\"\22\2\u00e4\u00e5\7\22\2\2\u00e5\u00e6\7\r\2"+
+		"\2\u00e6\u00e7\7\21\2\2\u00e7\u00f9\3\2\2\2\u00e8\u00e9\7\n\2\2\u00e9"+
+		"\u00ea\7\20\2\2\u00ea\u00eb\5\"\22\2\u00eb\u00ec\7\22\2\2\u00ec\u00ed"+
+		"\5\"\22\2\u00ed\u00ee\7\21\2\2\u00ee\u00f9\3\2\2\2\u00ef\u00f0\7\n\2\2"+
+		"\u00f0\u00f1\7\20\2\2\u00f1\u00f2\5\"\22\2\u00f2\u00f3\7\22\2\2\u00f3"+
+		"\u00f4\5\"\22\2\u00f4\u00f5\7\22\2\2\u00f5\u00f6\7\r\2\2\u00f6\u00f7\7"+
+		"\21\2\2\u00f7\u00f9\3\2\2\2\u00f8\u00b8\3\2\2\2\u00f8\u00bf\3\2\2\2\u00f8"+
+		"\u00c8\3\2\2\2\u00f8\u00cf\3\2\2\2\u00f8\u00d8\3\2\2\2\u00f8\u00df\3\2"+
+		"\2\2\u00f8\u00e8\3\2\2\2\u00f8\u00ef\3\2\2\2\u00f9\35\3\2\2\2\u00fa\u00fb"+
+		"\7\f\2\2\u00fb\u00fc\7\13\2\2\u00fc\u0101\5\6\4\2\u00fd\u00fe\7\f\2\2"+
+		"\u00fe\u00ff\7\13\2\2\u00ff\u0101\5\"\22\2\u0100\u00fa\3\2\2\2\u0100\u00fd"+
+		"\3\2\2\2\u0101\37\3\2\2\2\u0102\u0103\7\f\2\2\u0103\u0104\7\17\2\2\u0104"+
+		"!\3\2\2\2\u0105\u0106\7\r\2\2\u0106#\3\2\2\2\20\',\61\67?Vm}\u008d\u0096"+
+		"\u00a6\u00b6\u00f8\u0100";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

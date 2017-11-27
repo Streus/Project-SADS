@@ -68,18 +68,6 @@ public interface SequenceAnalyzerListener extends ParseTreeListener {
 	 */
 	void exitPredef(SequenceAnalyzerParser.PredefContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code SubstitutionOfFiles}
-	 * labeled alternative in {@link SequenceAnalyzerParser#sub}.
-	 * @param ctx the parse tree
-	 */
-	void enterSubstitutionOfFiles(SequenceAnalyzerParser.SubstitutionOfFilesContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code SubstitutionOfFiles}
-	 * labeled alternative in {@link SequenceAnalyzerParser#sub}.
-	 * @param ctx the parse tree
-	 */
-	void exitSubstitutionOfFiles(SequenceAnalyzerParser.SubstitutionOfFilesContext ctx);
-	/**
 	 * Enter a parse tree produced by the {@code SubstitutionOfCommands}
 	 * labeled alternative in {@link SequenceAnalyzerParser#sub}.
 	 * @param ctx the parse tree
@@ -116,17 +104,29 @@ public interface SequenceAnalyzerListener extends ParseTreeListener {
 	 */
 	void exitSubstitutionOfExpression(SequenceAnalyzerParser.SubstitutionOfExpressionContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code ComparisonOfFiles}
+	 * Enter a parse tree produced by the {@code ComparisonOfCommands}
 	 * labeled alternative in {@link SequenceAnalyzerParser#cmp}.
 	 * @param ctx the parse tree
 	 */
-	void enterComparisonOfFiles(SequenceAnalyzerParser.ComparisonOfFilesContext ctx);
+	void enterComparisonOfCommands(SequenceAnalyzerParser.ComparisonOfCommandsContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code ComparisonOfFiles}
+	 * Exit a parse tree produced by the {@code ComparisonOfCommands}
 	 * labeled alternative in {@link SequenceAnalyzerParser#cmp}.
 	 * @param ctx the parse tree
 	 */
-	void exitComparisonOfFiles(SequenceAnalyzerParser.ComparisonOfFilesContext ctx);
+	void exitComparisonOfCommands(SequenceAnalyzerParser.ComparisonOfCommandsContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code ComparisonOfCmdAndExpr}
+	 * labeled alternative in {@link SequenceAnalyzerParser#cmp}.
+	 * @param ctx the parse tree
+	 */
+	void enterComparisonOfCmdAndExpr(SequenceAnalyzerParser.ComparisonOfCmdAndExprContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code ComparisonOfCmdAndExpr}
+	 * labeled alternative in {@link SequenceAnalyzerParser#cmp}.
+	 * @param ctx the parse tree
+	 */
+	void exitComparisonOfCmdAndExpr(SequenceAnalyzerParser.ComparisonOfCmdAndExprContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code ComparisonOfExpression}
 	 * labeled alternative in {@link SequenceAnalyzerParser#cmp}.
@@ -139,30 +139,6 @@ public interface SequenceAnalyzerListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitComparisonOfExpression(SequenceAnalyzerParser.ComparisonOfExpressionContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code CuttingTimesOfFile}
-	 * labeled alternative in {@link SequenceAnalyzerParser#ct}.
-	 * @param ctx the parse tree
-	 */
-	void enterCuttingTimesOfFile(SequenceAnalyzerParser.CuttingTimesOfFileContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code CuttingTimesOfFile}
-	 * labeled alternative in {@link SequenceAnalyzerParser#ct}.
-	 * @param ctx the parse tree
-	 */
-	void exitCuttingTimesOfFile(SequenceAnalyzerParser.CuttingTimesOfFileContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code CuttingTimesOfFileInParens}
-	 * labeled alternative in {@link SequenceAnalyzerParser#ct}.
-	 * @param ctx the parse tree
-	 */
-	void enterCuttingTimesOfFileInParens(SequenceAnalyzerParser.CuttingTimesOfFileInParensContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code CuttingTimesOfFileInParens}
-	 * labeled alternative in {@link SequenceAnalyzerParser#ct}.
-	 * @param ctx the parse tree
-	 */
-	void exitCuttingTimesOfFileInParens(SequenceAnalyzerParser.CuttingTimesOfFileInParensContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code CuttingTimesOfCommand}
 	 * labeled alternative in {@link SequenceAnalyzerParser#ct}.
@@ -212,18 +188,6 @@ public interface SequenceAnalyzerListener extends ParseTreeListener {
 	 */
 	void exitCuttingTimesOfExpressionInParens(SequenceAnalyzerParser.CuttingTimesOfExpressionInParensContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code StarProductOfFiles}
-	 * labeled alternative in {@link SequenceAnalyzerParser#sp}.
-	 * @param ctx the parse tree
-	 */
-	void enterStarProductOfFiles(SequenceAnalyzerParser.StarProductOfFilesContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code StarProductOfFiles}
-	 * labeled alternative in {@link SequenceAnalyzerParser#sp}.
-	 * @param ctx the parse tree
-	 */
-	void exitStarProductOfFiles(SequenceAnalyzerParser.StarProductOfFilesContext ctx);
-	/**
 	 * Enter a parse tree produced by the {@code StarProductOfCommands}
 	 * labeled alternative in {@link SequenceAnalyzerParser#sp}.
 	 * @param ctx the parse tree
@@ -248,30 +212,6 @@ public interface SequenceAnalyzerListener extends ParseTreeListener {
 	 */
 	void exitStarProductOfExpressions(SequenceAnalyzerParser.StarProductOfExpressionsContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code BuildFile}
-	 * labeled alternative in {@link SequenceAnalyzerParser#build}.
-	 * @param ctx the parse tree
-	 */
-	void enterBuildFile(SequenceAnalyzerParser.BuildFileContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code BuildFile}
-	 * labeled alternative in {@link SequenceAnalyzerParser#build}.
-	 * @param ctx the parse tree
-	 */
-	void exitBuildFile(SequenceAnalyzerParser.BuildFileContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code BuildFileInParens}
-	 * labeled alternative in {@link SequenceAnalyzerParser#build}.
-	 * @param ctx the parse tree
-	 */
-	void enterBuildFileInParens(SequenceAnalyzerParser.BuildFileInParensContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code BuildFileInParens}
-	 * labeled alternative in {@link SequenceAnalyzerParser#build}.
-	 * @param ctx the parse tree
-	 */
-	void exitBuildFileInParens(SequenceAnalyzerParser.BuildFileInParensContext ctx);
-	/**
 	 * Enter a parse tree produced by the {@code BuildExpression}
 	 * labeled alternative in {@link SequenceAnalyzerParser#build}.
 	 * @param ctx the parse tree
@@ -295,30 +235,6 @@ public interface SequenceAnalyzerListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitBuildExpressionInParens(SequenceAnalyzerParser.BuildExpressionInParensContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code ShiftMaximalityOfFile}
-	 * labeled alternative in {@link SequenceAnalyzerParser#sm}.
-	 * @param ctx the parse tree
-	 */
-	void enterShiftMaximalityOfFile(SequenceAnalyzerParser.ShiftMaximalityOfFileContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code ShiftMaximalityOfFile}
-	 * labeled alternative in {@link SequenceAnalyzerParser#sm}.
-	 * @param ctx the parse tree
-	 */
-	void exitShiftMaximalityOfFile(SequenceAnalyzerParser.ShiftMaximalityOfFileContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code ShiftMaximalityOfFileInParens}
-	 * labeled alternative in {@link SequenceAnalyzerParser#sm}.
-	 * @param ctx the parse tree
-	 */
-	void enterShiftMaximalityOfFileInParens(SequenceAnalyzerParser.ShiftMaximalityOfFileInParensContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code ShiftMaximalityOfFileInParens}
-	 * labeled alternative in {@link SequenceAnalyzerParser#sm}.
-	 * @param ctx the parse tree
-	 */
-	void exitShiftMaximalityOfFileInParens(SequenceAnalyzerParser.ShiftMaximalityOfFileInParensContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code ShiftMaximalityOfCommand}
 	 * labeled alternative in {@link SequenceAnalyzerParser#sm}.
@@ -368,18 +284,6 @@ public interface SequenceAnalyzerListener extends ParseTreeListener {
 	 */
 	void exitShiftMaximalityOfExpressionInParens(SequenceAnalyzerParser.ShiftMaximalityOfExpressionInParensContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code WordCountOfFile}
-	 * labeled alternative in {@link SequenceAnalyzerParser#wordct}.
-	 * @param ctx the parse tree
-	 */
-	void enterWordCountOfFile(SequenceAnalyzerParser.WordCountOfFileContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code WordCountOfFile}
-	 * labeled alternative in {@link SequenceAnalyzerParser#wordct}.
-	 * @param ctx the parse tree
-	 */
-	void exitWordCountOfFile(SequenceAnalyzerParser.WordCountOfFileContext ctx);
-	/**
 	 * Enter a parse tree produced by the {@code WordCountOfCommand}
 	 * labeled alternative in {@link SequenceAnalyzerParser#wordct}.
 	 * @param ctx the parse tree
@@ -404,30 +308,6 @@ public interface SequenceAnalyzerListener extends ParseTreeListener {
 	 */
 	void exitWordCountOfExpression(SequenceAnalyzerParser.WordCountOfExpressionContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code ConcatOn2files}
-	 * labeled alternative in {@link SequenceAnalyzerParser#concat}.
-	 * @param ctx the parse tree
-	 */
-	void enterConcatOn2files(SequenceAnalyzerParser.ConcatOn2filesContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code ConcatOn2files}
-	 * labeled alternative in {@link SequenceAnalyzerParser#concat}.
-	 * @param ctx the parse tree
-	 */
-	void exitConcatOn2files(SequenceAnalyzerParser.ConcatOn2filesContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code ConcatOn2FilesAtIndex}
-	 * labeled alternative in {@link SequenceAnalyzerParser#concat}.
-	 * @param ctx the parse tree
-	 */
-	void enterConcatOn2FilesAtIndex(SequenceAnalyzerParser.ConcatOn2FilesAtIndexContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code ConcatOn2FilesAtIndex}
-	 * labeled alternative in {@link SequenceAnalyzerParser#concat}.
-	 * @param ctx the parse tree
-	 */
-	void exitConcatOn2FilesAtIndex(SequenceAnalyzerParser.ConcatOn2FilesAtIndexContext ctx);
-	/**
 	 * Enter a parse tree produced by the {@code ConcatOn2Commands}
 	 * labeled alternative in {@link SequenceAnalyzerParser#concat}.
 	 * @param ctx the parse tree
@@ -451,6 +331,54 @@ public interface SequenceAnalyzerListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitConcatOn2CommandsAtIndex(SequenceAnalyzerParser.ConcatOn2CommandsAtIndexContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code ConcatOfCmdOnExpr}
+	 * labeled alternative in {@link SequenceAnalyzerParser#concat}.
+	 * @param ctx the parse tree
+	 */
+	void enterConcatOfCmdOnExpr(SequenceAnalyzerParser.ConcatOfCmdOnExprContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code ConcatOfCmdOnExpr}
+	 * labeled alternative in {@link SequenceAnalyzerParser#concat}.
+	 * @param ctx the parse tree
+	 */
+	void exitConcatOfCmdOnExpr(SequenceAnalyzerParser.ConcatOfCmdOnExprContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code ConcatOfCmdOnExprAtIndex}
+	 * labeled alternative in {@link SequenceAnalyzerParser#concat}.
+	 * @param ctx the parse tree
+	 */
+	void enterConcatOfCmdOnExprAtIndex(SequenceAnalyzerParser.ConcatOfCmdOnExprAtIndexContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code ConcatOfCmdOnExprAtIndex}
+	 * labeled alternative in {@link SequenceAnalyzerParser#concat}.
+	 * @param ctx the parse tree
+	 */
+	void exitConcatOfCmdOnExprAtIndex(SequenceAnalyzerParser.ConcatOfCmdOnExprAtIndexContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code ConcatOfExprOnCommand}
+	 * labeled alternative in {@link SequenceAnalyzerParser#concat}.
+	 * @param ctx the parse tree
+	 */
+	void enterConcatOfExprOnCommand(SequenceAnalyzerParser.ConcatOfExprOnCommandContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code ConcatOfExprOnCommand}
+	 * labeled alternative in {@link SequenceAnalyzerParser#concat}.
+	 * @param ctx the parse tree
+	 */
+	void exitConcatOfExprOnCommand(SequenceAnalyzerParser.ConcatOfExprOnCommandContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code ConcatOfExprOnCommandAtIndex}
+	 * labeled alternative in {@link SequenceAnalyzerParser#concat}.
+	 * @param ctx the parse tree
+	 */
+	void enterConcatOfExprOnCommandAtIndex(SequenceAnalyzerParser.ConcatOfExprOnCommandAtIndexContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code ConcatOfExprOnCommandAtIndex}
+	 * labeled alternative in {@link SequenceAnalyzerParser#concat}.
+	 * @param ctx the parse tree
+	 */
+	void exitConcatOfExprOnCommandAtIndex(SequenceAnalyzerParser.ConcatOfExprOnCommandAtIndexContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code ConcatOn2Expressions}
 	 * labeled alternative in {@link SequenceAnalyzerParser#concat}.

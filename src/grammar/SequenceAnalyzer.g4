@@ -33,59 +33,53 @@ predef	:	ct		//cutting times
 		;
 		
 //input must be in format sub (data , data)
-sub		:	'sub' LP file COMMA file RP									#SubstitutionOfFiles
-		|	command='sub' LP nestedCmd1=cmd COMMA nestedCmd2=cmd RP		#SubstitutionOfCommands
-		|	command='sub' LP nestedCmd1=cmd COMMA expr RP				#SubstitutionOfCmdAndExpr
+sub		:	command='sub' LP nestedCmd1=cmd COMMA nestedCmd2=cmd RP		#SubstitutionOfCommands
+		|	command='sub' LP nestedCmd=cmd COMMA expression=expr RP		#SubstitutionOfCmdAndExpr
 		|	'sub' LP expr COMMA expr RP									#SubstitutionOfExpression
 		;
 		
 //input must be in format cmp (data , data)
-cmp		:	'cmp' LP file COMMA file RP	#ComparisonOfFiles
-		|	'cmp' LP expr COMMA expr RP	#ComparisonOfExpression
+cmp		:	command='cmp' LP nestedCmd1=cmd COMMA nestedCmd2=cmd RP		#ComparisonOfCommands
+		|	command='cmp' LP nestedCmd=cmd COMMA expression=expr RP		#ComparisonOfCmdAndExpr
+		|	'cmp' LP expr COMMA expr RP									#ComparisonOfExpression
 		;
 		
 //input must be in format ct data or ct (data)		
-ct		:	'ct' file							#CuttingTimesOfFile
-		|	'ct' LP file RP						#CuttingTimesOfFileInParens
-		|	command='ct' nestedCmd=cmd			#CuttingTimesOfCommand
+ct		:	command='ct' nestedCmd=cmd			#CuttingTimesOfCommand
 		|	command='ct' LP nestedCmd=cmd RP	#CuttingTimesOfCommandInParens
 		|	'ct' expr							#CuttingTimesOfExpression
 		|	'ct' LP expr RP						#CuttingTimesOfExpressionInParens
 		;
 		
 //input must be in format sp (data , data)		
-sp		:	'sp' LP file COMMA file RP									#StarProductOfFiles
-		|	command='sp' LP nestedCmd1=cmd COMMA nestedCmd2=cmd RP		#StarProductOfCommands
+sp		:	command='sp' LP nestedCmd1=cmd COMMA nestedCmd2=cmd RP		#StarProductOfCommands
 		|	'sp' LP expr COMMA expr RP									#StarProductOfExpressions
 		;	
 		
 //input must be in format build data or build (data)
-build	:	'build' file			#BuildFile
-		|	'build' LP file RP		#BuildFileInParens
-		|	'build'  expr			#BuildExpression
+build	:	'build'  expr			#BuildExpression
 		|	'build' LP expr RP		#BuildExpressionInParens
 		;
 		
 //input must be in format sm data or sm (data)
-sm		:	'sm' file							#ShiftMaximalityOfFile
-		|	'sm' LP file RP						#ShiftMaximalityOfFileInParens
-		|	command='sm' nestedCmd=cmd			#ShiftMaximalityOfCommand
-		|	cmmand='sm' LP nestedCmd=cmd RP		#ShiftMaximalityOfCommandInParens
+sm		:	command='sm' nestedCmd=cmd			#ShiftMaximalityOfCommand
+		|	command='sm' LP nestedCmd=cmd RP	#ShiftMaximalityOfCommandInParens
 		|	'sm' expr							#ShiftMaximalityOfExpression
 		|	'sm' LP expr RP						#ShiftMaximalityOfExpressionInParens
 		;
 	
 //input must be in format wordcount data or wordcount (data, data)	
-wordct	:	'wc' LP file COMMA file RP						#WordCountOfFile
-		|	command='wc' LP nestedCmd=cmd COMMA INT RP		#WordCountOfCommand
+wordct	:	command='wc' LP nestedCmd=cmd COMMA INT RP		#WordCountOfCommand
 		|	'wc' LP expr COMMA INT RP						#WordCountOfExpression
 		;
 		
 //input must be in format concat (data , data) or concat (data , data , index)	
-concat	:	'concat' LP file COMMA file RP											#ConcatOn2files	
-		|	'concat' LP file COMMA file COMMA INT RP								#ConcatOn2FilesAtIndex
-		|	command='concat' LP nestedCmd1=cmd COMMA nestedCmd2=cmd RP				#ConcatOn2Commands
+concat	:	command='concat' LP nestedCmd1=cmd COMMA nestedCmd2=cmd RP				#ConcatOn2Commands
 		|	command='concat' LP nestedCmd1=cmd COMMA nestedCmd2=cmd COMMA INT RP	#ConcatOn2CommandsAtIndex
+		|	command='concat' LP expression=expr COMMA nestedCmd=cmd RP				#ConcatOfCmdOnExpr
+		|	command='concat' LP expression=expr COMMA nestedCmd=cmd COMMA INT RP	#ConcatOfCmdOnExprAtIndex
+		|	command='concat' LP nestedCmd=cmd COMMA expression=expr RP				#ConcatOfExprOnCommand
+		|	command='concat' LP nestedCmd=cmd COMMA expression=expr COMMA INT RP	#ConcatOfExprOnCommandAtIndex
 		|	'concat' LP expr COMMA expr RP											#ConcatOn2Expressions
 		|	'concat' LP expr COMMA expr COMMA INT RP								#ConcatOn2ExpressionsAtIndex
 		;
@@ -98,7 +92,6 @@ assignment	:	ID ':=' command=cmd  	#AssignVariableOfCommand		//variable assignme
 file	:	ID FILE_EXT;		 //file name with . extension
 
 expr	:	INT                    # int        //expression as single Int 
-		/*|	USER_ALPHA			   # UserAlpha*///for later implementation of user defined alphabet
 		;
 
 
@@ -114,7 +107,7 @@ COMMA	:	',';			//assigns token name to comma
 //CMP		:	'cmp';
 //CT		:	'ct';
 //SP		:	'sp';
-//BUILD	:	'build';
+//BUILD		:	'build';
 //SM		:	'sm';
 //WC		:	'wc';
 //CONCAT	:	'concat';
