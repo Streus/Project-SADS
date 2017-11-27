@@ -20,14 +20,6 @@ public class AntlrBridge {
 
 		CommandObjectVisitor coVisitor = new CommandObjectVisitor();
 		coVisitor.visit(tree);
-		
-		Stack<CommandObject> commandObjectStack = coVisitor.commandObjectStack;
-		
-		while(commandObjectStack.isEmpty() == false) {
-			System.out.println(commandObjectStack.pop().commandType + " popped from stack");
-		}
-		
-		//commandExecutor.executeStack(commandObjectStack);
 	}
 	
 	
