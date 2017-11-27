@@ -33,8 +33,10 @@ predef	:	ct		//cutting times
 		;
 		
 //input must be in format sub (data , data)
-sub		:	'sub' LP file COMMA file RP	#SubstitutionOfFiles
-		|	'sub' LP expr COMMA expr RP	#SubstitutionOfExpression
+sub		:	'sub' LP file COMMA file RP									#SubstitutionOfFiles
+		|	command='sub' LP nestedCmd1=cmd COMMA nestedCmd2=cmd RP		#SubstitutionOfCommands
+		|	command='sub' LP nestedCmd1=cmd COMMA expr RP				#SubstitutionOfCmdAndExpr
+		|	'sub' LP expr COMMA expr RP									#SubstitutionOfExpression
 		;
 		
 //input must be in format cmp (data , data)
@@ -43,18 +45,18 @@ cmp		:	'cmp' LP file COMMA file RP	#ComparisonOfFiles
 		;
 		
 //input must be in format ct data or ct (data)		
-ct		:	'ct' file			#CuttingTimesOfFile
-		|	'ct' LP file RP		#CuttingTimesOfFileInParens
-		|	'ct' cmd			#CuttingTimesOfCommand
-		|	'ct' LP cmd RP		#CuttingTimesOfCommandInParens
-		|	'ct' expr			#CuttingTimesOfExpression
-		|	'ct' LP expr RP		#CuttingTimesOfExpressionInParens
+ct		:	'ct' file							#CuttingTimesOfFile
+		|	'ct' LP file RP						#CuttingTimesOfFileInParens
+		|	command='ct' nestedCmd=cmd			#CuttingTimesOfCommand
+		|	command='ct' LP nestedCmd=cmd RP	#CuttingTimesOfCommandInParens
+		|	'ct' expr							#CuttingTimesOfExpression
+		|	'ct' LP expr RP						#CuttingTimesOfExpressionInParens
 		;
 		
 //input must be in format sp (data , data)		
-sp		:	'sp' LP file COMMA file RP		#StarProductOfFiles
-		|	'sp' LP cmd COMMA cmd RP		#StarProductOfCommands
-		|	'sp' LP expr COMMA expr RP		#StarProductOfExpressions
+sp		:	'sp' LP file COMMA file RP									#StarProductOfFiles
+		|	command='sp' LP nestedCmd1=cmd COMMA nestedCmd2=cmd RP		#StarProductOfCommands
+		|	'sp' LP expr COMMA expr RP									#StarProductOfExpressions
 		;	
 		
 //input must be in format build data or build (data)
@@ -65,31 +67,31 @@ build	:	'build' file			#BuildFile
 		;
 		
 //input must be in format sm data or sm (data)
-sm		:	'sm' file			#ShiftMaximalityOfFile
-		|	'sm' LP file RP		#ShiftMaximalityOfFileInParens
-		|	'sm' cmd			#ShiftMaximalityOfCommand
-		|	'sm' LP cmd RP		#ShiftMaximalityOfCommandInParens
-		|	'sm' expr			#ShiftMaximalityOfExpression
-		|	'sm' LP expr RP		#ShiftMaximalityOfExpressionInParens
+sm		:	'sm' file							#ShiftMaximalityOfFile
+		|	'sm' LP file RP						#ShiftMaximalityOfFileInParens
+		|	command='sm' nestedCmd=cmd			#ShiftMaximalityOfCommand
+		|	cmmand='sm' LP nestedCmd=cmd RP		#ShiftMaximalityOfCommandInParens
+		|	'sm' expr							#ShiftMaximalityOfExpression
+		|	'sm' LP expr RP						#ShiftMaximalityOfExpressionInParens
 		;
 	
 //input must be in format wordcount data or wordcount (data, data)	
-wordct	:	'wc' LP file COMMA file RP		#WordCountOfFile
-		|	'wc' LP cmd COMMA INT RP		#WordCountOfCommand
-		|	'wc' LP expr COMMA INT RP		#WordCountOfExpression
+wordct	:	'wc' LP file COMMA file RP						#WordCountOfFile
+		|	command='wc' LP nestedCmd=cmd COMMA INT RP		#WordCountOfCommand
+		|	'wc' LP expr COMMA INT RP						#WordCountOfExpression
 		;
 		
 //input must be in format concat (data , data) or concat (data , data , index)	
-concat	:	'concat' LP file COMMA file RP				#ConcatOn2files	
-		|	'concat' LP file COMMA file COMMA INT RP	#ConcatOn2FilesAtIndex
-		|	'concat' LP cmd COMMA cmd RP				#ConcatOn2Commands
-		|	'concat' LP cmd COMMA cmd COMMA INT RP		#ConcatOn2CommandsAtIndex
-		|	'concat' LP expr COMMA expr RP				#ConcatOn2Expressions
-		|	'concat' LP expr COMMA expr COMMA INT RP	#ConcatOn2ExpressionsAtIndex
+concat	:	'concat' LP file COMMA file RP											#ConcatOn2files	
+		|	'concat' LP file COMMA file COMMA INT RP								#ConcatOn2FilesAtIndex
+		|	command='concat' LP nestedCmd1=cmd COMMA nestedCmd2=cmd RP				#ConcatOn2Commands
+		|	command='concat' LP nestedCmd1=cmd COMMA nestedCmd2=cmd COMMA INT RP	#ConcatOn2CommandsAtIndex
+		|	'concat' LP expr COMMA expr RP											#ConcatOn2Expressions
+		|	'concat' LP expr COMMA expr COMMA INT RP								#ConcatOn2ExpressionsAtIndex
 		;
 		
-assignment	:	ID ':=' cmd  	#AssignVariableOfCommand		//variable assignment syntax
-			|	ID ':=' expr  	#AssignVariableOfExpression	
+assignment	:	ID ':=' command=cmd  	#AssignVariableOfCommand		//variable assignment syntax
+			|	ID ':=' expr  			#AssignVariableOfExpression	
 			;
 
 
@@ -120,4 +122,4 @@ LETTER	: 	[a-zA-Z]+ ;		//defines letters as lowercase and uppercase
 NEWLINE	:	'\r'? '\n' ;    //return newlines to parser (end-statement signal)
 LN_COMMENT :   '//' .*? '\n' -> skip;	//skips single line comments
 COMMENT	:	'/*' .*? '*/' -> skip ;		//skips block comments
-WS  	:   [ \t]+ -> skip ; 			/* toss out whitespace*/
+WS  	:   [ \t]+ -> skip ;			/* toss out whitespace*/

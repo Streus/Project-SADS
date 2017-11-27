@@ -1,6 +1,5 @@
-// Generated from SequenceAnalyzer.g4 by ANTLR 4.7
 package grammar;
-
+// Generated from SequenceAnalyzer.g4 by ANTLR 4.7
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
 /**
@@ -54,6 +53,20 @@ public interface SequenceAnalyzerVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitSubstitutionOfFiles(SequenceAnalyzerParser.SubstitutionOfFilesContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code SubstitutionOfCommands}
+	 * labeled alternative in {@link SequenceAnalyzerParser#sub}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSubstitutionOfCommands(SequenceAnalyzerParser.SubstitutionOfCommandsContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code SubstitutionOfCmdAndExpr}
+	 * labeled alternative in {@link SequenceAnalyzerParser#sub}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSubstitutionOfCmdAndExpr(SequenceAnalyzerParser.SubstitutionOfCmdAndExprContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code SubstitutionOfExpression}
 	 * labeled alternative in {@link SequenceAnalyzerParser#sub}.
