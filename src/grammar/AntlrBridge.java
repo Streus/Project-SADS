@@ -16,10 +16,10 @@ public class AntlrBridge {
 		SequenceAnalyzerLexer lexer = new SequenceAnalyzerLexer(antlrInput);
 		CommonTokenStream tokens = new CommonTokenStream(lexer);
 		SequenceAnalyzerParser parser = new SequenceAnalyzerParser(tokens);
-		ParseTree tree = parser.prog(); // parse
+		ParseTree cst = parser.prog(); // parse
 
-		CommandObjectVisitor coVisitor = new CommandObjectVisitor();
-		coVisitor.visit(tree);
+		CommandObjectVisitor ast = new CommandObjectVisitor();
+		ast.visit(cst);
 	}
 	
 	

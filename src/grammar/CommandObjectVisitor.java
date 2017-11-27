@@ -82,17 +82,75 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 	}
 	
 	@Override public CommandObject visitCuttingTimesOfCommand(SequenceAnalyzerParser.CuttingTimesOfCommandContext ctx) { 
+		String context = ctx.getText();
+		String cmd = ctx.command.getText();
+		String nestedCmd = ctx.nestedCmd.getText();
+		CommandObject cmdObject;
+		
 		if(debugFlag == true) {
 			System.out.println("visiting CuttingTimesOfCommand");
+			System.out.println("ctx = " + context);
+			System.out.println("nestedCmd = "+nestedCmd);
 		}
-		return visitChildren(ctx); 
+		
+		switch(cmd) {
+		case "sm":
+			cmdObject = new ShiftMaximalityCommand();
+			break;
+		case "wc":
+			cmdObject = new WordCountCommand();
+			break;
+		case "ct":
+			cmdObject = new CuttingTimesCommand();
+			break;
+		case "bu":
+			cmdObject = new BuildCommand();
+			break;
+		case "sp":
+			cmdObject = new StarProductCommand();
+			break;
+		default:
+			break;
+		}
+		cmdObject = visitChildren(ctx.nestedCmd);
+		
+		return cmdObject;
 	}
 	
 	@Override public CommandObject visitCuttingTimesOfCommandInParens(SequenceAnalyzerParser.CuttingTimesOfCommandInParensContext ctx) { 
+		String context = ctx.getText();
+		String cmd = ctx.command.getText();
+		String nestedCmd = ctx.nestedCmd.getText();
+		CommandObject cmdObject;
+		
 		if(debugFlag == true) {
 			System.out.println("visiting CuttingTimesOfCommand");
+			System.out.println("ctx = " + context);
+			System.out.println("nestedCmd = "+nestedCmd);
 		}
-		return visitChildren(ctx); 
+		
+		switch(cmd) {
+		case "sm":
+			cmdObject = new ShiftMaximalityCommand();
+			break;
+		case "wc":
+			cmdObject = new WordCountCommand();
+			break;
+		case "ct":
+			cmdObject = new CuttingTimesCommand();
+			break;
+		case "bu":
+			cmdObject = new BuildCommand();
+			break;
+		case "sp":
+			cmdObject = new StarProductCommand();
+			break;
+		default:
+			break;
+		}
+		cmdObject = visitChildren(ctx.nestedCmd);
+		
+		return cmdObject;
 	}
 
 	@Override
@@ -174,76 +232,78 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 	
 	@Override public CommandObject visitShiftMaximalityOfCommand(SequenceAnalyzerParser.ShiftMaximalityOfCommandContext ctx) { 
 		String context = ctx.getText();
-		String cmd = context.substring(0,2);
-		String operand;
+		String cmd = ctx.command.getText();
+		String nestedCmd = ctx.nestedCmd.getText();
+		CommandObject cmdObject;
 		
 		if(debugFlag == true) {
 			System.out.println("visiting ShiftMaximalityOfCommand");
 			System.out.println("ctx = " + context);
+			System.out.println("nestedCmd = "+nestedCmd);
 		}
 		
 		switch(cmd) {
 		case "sm":
-			operand = context.replace(cmd, "");
-			ShiftMaximalityCommand smCommand = new ShiftMaximalityCommand(operand);
-			ShiftMaximalityCommand nestedCommand = new ShiftMaximalityCommand(smCommand);
+//			ShiftMaximalityCommand smCommand = new ShiftMaximalityCommand(nestedCmd);
+//			ShiftMaximalityCommand nestedCommand = new ShiftMaximalityCommand(smCommand);
+			cmdObject = new ShiftMaximalityCommand();
 			break;
 		case "wc":
-//			operand = context.replace(cmd, "");
-//			WordCountCommand wordcountCommand = new WordCountCommand(operand,index);
+			cmdObject = new WordCountCommand();
 			break;
 		case "ct":
-			
+			cmdObject = new CuttingTimesCommand();
 			break;
 		case "bu":
-			
+			cmdObject = new BuildCommand();
 			break;
 		case "sp":
-			
+			cmdObject = new StarProductCommand();
 			break;
 		default:
 			break;
 		}
-		//AntlrBridge nestedCommand = new AntlrBridge(command);
+		cmdObject = visitChildren(ctx.nestedCmd);
 		
-		return visitChildren(ctx);
+		return cmdObject;
 	}
 
 	@Override public CommandObject visitShiftMaximalityOfCommandInParens(SequenceAnalyzerParser.ShiftMaximalityOfCommandInParensContext ctx) { 
 		String context = ctx.getText();
 		String cmd = ctx.command.getText();
-		String operand;
+		String nestedCmd = ctx.nestedCmd.getText();
+		CommandObject cmdObject;
 		
 		if(debugFlag == true) {
 			System.out.println("visiting ShiftMaximalityOfCommandInParens");
 			System.out.println("ctx = "+context);
+			System.out.println("nestedCmd = "+nestedCmd);
 		}
 		
 		switch(cmd) {
 		case "sm":
-			operand = context.replace(cmd, "");
-			ShiftMaximalityCommand smCommand = new ShiftMaximalityCommand(operand);
-			ShiftMaximalityCommand nestedCommand = new ShiftMaximalityCommand(smCommand);
+//			ShiftMaximalityCommand smCommand = new ShiftMaximalityCommand(nestedCmd);
+//			ShiftMaximalityCommand nestedCommand = new ShiftMaximalityCommand(smCommand);
+			cmdObject = new ShiftMaximalityCommand();
 			break;
 		case "wc":
-//			operand = context.replace(cmd, "");
-//			WordCountCommand wordcountCommand = new WordCountCommand(operand,index);
+			cmdObject = new WordCountCommand();
 			break;
 		case "ct":
-			
+			cmdObject = new CuttingTimesCommand();
 			break;
 		case "bu":
-			
+			cmdObject = new BuildCommand();
 			break;
 		case "sp":
-			
+			cmdObject = new StarProductCommand();
 			break;			
 		default:
 			break;
 		}
-		//AntlrBridge nestedCommand = new AntlrBridge(command);
+		cmdObject = visitChildren(ctx.nestedCmd);
 		
-		return visitChildren(ctx);
+		return cmdObject;
 	}
 
 	@Override
@@ -262,10 +322,39 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 	}
 	
 	@Override public CommandObject visitWordCountOfCommand(SequenceAnalyzerParser.WordCountOfCommandContext ctx) { 
+		String context = ctx.getText();
+		String cmd = ctx.command.getText();
+		String nestedCmd = ctx.nestedCmd.getText();
+		CommandObject cmdObject;
+		
 		if(debugFlag == true) {
 			System.out.println("visiting WordCountOfCommand");
+			System.out.println("ctx = " + context);
+			System.out.println("nestedCmd = "+nestedCmd);
 		}
-		return visitChildren(ctx);
+		
+		switch(cmd) {
+		case "sm":
+			cmdObject = new ShiftMaximalityCommand();
+			break;
+		case "wc":
+			cmdObject = new WordCountCommand();
+			break;
+		case "ct":
+			cmdObject = new CuttingTimesCommand();
+			break;
+		case "bu":
+			cmdObject = new BuildCommand();
+			break;
+		case "sp":
+			cmdObject = new StarProductCommand();
+			break;
+		default:
+			break;
+		}
+		cmdObject = visitChildren(ctx.nestedCmd);
+		
+		return cmdObject;
 	}
 	
 	@Override
