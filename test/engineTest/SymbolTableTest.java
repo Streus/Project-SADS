@@ -64,13 +64,14 @@ public class SymbolTableTest {
 				sb.append(c);
 			}
 			
+			//put the string into the symbol table
 			SADSstring newString = new SADSstring(sb.toString());
-			
 			sadTree.put(newString, i);   
 		}
 		
 		assertEquals(TEST_ITER, sadTree.size());
 		
+		//check for accurate max values 
 		for(int i=sadTree.size()-1; i>=0; i--) {
 			int maxVal = sadTree.get(sadTree.max());
 			int actualMaxVal = i;
@@ -79,10 +80,40 @@ public class SymbolTableTest {
 			sadTree.deleteMax();
 		}
 		
-
 		assertEquals(0, sadTree.size());
+		 
+		//ensure that when a SADSstring key is put into the tree 
+		//and replaced, the new string points to the original value
+		SADSstring originalStr = new SADSstring("original");
+		
+		sadTree.put(originalStr, 1111);
+		int originalVal = sadTree.get(originalStr);
+		assertEquals(originalVal, 1111);
+		
+		sadTree.put(originalStr, 0000);
+		int replacedVal = sadTree.get(originalStr);
+		assertEquals(replacedVal, 0000);
 		
 		//TODO: test SADSstrings that are generated 
+		
+		
+	}
+	
+	@Test
+	public void OverwriteTester() {
+		
+		UniqueSymbolGenerator gen = new UniqueSymbolGenerator();
+		SymbolTable<String, Integer> uniqueTree = new SymbolTable<String, Integer>();
+		int original = 0000;
+		int replaced = 1111;
+		
+		uniqueTree.put("x", original);
+		int xVal = uniqueTree.get("x");
+		assertEquals(xVal, original);
+		
+		uniqueTree.put("x", replaced);
+		int newXVal = uniqueTree.get("x");
+		assertEquals(newXVal, replaced);
 		
 	}
 }
