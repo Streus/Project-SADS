@@ -1,5 +1,6 @@
 package engine.command;
 
+import java.util.EmptyStackException;
 import java.util.Stack;
 import grammar.CommandObject;
 import gui.Console;
@@ -10,20 +11,25 @@ public class commandExecutor {
 	public commandExecutor() {
 		
 	}
-
-	public static void executeStack(Stack<CommandObject> cmdObj) {
+	
+	/**
+	 * Handles a stack of command objects from AntlrBridge.java and returns input to the GUI
+	 * 
+	 * @param cmdObj - the stack containing all of the command objects to be processed 
+	 * @throws EmptyStackException
+	 */
+	public static void executeStack(Stack<CommandObject> cmdObj) throws EmptyStackException {
 		
-		Console.instance();
-		
-		CommandObject obj = cmdObj.pop();
-		
-		CommandResponse resp = obj.execute();
-		
-		Console.println("Response from commandExecutor: " + resp.returnVal.toString());
-		
+		try {
+			CommandObject obj = cmdObj.pop();
+			CommandResponse resp = obj.execute();
+			Console.println("Response from commandExecutor: " + resp.returnVal.toString());
+		}
+		catch (NullPointerException e) {
+			Console.println(e.getMessage());
+			throw e;
+		}
 		
 	}
-	
-
 
 }

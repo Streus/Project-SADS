@@ -5,8 +5,15 @@ package engine;
 *  Result: 1101001
 */
 
-abstract public class SADSstring 
+public class SADSstring implements Comparable<SADSstring>
 {
+	private String SADSstring;
+
+	public SADSstring(String stringConstructor) //maybe Generate1 should be a constructor?? 
+	{
+		this.SADSstring = stringConstructor;
+	}
+	
 	public static String Generate1(String rule1, String rule2, String startingString, int length)
 	{
 		String strFinal = startingString;
@@ -23,5 +30,10 @@ abstract public class SADSstring
 			}
 		}
 		return strFinal;
+	}
+	
+	@Override 
+	public int compareTo(SADSstring _s1) {
+		return this.SADSstring.compareTo(_s1.SADSstring);
 	}
 }  
