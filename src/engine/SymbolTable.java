@@ -221,7 +221,7 @@ public class SymbolTable<Key extends Comparable<Key>, Value> {
         // if both children of root are black, set root to red
         if (!isRed(root.left) && !isRed(root.right))
             root.color = RED;
-
+ 
         root = deleteMax(root);
         if (!isEmpty()) root.color = BLACK;
         // assert check();
@@ -290,6 +290,13 @@ public class SymbolTable<Key extends Comparable<Key>, Value> {
             else h.right = delete(h.right, key);
         }
         return balance(h);
+    }
+    
+    //deletes all of the key value pairs in the tree 
+	public void clear() {
+	    	for (Key key : this.keys()) {
+	    		delete(key);
+	    	}
     }
 
    /***************************************************************************

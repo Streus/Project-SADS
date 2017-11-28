@@ -1,35 +1,23 @@
 package engineTest;
 
 import static org.junit.Assert.*;
+
+import java.util.Random;
+
 //import org.junit.After;
 //import org.junit.AfterClass;
 //import org.junit.Before;
 //import org.junit.BeforeClass;
 import org.junit.Test;
+
+import engine.SADSstring;
 import engine.SymbolTable;
 import engine.UniqueSymbolGenerator;
 
 public class SymbolTableTest {
 	
-//  Might need these when the Symbol table becomes more complicated
-//	@BeforeClass
-//	public static void setUpBeforeClass() throws Exception {
-//	}
-//
-//	@AfterClass
-//	public static void tearDownAfterClass() throws Exception {
-//	}
-//
-//	@Before
-//	public void setUp() throws Exception {
-//	}
-//
-//	@After
-//	public void tearDown() throws Exception {
-//		
-//	}
-
-	
+	public int TEST_ITER = 10;
+	public int STRING_SIZE = 15;
     /**
      * Unit tests the {@code RedBlackBST} data type.
      *
@@ -43,7 +31,7 @@ public class SymbolTableTest {
         
         assertEquals(0,st.size());
         
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < TEST_ITER; i++) {
             String key =  Integer.toString(i);
             st.put(key, i);
         }
@@ -57,5 +45,44 @@ public class SymbolTableTest {
         }
         
         assertEquals(st.isEmpty(), true);
+	}
+	
+	@Test 
+	public void SymbolTreeSADSstringTester() {
+		SymbolTable<SADSstring, Integer> sadTree = new SymbolTable<SADSstring, Integer>();
+		StringBuilder sb = new StringBuilder();
+		
+		//tests randomly generated SADstrings in SymbolTable tree 
+		for (int i = 0; i < TEST_ITER; i++) {
+			
+			assertEquals(i, sadTree.size());
+			
+			//create a random string of 1's and 0's of size STRING_SIZE
+			for (int j = 0; j < STRING_SIZE; j++) {
+				Random rnd = new Random();
+				char c = (char) (rnd.nextInt(26) + 'a');
+				sb.append(c);
+			}
+			
+			SADSstring newString = new SADSstring(sb.toString());
+			
+			sadTree.put(newString, i);   
+		}
+		
+		assertEquals(TEST_ITER, sadTree.size());
+		
+		for(int i=sadTree.size()-1; i>=0; i--) {
+			int maxVal = sadTree.get(sadTree.max());
+			int actualMaxVal = i;
+			
+			assertEquals(maxVal, actualMaxVal);
+			sadTree.deleteMax();
+		}
+		
+
+		assertEquals(0, sadTree.size());
+		
+		//TODO: test SADSstrings that are generated 
+		
 	}
 }
