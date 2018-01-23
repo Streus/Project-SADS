@@ -40,7 +40,7 @@ public class ShiftMaximality {
 	 * @param s - the original string, from which all substrings will be generated
 	 * @return int value 1 if shift maximal, 0 if undetermined, -1 if not shift maximal
 	 */
-	public int shiftMaximal(String s) {
+	public static int shiftMaximal(String s) {
 		
 		if(s != null && !s.isEmpty()) {
 			
