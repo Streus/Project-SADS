@@ -4,8 +4,6 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
 
 import javax.swing.JTextPane;
 import javax.swing.text.BadLocationException;
@@ -63,13 +61,12 @@ public final class Console
 		//warning
 		styles[WRN] = new SimpleAttributeSet();
 		StyleConstants.setForeground(styles[WRN], Color.yellow);
-		StyleConstants.setItalic(styles[WRN], true);
+		StyleConstants.setBold(styles[WRN], true);
 		
 		//header
 		styles[HDR] = new SimpleAttributeSet();
-		StyleConstants.setForeground(styles[HDR], Color.cyan);
+		StyleConstants.setForeground(styles[HDR], Color.white);
 		StyleConstants.setBold(styles[HDR], true);
-		StyleConstants.setUnderline(styles[HDR], true);
 	}
 	
 	/* Instance Vars */
@@ -274,9 +271,11 @@ public final class Console
 		front.removeStyle("out");
 		front.removeStyle("err");
 		front.removeStyle("wrn");
+		front.removeStyle("hdr");
 		this.front = front;
 		front.addStyle("out", null).addAttribute("outStyle", styles[OUT]);
 		front.addStyle("err", null).addAttribute("errStyle", styles[ERR]);
 		front.addStyle("wrn", null).addAttribute("wrnStyle", styles[WRN]);
+		front.addStyle("hdr", null).addAttribute("hdrStyle", styles[HDR]);
 	}
 }
