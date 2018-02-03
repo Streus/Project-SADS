@@ -1,14 +1,12 @@
 package grammar;
 
-
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
-import engine.command.*;
 
-
-public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObject> {
+public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObject>
+{
 	public boolean debugFlag = true;
 	
-	@Override public CommandObject visitAssignVariableOfExpression(SequenceAnalyzerParser.AssignVariableOfExpressionContext ctx) { return visitChildren(ctx); }
+	@Override public CommandObject<String> visitAssignVariableOfExpression(SequenceAnalyzerParser.AssignVariableOfExpressionContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -17,133 +15,125 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 	 */
 	
 	@Override
-    public CommandObject visitSubstitutionOfExpression(SequenceAnalyzerParser.SubstitutionOfExpressionContext ctx){
-		String target = ctx.expr(0).getText();
-		String replacement = ctx.expr(1).getText();
+    public CommandObject<String> visitSubstitutionOfExpression(SequenceAnalyzerParser.SubstitutionOfExpressionContext ctx)
+	{
+		String target = ctx.arg1.getText();
+		String replacement = ctx.arg2.getText();
 		
 		if(debugFlag == true){
 			System.out.println("target = " + target);
 			System.out.println("replacement = " + replacement);
 		}
 		
-		SubstitutionCommand subCommand = new SubstitutionCommand(target, replacement);
-		
-		return visit(ctx);
+		return new SubstitutionCommand(visit(ctx.arg1), visit(ctx.arg2));
 	}
 
 	@Override
-    public CommandObject visitComparisonOfExpression(SequenceAnalyzerParser.ComparisonOfExpressionContext ctx){
-		String str1 = ctx.expr(0).getText();
-		String str2 = ctx.expr(1).getText(); 
+    public CommandObject<String> visitComparisonOfExpression(SequenceAnalyzerParser.ComparisonOfExpressionContext ctx)
+	{
+		String str1 = ctx.arg1.getText();
+		String str2 = ctx.arg2.getText(); 
 		
 		if(debugFlag == true){
 			System.out.println("str1 = " + str1);
 			System.out.println("str2 = " + str2);
 		}
 		
-		CompareCommand cmpCommand = new CompareCommand(str1, str2);
-		
-		return visit(ctx);
+		return new CompareCommand(visit(ctx.arg1), visit(ctx.arg2));
 	}
 
 	@Override
-    public CommandObject visitCuttingTimesOfExpression(SequenceAnalyzerParser.CuttingTimesOfExpressionContext ctx){
-		String expr = ctx.expr().getText();
+    public CommandObject<String> visitCuttingTimesOfExpression(SequenceAnalyzerParser.CuttingTimesOfExpressionContext ctx)
+	{
+		String expr = ctx.arg1.getText();
 		
 		if(debugFlag == true){
 			System.out.println("expr = " + expr);
 		}
 		
-		CuttingTimesCommand ctCommand = new CuttingTimesCommand(expr);
-		
-		return visit(ctx);
+		return new CuttingTimesCommand(visit(ctx.arg1));
 	}
 
 	@Override
-    public CommandObject  visitCuttingTimesOfExpressionInParens(SequenceAnalyzerParser.CuttingTimesOfExpressionInParensContext ctx){
-		String expr = ctx.expr().getText();
+    public CommandObject<String> visitCuttingTimesOfExpressionInParens(SequenceAnalyzerParser.CuttingTimesOfExpressionInParensContext ctx)
+	{
+		String expr = ctx.arg1.getText();
 		
 		if(debugFlag == true){
 			System.out.println("expr = " + expr);
 		}
 		
-		CuttingTimesCommand ctCommand = new CuttingTimesCommand(expr);
-		
-		return visit(ctx);
+		return new CuttingTimesCommand(visit(ctx.arg1));
 	}
 
 	@Override
-    public CommandObject  visitStarProductOfExpressions(SequenceAnalyzerParser.StarProductOfExpressionsContext ctx){
+    public CommandObject<String> visitStarProductOfExpressions(SequenceAnalyzerParser.StarProductOfExpressionsContext ctx)
+	{
 		System.out.println("Visiting StarProductOfExpressions");
-		String str1 = ctx.expr(0).getText();
-		String str2 = ctx.expr(1).getText(); 
+		String str1 = ctx.arg1.getText();
+		String str2 = ctx.arg2.getText(); 
 		
 		if(debugFlag == true){
 			System.out.println("str1 = " + str1);
 			System.out.println("str2 = " + str2);
 		}
 		
-		StarProductCommand spCommand = new StarProductCommand(str1, str2); 
-		
-		return visit(ctx);
+		return new StarProductCommand(visit(ctx.arg1), visit(ctx.arg2));
 	}
 	
 	@Override
-    public CommandObject  visitBuildExpression(SequenceAnalyzerParser.BuildExpressionContext ctx){
-		String str = ctx.expr().getText();
+    public CommandObject<String> visitBuildExpression(SequenceAnalyzerParser.BuildExpressionContext ctx)
+	{
+		String str = ctx.arg1.getText();
 		
 		if(debugFlag == true){
 			System.out.println("expr = " + str);
 		}
 		
-		BuildCommand buildCommand = new BuildCommand(str);
-		
-		return visit(ctx);
+		return new BuildCommand(visit(ctx.arg1));
 	}
 
 	@Override
-    public CommandObject  visitBuildExpressionInParens(SequenceAnalyzerParser.BuildExpressionInParensContext ctx){
-		String str = ctx.expr().getText();
+    public CommandObject<String> visitBuildExpressionInParens(SequenceAnalyzerParser.BuildExpressionInParensContext ctx)
+	{
+		String str = ctx.arg1.getText();
 		
 		if(debugFlag == true){
 			System.out.println("expr = " + str);
 		}
 		
-		BuildCommand buildCommand = new BuildCommand(str);
-		
-		return visit(ctx);
+		return new BuildCommand(visit(ctx.arg1));
 	}
 
 	@Override
-    public CommandObject  visitShiftMaximalityOfExpression(SequenceAnalyzerParser.ShiftMaximalityOfExpressionContext ctx){
-		String operand = ctx.expr().getText();
+    public CommandObject<String> visitShiftMaximalityOfExpression(SequenceAnalyzerParser.ShiftMaximalityOfExpressionContext ctx)
+	{
+		String operand = ctx.arg1.getText();
 		
 		if(debugFlag == true){
 			System.out.println("visiting ShiftMaximalityOfExpression");
 			System.out.println("operand = " + operand);
 		}
 		
-		ShiftMaximalityCommand smCommand = new ShiftMaximalityCommand(operand);
-		
-		return visit(ctx);
+		return new ShiftMaximalityCommand(visit(ctx.arg1));
 	}
 
 	@Override
-    public CommandObject  visitShiftMaximalityOfExpressionInParens(SequenceAnalyzerParser.ShiftMaximalityOfExpressionInParensContext ctx){
-		String operand = ctx.expr().getText();
+    public CommandObject  visitShiftMaximalityOfExpressionInParens(SequenceAnalyzerParser.ShiftMaximalityOfExpressionInParensContext ctx)
+	{
+		String operand = ctx.arg1.getText();
 		
 		if(debugFlag == true){
 			System.out.println("ShiftMaximalityInParens");
 			System.out.println("operand = " + operand);
 		}
 		
-		ShiftMaximalityCommand smCommand = new ShiftMaximalityCommand(operand);
-		
-		return visit(ctx);
+		return new ShiftMaximalityCommand(visit(ctx.arg1));
 	}
 
 	@Override
-    public CommandObject  visitWordCountOfExpression(SequenceAnalyzerParser.WordCountOfExpressionContext ctx){
+    public CommandObject  visitWordCountOfExpression(SequenceAnalyzerParser.WordCountOfExpressionContext ctx)
+	{
 		String str = ctx.arg1.getText();
 		int index = Integer.parseInt(ctx.arg2.getText());
 		
@@ -152,30 +142,28 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 			System.out.println("index = " + index);
 		}
 		
-		WordCountCommand wordcountCommand = new WordCountCommand(str,index);
-		
-		return visit(ctx);
+		return new WordCountCommand(visit(ctx.arg1), visit(ctx.arg2));
 	}
 	
 	@Override
-    public CommandObject visitConcatOn2Expressions(SequenceAnalyzerParser.ConcatOn2ExpressionsContext ctx){
-		String baseStr = ctx.expr(0).getText();
-		String concatStr = ctx.expr(1).getText();
+    public CommandObject<String> visitConcatOn2Expressions(SequenceAnalyzerParser.ConcatOn2ExpressionsContext ctx)
+	{
+		String baseStr = ctx.arg1.getText();
+		String concatStr = ctx.arg2.getText();
 		
 		if(debugFlag == true){
 			System.out.println("baseStr = " + baseStr);
 			System.out.println("concatStr = " + concatStr);
 		}
 		
-		ConcatenationCommand concatCommand = new ConcatenationCommand(baseStr, concatStr);
-		
-		return visit(ctx);
+		return new ConcatenationCommand(visit(ctx.arg1), visit(ctx.arg2));
 	}
 	
 	@Override
-    public CommandObject visitConcatOn2ExpressionsAtIndex(SequenceAnalyzerParser.ConcatOn2ExpressionsAtIndexContext ctx){
-		String baseStr = ctx.expr(0).getText();
-		String concatStr = ctx.expr(1).getText();
+    public CommandObject<String> visitConcatOn2ExpressionsAtIndex(SequenceAnalyzerParser.ConcatOn2ExpressionsAtIndexContext ctx)
+	{
+		String baseStr = ctx.arg1.getText();
+		String concatStr = ctx.arg2.getText();
 		int index = Integer.parseInt(ctx.INT().getText());
 		
 		if(debugFlag == true){
@@ -184,9 +172,7 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 			System.out.println("index = " + index);
 		}
 		
-		ConcatenationCommand concatCommand = new ConcatenationCommand(baseStr, concatStr, index);
-		
-		return visit(ctx);
+		return new ConcatenationCommand(visit(ctx.arg1), visit(ctx.arg2), visit(ctx.INT()));
 	}
 }
 

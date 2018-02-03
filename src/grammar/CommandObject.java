@@ -9,311 +9,218 @@ import engine.PredefinedFunctions.WordCount;
 import engine.command.CommandResponse;
 
 //COMMAND HIERARCHY LEVEL 0
-public abstract class CommandObject{										
-	public String commandType;
-	public boolean debugFlag = true;
-	
-	public CommandObject(){//default constructor
-		commandType = "";
-	}
-
-//	public CommandResponse execute() {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-	
+public abstract class CommandObject<T>
+{										
+	public abstract T execute();
 }
 
 //COMMAND HIERARCHY LEVEL 1
 
-abstract class VarDefCommand extends CommandObject{					
-	public VarDefCommand (){//default constructor
-		commandType = "";
-	}
-	
-//	public CommandResponse execute() {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-}
+abstract class VarDefCommand<S> extends CommandObject<S> { }
 
-abstract class StringCommand extends CommandObject{					
-	public StringCommand (){//default constructor
-		commandType = "";
-	}
-	
-//	public CommandResponse execute() {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}	
-}
+abstract class StringCommand extends CommandObject<String> { }
 
-class PredefinedFunctionCommand extends CommandObject{		
-	public PredefinedFunctionCommand (){//default constructor
-		commandType = "";
-	}
-	
-//	public CommandResponse execute() {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-}
+abstract class PredefinedFunctionCommand extends CommandObject<String> { }
 
 //COMMAND HIERARCHY LEVEL 2
 
-class VariableAssignmentCommand extends VarDefCommand{	
-	String value, varName;
-	
-	public VariableAssignmentCommand (){//default constructor
-		commandType = "";
-	}
-	
-	public VariableAssignmentCommand (String varName, String value){
-		commandType = "VariableAssignmentCommand";
+class VariableAssignmentCommand extends VarDefCommand<String>
+{	
+	private CommandObject<String> value, varName;
+
+	public VariableAssignmentCommand (CommandObject<String> varName, CommandObject<String> value)
+	{
 		this.varName = varName;
 		this.value = value;
-		
-		if(debugFlag == true)
-			System.out.println("VariableAssignmentCommand constructed");
+	}
+
+	@Override
+	public String execute()
+	{
+		//TODO
+		return null;
 	}
 }
 
-class AlphabetDefinitionCommand extends VarDefCommand{	
-	String alphabetName;
-	List<String> charList;
+class AlphabetDefinitionCommand extends VarDefCommand<String>
+{	
+	private CommandObject<String> alphabetName;
+	private CommandObject<List<String>> charList;
 	
-	public AlphabetDefinitionCommand (){//default constructor
-		commandType = "";
-	}
-	
-	public AlphabetDefinitionCommand (String alphabetName, List<String> charList){
-		commandType = "AlphabetDefinitionCommand";
+	public AlphabetDefinitionCommand (CommandObject<String> alphabetName, CommandObject<List<String>> charList)
+	{
 		this.alphabetName = alphabetName;
 		this.charList = charList;
-		
-		if(debugFlag == true)
-			System.out.println("AlphabetDefinitionCommand constructed");
+	}
+
+	@Override
+	public String execute()
+	{
+		//TODO
+		return null;
 	}
 	
 }
 
-class SubstitutionCommand extends StringCommand{
-	String target, replacement;
-	
-	public SubstitutionCommand (){//default constructor
-		commandType = "";
-	}
-	
-	public SubstitutionCommand (String target, String replacement){//replacing a target string
-		commandType = "SubstitutionCommand";
+class SubstitutionCommand extends StringCommand
+{
+	private CommandObject<String> target, replacement;
+
+	public SubstitutionCommand (CommandObject<String> target, CommandObject<String> replacement)
+	{
 		this.target = target;
 		this.replacement = replacement;
-		
-		if(debugFlag == true)
-			System.out.println("SubstitutionCommand constructed");
+	}
+
+	@Override
+	public String execute()
+	{
+		//TODO
+		return null;
 	}
 }
 
-class CompareCommand extends StringCommand{	
-	String str1, str2;
-	
-	public CompareCommand (){//default constructor
-		commandType = "";
-	}
-	
-	public CompareCommand (String str1, String str2){//comparing 2 strings
-		commandType = "CompareCommand";
+class CompareCommand extends StringCommand
+{	
+	private CommandObject<String> str1, str2;
+
+	public CompareCommand (CommandObject<String> str1, CommandObject<String> str2)
+	{
 		this.str1 = str1;
 		this.str2 = str2;
-		
-		if(debugFlag == true)
-			System.out.println("CompareCommand constructed");
+	}
+
+	@Override
+	public String execute()
+	{
+		//TODO
+		return null;
 	}
 }
 
 //////////////////PREDEFINED FUNCTIONS//////////////////
-class CuttingTimesCommand extends PredefinedFunctionCommand{	
-	String expr;
-	CommandObject command;
-	
-	public CuttingTimesCommand (){//default constructor
-		commandType = "";
-	}
-	
-	public CuttingTimesCommand (String expr){
-		commandType = "CuttingTimesCommand";
+class CuttingTimesCommand extends PredefinedFunctionCommand
+{	
+	private CommandObject<String> expr;
+
+	public CuttingTimesCommand (CommandObject<String> expr)
+	{
 		this.expr = expr;
-		
-		if(debugFlag == true)
-			System.out.println("CuttingTimesCommand constructed");
 	}
 	
-	public CuttingTimesCommand (CommandObject command){
-		commandType = "NestedCuttingTimesCommand";
-		this.command = command;
-		
-		if(debugFlag == true)
-			System.out.println("NestedCuttingTimesCommand constructed");
-	}
-	
-//	@Override
-	public CommandResponse execute() {
-		
+	@Override
+	public String execute()
+	{
 		CuttingTimes ct = new CuttingTimes();		
-		CommandResponse resp = new CommandResponse(ct.cuttingTimes(expr));
+		CommandResponse resp = new CommandResponse(ct.cuttingTimes(expr.execute()));
 		
-		return resp;
+		return resp.returnVal;
 	}
 }
 
-class StarProductCommand extends PredefinedFunctionCommand{	
-	String str1, str2;
-	CommandObject command;
-	
-	public StarProductCommand (){//default constructor
-		commandType = "";
-	}
-	
-	public StarProductCommand (String str1, String str2){
-		commandType = "StarProductCommand";
+class StarProductCommand extends PredefinedFunctionCommand
+{	
+	private CommandObject<String> str1, str2;
+
+	public StarProductCommand (CommandObject<String> str1, CommandObject<String> str2)
+	{
 		this.str1 = str1;
 		this.str2 = str2;
-		
-		if(debugFlag == true)
-			System.out.println("StarProductCommand constructed");
 	}
 	
-//	public StarProductCommand (CommandObject command){
-//		commandType = "NestedStarProductCommand";
-//		this.command = command;
-//		
-//		if(debugFlag == true)
-//			System.out.println("NestedStarProductCommand constructed");
-//	}
-	
-//	@Override
-	public CommandResponse execute() {
-		
+	@Override
+	public String execute()
+	{
 		StarProduct sp = new StarProduct();
-		CommandResponse resp = new CommandResponse(sp.starProduct(str1,str2));
-		return resp;
+		CommandResponse resp = new CommandResponse(sp.starProduct(str1.execute(), str2.execute()));
+		return resp.returnVal;
 	}
 }
 
-class ShiftMaximalityCommand extends PredefinedFunctionCommand{	
-	String operand;
-	CommandObject command;
-	
-	public ShiftMaximalityCommand (){//default constructor
-		commandType = "";
-	}
-	
+class ShiftMaximalityCommand extends PredefinedFunctionCommand
+{	
+	private CommandObject<String> operand;
+
 	//constructor for string
-	public ShiftMaximalityCommand (String operand){
-		commandType = "ShiftMaximalityCommand";
+	public ShiftMaximalityCommand (CommandObject<String> operand)
+	{
 		this.operand = operand;
-		
-		if(debugFlag == true)
-			System.out.println("ShiftMaximalityCommand constructed");
-	}
-	//constructor for command
-	public ShiftMaximalityCommand (CommandObject command){
-		commandType = "ShiftMaximalityNestedCommand";
-		this.command = command;
-		
-		if(debugFlag == true)
-			System.out.println("NestedShiftMaximalityCommand constructed");
 	}
 	
-//	@Override
-	public CommandResponse execute() {
+	@Override
+	public String execute()
+	{
 		
 		ShiftMaximality sm = new ShiftMaximality();
-		CommandResponse resp = new CommandResponse(sm.shiftMaximal(operand));
+		CommandResponse resp = new CommandResponse(sm.shiftMaximal(operand.execute()));
 		
-		return resp;	
+		return resp.returnVal;	
 	}
 }
 
-class WordCountCommand extends PredefinedFunctionCommand{	
-	String str;
-	int index;
-	CommandObject command;
+class WordCountCommand extends PredefinedFunctionCommand
+{	
+	private CommandObject<String> str;
+	private CommandObject<Integer> index;
 	
-	public WordCountCommand (){//default constructor
-		commandType = "";
-	}
-	
-	public WordCountCommand (String str, int index){
-		commandType = "WordCountCommand";
+	public WordCountCommand (CommandObject<String> str, CommandObject<Integer> index)
+	{
 		this.str = str;
 		this.index = index;
-		
-		if(debugFlag == true)
-			System.out.println("WordCountCommand constructed");
 	}
 	
-	public WordCountCommand (CommandObject command, int index){
-		commandType = "NestedWordCountCommand";
-		this.command = command;
-		this.index = index;
-		
-		if(debugFlag == true)
-			System.out.println("NestedWordCountCommand constructed");
-	}
-	
-//	@Override 
-	public CommandResponse execute() {
+	@Override 
+	public String execute()
+	{
 		
 		WordCount wc = new WordCount();
-		CommandResponse resp = new CommandResponse(wc.wordCount(str, index));
+		CommandResponse resp = new CommandResponse(wc.wordCount(str.execute(), index.execute().intValue()));
 		
-		return resp;	
+		return resp.returnVal;	
 	}
 }
 
 //////////////////END PREDEFINED FUNCTIONS//////////////////
 
-class BuildCommand extends PredefinedFunctionCommand{	
-	String str;
-		
-	public BuildCommand (){//default constructor
-		commandType = "";
-	}
-	
-	public BuildCommand (String str){
-		commandType = "BuildCommand";
+class BuildCommand extends PredefinedFunctionCommand
+{	
+	private CommandObject<String> str;
+
+	public BuildCommand (CommandObject<String> str)
+	{
 		this.str = str;
-		
-		if(debugFlag == true)
-			System.out.println("BuildCommand constructed");
+	}
+
+	@Override
+	public String execute()
+	{
+		//TODO
+		return null;
 	}
 }
 
-class ConcatenationCommand extends PredefinedFunctionCommand{	
-	String baseStr, concatStr;
-	int index;
-	
-	public ConcatenationCommand (){	//default constructor
-		commandType = "";
-	}
-	
-	public ConcatenationCommand (String baseStr, String concatStr){//concatenate concatStr to end baseStr
-		commandType = "ConcatenationCommand";
+class ConcatenationCommand extends PredefinedFunctionCommand
+{	
+	private CommandObject<String> baseStr, concatStr;
+	private CommandObject<Integer> index;
+
+	public ConcatenationCommand (CommandObject<String> baseStr, CommandObject<String> concatStr)
+	{
 		this.baseStr = baseStr;
 		this.concatStr = concatStr;
-		
-		if(debugFlag == true)
-			System.out.println("ConcatenationCommand constructed");
 	}
 	
-	public ConcatenationCommand (String baseStr, String concatStr, int index){//concatenate concatStr to baseStr at index
-		commandType = "ConcatenationCommand";
+	public ConcatenationCommand (CommandObject<String> baseStr, CommandObject<String> concatStr, CommandObject<Integer> index)
+	{
 		this.baseStr = baseStr;
 		this.concatStr = concatStr;
 		this.index = index;
-		
-		if(debugFlag == true)
-			System.out.println("CompareCommand constructed");
+	}
+
+	@Override
+	public String execute()
+	{
+		//TODO
+		return null;
 	}
 }
