@@ -51,7 +51,7 @@ public class SmStringGenerator {
 			}
 		}
 		
-		System.out.println(smString);
+//		System.out.println(smString);
 		
 		return smString;
 		
@@ -107,7 +107,7 @@ public class SmStringGenerator {
 	    	smString = smString.concat(smCopy);
 	    	middleNum ^= 1;
 	    	
-	    	System.out.println("Iteration: " + (i+1) + " String: " + smString);
+//	    	System.out.println("Iteration: " + (i+1) + " String: " + smString);
 	    }
 	    
 	    
@@ -152,7 +152,7 @@ public class SmStringGenerator {
 	    	non_smString = non_smString.concat(smCopy);
 	    	middleNum ^= 1;
 	    	
-	    	System.out.println("Iteration: " + (i+1) + " String: " + non_smString);
+//	    	System.out.println("Iteration: " + (i+1) + " String: " + non_smString);
 	    }
 	    
 	    non_smString = non_smString.concat(Integer.toString(middleNum));
@@ -194,8 +194,8 @@ public class SmStringGenerator {
 			nextFib = currFib + prevFib;
 			numOfFib++;
 		
-			System.out.println("Current Fibonacci String: " + smString + " after " + (numOfFib - 2) + " iterations . . ." );
-			System.out.println();
+//			System.out.println("Current Fibonacci String: " + smString + " after " + (numOfFib - 2) + " iterations . . ." );
+//			System.out.println();
 		}
 		
 		System.out.println("FINAL STRING: " + smString);
@@ -214,12 +214,12 @@ public class SmStringGenerator {
 //	 }
 	
 	//output test for generating functions
-	public static void main(String[] args) {
-		
-		//fibonacciGen(50);
-		//spGen(4);
-		//spGenV2("100101", 4);
-		spGenV2Fail("100101", 4);
-
-	}
+//	public static void main(String[] args) {
+//		
+//		fibonacciGen(50);
+//		spGen(4);
+//		spGenV2("100101", 4);
+//		spGenV2Fail("100101", 4);
+//
+//	}
 }
