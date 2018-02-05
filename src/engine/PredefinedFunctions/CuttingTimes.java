@@ -6,8 +6,8 @@ import java.util.List;
 public class CuttingTimes {
 	
 	List<Integer> cuttingList = new ArrayList<Integer>();	
-	boolean disagreement = true;
-	int curDisagreement = 2;
+	static boolean disagreement = true;
+	static int curDisagreement = 2;
 	
 	/**
 	 * This method iterates through a string to find a list of all cutting times 
@@ -18,7 +18,7 @@ public class CuttingTimes {
 	 * @param s - the shift maximal string whose cutting times are to be calculated
 	 * @return List<Integer> cuttingX - the list containing all cutting times
 	 */
-	public int[] cuttingTimes(String s) {
+	static public int[] cuttingTimes(String s) {
 		
 		if (s != null && !s.isEmpty()) {
 		
