@@ -46,13 +46,13 @@ public class CuttingTimesTest {
 		String fibString = SmStringGenerator.fibonacciGen(FIB_ITER);
 		int[] calcFibSequence = CuttingTimes.cuttingTimes(fibString);
 		ArrayList<Integer> fibList = fibonacciLoop(FIB_ITER);
-		int[] actualFibArray = new int[FIB_ITER];
+		int[] actualFibSequence = new int[FIB_ITER];
 		
 		for (int i=0; i<FIB_ITER; i++) {
-			actualFibArray[i] = fibList.get(i);
+			actualFibSequence[i] = fibList.get(i);
 		}
 		
-		assertArrayEquals(calcFibSequence, actualFibArray);
+		assertArrayEquals(calcFibSequence, actualFibSequence);
 	}
 	/**
 	 * 
@@ -64,15 +64,12 @@ public class CuttingTimesTest {
 		//to update with the tester, using int array
 		//because of cutting times return type
 		ArrayList<Integer> fibList= new ArrayList<Integer>();
+		fibList.add(1);
 		
-		if (number == 1 || number == 2) {
-			return fibList;
-		}
 		int fibo1 = 1, fibo2 = 1, fibonacci = 1;
-		for (int i = 3; i <= number; i++) {
-			
-			fibList.add(fibonacci);
+		for (int i = 0; i < number; i++) {
 			fibonacci = fibo1 + fibo2; // Fibonacci number is sum of previous two Fibonacci number
+			fibList.add(fibonacci);
 			fibo1 = fibo2;
 			fibo2 = fibonacci;
  
@@ -80,16 +77,33 @@ public class CuttingTimesTest {
 		return fibList; // Fibonacci number
 	}
 	
-	public static void main(String[] args) {
-		
-		ArrayList<Integer> fibList = fibonacciLoop(FIB_ITER);
-		int[] actualFibArray = new int[FIB_ITER];
-		
-		for (int i=0; i<FIB_ITER; i++) {
-			System.out.println(fibList.get(i));
-			actualFibArray[i] = fibList.get(i);
+	public static String printList(int[] arg) {
+		String arrayString = "";
+		for (int i=0; i<arg.length; i++) {
+			arrayString+=String.valueOf(arg[i]);
+			arrayString+=",";
 		}
+		return arrayString;
 	}
+	
+//	public static void main(String[] args) {
+//		
+//		//fibonacciCurttingTimes
+//		String fibString = SmStringGenerator.fibonacciGen(FIB_ITER);
+//		int[] calcFibSequence = CuttingTimes.cuttingTimes(fibString);
+//		ArrayList<Integer> fibList = fibonacciLoop(FIB_ITER);
+//		int[] actualFibArray = new int[FIB_ITER];
+//		
+//		for (int i=0; i<FIB_ITER; i++) {
+//			actualFibArray[i] = fibList.get(i);
+//		}
+//		String s1 = printList(actualFibArray);
+//		String s2 = printList(calcFibSequence);
+//		
+//		System.out.println(s1);
+//		System.out.println();
+//		System.out.println(s2);
+//	}
 
 
 }
