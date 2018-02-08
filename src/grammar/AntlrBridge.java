@@ -19,8 +19,6 @@ public class AntlrBridge {
 		ParseTree cst = parser.prog(); // parse
 
 		CommandObjectVisitor ast = new CommandObjectVisitor();
-		ast.visit(cst);
+		ast.visit(cst).execute();
 	}
-	
-	
 }

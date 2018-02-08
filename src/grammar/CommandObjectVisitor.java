@@ -181,6 +181,7 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 	@Override
     public CommandObject<String> visitStringLiteral(SequenceAnalyzerParser.StringLiteralContext ctx)
 	{
+		System.out.println("sl visit: " + new Boolean(ctx.value == null).toString()); //DEBUG
 		String value = ctx.value.getText();
 		
 		if(debugFlag == true)
