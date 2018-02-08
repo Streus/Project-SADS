@@ -24,18 +24,19 @@ abstract class PredefinedFunctionCommand extends CommandObject<String> { }
 
 //COMMAND HIERARCHY LEVEL 2
 
-class VariableAssignmentCommand extends VarDefCommand<String>
+class VariableAssignmentCommand extends VarDefCommand<Object>
 {	
-	private CommandObject<String> value, varName;
+	private CommandObject<Object> value;
+	private String varName;
 
-	public VariableAssignmentCommand (CommandObject<String> varName, CommandObject<String> value)
+	public VariableAssignmentCommand (String varName, CommandObject<Object> value)
 	{
 		this.varName = varName;
 		this.value = value;
 	}
 
 	@Override
-	public String execute()
+	public Object execute()
 	{
 		//TODO
 		return null;
@@ -223,4 +224,21 @@ class ConcatenationCommand extends PredefinedFunctionCommand
 		//TODO
 		return null;
 	}
+}
+
+class LiteralCommand<S> extends CommandObject<S>
+{
+	private S value;
+	
+	public LiteralCommand(S value)
+	{
+		this.value = value;
+	}
+	
+	@Override
+	public S execute()
+	{
+		return value;
+	}
+	
 }

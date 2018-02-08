@@ -6,13 +6,16 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 {
 	public boolean debugFlag = true;
 	
-	@Override public CommandObject<String> visitAssignVariableOfExpression(SequenceAnalyzerParser.AssignVariableOfExpressionContext ctx) { return visitChildren(ctx); }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
+	//TODO this is kinda a work around to deal with variables of different types (e.g. Integer, String, etc.)
+	@Override public CommandObject<Object> visitAssignVariableOfExpression(SequenceAnalyzerParser.AssignVariableOfExpressionContext ctx)
+	{
+		String name = ctx.varName.getText();
+		Object value = ctx.expr().getText();
+		
+		//TODO debug stuff
+		
+		return new VariableAssignmentCommand(name, visit(ctx.expr()));
+	}
 	
 	@Override
     public CommandObject<String> visitSubstitutionOfExpression(SequenceAnalyzerParser.SubstitutionOfExpressionContext ctx)
@@ -173,6 +176,32 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 		}
 		
 		return new ConcatenationCommand(visit(ctx.arg1), visit(ctx.arg2), visit(ctx.INT()));
+	}
+	
+	@Override
+    public CommandObject<String> visitStringLiteral(SequenceAnalyzerParser.StringLiteralContext ctx)
+	{
+		String value = ctx.value.getText();
+		
+		if(debugFlag == true)
+		{
+			System.out.println("string value = " + value);
+		}
+		
+		return new LiteralCommand<String>(value);
+	}
+	
+	@Override
+    public CommandObject<Integer> visitIntegerLiteral(SequenceAnalyzerParser.IntegerLiteralContext ctx)
+	{
+		Integer value = new Integer(ctx.value.getText());
+		
+		if(debugFlag == true)
+		{
+			System.out.println("int value = " + value);
+		}
+		
+		return new LiteralCommand<Integer>(value);
 	}
 }
 
