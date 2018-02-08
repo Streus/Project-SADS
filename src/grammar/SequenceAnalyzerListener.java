@@ -224,6 +224,30 @@ public interface SequenceAnalyzerListener extends ParseTreeListener {
 	 */
 	void exitAssignVariableOfExpression(SequenceAnalyzerParser.AssignVariableOfExpressionContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code StringLiteral}
+	 * labeled alternative in {@link SequenceAnalyzerParser#literal}.
+	 * @param ctx the parse tree
+	 */
+	void enterStringLiteral(SequenceAnalyzerParser.StringLiteralContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code StringLiteral}
+	 * labeled alternative in {@link SequenceAnalyzerParser#literal}.
+	 * @param ctx the parse tree
+	 */
+	void exitStringLiteral(SequenceAnalyzerParser.StringLiteralContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code IntegerLiteral}
+	 * labeled alternative in {@link SequenceAnalyzerParser#literal}.
+	 * @param ctx the parse tree
+	 */
+	void enterIntegerLiteral(SequenceAnalyzerParser.IntegerLiteralContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code IntegerLiteral}
+	 * labeled alternative in {@link SequenceAnalyzerParser#literal}.
+	 * @param ctx the parse tree
+	 */
+	void exitIntegerLiteral(SequenceAnalyzerParser.IntegerLiteralContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code ExpressionOfInteger}
 	 * labeled alternative in {@link SequenceAnalyzerParser#expr}.
 	 * @param ctx the parse tree

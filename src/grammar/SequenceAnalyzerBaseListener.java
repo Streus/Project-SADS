@@ -244,6 +244,30 @@ public class SequenceAnalyzerBaseListener implements SequenceAnalyzerListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterStringLiteral(SequenceAnalyzerParser.StringLiteralContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitStringLiteral(SequenceAnalyzerParser.StringLiteralContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterIntegerLiteral(SequenceAnalyzerParser.IntegerLiteralContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitIntegerLiteral(SequenceAnalyzerParser.IntegerLiteralContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterExpressionOfInteger(SequenceAnalyzerParser.ExpressionOfIntegerContext ctx) { }
 	/**
 	 * {@inheritDoc}
