@@ -69,11 +69,11 @@ concat	:	'concat' LP arg1=expr COMMA arg2=expr RP			#ConcatOn2Expressions
 		|	'concat' LP arg1=expr COMMA arg2=expr COMMA INT RP	#ConcatOn2ExpressionsAtIndex
 		;
 		
-assignment	:	ID ':=' expr  			#AssignVariableOfExpression	
+assignment	:	varName=ID ':=' expr  			#AssignVariableOfExpression	
 			;
 
-literal	:	STRING		#StringLiteral
-		|	INT			#IntegerLiteral
+literal	:	DBQUOTE value=STRING DBQUOTE		#StringLiteral
+		|	value=INT							#IntegerLiteral
 		;
 
 expr	:	INT				#ExpressionOfInteger        //expression as single Int 
@@ -84,11 +84,12 @@ expr	:	INT				#ExpressionOfInteger        //expression as single Int
 //LEXER RULES
 ID  	:   LETTER (LETTER | INT)* ;	//defines ID as one letter and 0 or many letters or digits
 INT 	:   [0-9]+ ;         // match integers
-STRING	:	'"'(LETTER | INT)*'"';
+STRING	:	(LETTER | INT)*;
 USER_ALPHA	:	[0-1]+;		 // user defined
 LP		:	'(';			//assigns token name to left parenthesis
 RP		:	')';			//assigns token name to right parenthesis
 COMMA	:	',';			//assigns token name to comma
+DBQUOTE	:	'"';
 //SUB		:	'sub';
 //CMP		:	'cmp';
 //CT		:	'ct';
