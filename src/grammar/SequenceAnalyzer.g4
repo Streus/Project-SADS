@@ -13,6 +13,7 @@ cmd		:	//first branch of command hierarchy
 			vardef			//variable definition
 		|	strcmd			//string command
 		|	predef			//predefined function
+		|	literal			//string literal
 		//|	'print'
 		;
 		
@@ -71,6 +72,10 @@ concat	:	'concat' LP arg1=expr COMMA arg2=expr RP			#ConcatOn2Expressions
 assignment	:	ID ':=' expr  			#AssignVariableOfExpression	
 			;
 
+literal	:	STRING		#StringLiteral
+		|	INT			#IntegerLiteral
+		;
+
 expr	:	INT				#ExpressionOfInteger        //expression as single Int 
 		|	cmd				#ExpressionOfCommand		//expression as single Command 
 		;
@@ -79,6 +84,7 @@ expr	:	INT				#ExpressionOfInteger        //expression as single Int
 //LEXER RULES
 ID  	:   LETTER (LETTER | INT)* ;	//defines ID as one letter and 0 or many letters or digits
 INT 	:   [0-9]+ ;         // match integers
+STRING	:	'"'(LETTER | INT)*'"';
 USER_ALPHA	:	[0-1]+;		 // user defined
 LP		:	'(';			//assigns token name to left parenthesis
 RP		:	')';			//assigns token name to right parenthesis
