@@ -145,8 +145,9 @@ class ShiftMaximalityCommand extends PredefinedFunctionCommand
 	//constructor for string
 	public ShiftMaximalityCommand (CommandObject<String> operand)
 	{
-		System.out.println("sm setup: " + new Boolean(operand == null).toString()); //DEBUG
+		System.out.println("sm start setup: " + new Boolean(operand == null).toString()); //DEBUG
 		this.operand = operand;
+		System.out.println("sm finish setup: " + new Boolean(operand == null).toString()); //DEBUG
 	}
 	
 	@Override
