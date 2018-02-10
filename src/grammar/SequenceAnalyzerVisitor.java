@@ -152,13 +152,6 @@ public interface SequenceAnalyzerVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitIntegerLiteral(SequenceAnalyzerParser.IntegerLiteralContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code ExpressionOfInteger}
-	 * labeled alternative in {@link SequenceAnalyzerParser#expr}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitExpressionOfInteger(SequenceAnalyzerParser.ExpressionOfIntegerContext ctx);
-	/**
 	 * Visit a parse tree produced by the {@code ExpressionOfCommand}
 	 * labeled alternative in {@link SequenceAnalyzerParser#expr}.
 	 * @param ctx the parse tree

@@ -268,18 +268,6 @@ public class SequenceAnalyzerBaseListener implements SequenceAnalyzerListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterExpressionOfInteger(SequenceAnalyzerParser.ExpressionOfIntegerContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitExpressionOfInteger(SequenceAnalyzerParser.ExpressionOfIntegerContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterExpressionOfCommand(SequenceAnalyzerParser.ExpressionOfCommandContext ctx) { }
 	/**
 	 * {@inheritDoc}

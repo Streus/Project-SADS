@@ -76,15 +76,14 @@ literal	:	DBQUOTE value=STRING DBQUOTE		#StringLiteral
 		|	value=INT							#IntegerLiteral
 		;
 
-expr	:	INT				#ExpressionOfInteger        //expression as single Int 
-		|	cmd				#ExpressionOfCommand		//expression as single Command 
+expr	:	cmd				#ExpressionOfCommand		//expression as single Command 
 		;
 
 
 //LEXER RULES
 ID  	:   LETTER (LETTER | INT)* ;	//defines ID as one letter and 0 or many letters or digits
 INT 	:   [0-9]+ ;         // match integers
-STRING	:	(LETTER | INT)*;
+STRING	:	(LETTER | INT)+;
 USER_ALPHA	:	[0-1]+;		 // user defined
 LP		:	'(';			//assigns token name to left parenthesis
 RP		:	')';			//assigns token name to right parenthesis
