@@ -7,7 +7,7 @@ import gui.Console;
 
 public class commandExecutor {
 	
-	//defualt
+	//default YEE
 	public commandExecutor() {
 		
 	}
