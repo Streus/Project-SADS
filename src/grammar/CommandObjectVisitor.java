@@ -112,12 +112,10 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
     public CommandObject<String> visitShiftMaximalityOfExpression(SequenceAnalyzerParser.ShiftMaximalityOfExpressionContext ctx)
 	{
 		String operand = ctx.arg1.getText();
-		Object visit = visit(ctx.arg1);
 		
 		if(debugFlag == true){
 			System.out.println("visiting ShiftMaximalityOfExpression");
 			System.out.println("operand = " + operand);
-			System.out.println("visit is null: " +new Boolean(visit == null).toString());
 		}
 		
 		
@@ -129,12 +127,10 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
     public CommandObject  visitShiftMaximalityOfExpressionInParens(SequenceAnalyzerParser.ShiftMaximalityOfExpressionInParensContext ctx)
 	{
 		String operand = ctx.arg1.getText();
-		Object visit = visit(ctx.arg1);
 		
 		if(debugFlag == true){
 			System.out.println("ShiftMaximalityInParens");
 			System.out.println("operand = " + operand);
-			System.out.println("visit is null = " +new Boolean(visit == null).toString());
 		}
 		
 		return new ShiftMaximalityCommand(visit(ctx.arg1));
@@ -187,7 +183,6 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 	@Override
 	public CommandObject<String> visitStringLiteral(SequenceAnalyzerParser.StringLiteralContext ctx)
 	{
-		System.out.println("sl visit: " + new Boolean(ctx.value == null).toString()); //DEBUG
 		String value = ctx.value.getText();
 		
 		if(debugFlag == true)
@@ -202,7 +197,6 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 	@Override
     public CommandObject<Integer> visitIntegerLiteral(SequenceAnalyzerParser.IntegerLiteralContext ctx)
 	{
-		System.out.println("sl visit: " + new Boolean(ctx.value == null).toString()); //DEBUG
 		Integer value = new Integer(ctx.value.getText());
 		
 		if(debugFlag == true)
