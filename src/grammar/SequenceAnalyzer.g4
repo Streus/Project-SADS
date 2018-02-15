@@ -72,8 +72,8 @@ concat	:	'concat' LP arg1=expr COMMA arg2=expr RP			#ConcatOn2Expressions
 assignment	:	varName=ID ':=' expr  			#AssignVariableOfExpression	
 			;
 
-literal	:	DBQUOTE value=STRING DBQUOTE		#StringLiteral
-		|	value=INT							#IntegerLiteral
+literal	:	value=STRING_LITERAL		#StringLiteral
+		|	value=INT					#IntegerLiteral
 		;
 
 expr	:	cmd				#ExpressionOfCommand		//expression as single Command 
@@ -89,6 +89,9 @@ LP		:	'(';			//assigns token name to left parenthesis
 RP		:	')';			//assigns token name to right parenthesis
 COMMA	:	',';			//assigns token name to comma
 DBQUOTE	:	'"';
+FWDSLSH	:	'/';
+STRING_LITERAL : '"' (~('"' | '\\' | '\r' | '\n') | '\\' ('"' | '\\'))* '"';
+//SQUOTE	:	'';
 //SUB		:	'sub';
 //CMP		:	'cmp';
 //CT		:	'ct';
