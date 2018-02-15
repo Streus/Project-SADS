@@ -16,18 +16,6 @@ public class SequenceAnalyzerBaseListener implements SequenceAnalyzerListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterProg(SequenceAnalyzerParser.ProgContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitProg(SequenceAnalyzerParser.ProgContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterInit(SequenceAnalyzerParser.InitContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -35,6 +23,18 @@ public class SequenceAnalyzerBaseListener implements SequenceAnalyzerListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitInit(SequenceAnalyzerParser.InitContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterProg(SequenceAnalyzerParser.ProgContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitProg(SequenceAnalyzerParser.ProgContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

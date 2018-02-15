@@ -1,14 +1,12 @@
 grammar SequenceAnalyzer;
 
 //PARSER RULES
-prog	:	cmd+;			//allows for multiple branches in tree
-
-init	:	//declares options for beginning of parse tree
-			cmd				
-		|	expr
-		|	ID
+		
+init	:	prog+		//allows for multiple branches in tree		
 		;
 		
+prog	:	cmd+			
+		;	
 cmd		:	//first branch of command hierarchy
 			vardef			//variable definition
 		|	strcmd			//string command

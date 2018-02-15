@@ -8,16 +8,6 @@ import org.antlr.v4.runtime.tree.ParseTreeListener;
  */
 public interface SequenceAnalyzerListener extends ParseTreeListener {
 	/**
-	 * Enter a parse tree produced by {@link SequenceAnalyzerParser#prog}.
-	 * @param ctx the parse tree
-	 */
-	void enterProg(SequenceAnalyzerParser.ProgContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link SequenceAnalyzerParser#prog}.
-	 * @param ctx the parse tree
-	 */
-	void exitProg(SequenceAnalyzerParser.ProgContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link SequenceAnalyzerParser#init}.
 	 * @param ctx the parse tree
 	 */
@@ -27,6 +17,16 @@ public interface SequenceAnalyzerListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitInit(SequenceAnalyzerParser.InitContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link SequenceAnalyzerParser#prog}.
+	 * @param ctx the parse tree
+	 */
+	void enterProg(SequenceAnalyzerParser.ProgContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link SequenceAnalyzerParser#prog}.
+	 * @param ctx the parse tree
+	 */
+	void exitProg(SequenceAnalyzerParser.ProgContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link SequenceAnalyzerParser#cmd}.
 	 * @param ctx the parse tree

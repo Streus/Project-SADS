@@ -11,17 +11,17 @@ import org.antlr.v4.runtime.tree.ParseTreeVisitor;
  */
 public interface SequenceAnalyzerVisitor<T> extends ParseTreeVisitor<T> {
 	/**
-	 * Visit a parse tree produced by {@link SequenceAnalyzerParser#prog}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitProg(SequenceAnalyzerParser.ProgContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link SequenceAnalyzerParser#init}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitInit(SequenceAnalyzerParser.InitContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link SequenceAnalyzerParser#prog}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitProg(SequenceAnalyzerParser.ProgContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link SequenceAnalyzerParser#cmd}.
 	 * @param ctx the parse tree
