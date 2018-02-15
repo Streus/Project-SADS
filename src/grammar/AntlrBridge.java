@@ -18,9 +18,17 @@ public class AntlrBridge {
 		CommonTokenStream tokens = new CommonTokenStream(lexer);
 		SequenceAnalyzerParser parser = new SequenceAnalyzerParser(tokens);
 		ParseTree cst = parser.init(); // parse
-
-		CommandObjectVisitor ast = new CommandObjectVisitor();
-		Object result = ast.visit(cst).execute();
-		Console.println(result.toString());
+		
+		Object result;
+		try
+		{
+			CommandObjectVisitor ast = new CommandObjectVisitor();
+			result = ast.visit(cst).execute();
+			Console.println(result.toString());
+		}
+		catch(ClassCastException cce)
+		{
+			Console.println(cce.getMessage(), Console.getErr());
+		}
 	}
 }
