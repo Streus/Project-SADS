@@ -1,5 +1,4 @@
-package grammar;
-// Generated from SequenceAnalyzer.g4 by ANTLR 4.7
+package grammar;// Generated from SequenceAnalyzer.g4 by ANTLR 4.7
 
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
@@ -28,13 +27,13 @@ public class SequenceAnalyzerBaseListener implements SequenceAnalyzerListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterProg(SequenceAnalyzerParser.ProgContext ctx) { }
+	@Override public void enterProgram(SequenceAnalyzerParser.ProgramContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitProg(SequenceAnalyzerParser.ProgContext ctx) { }
+	@Override public void exitProgram(SequenceAnalyzerParser.ProgramContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

@@ -6,6 +6,10 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 {
 	public boolean debugFlag = true;
 	
+	@Override public T visitProgram(SequenceAnalyzerParser.ProgramContext ctx) { 
+		return visitChildren(ctx); 
+		}
+	
 	//TODO this is kinda a work around to deal with variables of different types (e.g. Integer, String, etc.)
 	@Override public CommandObject<Object> visitAssignVariableOfExpression(SequenceAnalyzerParser.AssignVariableOfExpressionContext ctx)
 	{

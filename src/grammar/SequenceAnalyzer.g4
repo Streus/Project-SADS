@@ -2,10 +2,10 @@ grammar SequenceAnalyzer;
 
 //PARSER RULES
 		
-init	:	prog+		//allows for multiple branches in tree		
+init	:	prog		//allows for multiple branches in tree		
 		;
 		
-prog	:	cmd+			
+prog	:	cmd+		#program		
 		;	
 cmd		:	//first branch of command hierarchy
 			vardef			//variable definition
