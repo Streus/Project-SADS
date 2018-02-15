@@ -4,6 +4,7 @@ import java.util.*;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.ParseTree;
 import engine.command.*;
+import gui.Console;
 
 public class AntlrBridge {
 
@@ -19,6 +20,7 @@ public class AntlrBridge {
 		ParseTree cst = parser.prog(); // parse
 
 		CommandObjectVisitor ast = new CommandObjectVisitor();
-		ast.visit(cst).execute();
+		Object result = ast.visit(cst).execute();
+		Console.println(result.toString());
 	}
 }
