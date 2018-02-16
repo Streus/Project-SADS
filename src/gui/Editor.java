@@ -1,27 +1,29 @@
 package gui;
 
+import java.io.File;
+
+import javax.swing.JTextPane;
+
 public class Editor
 {
 	/* Static Vars */
 	
-	private static Editor inst;
 	
 	/* Static Methods */
 	
-	public static Editor instance()
-	{
-		if(inst == null)
-			inst = new Editor();
-		return inst;
-	}
 	
 	/* Instance Vars */
 	
+	// The GUI element this Editor acts upon
+	private JTextPane area;
+	
+	// The file currently open is this Editor
+	private File currentFile;
 	
 	/* Instance Methods */
 	
-	private Editor()
+	public Editor(JTextPane area)
 	{
-		
+		this.area = area;
 	}
 }
