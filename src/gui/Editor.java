@@ -1,7 +1,13 @@
 package gui;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTextPane;
 import javax.swing.event.DocumentEvent;
@@ -9,6 +15,8 @@ import javax.swing.event.DocumentListener;
 
 public class Editor
 {
+	private static final String UNSAVED_NAME = "unnamed";
+	
 	/* Static Vars */
 	
 	
@@ -68,14 +76,46 @@ public class Editor
 	}
 	
 	/**
+	 * Helper for save() and saveAs()
+	 * @param f - the file to which text will be written
+	 * @return the success of the operation
+	 */
+	private boolean writeFile(File f)
+	{
+		try
+		{
+			BufferedWriter writer = new BufferedWriter(new FileWriter(f));
+			writer.write(area.getText());
+			writer.close();
+		}
+		catch(IOException ioe)
+		{
+			ioe.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+	
+	/**
 	 * Saves the currently open file under the specified name
 	 * @param name - the name given to the new file
 	 * @return the success of the operation
 	 */
-	public boolean saveAs(String name)
+	public boolean saveAs()
 	{
-		unsavedChanges = false;
-		return false;
+		JFileChooser chooser = new JFileChooser();
+		chooser.setDialogType(JFileChooser.SAVE_DIALOG);
+		
+		int val = chooser.showSaveDialog(area.getRootPane());
+		File f = null;
+		
+		if(val == JFileChooser.APPROVE_OPTION)
+			f = chooser.getSelectedFile();
+		else
+			return false;
+		
+		unsavedChanges = !writeFile(f);
+		return !unsavedChanges;
 	}
 	
 	/**
@@ -84,8 +124,11 @@ public class Editor
 	 */
 	public boolean save()
 	{
-		unsavedChanges = false;
-		return false;
+		if(currentFile == null)
+			return saveAs();
+		
+		unsavedChanges = !writeFile(currentFile);
+		return !unsavedChanges;
 	}
 	
 	/**
@@ -93,13 +136,69 @@ public class Editor
 	 * @param f - the file to open
 	 * @return the success of the operation
 	 */
-	public boolean open(File f)
+	public boolean open()
 	{
 		if(resolveUnsavedChanges())
 		{
+			area.setText("");
 			
+			JFileChooser chooser = new JFileChooser();
+			chooser.setDialogType(JFileChooser.OPEN_DIALOG);
+			int val = chooser.showOpenDialog(area.getRootPane());
+			File f = null;
+			if(val == JFileChooser.APPROVE_OPTION)
+				f = chooser.getSelectedFile();
+			else
+				return false;
+			
+			return setFile(f);
 		}
 		return false;
+	}
+	
+	/**
+	 * Set the currently open file in this editor
+	 * @param f - the file to open in this editor
+	 * @return the success of the operation
+	 */
+	public boolean setFile(File f)
+	{
+		currentFile = f;
+		
+		try
+		{
+			BufferedReader reader = new BufferedReader(new FileReader(currentFile));
+			area.read(reader, reader);
+			reader.close();
+		}
+		catch(IOException ioe)
+		{
+			ioe.printStackTrace();
+			return false;
+		}
+		
+		unsavedChanges = false;
+		return true;
+	}
+	
+	/**
+	 * Get the file currently open in this editor
+	 * @return what the fuck do you think?
+	 */
+	public File getFile()
+	{
+		return currentFile;
+	}
+	
+	/**
+	 * Get the name of the file currently open in this editor
+	 * @return the name of the file, or 'unnamed' if the file is null
+	 */
+	public String getFileName()
+	{
+		if(currentFile != null)
+			return currentFile.getName();
+		return UNSAVED_NAME;
 	}
 	
 	/**
@@ -108,7 +207,7 @@ public class Editor
 	 */
 	public boolean close()
 	{
-		return false;
+		return resolveUnsavedChanges();
 	}
 	
 	private boolean resolveUnsavedChanges()
