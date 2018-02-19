@@ -493,6 +493,7 @@ public class MainWindow
 	/**
 	 * Save the currentBatch. If there is no currentBatch, run saveAs()
 	 */
+	/*
 	private void save(File defaultFile, String source)
 	{
 		if(defaultFile == null)
@@ -510,10 +511,12 @@ public class MainWindow
 		}
 		catch (IOException ioe){ ioe.printStackTrace(); }
 	}
+	*/
 	
 	/**
 	 * Save the contents of editorArea to a file in the file system
 	 */
+	/*
 	private File saveAs(String source)
 	{
 		//user defines save file name and directory
@@ -537,10 +540,12 @@ public class MainWindow
 		
 		return f;
 	}
+	*/
 	
 	/**
 	 * Set the file currently being edited in the editor
 	 */
+	/*
 	private void setCurrentBatch(File f)
 	{
 		currentBatch = f;
@@ -549,12 +554,14 @@ public class MainWindow
 		else
 			lblFilename.setText("???");
 	}
+	*/
 	
 	/**
 	 * Check for unsaved changes in the Editor
 	 * 
 	 * @return whether the situation was resolved
 	 */
+	/*
 	private boolean resolveUnsavedChanges()
 	{
 		//check if any changes have not been saved
@@ -581,8 +588,8 @@ public class MainWindow
 		}
 		return true;
 	}
+	*/
 	
-	//TODO remove debug
 	private void sendInToOut()
 	{
 		if(Console.instance().processInput(inputLine.getText()) == -1)
