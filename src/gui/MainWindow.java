@@ -23,6 +23,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
@@ -58,18 +59,12 @@ import grammar.AntlrBridge;
 public class MainWindow
 {
 	public static boolean DEBUG;
-
-	//The file most recently opened/saved batch
-	private File currentBatch;
 	
-	//A flag that indicates changes have been made to currentBatch
-	private boolean unsavedChanges;
+	private int currentEditor;
+	private ArrayList<Editor> editors;
 	
 	//The file to which output dumps will be saved
 	private File currentOutputDump;
-	
-	//A listener that raises the unsavedChanges flag
-	private DocumentListener changesListener;
 	
 	private JFrame frmStringSequenceAnalyzer;
 	private JTextField inputLine;
@@ -109,31 +104,11 @@ public class MainWindow
 	public MainWindow() {
 		initialize();
 		
-		setCurrentBatch(null);
-		unsavedChanges = false;
+		editors = new ArrayList<Editor>();
+		editors.add(new Editor(editorArea));
+		currentEditor = 0;
 		
 		currentOutputDump = null;
-		
-		changesListener = new DocumentListener() {
-			/**
-			 * Track changes made to the currently open document
-			 */
-			@Override
-			public void changedUpdate(DocumentEvent arg0) {
-				unsavedChanges = true;
-				System.out.println("There are now unsaved changes."); //DEBUG
-			}
-			@Override
-			public void insertUpdate(DocumentEvent arg0) {
-				unsavedChanges = true;
-				System.out.println("There are now unsaved insertions."); //DEBUG
-			}
-			@Override
-			public void removeUpdate(DocumentEvent arg0) {
-				unsavedChanges = true;
-				System.out.println("There are now unsaved deletions."); //DEBUG
-			}
-		};
 		
 		//Create a Console singleton if one has not already been instantiated
 		Console.instance().setFront(outputArea);
@@ -168,22 +143,7 @@ public class MainWindow
 				//select the editor tab
 				tabbedPane.setSelectedIndex(1);
 				
-				//if there are unresolved changes, abort creating a new file
-				if(!resolveUnsavedChanges())
-					return;
-				
-				//prompt the user to provide a file name
-				JFileChooser chooser = new JFileChooser();
-				chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-				chooser.setDialogType(JFileChooser.CUSTOM_DIALOG);
-				int retVal = chooser.showDialog(frmStringSequenceAnalyzer, "Create");
-				File f = null;
-				if(retVal == JFileChooser.APPROVE_OPTION)
-					f = chooser.getSelectedFile();
-				else
-					return;
-				
-				setCurrentBatch(f);
+				//TODO open new editor
 			}
 		});
 		mnFile.add(mntmNewBatch);
