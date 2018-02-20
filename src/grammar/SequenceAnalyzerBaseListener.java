@@ -244,6 +244,18 @@ public class SequenceAnalyzerBaseListener implements SequenceAnalyzerListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterAssignUserAlphabet(SequenceAnalyzerParser.AssignUserAlphabetContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAssignUserAlphabet(SequenceAnalyzerParser.AssignUserAlphabetContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterStringLiteral(SequenceAnalyzerParser.StringLiteralContext ctx) { }
 	/**
 	 * {@inheritDoc}

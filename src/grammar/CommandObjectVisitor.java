@@ -19,6 +19,12 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 		return new VariableAssignmentCommand(name, visit(ctx.expr()));
 	}
 	
+	@Override public CommandObject<Object> visitAssignUserAlphabet(SequenceAnalyzerParser.AssignUserAlphabetContext ctx) { 
+		System.out.println(ctx.getText());
+		System.out.println("STRING_LITERAL 1 = "+ctx.STRING_LITERAL(0));
+		return visitChildren(ctx); 
+		}
+	
 	@Override
     public CommandObject<String> visitSubstitutionOfExpression(SequenceAnalyzerParser.SubstitutionOfExpressionContext ctx)
 	{
