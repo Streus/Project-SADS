@@ -1,7 +1,7 @@
 grammar SequenceAnalyzer;
 
 //PARSER RULES
-		
+
 init	:	prog		//allows for multiple branches in tree		
 		;
 		
