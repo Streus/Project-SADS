@@ -5,6 +5,10 @@ import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObject>
 {
 	public boolean debugFlag = true;
+	@Override public CommandObject<Object> visitProgram(SequenceAnalyzerParser.ProgramContext ctx) { 
+		return visitChildren(ctx); 
+		}
+
 	//TODO this is kinda a work around to deal with variables of different types (e.g. Integer, String, etc.)
 	@Override public CommandObject<Object> visitAssignVariableOfExpression(SequenceAnalyzerParser.AssignVariableOfExpressionContext ctx)
 	{
