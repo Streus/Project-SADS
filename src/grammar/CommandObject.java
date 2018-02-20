@@ -2,6 +2,8 @@ package grammar;
 import java.util.List;
 //Command Objects to processed in the Engine
 
+import engine.RedBlackBST;
+import engine.UniqueSymbolGenerator;
 import engine.PredefinedFunctions.CuttingTimes;
 import engine.PredefinedFunctions.ShiftMaximality;
 import engine.PredefinedFunctions.StarProduct;
@@ -10,7 +12,9 @@ import engine.command.CommandResponse;
 
 //COMMAND HIERARCHY LEVEL 0
 public abstract class CommandObject<T>
-{										
+{		
+	RedBlackBST alphaBST = new RedBlackBST<String, CommandObject<List<String>>>();
+	UniqueSymbolGenerator symbolGen = new UniqueSymbolGenerator();
 	public abstract T execute();
 }
 
@@ -43,7 +47,7 @@ class VariableAssignmentCommand extends VarDefCommand<Object>
 	}
 }
 
-class AlphabetDefinitionCommand extends VarDefCommand<String>
+class AlphabetDefinitionCommand extends VarDefCommand<String> 
 {	
 	private CommandObject<String> alphabetName;
 	private CommandObject<List<String>> charList;
@@ -54,11 +58,12 @@ class AlphabetDefinitionCommand extends VarDefCommand<String>
 		this.charList = charList;
 	}
 
+	@SuppressWarnings({ "unchecked" })
 	@Override
 	public String execute()
 	{
-		//TODO
-		return null;
+		alphaBST.put(alphabetName.toString(), charList);
+		return null; //return message to console?
 	}
 	
 }

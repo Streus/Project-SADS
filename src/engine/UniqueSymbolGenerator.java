@@ -12,13 +12,7 @@ import java.util.*;
 public class UniqueSymbolGenerator {
 	
 	protected Map<Integer, String> varNames = new HashMap<>(); //Stores Variables and their values
-	
-	
-	//default constructor
-	public UniqueSymbolGenerator() {
 		
-	}
-	
 	//basic generate command with no arguments
 	public String Generate() {
 		return Generate("");
