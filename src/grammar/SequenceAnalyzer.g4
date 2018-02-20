@@ -1,8 +1,17 @@
 grammar SequenceAnalyzer;
 
 //PARSER RULES
+<<<<<<< HEAD
 		
 init	:	prog		//allows for multiple branches in tree		
+=======
+prog	:	cmd+;			//allows for multiple branches in tree
+
+init	:	//declares options for beginning of parse tree
+			cmd				
+		|	expr
+		|	ID
+>>>>>>> 107abbffe75194f5144dbb64f599dd62ef6625a5
 		;
 		
 prog	:	cmd+		#program		
@@ -68,7 +77,10 @@ concat	:	'concat' LP arg1=expr COMMA arg2=expr RP			#ConcatOn2Expressions
 		;
 		
 assignment	:	varName=ID ':=' expr  			#AssignVariableOfExpression	
+<<<<<<< HEAD
 			:	alphabetName=ID ':=' 
+=======
+>>>>>>> 107abbffe75194f5144dbb64f599dd62ef6625a5
 			;
 
 literal	:	value=STRING_LITERAL		#StringLiteral
@@ -83,13 +95,20 @@ expr	:	cmd				#ExpressionOfCommand		//expression as single Command
 ID  	:   LETTER (LETTER | INT)* ;	//defines ID as one letter and 0 or many letters or digits
 INT 	:   [0-9]+ ;         // match integers
 STRING	:	(LETTER | INT)+;
+<<<<<<< HEAD
+=======
+USER_ALPHA	:	[0-1]+;		 // user defined
+>>>>>>> 107abbffe75194f5144dbb64f599dd62ef6625a5
 LP		:	'(';			//assigns token name to left parenthesis
 RP		:	')';			//assigns token name to right parenthesis
 COMMA	:	',';			//assigns token name to comma
 DBQUOTE	:	'"';
 FWDSLSH	:	'/';
 STRING_LITERAL : '"' (~('"' | '\\' | '\r' | '\n') | '\\' ('"' | '\\'))* '"';
+<<<<<<< HEAD
 USER_ALPHA	:	(STRING_LITERAL ',')+;		 // user defined
+=======
+>>>>>>> 107abbffe75194f5144dbb64f599dd62ef6625a5
 //SQUOTE	:	'';
 //SUB		:	'sub';
 //CMP		:	'cmp';

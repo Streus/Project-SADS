@@ -138,6 +138,7 @@ public interface SequenceAnalyzerVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitAssignVariableOfExpression(SequenceAnalyzerParser.AssignVariableOfExpressionContext ctx);
+<<<<<<< HEAD
 	/**
 	 * Visit a parse tree produced by the {@code StringLiteral}
 	 * labeled alternative in {@link SequenceAnalyzerParser#literal}.
@@ -146,6 +147,16 @@ public interface SequenceAnalyzerVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitStringLiteral(SequenceAnalyzerParser.StringLiteralContext ctx);
 	/**
+=======
+	/**
+	 * Visit a parse tree produced by the {@code StringLiteral}
+	 * labeled alternative in {@link SequenceAnalyzerParser#literal}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitStringLiteral(SequenceAnalyzerParser.StringLiteralContext ctx);
+	/**
+>>>>>>> 107abbffe75194f5144dbb64f599dd62ef6625a5
 	 * Visit a parse tree produced by the {@code IntegerLiteral}
 	 * labeled alternative in {@link SequenceAnalyzerParser#literal}.
 	 * @param ctx the parse tree
