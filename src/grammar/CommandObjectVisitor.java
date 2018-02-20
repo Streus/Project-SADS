@@ -1,16 +1,12 @@
 package grammar;
 
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
-<<<<<<< HEAD
 import engine.command.*;
-=======
->>>>>>> 107abbffe75194f5144dbb64f599dd62ef6625a5
 
 public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObject>
 {
 	public boolean debugFlag = true;
 	
-<<<<<<< HEAD
 	@Override public CommandObject<Object> visitProgram(SequenceAnalyzerParser.ProgramContext ctx) { 
 		for(int i = 0; i<2;/*cmd.length()*/i++) {
 			//visit(ctx.cmd(i).execute());
@@ -18,8 +14,6 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 		return visitChildren(ctx); 
 		}
 
-=======
->>>>>>> 107abbffe75194f5144dbb64f599dd62ef6625a5
 	//TODO this is kinda a work around to deal with variables of different types (e.g. Integer, String, etc.)
 	@Override public CommandObject<Object> visitAssignVariableOfExpression(SequenceAnalyzerParser.AssignVariableOfExpressionContext ctx)
 	{
@@ -197,11 +191,7 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 	@Override
 	public CommandObject<String> visitStringLiteral(SequenceAnalyzerParser.StringLiteralContext ctx)
 	{
-<<<<<<< HEAD
-		String value = ctx.value.getText().substring(1, ctx.value.getText().length() - 1);
-=======
 		String value = ctx.value.getText().substring(1, ctx.value.getText().length() - 2);
->>>>>>> 107abbffe75194f5144dbb64f599dd62ef6625a5
 		
 		if(debugFlag == true)
 		{
