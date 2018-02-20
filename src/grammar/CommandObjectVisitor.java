@@ -1,12 +1,16 @@
 package grammar;
 
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
+import engine.command.*;
 
 public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObject>
 {
 	public boolean debugFlag = true;
 	
 	@Override public CommandObject<Object> visitProgram(SequenceAnalyzerParser.ProgramContext ctx) { 
+		for(int i = 0; i<2;/*cmd.length()*/i++) {
+			//visit(ctx.cmd(i).execute());
+		}
 		return visitChildren(ctx); 
 		}
 
