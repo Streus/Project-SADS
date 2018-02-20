@@ -67,7 +67,8 @@ concat	:	'concat' LP arg1=expr COMMA arg2=expr RP			#ConcatOn2Expressions
 		|	'concat' LP arg1=expr COMMA arg2=expr COMMA INT RP	#ConcatOn2ExpressionsAtIndex
 		;
 		
-assignment	:	varName=ID ':=' expr  			#AssignVariableOfExpression	
+assignment	:	varName=ID ':=' expr  				#AssignVariableOfExpression	
+			//|	alphabetName=ID ':=' USER_ALPHA		#AssignUserAlphabet
 			;
 
 literal	:	value=STRING_LITERAL		#StringLiteral
@@ -82,13 +83,13 @@ expr	:	cmd				#ExpressionOfCommand		//expression as single Command
 ID  	:   LETTER (LETTER | INT)* ;	//defines ID as one letter and 0 or many letters or digits
 INT 	:   [0-9]+ ;         // match integers
 STRING	:	(LETTER | INT)+;
-USER_ALPHA	:	[0-1]+;		 // user defined
 LP		:	'(';			//assigns token name to left parenthesis
 RP		:	')';			//assigns token name to right parenthesis
 COMMA	:	',';			//assigns token name to comma
 DBQUOTE	:	'"';
 FWDSLSH	:	'/';
 STRING_LITERAL : '"' (~('"' | '\\' | '\r' | '\n') | '\\' ('"' | '\\'))* '"';
+//USER_ALPHA	:	(STRING_LITERAL ',')+;		 // user defined
 //SQUOTE	:	'';
 //SUB		:	'sub';
 //CMP		:	'cmp';

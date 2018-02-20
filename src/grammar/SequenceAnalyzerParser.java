@@ -18,9 +18,8 @@ public class SequenceAnalyzerParser extends Parser {
 		new PredictionContextCache();
 	public static final int
 		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, T__5=6, T__6=7, T__7=8, T__8=9, 
-		ID=10, INT=11, STRING=12, USER_ALPHA=13, LP=14, RP=15, COMMA=16, DBQUOTE=17, 
-		FWDSLSH=18, STRING_LITERAL=19, LETTER=20, NEWLINE=21, LN_COMMENT=22, COMMENT=23, 
-		WS=24;
+		ID=10, INT=11, STRING=12, LP=13, RP=14, COMMA=15, DBQUOTE=16, FWDSLSH=17, 
+		STRING_LITERAL=18, LETTER=19, NEWLINE=20, LN_COMMENT=21, COMMENT=22, WS=23;
 	public static final int
 		RULE_init = 0, RULE_prog = 1, RULE_cmd = 2, RULE_vardef = 3, RULE_strcmd = 4, 
 		RULE_predef = 5, RULE_sub = 6, RULE_cmp = 7, RULE_ct = 8, RULE_sp = 9, 
@@ -33,11 +32,11 @@ public class SequenceAnalyzerParser extends Parser {
 
 	private static final String[] _LITERAL_NAMES = {
 		null, "'sub'", "'cmp'", "'ct'", "'sp'", "'build'", "'sm'", "'wc'", "'concat'", 
-		"':='", null, null, null, null, "'('", "')'", "','", "'\"'", "'/'"
+		"':='", null, null, null, "'('", "')'", "','", "'\"'", "'/'"
 	};
 	private static final String[] _SYMBOLIC_NAMES = {
 		null, null, null, null, null, null, null, null, null, null, "ID", "INT", 
-		"STRING", "USER_ALPHA", "LP", "RP", "COMMA", "DBQUOTE", "FWDSLSH", "STRING_LITERAL", 
+		"STRING", "LP", "RP", "COMMA", "DBQUOTE", "FWDSLSH", "STRING_LITERAL", 
 		"LETTER", "NEWLINE", "LN_COMMENT", "COMMENT", "WS"
 	};
 	public static final Vocabulary VOCABULARY = new VocabularyImpl(_LITERAL_NAMES, _SYMBOLIC_NAMES);
@@ -1406,7 +1405,7 @@ public class SequenceAnalyzerParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\32\u0093\4\2\t\2"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\31\u0093\4\2\t\2"+
 		"\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13"+
 		"\t\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22"+
 		"\3\2\3\2\3\3\6\3(\n\3\r\3\16\3)\3\4\3\4\3\4\3\4\5\4\60\n\4\3\5\3\5\3\6"+
@@ -1426,22 +1425,22 @@ public class SequenceAnalyzerParser extends Parser {
 		"\61\62\5\36\20\2\62\t\3\2\2\2\63\66\5\16\b\2\64\66\5\20\t\2\65\63\3\2"+
 		"\2\2\65\64\3\2\2\2\66\13\3\2\2\2\67>\5\22\n\28>\5\24\13\29>\5\26\f\2:"+
 		">\5\30\r\2;>\5\32\16\2<>\5\34\17\2=\67\3\2\2\2=8\3\2\2\2=9\3\2\2\2=:\3"+
-		"\2\2\2=;\3\2\2\2=<\3\2\2\2>\r\3\2\2\2?@\7\3\2\2@A\7\20\2\2AB\5\"\22\2"+
-		"BC\7\22\2\2CD\5\"\22\2DE\7\21\2\2E\17\3\2\2\2FG\7\4\2\2GH\7\20\2\2HI\5"+
-		"\"\22\2IJ\7\22\2\2JK\5\"\22\2KL\7\21\2\2L\21\3\2\2\2MN\7\5\2\2NU\5\"\22"+
-		"\2OP\7\5\2\2PQ\7\20\2\2QR\5\"\22\2RS\7\21\2\2SU\3\2\2\2TM\3\2\2\2TO\3"+
-		"\2\2\2U\23\3\2\2\2VW\7\6\2\2WX\7\20\2\2XY\5\"\22\2YZ\7\22\2\2Z[\5\"\22"+
-		"\2[\\\7\21\2\2\\\25\3\2\2\2]^\7\7\2\2^e\5\"\22\2_`\7\7\2\2`a\7\20\2\2"+
-		"ab\5\"\22\2bc\7\21\2\2ce\3\2\2\2d]\3\2\2\2d_\3\2\2\2e\27\3\2\2\2fg\7\b"+
-		"\2\2gn\5\"\22\2hi\7\b\2\2ij\7\20\2\2jk\5\"\22\2kl\7\21\2\2ln\3\2\2\2m"+
-		"f\3\2\2\2mh\3\2\2\2n\31\3\2\2\2op\7\t\2\2pq\7\20\2\2qr\5\"\22\2rs\7\22"+
-		"\2\2st\5\"\22\2tu\7\21\2\2u\33\3\2\2\2vw\7\n\2\2wx\7\20\2\2xy\5\"\22\2"+
-		"yz\7\22\2\2z{\5\"\22\2{|\7\21\2\2|\u0087\3\2\2\2}~\7\n\2\2~\177\7\20\2"+
-		"\2\177\u0080\5\"\22\2\u0080\u0081\7\22\2\2\u0081\u0082\5\"\22\2\u0082"+
-		"\u0083\7\22\2\2\u0083\u0084\7\r\2\2\u0084\u0085\7\21\2\2\u0085\u0087\3"+
+		"\2\2\2=;\3\2\2\2=<\3\2\2\2>\r\3\2\2\2?@\7\3\2\2@A\7\17\2\2AB\5\"\22\2"+
+		"BC\7\21\2\2CD\5\"\22\2DE\7\20\2\2E\17\3\2\2\2FG\7\4\2\2GH\7\17\2\2HI\5"+
+		"\"\22\2IJ\7\21\2\2JK\5\"\22\2KL\7\20\2\2L\21\3\2\2\2MN\7\5\2\2NU\5\"\22"+
+		"\2OP\7\5\2\2PQ\7\17\2\2QR\5\"\22\2RS\7\20\2\2SU\3\2\2\2TM\3\2\2\2TO\3"+
+		"\2\2\2U\23\3\2\2\2VW\7\6\2\2WX\7\17\2\2XY\5\"\22\2YZ\7\21\2\2Z[\5\"\22"+
+		"\2[\\\7\20\2\2\\\25\3\2\2\2]^\7\7\2\2^e\5\"\22\2_`\7\7\2\2`a\7\17\2\2"+
+		"ab\5\"\22\2bc\7\20\2\2ce\3\2\2\2d]\3\2\2\2d_\3\2\2\2e\27\3\2\2\2fg\7\b"+
+		"\2\2gn\5\"\22\2hi\7\b\2\2ij\7\17\2\2jk\5\"\22\2kl\7\20\2\2ln\3\2\2\2m"+
+		"f\3\2\2\2mh\3\2\2\2n\31\3\2\2\2op\7\t\2\2pq\7\17\2\2qr\5\"\22\2rs\7\21"+
+		"\2\2st\5\"\22\2tu\7\20\2\2u\33\3\2\2\2vw\7\n\2\2wx\7\17\2\2xy\5\"\22\2"+
+		"yz\7\21\2\2z{\5\"\22\2{|\7\20\2\2|\u0087\3\2\2\2}~\7\n\2\2~\177\7\17\2"+
+		"\2\177\u0080\5\"\22\2\u0080\u0081\7\21\2\2\u0081\u0082\5\"\22\2\u0082"+
+		"\u0083\7\21\2\2\u0083\u0084\7\r\2\2\u0084\u0085\7\20\2\2\u0085\u0087\3"+
 		"\2\2\2\u0086v\3\2\2\2\u0086}\3\2\2\2\u0087\35\3\2\2\2\u0088\u0089\7\f"+
 		"\2\2\u0089\u008a\7\13\2\2\u008a\u008b\5\"\22\2\u008b\37\3\2\2\2\u008c"+
-		"\u008f\7\25\2\2\u008d\u008f\7\r\2\2\u008e\u008c\3\2\2\2\u008e\u008d\3"+
+		"\u008f\7\24\2\2\u008d\u008f\7\r\2\2\u008e\u008c\3\2\2\2\u008e\u008d\3"+
 		"\2\2\2\u008f!\3\2\2\2\u0090\u0091\5\6\4\2\u0091#\3\2\2\2\13)/\65=Tdm\u0086"+
 		"\u008e";
 	public static final ATN _ATN =
