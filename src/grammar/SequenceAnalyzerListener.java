@@ -238,6 +238,18 @@ public interface SequenceAnalyzerListener extends ParseTreeListener {
 	 */
 	void exitAssignUserAlphabet(SequenceAnalyzerParser.AssignUserAlphabetContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code RetrieveVariable}
+	 * labeled alternative in {@link SequenceAnalyzerParser#retreival}.
+	 * @param ctx the parse tree
+	 */
+	void enterRetrieveVariable(SequenceAnalyzerParser.RetrieveVariableContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code RetrieveVariable}
+	 * labeled alternative in {@link SequenceAnalyzerParser#retreival}.
+	 * @param ctx the parse tree
+	 */
+	void exitRetrieveVariable(SequenceAnalyzerParser.RetrieveVariableContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link SequenceAnalyzerParser#array}.
 	 * @param ctx the parse tree
 	 */
@@ -260,6 +272,18 @@ public interface SequenceAnalyzerListener extends ParseTreeListener {
 	 */
 	void exitPrintArray(SequenceAnalyzerParser.PrintArrayContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code PrintArrayInParens}
+	 * labeled alternative in {@link SequenceAnalyzerParser#print}.
+	 * @param ctx the parse tree
+	 */
+	void enterPrintArrayInParens(SequenceAnalyzerParser.PrintArrayInParensContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code PrintArrayInParens}
+	 * labeled alternative in {@link SequenceAnalyzerParser#print}.
+	 * @param ctx the parse tree
+	 */
+	void exitPrintArrayInParens(SequenceAnalyzerParser.PrintArrayInParensContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code PrintCommand}
 	 * labeled alternative in {@link SequenceAnalyzerParser#print}.
 	 * @param ctx the parse tree
@@ -271,6 +295,18 @@ public interface SequenceAnalyzerListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitPrintCommand(SequenceAnalyzerParser.PrintCommandContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code PrintCommandInParens}
+	 * labeled alternative in {@link SequenceAnalyzerParser#print}.
+	 * @param ctx the parse tree
+	 */
+	void enterPrintCommandInParens(SequenceAnalyzerParser.PrintCommandInParensContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code PrintCommandInParens}
+	 * labeled alternative in {@link SequenceAnalyzerParser#print}.
+	 * @param ctx the parse tree
+	 */
+	void exitPrintCommandInParens(SequenceAnalyzerParser.PrintCommandInParensContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code StringLiteral}
 	 * labeled alternative in {@link SequenceAnalyzerParser#literal}.

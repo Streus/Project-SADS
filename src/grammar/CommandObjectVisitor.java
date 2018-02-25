@@ -35,7 +35,7 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 				//Console.println("result is null",Console.getErr());
 			}
 		}
-		return visitChildren(ctx);
+		return null;
 	}
 	
 	//TODO this is kinda a work around to deal with variables of different types (e.g. Integer, String, etc.)
@@ -274,6 +274,22 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 		return visitChildren(ctx); 
 	}
 	
+	@Override public CommandObject<Object> visitPrintCommandInParens(SequenceAnalyzerParser.PrintCommandInParensContext ctx) { 
+		if(debugFlag == true)
+		{
+			System.out.println("Visiting Print Command");
+		}
+		
+		String command = ctx.cmd().getText();
+		
+		if(debugFlag == true)
+		{
+			System.out.println("Command = "+command);
+		}
+		
+		return visitChildren(ctx); 
+	}
+	
 	@Override public CommandObject<Object> visitPrintArray(SequenceAnalyzerParser.PrintArrayContext ctx) { 
 		if(debugFlag == true)
 		{
@@ -289,6 +305,35 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 		System.out.println("arrayIndex = "+arrayIndex);
 		}
 		
+		return visitChildren(ctx); 
+	}
+	
+	@Override public CommandObject<Object> visitPrintArrayInParens(SequenceAnalyzerParser.PrintArrayInParensContext ctx) { 
+		if(debugFlag == true)
+		{
+			System.out.println("Visiting Print Array");
+		}
+		
+		String arrayName = ctx.array().ID().getText();
+		int arrayIndex = Integer.parseInt(ctx.array().INT().getText());
+		
+		if(debugFlag == true)
+		{
+		System.out.println("arrayName = "+arrayName);
+		System.out.println("arrayIndex = "+arrayIndex);
+		}
+		
+		return visitChildren(ctx); 
+	}
+	
+	@Override public CommandObject<Object> visitRetrieveVariable(SequenceAnalyzerParser.RetrieveVariableContext ctx) { 
+		if(debugFlag == true)
+		{
+			System.out.println("Visiting RetrieveVariable");
+		}
+		
+		String variableName = ctx.variable.getText();
+		System.out.println("Variable = "+variableName);
 		return visitChildren(ctx); 
 	}
 }

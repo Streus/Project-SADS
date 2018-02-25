@@ -17,7 +17,7 @@ cmd		:	//first branch of command hierarchy
 		;
 		
 vardef	:	assignment		
-		//|	alphadef		//for future implementation of a user defined alphabet
+		|	retreival
 		;
 		
 strcmd	:	sub			//substitution command
@@ -71,12 +71,17 @@ concat	:	'concat' LP arg1=expr COMMA arg2=expr RP			#ConcatOn2Expressions
 assignment	:	varName=ID ':=' expr  												#AssignVariableOfExpression	
 			|	alphabetName=ID ':=' '{' (STRING_LITERAL ',')*(STRING_LITERAL)'}'	#AssignUserAlphabet
 			;
+	
+retreival	:	variable=ID		#RetrieveVariable
+			;
 
 array	:	ID '[' INT ']'
 		;
 			
-print	:	'print' array		#PrintArray	
-		|	'print' cmd			#PrintCommand
+print	:	'print' array			#PrintArray
+		|	'print' LP array RP		#PrintArrayInParens		
+		|	'print' cmd				#PrintCommand
+		|	'print' LP cmd RP		#PrintCommandInParens
 		;
 
 literal	:	value=STRING_LITERAL		#StringLiteral

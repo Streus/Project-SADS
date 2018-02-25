@@ -256,6 +256,18 @@ public class SequenceAnalyzerBaseListener implements SequenceAnalyzerListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterRetrieveVariable(SequenceAnalyzerParser.RetrieveVariableContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitRetrieveVariable(SequenceAnalyzerParser.RetrieveVariableContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterArray(SequenceAnalyzerParser.ArrayContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -280,6 +292,18 @@ public class SequenceAnalyzerBaseListener implements SequenceAnalyzerListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterPrintArrayInParens(SequenceAnalyzerParser.PrintArrayInParensContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitPrintArrayInParens(SequenceAnalyzerParser.PrintArrayInParensContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterPrintCommand(SequenceAnalyzerParser.PrintCommandContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -287,6 +311,18 @@ public class SequenceAnalyzerBaseListener implements SequenceAnalyzerListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitPrintCommand(SequenceAnalyzerParser.PrintCommandContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterPrintCommandInParens(SequenceAnalyzerParser.PrintCommandInParensContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitPrintCommandInParens(SequenceAnalyzerParser.PrintCommandInParensContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

@@ -146,6 +146,13 @@ public interface SequenceAnalyzerVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitAssignUserAlphabet(SequenceAnalyzerParser.AssignUserAlphabetContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code RetrieveVariable}
+	 * labeled alternative in {@link SequenceAnalyzerParser#retreival}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitRetrieveVariable(SequenceAnalyzerParser.RetrieveVariableContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link SequenceAnalyzerParser#array}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -159,12 +166,26 @@ public interface SequenceAnalyzerVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitPrintArray(SequenceAnalyzerParser.PrintArrayContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code PrintArrayInParens}
+	 * labeled alternative in {@link SequenceAnalyzerParser#print}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPrintArrayInParens(SequenceAnalyzerParser.PrintArrayInParensContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code PrintCommand}
 	 * labeled alternative in {@link SequenceAnalyzerParser#print}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitPrintCommand(SequenceAnalyzerParser.PrintCommandContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code PrintCommandInParens}
+	 * labeled alternative in {@link SequenceAnalyzerParser#print}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPrintCommandInParens(SequenceAnalyzerParser.PrintCommandInParensContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code StringLiteral}
 	 * labeled alternative in {@link SequenceAnalyzerParser#literal}.
