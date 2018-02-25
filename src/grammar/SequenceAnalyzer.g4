@@ -12,7 +12,8 @@ cmd		:	//first branch of command hierarchy
 		|	strcmd			//string command
 		|	predef			//predefined function
 		|	literal			//string literal
-		//|	'print'
+		|	array
+		|	print			
 		;
 		
 vardef	:	assignment		
@@ -71,6 +72,13 @@ assignment	:	varName=ID ':=' expr  												#AssignVariableOfExpression
 			|	alphabetName=ID ':=' '{' (STRING_LITERAL ',')*(STRING_LITERAL)'}'	#AssignUserAlphabet
 			;
 
+array	:	ID '[' INT ']'
+		;
+			
+print	:	'print' array		#PrintArray	
+		|	'print' cmd			#PrintCommand
+		;
+
 literal	:	value=STRING_LITERAL		#StringLiteral
 		|	value=INT					#IntegerLiteral
 		;
@@ -87,7 +95,6 @@ LP		:	'(';			//assigns token name to left parenthesis
 RP		:	')';			//assigns token name to right parenthesis
 COMMA	:	',';			//assigns token name to comma
 DBQUOTE	:	'"';
-FWDSLSH	:	'/';
 STRING_LITERAL : '"' (~('"' | '\\' | '\r' | '\n') | '\\' ('"' | '\\'))* '"';
 //USER_ALPHA	:	(STRING_LITERAL ',')+;		 // user defined
 //SQUOTE	:	'';

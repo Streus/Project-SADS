@@ -246,7 +246,7 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 	
 	@Override
     public CommandObject<Integer> visitIntegerLiteral(SequenceAnalyzerParser.IntegerLiteralContext ctx)
-	{
+	{		
 		Integer value = new Integer(ctx.value.getText());
 		
 		if(debugFlag == true)
@@ -256,6 +256,40 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 		}
 		
 		return new LiteralCommand<Integer>(value);
+	}
+	
+	@Override public CommandObject<Object> visitPrintCommand(SequenceAnalyzerParser.PrintCommandContext ctx) { 
+		if(debugFlag == true)
+		{
+			System.out.println("Visiting Print Command");
+		}
+		
+		String command = ctx.cmd().getText();
+		
+		if(debugFlag == true)
+		{
+			System.out.println("Command = "+command);
+		}
+		
+		return visitChildren(ctx); 
+	}
+	
+	@Override public CommandObject<Object> visitPrintArray(SequenceAnalyzerParser.PrintArrayContext ctx) { 
+		if(debugFlag == true)
+		{
+			System.out.println("Visiting Print Array");
+		}
+		
+		String arrayName = ctx.array().ID().getText();
+		int arrayIndex = Integer.parseInt(ctx.array().INT().getText());
+		
+		if(debugFlag == true)
+		{
+		System.out.println("arrayName = "+arrayName);
+		System.out.println("arrayIndex = "+arrayIndex);
+		}
+		
+		return visitChildren(ctx); 
 	}
 }
 

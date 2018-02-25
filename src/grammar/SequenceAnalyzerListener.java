@@ -238,6 +238,40 @@ public interface SequenceAnalyzerListener extends ParseTreeListener {
 	 */
 	void exitAssignUserAlphabet(SequenceAnalyzerParser.AssignUserAlphabetContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link SequenceAnalyzerParser#array}.
+	 * @param ctx the parse tree
+	 */
+	void enterArray(SequenceAnalyzerParser.ArrayContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link SequenceAnalyzerParser#array}.
+	 * @param ctx the parse tree
+	 */
+	void exitArray(SequenceAnalyzerParser.ArrayContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code PrintArray}
+	 * labeled alternative in {@link SequenceAnalyzerParser#print}.
+	 * @param ctx the parse tree
+	 */
+	void enterPrintArray(SequenceAnalyzerParser.PrintArrayContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code PrintArray}
+	 * labeled alternative in {@link SequenceAnalyzerParser#print}.
+	 * @param ctx the parse tree
+	 */
+	void exitPrintArray(SequenceAnalyzerParser.PrintArrayContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code PrintCommand}
+	 * labeled alternative in {@link SequenceAnalyzerParser#print}.
+	 * @param ctx the parse tree
+	 */
+	void enterPrintCommand(SequenceAnalyzerParser.PrintCommandContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code PrintCommand}
+	 * labeled alternative in {@link SequenceAnalyzerParser#print}.
+	 * @param ctx the parse tree
+	 */
+	void exitPrintCommand(SequenceAnalyzerParser.PrintCommandContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code StringLiteral}
 	 * labeled alternative in {@link SequenceAnalyzerParser#literal}.
 	 * @param ctx the parse tree
