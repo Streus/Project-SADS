@@ -19,7 +19,6 @@ public abstract class CommandObject<T>
 }
 
 //COMMAND HIERARCHY LEVEL 1
-
 abstract class VarDefCommand<S> extends CommandObject<S> { }
 
 abstract class StringCommand extends CommandObject<String> { }
