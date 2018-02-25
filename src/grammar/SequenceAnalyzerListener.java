@@ -1,4 +1,4 @@
-package grammar;// Generated from SequenceAnalyzer.g4 by ANTLR 4.7
+package grammar;
 // Generated from SequenceAnalyzer.g4 by ANTLR 4.7
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
@@ -225,6 +225,18 @@ public interface SequenceAnalyzerListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitAssignVariableOfExpression(SequenceAnalyzerParser.AssignVariableOfExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code AssignUserAlphabet}
+	 * labeled alternative in {@link SequenceAnalyzerParser#assignment}.
+	 * @param ctx the parse tree
+	 */
+	void enterAssignUserAlphabet(SequenceAnalyzerParser.AssignUserAlphabetContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code AssignUserAlphabet}
+	 * labeled alternative in {@link SequenceAnalyzerParser#assignment}.
+	 * @param ctx the parse tree
+	 */
+	void exitAssignUserAlphabet(SequenceAnalyzerParser.AssignUserAlphabetContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code StringLiteral}
 	 * labeled alternative in {@link SequenceAnalyzerParser#literal}.

@@ -1,4 +1,4 @@
-package grammar;// Generated from SequenceAnalyzer.g4 by ANTLR 4.7
+package grammar;
 // Generated from SequenceAnalyzer.g4 by ANTLR 4.7
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
@@ -18,9 +18,9 @@ public class SequenceAnalyzerParser extends Parser {
 		new PredictionContextCache();
 	public static final int
 		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, T__5=6, T__6=7, T__7=8, T__8=9, 
-		ID=10, INT=11, STRING=12, USER_ALPHA=13, LP=14, RP=15, COMMA=16, DBQUOTE=17, 
-		FWDSLSH=18, STRING_LITERAL=19, LETTER=20, NEWLINE=21, LN_COMMENT=22, COMMENT=23, 
-		WS=24;
+		T__9=10, T__10=11, ID=12, INT=13, STRING=14, LP=15, RP=16, COMMA=17, DBQUOTE=18, 
+		FWDSLSH=19, STRING_LITERAL=20, LETTER=21, NEWLINE=22, LN_COMMENT=23, COMMENT=24, 
+		WS=25;
 	public static final int
 		RULE_init = 0, RULE_prog = 1, RULE_cmd = 2, RULE_vardef = 3, RULE_strcmd = 4, 
 		RULE_predef = 5, RULE_sub = 6, RULE_cmp = 7, RULE_ct = 8, RULE_sp = 9, 
@@ -33,11 +33,11 @@ public class SequenceAnalyzerParser extends Parser {
 
 	private static final String[] _LITERAL_NAMES = {
 		null, "'sub'", "'cmp'", "'ct'", "'sp'", "'build'", "'sm'", "'wc'", "'concat'", 
-		"':='", null, null, null, null, "'('", "')'", "','", "'\"'", "'/'"
+		"':='", "'{'", "'}'", null, null, null, "'('", "')'", "','", "'\"'", "'/'"
 	};
 	private static final String[] _SYMBOLIC_NAMES = {
-		null, null, null, null, null, null, null, null, null, null, "ID", "INT", 
-		"STRING", "USER_ALPHA", "LP", "RP", "COMMA", "DBQUOTE", "FWDSLSH", "STRING_LITERAL", 
+		null, null, null, null, null, null, null, null, null, null, null, null, 
+		"ID", "INT", "STRING", "LP", "RP", "COMMA", "DBQUOTE", "FWDSLSH", "STRING_LITERAL", 
 		"LETTER", "NEWLINE", "LN_COMMENT", "COMMENT", "WS"
 	};
 	public static final Vocabulary VOCABULARY = new VocabularyImpl(_LITERAL_NAMES, _SYMBOLIC_NAMES);
@@ -1239,20 +1239,85 @@ public class SequenceAnalyzerParser extends Parser {
 			else return visitor.visitChildren(this);
 		}
 	}
+	public static class AssignUserAlphabetContext extends AssignmentContext {
+		public Token alphabetName;
+		public TerminalNode ID() { return getToken(SequenceAnalyzerParser.ID, 0); }
+		public List<TerminalNode> STRING_LITERAL() { return getTokens(SequenceAnalyzerParser.STRING_LITERAL); }
+		public TerminalNode STRING_LITERAL(int i) {
+			return getToken(SequenceAnalyzerParser.STRING_LITERAL, i);
+		}
+		public AssignUserAlphabetContext(AssignmentContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SequenceAnalyzerListener ) ((SequenceAnalyzerListener)listener).enterAssignUserAlphabet(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SequenceAnalyzerListener ) ((SequenceAnalyzerListener)listener).exitAssignUserAlphabet(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof SequenceAnalyzerVisitor ) return ((SequenceAnalyzerVisitor<? extends T>)visitor).visitAssignUserAlphabet(this);
+			else return visitor.visitChildren(this);
+		}
+	}
 
 	public final AssignmentContext assignment() throws RecognitionException {
 		AssignmentContext _localctx = new AssignmentContext(_ctx, getState());
 		enterRule(_localctx, 28, RULE_assignment);
 		try {
-			_localctx = new AssignVariableOfExpressionContext(_localctx);
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(134);
-			((AssignVariableOfExpressionContext)_localctx).varName = match(ID);
-			setState(135);
-			match(T__8);
-			setState(136);
-			expr();
+			int _alt;
+			setState(149);
+			_errHandler.sync(this);
+			switch ( getInterpreter().adaptivePredict(_input,9,_ctx) ) {
+			case 1:
+				_localctx = new AssignVariableOfExpressionContext(_localctx);
+				enterOuterAlt(_localctx, 1);
+				{
+				setState(134);
+				((AssignVariableOfExpressionContext)_localctx).varName = match(ID);
+				setState(135);
+				match(T__8);
+				setState(136);
+				expr();
+				}
+				break;
+			case 2:
+				_localctx = new AssignUserAlphabetContext(_localctx);
+				enterOuterAlt(_localctx, 2);
+				{
+				setState(137);
+				((AssignUserAlphabetContext)_localctx).alphabetName = match(ID);
+				setState(138);
+				match(T__8);
+				setState(139);
+				match(T__9);
+				setState(144);
+				_errHandler.sync(this);
+				_alt = getInterpreter().adaptivePredict(_input,8,_ctx);
+				while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
+					if ( _alt==1 ) {
+						{
+						{
+						setState(140);
+						match(STRING_LITERAL);
+						setState(141);
+						match(COMMA);
+						}
+						} 
+					}
+					setState(146);
+					_errHandler.sync(this);
+					_alt = getInterpreter().adaptivePredict(_input,8,_ctx);
+				}
+				{
+				setState(147);
+				match(STRING_LITERAL);
+				}
+				setState(148);
+				match(T__10);
+				}
+				break;
 			}
 		}
 		catch (RecognitionException re) {
@@ -1318,14 +1383,14 @@ public class SequenceAnalyzerParser extends Parser {
 		LiteralContext _localctx = new LiteralContext(_ctx, getState());
 		enterRule(_localctx, 30, RULE_literal);
 		try {
-			setState(140);
+			setState(153);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case STRING_LITERAL:
 				_localctx = new StringLiteralContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(138);
+				setState(151);
 				((StringLiteralContext)_localctx).value = match(STRING_LITERAL);
 				}
 				break;
@@ -1333,7 +1398,7 @@ public class SequenceAnalyzerParser extends Parser {
 				_localctx = new IntegerLiteralContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(139);
+				setState(152);
 				((IntegerLiteralContext)_localctx).value = match(INT);
 				}
 				break;
@@ -1390,7 +1455,7 @@ public class SequenceAnalyzerParser extends Parser {
 			_localctx = new ExpressionOfCommandContext(_localctx);
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(142);
+			setState(155);
 			cmd();
 			}
 		}
@@ -1406,7 +1471,7 @@ public class SequenceAnalyzerParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\32\u0093\4\2\t\2"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\33\u00a0\4\2\t\2"+
 		"\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13"+
 		"\t\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22"+
 		"\3\2\3\2\3\3\6\3(\n\3\r\3\16\3)\3\4\3\4\3\4\3\4\5\4\60\n\4\3\5\3\5\3\6"+
@@ -1415,35 +1480,40 @@ public class SequenceAnalyzerParser extends Parser {
 		"\n\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\f\3\f\3\f\3\f\3\f\3\f\3\f\5\f"+
 		"e\n\f\3\r\3\r\3\r\3\r\3\r\3\r\3\r\5\rn\n\r\3\16\3\16\3\16\3\16\3\16\3"+
 		"\16\3\16\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3"+
-		"\17\3\17\3\17\3\17\5\17\u0087\n\17\3\20\3\20\3\20\3\20\3\21\3\21\5\21"+
-		"\u008f\n\21\3\22\3\22\3\22\2\2\23\2\4\6\b\n\f\16\20\22\24\26\30\32\34"+
-		"\36 \"\2\2\2\u0090\2$\3\2\2\2\4\'\3\2\2\2\6/\3\2\2\2\b\61\3\2\2\2\n\65"+
-		"\3\2\2\2\f=\3\2\2\2\16?\3\2\2\2\20F\3\2\2\2\22T\3\2\2\2\24V\3\2\2\2\26"+
-		"d\3\2\2\2\30m\3\2\2\2\32o\3\2\2\2\34\u0086\3\2\2\2\36\u0088\3\2\2\2 \u008e"+
-		"\3\2\2\2\"\u0090\3\2\2\2$%\5\4\3\2%\3\3\2\2\2&(\5\6\4\2\'&\3\2\2\2()\3"+
-		"\2\2\2)\'\3\2\2\2)*\3\2\2\2*\5\3\2\2\2+\60\5\b\5\2,\60\5\n\6\2-\60\5\f"+
-		"\7\2.\60\5 \21\2/+\3\2\2\2/,\3\2\2\2/-\3\2\2\2/.\3\2\2\2\60\7\3\2\2\2"+
-		"\61\62\5\36\20\2\62\t\3\2\2\2\63\66\5\16\b\2\64\66\5\20\t\2\65\63\3\2"+
-		"\2\2\65\64\3\2\2\2\66\13\3\2\2\2\67>\5\22\n\28>\5\24\13\29>\5\26\f\2:"+
-		">\5\30\r\2;>\5\32\16\2<>\5\34\17\2=\67\3\2\2\2=8\3\2\2\2=9\3\2\2\2=:\3"+
-		"\2\2\2=;\3\2\2\2=<\3\2\2\2>\r\3\2\2\2?@\7\3\2\2@A\7\20\2\2AB\5\"\22\2"+
-		"BC\7\22\2\2CD\5\"\22\2DE\7\21\2\2E\17\3\2\2\2FG\7\4\2\2GH\7\20\2\2HI\5"+
-		"\"\22\2IJ\7\22\2\2JK\5\"\22\2KL\7\21\2\2L\21\3\2\2\2MN\7\5\2\2NU\5\"\22"+
-		"\2OP\7\5\2\2PQ\7\20\2\2QR\5\"\22\2RS\7\21\2\2SU\3\2\2\2TM\3\2\2\2TO\3"+
-		"\2\2\2U\23\3\2\2\2VW\7\6\2\2WX\7\20\2\2XY\5\"\22\2YZ\7\22\2\2Z[\5\"\22"+
-		"\2[\\\7\21\2\2\\\25\3\2\2\2]^\7\7\2\2^e\5\"\22\2_`\7\7\2\2`a\7\20\2\2"+
-		"ab\5\"\22\2bc\7\21\2\2ce\3\2\2\2d]\3\2\2\2d_\3\2\2\2e\27\3\2\2\2fg\7\b"+
-		"\2\2gn\5\"\22\2hi\7\b\2\2ij\7\20\2\2jk\5\"\22\2kl\7\21\2\2ln\3\2\2\2m"+
-		"f\3\2\2\2mh\3\2\2\2n\31\3\2\2\2op\7\t\2\2pq\7\20\2\2qr\5\"\22\2rs\7\22"+
-		"\2\2st\5\"\22\2tu\7\21\2\2u\33\3\2\2\2vw\7\n\2\2wx\7\20\2\2xy\5\"\22\2"+
-		"yz\7\22\2\2z{\5\"\22\2{|\7\21\2\2|\u0087\3\2\2\2}~\7\n\2\2~\177\7\20\2"+
-		"\2\177\u0080\5\"\22\2\u0080\u0081\7\22\2\2\u0081\u0082\5\"\22\2\u0082"+
-		"\u0083\7\22\2\2\u0083\u0084\7\r\2\2\u0084\u0085\7\21\2\2\u0085\u0087\3"+
-		"\2\2\2\u0086v\3\2\2\2\u0086}\3\2\2\2\u0087\35\3\2\2\2\u0088\u0089\7\f"+
-		"\2\2\u0089\u008a\7\13\2\2\u008a\u008b\5\"\22\2\u008b\37\3\2\2\2\u008c"+
-		"\u008f\7\25\2\2\u008d\u008f\7\r\2\2\u008e\u008c\3\2\2\2\u008e\u008d\3"+
-		"\2\2\2\u008f!\3\2\2\2\u0090\u0091\5\6\4\2\u0091#\3\2\2\2\13)/\65=Tdm\u0086"+
-		"\u008e";
+		"\17\3\17\3\17\3\17\5\17\u0087\n\17\3\20\3\20\3\20\3\20\3\20\3\20\3\20"+
+		"\3\20\7\20\u0091\n\20\f\20\16\20\u0094\13\20\3\20\3\20\5\20\u0098\n\20"+
+		"\3\21\3\21\5\21\u009c\n\21\3\22\3\22\3\22\2\2\23\2\4\6\b\n\f\16\20\22"+
+		"\24\26\30\32\34\36 \"\2\2\2\u009f\2$\3\2\2\2\4\'\3\2\2\2\6/\3\2\2\2\b"+
+		"\61\3\2\2\2\n\65\3\2\2\2\f=\3\2\2\2\16?\3\2\2\2\20F\3\2\2\2\22T\3\2\2"+
+		"\2\24V\3\2\2\2\26d\3\2\2\2\30m\3\2\2\2\32o\3\2\2\2\34\u0086\3\2\2\2\36"+
+		"\u0097\3\2\2\2 \u009b\3\2\2\2\"\u009d\3\2\2\2$%\5\4\3\2%\3\3\2\2\2&(\5"+
+		"\6\4\2\'&\3\2\2\2()\3\2\2\2)\'\3\2\2\2)*\3\2\2\2*\5\3\2\2\2+\60\5\b\5"+
+		"\2,\60\5\n\6\2-\60\5\f\7\2.\60\5 \21\2/+\3\2\2\2/,\3\2\2\2/-\3\2\2\2/"+
+		".\3\2\2\2\60\7\3\2\2\2\61\62\5\36\20\2\62\t\3\2\2\2\63\66\5\16\b\2\64"+
+		"\66\5\20\t\2\65\63\3\2\2\2\65\64\3\2\2\2\66\13\3\2\2\2\67>\5\22\n\28>"+
+		"\5\24\13\29>\5\26\f\2:>\5\30\r\2;>\5\32\16\2<>\5\34\17\2=\67\3\2\2\2="+
+		"8\3\2\2\2=9\3\2\2\2=:\3\2\2\2=;\3\2\2\2=<\3\2\2\2>\r\3\2\2\2?@\7\3\2\2"+
+		"@A\7\21\2\2AB\5\"\22\2BC\7\23\2\2CD\5\"\22\2DE\7\22\2\2E\17\3\2\2\2FG"+
+		"\7\4\2\2GH\7\21\2\2HI\5\"\22\2IJ\7\23\2\2JK\5\"\22\2KL\7\22\2\2L\21\3"+
+		"\2\2\2MN\7\5\2\2NU\5\"\22\2OP\7\5\2\2PQ\7\21\2\2QR\5\"\22\2RS\7\22\2\2"+
+		"SU\3\2\2\2TM\3\2\2\2TO\3\2\2\2U\23\3\2\2\2VW\7\6\2\2WX\7\21\2\2XY\5\""+
+		"\22\2YZ\7\23\2\2Z[\5\"\22\2[\\\7\22\2\2\\\25\3\2\2\2]^\7\7\2\2^e\5\"\22"+
+		"\2_`\7\7\2\2`a\7\21\2\2ab\5\"\22\2bc\7\22\2\2ce\3\2\2\2d]\3\2\2\2d_\3"+
+		"\2\2\2e\27\3\2\2\2fg\7\b\2\2gn\5\"\22\2hi\7\b\2\2ij\7\21\2\2jk\5\"\22"+
+		"\2kl\7\22\2\2ln\3\2\2\2mf\3\2\2\2mh\3\2\2\2n\31\3\2\2\2op\7\t\2\2pq\7"+
+		"\21\2\2qr\5\"\22\2rs\7\23\2\2st\5\"\22\2tu\7\22\2\2u\33\3\2\2\2vw\7\n"+
+		"\2\2wx\7\21\2\2xy\5\"\22\2yz\7\23\2\2z{\5\"\22\2{|\7\22\2\2|\u0087\3\2"+
+		"\2\2}~\7\n\2\2~\177\7\21\2\2\177\u0080\5\"\22\2\u0080\u0081\7\23\2\2\u0081"+
+		"\u0082\5\"\22\2\u0082\u0083\7\23\2\2\u0083\u0084\7\17\2\2\u0084\u0085"+
+		"\7\22\2\2\u0085\u0087\3\2\2\2\u0086v\3\2\2\2\u0086}\3\2\2\2\u0087\35\3"+
+		"\2\2\2\u0088\u0089\7\16\2\2\u0089\u008a\7\13\2\2\u008a\u0098\5\"\22\2"+
+		"\u008b\u008c\7\16\2\2\u008c\u008d\7\13\2\2\u008d\u0092\7\f\2\2\u008e\u008f"+
+		"\7\26\2\2\u008f\u0091\7\23\2\2\u0090\u008e\3\2\2\2\u0091\u0094\3\2\2\2"+
+		"\u0092\u0090\3\2\2\2\u0092\u0093\3\2\2\2\u0093\u0095\3\2\2\2\u0094\u0092"+
+		"\3\2\2\2\u0095\u0096\7\26\2\2\u0096\u0098\7\r\2\2\u0097\u0088\3\2\2\2"+
+		"\u0097\u008b\3\2\2\2\u0098\37\3\2\2\2\u0099\u009c\7\26\2\2\u009a\u009c"+
+		"\7\17\2\2\u009b\u0099\3\2\2\2\u009b\u009a\3\2\2\2\u009c!\3\2\2\2\u009d"+
+		"\u009e\5\6\4\2\u009e#\3\2\2\2\r)/\65=Tdm\u0086\u0092\u0097\u009b";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

@@ -1,4 +1,4 @@
-package grammar;// Generated from SequenceAnalyzer.g4 by ANTLR 4.7
+package grammar;
 // Generated from SequenceAnalyzer.g4 by ANTLR 4.7
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
@@ -138,6 +138,13 @@ public interface SequenceAnalyzerVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitAssignVariableOfExpression(SequenceAnalyzerParser.AssignVariableOfExpressionContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code AssignUserAlphabet}
+	 * labeled alternative in {@link SequenceAnalyzerParser#assignment}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAssignUserAlphabet(SequenceAnalyzerParser.AssignUserAlphabetContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code StringLiteral}
 	 * labeled alternative in {@link SequenceAnalyzerParser#literal}.
