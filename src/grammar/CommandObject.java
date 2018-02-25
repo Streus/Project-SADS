@@ -9,12 +9,14 @@ import engine.PredefinedFunctions.ShiftMaximality;
 import engine.PredefinedFunctions.StarProduct;
 import engine.PredefinedFunctions.WordCount;
 import engine.command.CommandResponse;
+import engine.SymbolTable;
 
 //COMMAND HIERARCHY LEVEL 0
 public abstract class CommandObject<T>
 {		
 	RedBlackBST alphaBST = new RedBlackBST<String, CommandObject<List<String>>>();
 	UniqueSymbolGenerator symbolGen = new UniqueSymbolGenerator();
+	SymbolTable<String, CommandObject<Object>> st = new SymbolTable<String, CommandObject<Object>>();
 	public abstract T execute();
 }
 
@@ -42,8 +44,8 @@ class VariableAssignmentCommand extends VarDefCommand<Object>
 	@Override
 	public Object execute()
 	{
-		//TODO
-		return null;
+		st.addSymbol(varName, value);	
+		return null; //return the value?
 	}
 }
 
