@@ -24,12 +24,17 @@ public class AntlrBridge {
 		try
 		{
 			CommandObjectVisitor ast = new CommandObjectVisitor();
-			result = ast.visit(cst).execute();
-			Console.println(result.toString());
+			result = ast.visit(cst);
+			//Console.println(result.toString());
 		}
 		catch(ClassCastException cce)
 		{
 			Console.println(cce.getMessage(), Console.getErr());
 		}
+	}
+
+	private void visit(ParseTree cst) {
+		// TODO Auto-generated method stub
+		
 	}
 }

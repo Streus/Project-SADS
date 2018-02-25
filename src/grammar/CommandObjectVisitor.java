@@ -1,13 +1,34 @@
 package grammar;
 
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
+import gui.Console;
 
 public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObject>
 {
 	public boolean debugFlag = true;
+	
 	@Override public CommandObject<Object> visitProgram(SequenceAnalyzerParser.ProgramContext ctx) { 
-		return visitChildren(ctx); 
+		Object result;
+		if(debugFlag == true) {
+			System.out.println("Visiting Prog");
 		}
+		for(int i=0; ctx.cmd(i)!=null; i++) {
+			
+			if(debugFlag == true) {
+				System.out.println("Looping ctx.cmd("+i+")");
+			}
+			
+			if(ctx.cmd(1)!=null) {
+				Console.println("Command "+(i+1)+": "+ctx.cmd(i).getText(),Console.getHdr());
+			}
+			
+			result = visit(ctx.cmd(i)).execute();
+			System.out.println("Result = "+result);
+			Console.println(result.toString());
+		}
+		return visitChildren(ctx);
+	}
+	
 	//TODO this is kinda a work around to deal with variables of different types (e.g. Integer, String, etc.)
 	@Override public CommandObject<Object> visitAssignVariableOfExpression(SequenceAnalyzerParser.AssignVariableOfExpressionContext ctx)
 	{
