@@ -46,6 +46,7 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 		
 		if(debugFlag == true) {
 			System.out.println("Visiting AssignVariableOfExpression");
+			System.out.println("name = " + name);
 		}
 		
 		//TODO debug stuff
@@ -326,15 +327,17 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 		return visitChildren(ctx); 
 	}
 	
-	@Override public CommandObject<Object> visitRetrieveVariable(SequenceAnalyzerParser.RetrieveVariableContext ctx) { 
+	@Override public CommandObject<Object> visitRetrieveVariable(SequenceAnalyzerParser.RetrieveVariableContext ctx)
+	{ 
+		String name = ctx.variable.getText();
+		
 		if(debugFlag == true)
 		{
-			System.out.println("Visiting RetrieveVariable");
+			System.out.println("Visiting Retrieve Variable");
+			System.out.println("var name = " + name);
 		}
 		
-		String variableName = ctx.variable.getText();
-		System.out.println("Variable = "+variableName);
-		return visitChildren(ctx); 
+		return new ResolveVariable(name);
 	}
 }
 

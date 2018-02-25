@@ -14,9 +14,17 @@ import engine.SymbolTable;
 //COMMAND HIERARCHY LEVEL 0
 public abstract class CommandObject<T>
 {		
-	RedBlackBST alphaBST = new RedBlackBST<String, CommandObject<List<String>>>();
-	UniqueSymbolGenerator symbolGen = new UniqueSymbolGenerator();
-	SymbolTable<String, CommandObject<Object>> st = new SymbolTable<String, CommandObject<Object>>();
+	protected static RedBlackBST alphaBST;
+	protected static UniqueSymbolGenerator symbolGen;
+	protected static SymbolTable<String, Object> st;
+	
+	static
+	{
+		alphaBST = new RedBlackBST<String, CommandObject<List<String>>>();
+		symbolGen = new UniqueSymbolGenerator();
+		st = new SymbolTable<String, Object>();
+	}
+	
 	public abstract T execute();
 }
 
@@ -44,7 +52,7 @@ class VariableAssignmentCommand extends VarDefCommand<Object>
 	public Object execute()
 	{
 		st.addSymbol(varName, value);	
-		return null; //return the value?
+		return value; //return the value?
 	}
 }
 
@@ -158,7 +166,7 @@ class ShiftMaximalityCommand extends PredefinedFunctionCommand
 	public String execute()
 	{
 		ShiftMaximality sm = new ShiftMaximality();
-		CommandResponse resp = new CommandResponse(sm.shiftMaximal(operand.execute()));
+		CommandResponse resp = new CommandResponse(sm.shiftMaximal((String)operand.execute()));
 		
 		return resp.returnVal;	
 	}
@@ -245,5 +253,21 @@ class LiteralCommand<S> extends CommandObject<S>
 	{
 		return value;
 	}
+}
+
+class ResolveVariable extends CommandObject<Object>
+{
+	private String name;
 	
+	public ResolveVariable(String name)
+	{
+		this.name = name;
+	}
+	
+	@Override
+	public Object execute()
+	{
+		System.out.println((String)st.get(name));
+		return st.get(name);
+	}
 }
