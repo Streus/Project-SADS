@@ -8,7 +8,8 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 	public boolean debugFlag = true;
 	
 	@Override public CommandObject<Object> visitProgram(SequenceAnalyzerParser.ProgramContext ctx) { 
-		Object result;
+		CommandObject<Object> visitResult;
+		Object executeResult;
 		if(debugFlag == true) {
 			System.out.println("Visiting Prog");
 		}
@@ -22,9 +23,17 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 				Console.println("Command "+(i+1)+": "+ctx.cmd(i).getText(),Console.getHdr());
 			}
 			
-			result = visit(ctx.cmd(i)).execute();
-			System.out.println("Result = "+result);
-			Console.println(result.toString());
+			visitResult = visit(ctx.cmd(i));
+			
+			if(visitResult!=null) {
+				executeResult = visitResult.execute();
+				System.out.println("Result = "+executeResult);
+				Console.println(executeResult.toString());
+			}
+			else {
+				System.out.println("Result = null");
+				//Console.println("result is null",Console.getErr());
+			}
 		}
 		return visitChildren(ctx);
 	}
@@ -35,14 +44,26 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 		String name = ctx.varName.getText();
 		Object value = ctx.expr().getText();
 		
+		if(debugFlag == true) {
+			System.out.println("Visiting AssignVariableOfExpression");
+		}
+		
 		//TODO debug stuff
 		
 		return new VariableAssignmentCommand(name, visit(ctx.expr()));
 	}
 	
 	@Override public CommandObject<Object> visitAssignUserAlphabet(SequenceAnalyzerParser.AssignUserAlphabetContext ctx) { 
+		if(debugFlag == true) {
+			System.out.println("Visiting AssignUserAlphabet");
+		}
+		
 		System.out.println(ctx.getText());
-		System.out.println("STRING_LITERAL 1 = "+ctx.STRING_LITERAL(0));
+		
+		for(int i=0; ctx.STRING_LITERAL(i)!=null; i++) {
+			System.out.println("STRING_LITERAL "+(i+1)+" = "+ctx.STRING_LITERAL(i));
+		}
+		
 		return visitChildren(ctx); 
 		}
 	
