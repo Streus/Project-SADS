@@ -79,6 +79,6 @@ public class StarProduct
 				strFinal += star1 + subStar2;
 			}
 		}				
-		return strFinal;		
+		return strFinal + star1;		
 	}
 }  
