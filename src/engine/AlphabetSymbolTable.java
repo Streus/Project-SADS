@@ -15,30 +15,30 @@ import engine.SymbolTable;
 public class AlphabetSymbolTable {
 
 	private String currAlphabet = "currAlphabet";
-	SymbolTable<String, ArrayList<Character>> AlphaSymbolTable = new SymbolTable<String, ArrayList<Character>>();
+	SymbolTable<String, ArrayList<String>> AlphaSymbolTable = new SymbolTable<String, ArrayList<String>>();
 	
 	//default
 	public AlphabetSymbolTable() {
 		
-		ArrayList<Character> defaultAlphabet = new ArrayList<>();
-		defaultAlphabet.add('1');
-		defaultAlphabet.add('0');
+		ArrayList<String> defaultAlphabet = new ArrayList<>();
+		defaultAlphabet.add("1");
+		defaultAlphabet.add("0");
 		
 		AlphaSymbolTable.addSymbol(currAlphabet, defaultAlphabet);
 	}
 	
 	//user defined alphabet
-	public AlphabetSymbolTable(ArrayList<Character> constructorAlpha) {
+	public AlphabetSymbolTable(ArrayList<String> constructorAlpha) {
 		
 		AlphaSymbolTable.addSymbol(currAlphabet, constructorAlpha);
 	}
 	
-	public ArrayList<Character> getCurrentAlphabet() {
-		ArrayList<Character> currAlpha = AlphaSymbolTable.get(currAlphabet);
+	public ArrayList<String> getCurrentAlphabet() {
+		ArrayList<String> currAlpha = AlphaSymbolTable.get(currAlphabet);
 		return currAlpha;
 	}
 	
-	public void setCurrentAlphabet(ArrayList<Character> newAlphabet) {   //change to boolean? how to check success/failure?
+	public void setCurrentAlphabet(ArrayList<String> newAlphabet) {   //change to boolean? how to check success/failure?
 		AlphaSymbolTable.addSymbol(currAlphabet, newAlphabet);
 	}
 	
@@ -49,10 +49,10 @@ public class AlphabetSymbolTable {
 	 * @param c - the char to be checked
 	 * @return true if char exists in alphabet, false otherwise
 	 */
-	public boolean isInAlphabet(char c) {
+	public boolean isInAlphabet(String s) {
 		
-		 ArrayList<Character> checkArray = AlphaSymbolTable.get("currAlphabet");
-		 int x = checkArray.indexOf(c);  
+		 ArrayList<String> checkArray = AlphaSymbolTable.get("currAlphabet");
+		 int x = checkArray.indexOf(s);  
 				 
 		 if (x == -1) {
 			 return false;
