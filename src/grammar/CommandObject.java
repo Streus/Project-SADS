@@ -2,7 +2,6 @@ package grammar;
 import java.util.List;
 //Command Objects to processed in the Engine
 
-import engine.RedBlackBST;
 import engine.UniqueSymbolGenerator;
 import engine.PredefinedFunctions.CuttingTimes;
 import engine.PredefinedFunctions.ShiftMaximality;
@@ -13,14 +12,12 @@ import engine.SymbolTable;
 
 //COMMAND HIERARCHY LEVEL 0
 public abstract class CommandObject<T>
-{		
-	protected static RedBlackBST alphaBST;
+{
 	protected static UniqueSymbolGenerator symbolGen;
 	protected static SymbolTable<String, Object> st;
 	
 	static
 	{
-		alphaBST = new RedBlackBST<String, CommandObject<List<String>>>();
 		symbolGen = new UniqueSymbolGenerator();
 		st = new SymbolTable<String, Object>();
 	}
@@ -71,7 +68,6 @@ class AlphabetDefinitionCommand extends VarDefCommand<String>
 	@Override
 	public String execute()
 	{
-		alphaBST.put(alphabetName.toString(), charList);
 		return null; //return message to console?
 	}
 	
