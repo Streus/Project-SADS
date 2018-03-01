@@ -311,9 +311,41 @@ public class MainWindow
 		mnEdit.setMnemonic('e');
 		menuBar.add(mnEdit);
 		
+		JMenuItem mntmInsertFilePath = new JMenuItem("Insert File Path...");
+		mntmInsertFilePath.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_I, InputEvent.CTRL_MASK));
+		mntmInsertFilePath.addActionListener(new ActionListener() {
+			/**
+			 * Browse for a file for which to add a path to in the input line
+			 */
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				JFileChooser chooser = new JFileChooser();
+				chooser.setDialogType(JFileChooser.OPEN_DIALOG);
+				int retVal = chooser.showOpenDialog(frmStringSequenceAnalyzer);
+				File f = null;
+				if(retVal == JFileChooser.APPROVE_OPTION)
+					f = chooser.getSelectedFile();
+				else
+					return;
+				
+				if(!inputLine.getText().endsWith(" "))
+					inputLine.setText(inputLine.getText() + " ");
+				
+				inputLine.setText(inputLine.getText() + f.getAbsolutePath());
+			}
+		});
+		mnEdit.add(mntmInsertFilePath);
+		
 		JMenu mnView = new JMenu("View");
 		mnView.setMnemonic('v');
 		menuBar.add(mnView);
+		
+		JMenu mnHelp = new JMenu("Help");
+		menuBar.add(mnHelp);
+		
+		JMenuItem mntmDocumentation = new JMenuItem("Documentation");
+		mnHelp.add(mntmDocumentation);
 		frmStringSequenceAnalyzer.getContentPane().setLayout(new BoxLayout(frmStringSequenceAnalyzer.getContentPane(), BoxLayout.X_AXIS));
 		
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
@@ -604,6 +636,7 @@ public class MainWindow
 			catch(Exception e)
 			{
 				Console.println("ANTLR interpretation engine encountered an error.", Console.getErr());
+				Console.println(e.getMessage(), Console.getErr());
 				e.printStackTrace();
 			}
 		}

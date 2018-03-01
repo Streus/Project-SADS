@@ -246,7 +246,7 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 	{
 		String baseStr = ctx.arg1.getText();
 		String concatStr = ctx.arg2.getText();
-		int index = Integer.parseInt(ctx.INT().getText());
+		int index = Integer.parseInt(ctx.literal().getText());
 		
 		if(debugFlag == true){
 			System.out.println("baseStr = " + baseStr);
@@ -254,7 +254,7 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 			System.out.println("index = " + index);
 		}
 		
-		return new ConcatenationCommand(visit(ctx.arg1), visit(ctx.arg2), visit(ctx.INT()));
+		return new ConcatenationCommand(visit(ctx.arg1), visit(ctx.arg2), visit(ctx.literal()));
 	}
 	
 	@Override
@@ -304,7 +304,7 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 	@Override public CommandObject<Object> visitPrintCommandInParens(SequenceAnalyzerParser.PrintCommandInParensContext ctx) { 
 		if(debugFlag == true)
 		{
-			System.out.println("Visiting Print Command");
+			System.out.println("Visiting Print CommandInParens");
 		}
 		
 		String command = ctx.cmd().getText();

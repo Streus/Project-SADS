@@ -40,6 +40,7 @@ public final class Console
 		
 		commandList.put("clear", new ClearCommand("clear"));
 		commandList.put("debug", new DebugCommand("debug"));
+		commandList.put("exec", new ExecCommand("exec"));
 		commandList.put("exit", new ExitCommand("exit"));
 		commandList.put("help", new HelpCommand("help"));
 	}
