@@ -33,7 +33,7 @@ predef	:	ct		//cutting times
 		;
 		
 //input must be in format sub (data , data)
-sub		:	'sub' LP arg1=expr COMMA arg2=expr RP			#SubstitutionOfExpression
+sub		:	'sub' LP arg1=expr COMMA arg2=expr COMMA arg3=expr RP			#SubstitutionOfExpression
 		;
 		
 //input must be in format cmp (data , data)
