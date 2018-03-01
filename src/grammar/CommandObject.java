@@ -48,7 +48,7 @@ class VariableAssignmentCommand extends VarDefCommand<Object>
 	@Override
 	public Object execute()
 	{
-		st.addSymbol(varName, value);	
+		st.addSymbol(varName, value.execute());	
 		return value; //return the value?
 	}
 }
