@@ -312,6 +312,7 @@ public class MainWindow
 		menuBar.add(mnEdit);
 		
 		JMenuItem mntmInsertFilePath = new JMenuItem("Insert File Path...");
+		mntmInsertFilePath.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_I, InputEvent.CTRL_MASK));
 		mntmInsertFilePath.addActionListener(new ActionListener() {
 			/**
 			 * Browse for a file for which to add a path to in the input line
