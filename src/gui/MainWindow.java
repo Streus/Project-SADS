@@ -58,6 +58,8 @@ import grammar.AntlrBridge;
 
 public class MainWindow
 {
+	public static final String UNSAVED_INDICATOR = "*";
+	
 	public static boolean DEBUG;
 	
 	private int currentEditor;
@@ -156,6 +158,7 @@ public class MainWindow
 				tabbedPane.setSelectedIndex(1);
 				
 				editors.get(0).open();
+				lblFilename.setText(editors.get(0).getFileName());
 			}
 		});
 		mnFile.add(mntmOpenBatch);
@@ -172,6 +175,7 @@ public class MainWindow
 			public void actionPerformed(ActionEvent e)
 			{
 				editors.get(0).save();
+				lblFilename.setText(editors.get(0).getFileName());
 			}
 		});
 		mnFile.add(mntmSaveBatch);
@@ -185,6 +189,7 @@ public class MainWindow
 			public void actionPerformed(ActionEvent e)
 			{
 				editors.get(0).saveAs();
+				lblFilename.setText(editors.get(0).getFileName());
 			}
 		});
 		mnFile.add(mntmSaveBatchAs);
@@ -404,12 +409,34 @@ public class MainWindow
 		JScrollPane scrollPane_1 = new JScrollPane();
 		editor_view.add(scrollPane_1, "cell 0 1,grow");
 		
-		lblFilename = new JLabel("example.txt");
+		lblFilename = new JLabel("???");
 		lblFilename.setFont(UIManager.getFont("InternalFrame.titleFont"));
 		scrollPane_1.setColumnHeaderView(lblFilename);
 		
 		editorArea = new JTextPane();
 		editorArea.setFont(new Font("Courier New", Font.PLAIN, 13));
+		editorArea.getDocument().addDocumentListener(new DocumentListener() {
+			@Override
+			public void removeUpdate(DocumentEvent e)
+			{
+				if(!lblFilename.getText().endsWith(UNSAVED_INDICATOR))
+					lblFilename.setText(lblFilename.getText() + UNSAVED_INDICATOR);
+			}
+			
+			@Override
+			public void insertUpdate(DocumentEvent e)
+			{
+				if(!lblFilename.getText().endsWith(UNSAVED_INDICATOR))
+					lblFilename.setText(lblFilename.getText() + UNSAVED_INDICATOR);
+			}
+			
+			@Override
+			public void changedUpdate(DocumentEvent e)
+			{
+				if(!lblFilename.getText().endsWith(UNSAVED_INDICATOR))
+					lblFilename.setText(lblFilename.getText() + UNSAVED_INDICATOR);
+			}
+		});
 		editorArea.addCaretListener(new CaretListener() {
 			/**
 			 * Update caret status bar in the editor tab
