@@ -192,7 +192,6 @@ public final class Console
 		catch(BadLocationException ble) { }
 	}
 	
-	
 	/* Instance Methods */
 	private Console()
 	{

@@ -23,6 +23,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
@@ -57,19 +58,15 @@ import grammar.AntlrBridge;
 
 public class MainWindow
 {
-	public static boolean DEBUG;
-
-	//The file most recently opened/saved batch
-	private File currentBatch;
+	public static final String UNSAVED_INDICATOR = "*";
 	
-	//A flag that indicates changes have been made to currentBatch
-	private boolean unsavedChanges;
+	public static boolean DEBUG;
+	
+	private int currentEditor;
+	private ArrayList<Editor> editors;
 	
 	//The file to which output dumps will be saved
 	private File currentOutputDump;
-	
-	//A listener that raises the unsavedChanges flag
-	private DocumentListener changesListener;
 	
 	private JFrame frmStringSequenceAnalyzer;
 	private JTextField inputLine;
@@ -109,31 +106,11 @@ public class MainWindow
 	public MainWindow() {
 		initialize();
 		
-		setCurrentBatch(null);
-		unsavedChanges = false;
+		editors = new ArrayList<Editor>();
+		editors.add(new Editor(editorArea));
+		currentEditor = 0;
 		
 		currentOutputDump = null;
-		
-		changesListener = new DocumentListener() {
-			/**
-			 * Track changes made to the currently open document
-			 */
-			@Override
-			public void changedUpdate(DocumentEvent arg0) {
-				unsavedChanges = true;
-				System.out.println("There are now unsaved changes."); //DEBUG
-			}
-			@Override
-			public void insertUpdate(DocumentEvent arg0) {
-				unsavedChanges = true;
-				System.out.println("There are now unsaved insertions."); //DEBUG
-			}
-			@Override
-			public void removeUpdate(DocumentEvent arg0) {
-				unsavedChanges = true;
-				System.out.println("There are now unsaved deletions."); //DEBUG
-			}
-		};
 		
 		//Create a Console singleton if one has not already been instantiated
 		Console.instance().setFront(outputArea);
@@ -168,22 +145,7 @@ public class MainWindow
 				//select the editor tab
 				tabbedPane.setSelectedIndex(1);
 				
-				//if there are unresolved changes, abort creating a new file
-				if(!resolveUnsavedChanges())
-					return;
-				
-				//prompt the user to provide a file name
-				JFileChooser chooser = new JFileChooser();
-				chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-				chooser.setDialogType(JFileChooser.CUSTOM_DIALOG);
-				int retVal = chooser.showDialog(frmStringSequenceAnalyzer, "Create");
-				File f = null;
-				if(retVal == JFileChooser.APPROVE_OPTION)
-					f = chooser.getSelectedFile();
-				else
-					return;
-				
-				setCurrentBatch(f);
+				//TODO open new editor
 			}
 		});
 		mnFile.add(mntmNewBatch);
@@ -195,37 +157,8 @@ public class MainWindow
 			{
 				tabbedPane.setSelectedIndex(1);
 				
-				//if there are unresolved changes, abort opening a new file
-				if(!resolveUnsavedChanges())
-					return;
-				
-				//dump the contents of the editor
-				editorArea.setText("");
-				
-				//user selects file
-				JFileChooser chooser = new JFileChooser();
-				chooser.setDialogType(JFileChooser.OPEN_DIALOG);
-				int retVal = chooser.showOpenDialog(frmStringSequenceAnalyzer);
-				File f = null;
-				if(retVal == JFileChooser.APPROVE_OPTION)
-					f = chooser.getSelectedFile();
-				else
-					return;
-				
-				//save reference to file for future saves
-				setCurrentBatch(f);
-				
-				//dump file contents into the editorArea
-				try
-				{
-					BufferedReader reader = new BufferedReader(new FileReader(f));
-					editorArea.read(reader, reader);
-					editorArea.getDocument().addDocumentListener(changesListener);
-					reader.close();
-				}
-				catch (IOException e){ e.printStackTrace(); }
-				
-				unsavedChanges = false;
+				editors.get(0).open();
+				lblFilename.setText(editors.get(0).getFileName());
 			}
 		});
 		mnFile.add(mntmOpenBatch);
@@ -241,9 +174,8 @@ public class MainWindow
 			 */
 			public void actionPerformed(ActionEvent e)
 			{
-				//save the contents of editorArea to currentBatch, ifex
-				save(currentBatch, editorArea.getText());
-				unsavedChanges = false;
+				editors.get(0).save();
+				lblFilename.setText(editors.get(0).getFileName());
 			}
 		});
 		mnFile.add(mntmSaveBatch);
@@ -256,8 +188,8 @@ public class MainWindow
 			 */
 			public void actionPerformed(ActionEvent e)
 			{
-				//save the contents of the editorArea to a user-defined file
-				setCurrentBatch(saveAs(editorArea.getText()));
+				editors.get(0).saveAs();
+				lblFilename.setText(editors.get(0).getFileName());
 			}
 		});
 		mnFile.add(mntmSaveBatchAs);
@@ -273,7 +205,8 @@ public class MainWindow
 			 */
 			public void actionPerformed(ActionEvent e)
 			{
-				save(currentOutputDump, outputArea.getText());
+				//TODO saving results
+				//save(currentOutputDump, outputArea.getText());
 			}
 		});
 		mnFile.add(mntmSaveResults);
@@ -286,7 +219,8 @@ public class MainWindow
 			 */
 			public void actionPerformed(ActionEvent e)
 			{
-				currentOutputDump = saveAs(outputArea.getText());
+				//TODO saving results
+				//currentOutputDump = saveAs(outputArea.getText());
 			}
 		});
 		mnFile.add(mntmSaveResultsAs);
@@ -428,7 +362,7 @@ public class MainWindow
 			 */
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				sendInToOut(); //TODO remove debug
+				sendInToOut();
 			}
 		});
 		cli_view.add(btnEnter, "cell 2 3");
@@ -467,7 +401,7 @@ public class MainWindow
 		editorWordWrap.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e)
 			{
-				
+				//TODO editor word wrap
 			}
 		});
 		editorToolBar.add(editorWordWrap);
@@ -475,13 +409,34 @@ public class MainWindow
 		JScrollPane scrollPane_1 = new JScrollPane();
 		editor_view.add(scrollPane_1, "cell 0 1,grow");
 		
-		lblFilename = new JLabel("example.txt");
+		lblFilename = new JLabel("???");
 		lblFilename.setFont(UIManager.getFont("InternalFrame.titleFont"));
 		scrollPane_1.setColumnHeaderView(lblFilename);
 		
 		editorArea = new JTextPane();
 		editorArea.setFont(new Font("Courier New", Font.PLAIN, 13));
-		editorArea.getDocument().addDocumentListener(changesListener);
+		editorArea.getDocument().addDocumentListener(new DocumentListener() {
+			@Override
+			public void removeUpdate(DocumentEvent e)
+			{
+				if(!lblFilename.getText().endsWith(UNSAVED_INDICATOR))
+					lblFilename.setText(lblFilename.getText() + UNSAVED_INDICATOR);
+			}
+			
+			@Override
+			public void insertUpdate(DocumentEvent e)
+			{
+				if(!lblFilename.getText().endsWith(UNSAVED_INDICATOR))
+					lblFilename.setText(lblFilename.getText() + UNSAVED_INDICATOR);
+			}
+			
+			@Override
+			public void changedUpdate(DocumentEvent e)
+			{
+				if(!lblFilename.getText().endsWith(UNSAVED_INDICATOR))
+					lblFilename.setText(lblFilename.getText() + UNSAVED_INDICATOR);
+			}
+		});
 		editorArea.addCaretListener(new CaretListener() {
 			/**
 			 * Update caret status bar in the editor tab
@@ -533,6 +488,7 @@ public class MainWindow
 	/**
 	 * Save the currentBatch. If there is no currentBatch, run saveAs()
 	 */
+	/*
 	private void save(File defaultFile, String source)
 	{
 		if(defaultFile == null)
@@ -550,10 +506,12 @@ public class MainWindow
 		}
 		catch (IOException ioe){ ioe.printStackTrace(); }
 	}
+	*/
 	
 	/**
 	 * Save the contents of editorArea to a file in the file system
 	 */
+	/*
 	private File saveAs(String source)
 	{
 		//user defines save file name and directory
@@ -577,52 +535,8 @@ public class MainWindow
 		
 		return f;
 	}
+	*/
 	
-	/**
-	 * Set the file currently being edited in the editor
-	 */
-	private void setCurrentBatch(File f)
-	{
-		currentBatch = f;
-		if(f != null)
-			lblFilename.setText(currentBatch.getName());
-		else
-			lblFilename.setText("???");
-	}
-	
-	/**
-	 * Check for unsaved changes in the Editor
-	 * 
-	 * @return whether the situation was resolved
-	 */
-	private boolean resolveUnsavedChanges()
-	{
-		//check if any changes have not been saved
-		if(unsavedChanges)
-		{
-			int option = JOptionPane.showConfirmDialog(frmStringSequenceAnalyzer, "There are unsaved changes. Would you like to save?", "Save?", JOptionPane.YES_NO_CANCEL_OPTION);
-			switch(option)
-			{
-			case JOptionPane.YES_OPTION:
-				//save the contents of editorArea
-				save(currentBatch, editorArea.getText());
-				unsavedChanges = false;
-				break;
-				
-			case JOptionPane.NO_OPTION:
-				//just continue with the opening procedure
-				
-				break;
-				
-			case JOptionPane.CANCEL_OPTION:
-				//back out of opening a file
-				return false;
-			}
-		}
-		return true;
-	}
-	
-	//TODO remove debug
 	private void sendInToOut()
 	{
 		if(Console.instance().processInput(inputLine.getText()) == -1)
