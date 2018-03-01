@@ -133,7 +133,6 @@ public class Editor
 	
 	/**
 	 * Opens the specified file in this editor
-	 * @param f - the file to open
 	 * @return the success of the operation
 	 */
 	public boolean open()
