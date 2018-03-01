@@ -62,7 +62,8 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 		System.out.println(ctx.getText());
 		
 		for(int i=0; ctx.STRING_LITERAL(i)!=null; i++) {
-			System.out.println("STRING_LITERAL "+(i+1)+" = "+ctx.STRING_LITERAL(i));
+			String character = ctx.STRING_LITERAL(i).getText().substring(1, ctx.STRING_LITERAL(i).getText().length()-1);
+			System.out.println("STRING_LITERAL "+(i+1)+" = "+character);
 		}
 		
 		return visitChildren(ctx); 
