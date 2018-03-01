@@ -139,12 +139,19 @@ public interface SequenceAnalyzerVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitAssignVariableOfExpression(SequenceAnalyzerParser.AssignVariableOfExpressionContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code AssignUserAlphabet}
+	 * Visit a parse tree produced by the {@code AssignUserAlphabetOfStrings}
 	 * labeled alternative in {@link SequenceAnalyzerParser#assignment}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitAssignUserAlphabet(SequenceAnalyzerParser.AssignUserAlphabetContext ctx);
+	T visitAssignUserAlphabetOfStrings(SequenceAnalyzerParser.AssignUserAlphabetOfStringsContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code AssignUserAlphabetOfInt}
+	 * labeled alternative in {@link SequenceAnalyzerParser#assignment}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAssignUserAlphabetOfInt(SequenceAnalyzerParser.AssignUserAlphabetOfIntContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code RetrieveVariable}
 	 * labeled alternative in {@link SequenceAnalyzerParser#retreival}.

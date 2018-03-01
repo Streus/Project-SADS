@@ -226,17 +226,29 @@ public interface SequenceAnalyzerListener extends ParseTreeListener {
 	 */
 	void exitAssignVariableOfExpression(SequenceAnalyzerParser.AssignVariableOfExpressionContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code AssignUserAlphabet}
+	 * Enter a parse tree produced by the {@code AssignUserAlphabetOfStrings}
 	 * labeled alternative in {@link SequenceAnalyzerParser#assignment}.
 	 * @param ctx the parse tree
 	 */
-	void enterAssignUserAlphabet(SequenceAnalyzerParser.AssignUserAlphabetContext ctx);
+	void enterAssignUserAlphabetOfStrings(SequenceAnalyzerParser.AssignUserAlphabetOfStringsContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code AssignUserAlphabet}
+	 * Exit a parse tree produced by the {@code AssignUserAlphabetOfStrings}
 	 * labeled alternative in {@link SequenceAnalyzerParser#assignment}.
 	 * @param ctx the parse tree
 	 */
-	void exitAssignUserAlphabet(SequenceAnalyzerParser.AssignUserAlphabetContext ctx);
+	void exitAssignUserAlphabetOfStrings(SequenceAnalyzerParser.AssignUserAlphabetOfStringsContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code AssignUserAlphabetOfInt}
+	 * labeled alternative in {@link SequenceAnalyzerParser#assignment}.
+	 * @param ctx the parse tree
+	 */
+	void enterAssignUserAlphabetOfInt(SequenceAnalyzerParser.AssignUserAlphabetOfIntContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code AssignUserAlphabetOfInt}
+	 * labeled alternative in {@link SequenceAnalyzerParser#assignment}.
+	 * @param ctx the parse tree
+	 */
+	void exitAssignUserAlphabetOfInt(SequenceAnalyzerParser.AssignUserAlphabetOfIntContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code RetrieveVariable}
 	 * labeled alternative in {@link SequenceAnalyzerParser#retreival}.

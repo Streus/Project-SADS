@@ -69,7 +69,8 @@ concat	:	'concat' LP arg1=expr COMMA arg2=expr RP			#ConcatOn2Expressions
 		;
 		
 assignment	:	varName=ID ':=' expr  												#AssignVariableOfExpression	
-			|	alphabetName=ID ':=' '{' (STRING_LITERAL ',')*(STRING_LITERAL)'}'	#AssignUserAlphabet
+			|	alphabetName=ID ':=' '{' (STRING_LITERAL ',')*(STRING_LITERAL)'}'	#AssignUserAlphabetOfStrings
+			|	alphabetName=ID ':=' '{' (INT ',')*(INT)'}'							#AssignUserAlphabetOfInt
 			;
 	
 retreival	:	variable=ID		#RetrieveVariable

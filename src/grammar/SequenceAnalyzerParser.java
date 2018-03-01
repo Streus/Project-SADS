@@ -1269,25 +1269,47 @@ public class SequenceAnalyzerParser extends Parser {
 			else return visitor.visitChildren(this);
 		}
 	}
-	public static class AssignUserAlphabetContext extends AssignmentContext {
+	public static class AssignUserAlphabetOfIntContext extends AssignmentContext {
+		public Token alphabetName;
+		public TerminalNode ID() { return getToken(SequenceAnalyzerParser.ID, 0); }
+		public List<TerminalNode> INT() { return getTokens(SequenceAnalyzerParser.INT); }
+		public TerminalNode INT(int i) {
+			return getToken(SequenceAnalyzerParser.INT, i);
+		}
+		public AssignUserAlphabetOfIntContext(AssignmentContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SequenceAnalyzerListener ) ((SequenceAnalyzerListener)listener).enterAssignUserAlphabetOfInt(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SequenceAnalyzerListener ) ((SequenceAnalyzerListener)listener).exitAssignUserAlphabetOfInt(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof SequenceAnalyzerVisitor ) return ((SequenceAnalyzerVisitor<? extends T>)visitor).visitAssignUserAlphabetOfInt(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class AssignUserAlphabetOfStringsContext extends AssignmentContext {
 		public Token alphabetName;
 		public TerminalNode ID() { return getToken(SequenceAnalyzerParser.ID, 0); }
 		public List<TerminalNode> STRING_LITERAL() { return getTokens(SequenceAnalyzerParser.STRING_LITERAL); }
 		public TerminalNode STRING_LITERAL(int i) {
 			return getToken(SequenceAnalyzerParser.STRING_LITERAL, i);
 		}
-		public AssignUserAlphabetContext(AssignmentContext ctx) { copyFrom(ctx); }
+		public AssignUserAlphabetOfStringsContext(AssignmentContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SequenceAnalyzerListener ) ((SequenceAnalyzerListener)listener).enterAssignUserAlphabet(this);
+			if ( listener instanceof SequenceAnalyzerListener ) ((SequenceAnalyzerListener)listener).enterAssignUserAlphabetOfStrings(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SequenceAnalyzerListener ) ((SequenceAnalyzerListener)listener).exitAssignUserAlphabet(this);
+			if ( listener instanceof SequenceAnalyzerListener ) ((SequenceAnalyzerListener)listener).exitAssignUserAlphabetOfStrings(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SequenceAnalyzerVisitor ) return ((SequenceAnalyzerVisitor<? extends T>)visitor).visitAssignUserAlphabet(this);
+			if ( visitor instanceof SequenceAnalyzerVisitor ) return ((SequenceAnalyzerVisitor<? extends T>)visitor).visitAssignUserAlphabetOfStrings(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1297,9 +1319,9 @@ public class SequenceAnalyzerParser extends Parser {
 		enterRule(_localctx, 28, RULE_assignment);
 		try {
 			int _alt;
-			setState(159);
+			setState(171);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,10,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,11,_ctx) ) {
 			case 1:
 				_localctx = new AssignVariableOfExpressionContext(_localctx);
 				enterOuterAlt(_localctx, 1);
@@ -1313,11 +1335,11 @@ public class SequenceAnalyzerParser extends Parser {
 				}
 				break;
 			case 2:
-				_localctx = new AssignUserAlphabetContext(_localctx);
+				_localctx = new AssignUserAlphabetOfStringsContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
 				setState(147);
-				((AssignUserAlphabetContext)_localctx).alphabetName = match(ID);
+				((AssignUserAlphabetOfStringsContext)_localctx).alphabetName = match(ID);
 				setState(148);
 				match(T__8);
 				setState(149);
@@ -1345,6 +1367,42 @@ public class SequenceAnalyzerParser extends Parser {
 				match(STRING_LITERAL);
 				}
 				setState(158);
+				match(T__10);
+				}
+				break;
+			case 3:
+				_localctx = new AssignUserAlphabetOfIntContext(_localctx);
+				enterOuterAlt(_localctx, 3);
+				{
+				setState(159);
+				((AssignUserAlphabetOfIntContext)_localctx).alphabetName = match(ID);
+				setState(160);
+				match(T__8);
+				setState(161);
+				match(T__9);
+				setState(166);
+				_errHandler.sync(this);
+				_alt = getInterpreter().adaptivePredict(_input,10,_ctx);
+				while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
+					if ( _alt==1 ) {
+						{
+						{
+						setState(162);
+						match(INT);
+						setState(163);
+						match(COMMA);
+						}
+						} 
+					}
+					setState(168);
+					_errHandler.sync(this);
+					_alt = getInterpreter().adaptivePredict(_input,10,_ctx);
+				}
+				{
+				setState(169);
+				match(INT);
+				}
+				setState(170);
 				match(T__10);
 				}
 				break;
@@ -1398,7 +1456,7 @@ public class SequenceAnalyzerParser extends Parser {
 			_localctx = new RetrieveVariableContext(_localctx);
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(161);
+			setState(173);
 			((RetrieveVariableContext)_localctx).variable = match(ID);
 			}
 		}
@@ -1441,13 +1499,13 @@ public class SequenceAnalyzerParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(163);
+			setState(175);
 			match(ID);
-			setState(164);
+			setState(176);
 			match(T__11);
-			setState(165);
+			setState(177);
 			match(INT);
-			setState(166);
+			setState(178);
 			match(T__12);
 			}
 		}
@@ -1558,16 +1616,16 @@ public class SequenceAnalyzerParser extends Parser {
 		PrintContext _localctx = new PrintContext(_ctx, getState());
 		enterRule(_localctx, 34, RULE_print);
 		try {
-			setState(182);
+			setState(194);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,11,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,12,_ctx) ) {
 			case 1:
 				_localctx = new PrintArrayContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(168);
+				setState(180);
 				match(T__13);
-				setState(169);
+				setState(181);
 				array();
 				}
 				break;
@@ -1575,13 +1633,13 @@ public class SequenceAnalyzerParser extends Parser {
 				_localctx = new PrintArrayInParensContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(170);
+				setState(182);
 				match(T__13);
-				setState(171);
+				setState(183);
 				match(LP);
-				setState(172);
+				setState(184);
 				array();
-				setState(173);
+				setState(185);
 				match(RP);
 				}
 				break;
@@ -1589,9 +1647,9 @@ public class SequenceAnalyzerParser extends Parser {
 				_localctx = new PrintCommandContext(_localctx);
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(175);
+				setState(187);
 				match(T__13);
-				setState(176);
+				setState(188);
 				cmd();
 				}
 				break;
@@ -1599,13 +1657,13 @@ public class SequenceAnalyzerParser extends Parser {
 				_localctx = new PrintCommandInParensContext(_localctx);
 				enterOuterAlt(_localctx, 4);
 				{
-				setState(177);
+				setState(189);
 				match(T__13);
-				setState(178);
+				setState(190);
 				match(LP);
-				setState(179);
+				setState(191);
 				cmd();
-				setState(180);
+				setState(192);
 				match(RP);
 				}
 				break;
@@ -1674,14 +1732,14 @@ public class SequenceAnalyzerParser extends Parser {
 		LiteralContext _localctx = new LiteralContext(_ctx, getState());
 		enterRule(_localctx, 36, RULE_literal);
 		try {
-			setState(186);
+			setState(198);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case STRING_LITERAL:
 				_localctx = new StringLiteralContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(184);
+				setState(196);
 				((StringLiteralContext)_localctx).value = match(STRING_LITERAL);
 				}
 				break;
@@ -1689,7 +1747,7 @@ public class SequenceAnalyzerParser extends Parser {
 				_localctx = new IntegerLiteralContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(185);
+				setState(197);
 				((IntegerLiteralContext)_localctx).value = match(INT);
 				}
 				break;
@@ -1746,7 +1804,7 @@ public class SequenceAnalyzerParser extends Parser {
 			_localctx = new ExpressionOfCommandContext(_localctx);
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(188);
+			setState(200);
 			cmd();
 			}
 		}
@@ -1762,7 +1820,7 @@ public class SequenceAnalyzerParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\35\u00c1\4\2\t\2"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\35\u00cd\4\2\t\2"+
 		"\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13"+
 		"\t\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22"+
 		"\4\23\t\23\4\24\t\24\4\25\t\25\3\2\3\2\3\3\6\3.\n\3\r\3\16\3/\3\4\3\4"+
@@ -1773,51 +1831,56 @@ public class SequenceAnalyzerParser extends Parser {
 		"\3\r\3\r\5\rx\n\r\3\16\3\16\3\16\3\16\3\16\3\16\3\16\3\17\3\17\3\17\3"+
 		"\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\5\17\u0091"+
 		"\n\17\3\20\3\20\3\20\3\20\3\20\3\20\3\20\3\20\7\20\u009b\n\20\f\20\16"+
-		"\20\u009e\13\20\3\20\3\20\5\20\u00a2\n\20\3\21\3\21\3\22\3\22\3\22\3\22"+
-		"\3\22\3\23\3\23\3\23\3\23\3\23\3\23\3\23\3\23\3\23\3\23\3\23\3\23\3\23"+
-		"\3\23\5\23\u00b9\n\23\3\24\3\24\5\24\u00bd\n\24\3\25\3\25\3\25\2\2\26"+
-		"\2\4\6\b\n\f\16\20\22\24\26\30\32\34\36 \"$&(\2\2\2\u00c3\2*\3\2\2\2\4"+
-		"-\3\2\2\2\6\67\3\2\2\2\b;\3\2\2\2\n?\3\2\2\2\fG\3\2\2\2\16I\3\2\2\2\20"+
-		"P\3\2\2\2\22^\3\2\2\2\24`\3\2\2\2\26n\3\2\2\2\30w\3\2\2\2\32y\3\2\2\2"+
-		"\34\u0090\3\2\2\2\36\u00a1\3\2\2\2 \u00a3\3\2\2\2\"\u00a5\3\2\2\2$\u00b8"+
-		"\3\2\2\2&\u00bc\3\2\2\2(\u00be\3\2\2\2*+\5\4\3\2+\3\3\2\2\2,.\5\6\4\2"+
-		"-,\3\2\2\2./\3\2\2\2/-\3\2\2\2/\60\3\2\2\2\60\5\3\2\2\2\618\5\b\5\2\62"+
-		"8\5\n\6\2\638\5\f\7\2\648\5&\24\2\658\5\"\22\2\668\5$\23\2\67\61\3\2\2"+
-		"\2\67\62\3\2\2\2\67\63\3\2\2\2\67\64\3\2\2\2\67\65\3\2\2\2\67\66\3\2\2"+
-		"\28\7\3\2\2\29<\5\36\20\2:<\5 \21\2;9\3\2\2\2;:\3\2\2\2<\t\3\2\2\2=@\5"+
-		"\16\b\2>@\5\20\t\2?=\3\2\2\2?>\3\2\2\2@\13\3\2\2\2AH\5\22\n\2BH\5\24\13"+
-		"\2CH\5\26\f\2DH\5\30\r\2EH\5\32\16\2FH\5\34\17\2GA\3\2\2\2GB\3\2\2\2G"+
-		"C\3\2\2\2GD\3\2\2\2GE\3\2\2\2GF\3\2\2\2H\r\3\2\2\2IJ\7\3\2\2JK\7\24\2"+
-		"\2KL\5(\25\2LM\7\26\2\2MN\5(\25\2NO\7\25\2\2O\17\3\2\2\2PQ\7\4\2\2QR\7"+
-		"\24\2\2RS\5(\25\2ST\7\26\2\2TU\5(\25\2UV\7\25\2\2V\21\3\2\2\2WX\7\5\2"+
-		"\2X_\5(\25\2YZ\7\5\2\2Z[\7\24\2\2[\\\5(\25\2\\]\7\25\2\2]_\3\2\2\2^W\3"+
-		"\2\2\2^Y\3\2\2\2_\23\3\2\2\2`a\7\6\2\2ab\7\24\2\2bc\5(\25\2cd\7\26\2\2"+
-		"de\5(\25\2ef\7\25\2\2f\25\3\2\2\2gh\7\7\2\2ho\5(\25\2ij\7\7\2\2jk\7\24"+
-		"\2\2kl\5(\25\2lm\7\25\2\2mo\3\2\2\2ng\3\2\2\2ni\3\2\2\2o\27\3\2\2\2pq"+
-		"\7\b\2\2qx\5(\25\2rs\7\b\2\2st\7\24\2\2tu\5(\25\2uv\7\25\2\2vx\3\2\2\2"+
-		"wp\3\2\2\2wr\3\2\2\2x\31\3\2\2\2yz\7\t\2\2z{\7\24\2\2{|\5(\25\2|}\7\26"+
-		"\2\2}~\5(\25\2~\177\7\25\2\2\177\33\3\2\2\2\u0080\u0081\7\n\2\2\u0081"+
-		"\u0082\7\24\2\2\u0082\u0083\5(\25\2\u0083\u0084\7\26\2\2\u0084\u0085\5"+
-		"(\25\2\u0085\u0086\7\25\2\2\u0086\u0091\3\2\2\2\u0087\u0088\7\n\2\2\u0088"+
-		"\u0089\7\24\2\2\u0089\u008a\5(\25\2\u008a\u008b\7\26\2\2\u008b\u008c\5"+
-		"(\25\2\u008c\u008d\7\26\2\2\u008d\u008e\7\22\2\2\u008e\u008f\7\25\2\2"+
-		"\u008f\u0091\3\2\2\2\u0090\u0080\3\2\2\2\u0090\u0087\3\2\2\2\u0091\35"+
-		"\3\2\2\2\u0092\u0093\7\21\2\2\u0093\u0094\7\13\2\2\u0094\u00a2\5(\25\2"+
-		"\u0095\u0096\7\21\2\2\u0096\u0097\7\13\2\2\u0097\u009c\7\f\2\2\u0098\u0099"+
-		"\7\30\2\2\u0099\u009b\7\26\2\2\u009a\u0098\3\2\2\2\u009b\u009e\3\2\2\2"+
-		"\u009c\u009a\3\2\2\2\u009c\u009d\3\2\2\2\u009d\u009f\3\2\2\2\u009e\u009c"+
-		"\3\2\2\2\u009f\u00a0\7\30\2\2\u00a0\u00a2\7\r\2\2\u00a1\u0092\3\2\2\2"+
-		"\u00a1\u0095\3\2\2\2\u00a2\37\3\2\2\2\u00a3\u00a4\7\21\2\2\u00a4!\3\2"+
-		"\2\2\u00a5\u00a6\7\21\2\2\u00a6\u00a7\7\16\2\2\u00a7\u00a8\7\22\2\2\u00a8"+
-		"\u00a9\7\17\2\2\u00a9#\3\2\2\2\u00aa\u00ab\7\20\2\2\u00ab\u00b9\5\"\22"+
-		"\2\u00ac\u00ad\7\20\2\2\u00ad\u00ae\7\24\2\2\u00ae\u00af\5\"\22\2\u00af"+
-		"\u00b0\7\25\2\2\u00b0\u00b9\3\2\2\2\u00b1\u00b2\7\20\2\2\u00b2\u00b9\5"+
-		"\6\4\2\u00b3\u00b4\7\20\2\2\u00b4\u00b5\7\24\2\2\u00b5\u00b6\5\6\4\2\u00b6"+
-		"\u00b7\7\25\2\2\u00b7\u00b9\3\2\2\2\u00b8\u00aa\3\2\2\2\u00b8\u00ac\3"+
-		"\2\2\2\u00b8\u00b1\3\2\2\2\u00b8\u00b3\3\2\2\2\u00b9%\3\2\2\2\u00ba\u00bd"+
-		"\7\30\2\2\u00bb\u00bd\7\22\2\2\u00bc\u00ba\3\2\2\2\u00bc\u00bb\3\2\2\2"+
-		"\u00bd\'\3\2\2\2\u00be\u00bf\5\6\4\2\u00bf)\3\2\2\2\17/\67;?G^nw\u0090"+
-		"\u009c\u00a1\u00b8\u00bc";
+		"\20\u009e\13\20\3\20\3\20\3\20\3\20\3\20\3\20\3\20\7\20\u00a7\n\20\f\20"+
+		"\16\20\u00aa\13\20\3\20\3\20\5\20\u00ae\n\20\3\21\3\21\3\22\3\22\3\22"+
+		"\3\22\3\22\3\23\3\23\3\23\3\23\3\23\3\23\3\23\3\23\3\23\3\23\3\23\3\23"+
+		"\3\23\3\23\5\23\u00c5\n\23\3\24\3\24\5\24\u00c9\n\24\3\25\3\25\3\25\2"+
+		"\2\26\2\4\6\b\n\f\16\20\22\24\26\30\32\34\36 \"$&(\2\2\2\u00d1\2*\3\2"+
+		"\2\2\4-\3\2\2\2\6\67\3\2\2\2\b;\3\2\2\2\n?\3\2\2\2\fG\3\2\2\2\16I\3\2"+
+		"\2\2\20P\3\2\2\2\22^\3\2\2\2\24`\3\2\2\2\26n\3\2\2\2\30w\3\2\2\2\32y\3"+
+		"\2\2\2\34\u0090\3\2\2\2\36\u00ad\3\2\2\2 \u00af\3\2\2\2\"\u00b1\3\2\2"+
+		"\2$\u00c4\3\2\2\2&\u00c8\3\2\2\2(\u00ca\3\2\2\2*+\5\4\3\2+\3\3\2\2\2,"+
+		".\5\6\4\2-,\3\2\2\2./\3\2\2\2/-\3\2\2\2/\60\3\2\2\2\60\5\3\2\2\2\618\5"+
+		"\b\5\2\628\5\n\6\2\638\5\f\7\2\648\5&\24\2\658\5\"\22\2\668\5$\23\2\67"+
+		"\61\3\2\2\2\67\62\3\2\2\2\67\63\3\2\2\2\67\64\3\2\2\2\67\65\3\2\2\2\67"+
+		"\66\3\2\2\28\7\3\2\2\29<\5\36\20\2:<\5 \21\2;9\3\2\2\2;:\3\2\2\2<\t\3"+
+		"\2\2\2=@\5\16\b\2>@\5\20\t\2?=\3\2\2\2?>\3\2\2\2@\13\3\2\2\2AH\5\22\n"+
+		"\2BH\5\24\13\2CH\5\26\f\2DH\5\30\r\2EH\5\32\16\2FH\5\34\17\2GA\3\2\2\2"+
+		"GB\3\2\2\2GC\3\2\2\2GD\3\2\2\2GE\3\2\2\2GF\3\2\2\2H\r\3\2\2\2IJ\7\3\2"+
+		"\2JK\7\24\2\2KL\5(\25\2LM\7\26\2\2MN\5(\25\2NO\7\25\2\2O\17\3\2\2\2PQ"+
+		"\7\4\2\2QR\7\24\2\2RS\5(\25\2ST\7\26\2\2TU\5(\25\2UV\7\25\2\2V\21\3\2"+
+		"\2\2WX\7\5\2\2X_\5(\25\2YZ\7\5\2\2Z[\7\24\2\2[\\\5(\25\2\\]\7\25\2\2]"+
+		"_\3\2\2\2^W\3\2\2\2^Y\3\2\2\2_\23\3\2\2\2`a\7\6\2\2ab\7\24\2\2bc\5(\25"+
+		"\2cd\7\26\2\2de\5(\25\2ef\7\25\2\2f\25\3\2\2\2gh\7\7\2\2ho\5(\25\2ij\7"+
+		"\7\2\2jk\7\24\2\2kl\5(\25\2lm\7\25\2\2mo\3\2\2\2ng\3\2\2\2ni\3\2\2\2o"+
+		"\27\3\2\2\2pq\7\b\2\2qx\5(\25\2rs\7\b\2\2st\7\24\2\2tu\5(\25\2uv\7\25"+
+		"\2\2vx\3\2\2\2wp\3\2\2\2wr\3\2\2\2x\31\3\2\2\2yz\7\t\2\2z{\7\24\2\2{|"+
+		"\5(\25\2|}\7\26\2\2}~\5(\25\2~\177\7\25\2\2\177\33\3\2\2\2\u0080\u0081"+
+		"\7\n\2\2\u0081\u0082\7\24\2\2\u0082\u0083\5(\25\2\u0083\u0084\7\26\2\2"+
+		"\u0084\u0085\5(\25\2\u0085\u0086\7\25\2\2\u0086\u0091\3\2\2\2\u0087\u0088"+
+		"\7\n\2\2\u0088\u0089\7\24\2\2\u0089\u008a\5(\25\2\u008a\u008b\7\26\2\2"+
+		"\u008b\u008c\5(\25\2\u008c\u008d\7\26\2\2\u008d\u008e\7\22\2\2\u008e\u008f"+
+		"\7\25\2\2\u008f\u0091\3\2\2\2\u0090\u0080\3\2\2\2\u0090\u0087\3\2\2\2"+
+		"\u0091\35\3\2\2\2\u0092\u0093\7\21\2\2\u0093\u0094\7\13\2\2\u0094\u00ae"+
+		"\5(\25\2\u0095\u0096\7\21\2\2\u0096\u0097\7\13\2\2\u0097\u009c\7\f\2\2"+
+		"\u0098\u0099\7\30\2\2\u0099\u009b\7\26\2\2\u009a\u0098\3\2\2\2\u009b\u009e"+
+		"\3\2\2\2\u009c\u009a\3\2\2\2\u009c\u009d\3\2\2\2\u009d\u009f\3\2\2\2\u009e"+
+		"\u009c\3\2\2\2\u009f\u00a0\7\30\2\2\u00a0\u00ae\7\r\2\2\u00a1\u00a2\7"+
+		"\21\2\2\u00a2\u00a3\7\13\2\2\u00a3\u00a8\7\f\2\2\u00a4\u00a5\7\22\2\2"+
+		"\u00a5\u00a7\7\26\2\2\u00a6\u00a4\3\2\2\2\u00a7\u00aa\3\2\2\2\u00a8\u00a6"+
+		"\3\2\2\2\u00a8\u00a9\3\2\2\2\u00a9\u00ab\3\2\2\2\u00aa\u00a8\3\2\2\2\u00ab"+
+		"\u00ac\7\22\2\2\u00ac\u00ae\7\r\2\2\u00ad\u0092\3\2\2\2\u00ad\u0095\3"+
+		"\2\2\2\u00ad\u00a1\3\2\2\2\u00ae\37\3\2\2\2\u00af\u00b0\7\21\2\2\u00b0"+
+		"!\3\2\2\2\u00b1\u00b2\7\21\2\2\u00b2\u00b3\7\16\2\2\u00b3\u00b4\7\22\2"+
+		"\2\u00b4\u00b5\7\17\2\2\u00b5#\3\2\2\2\u00b6\u00b7\7\20\2\2\u00b7\u00c5"+
+		"\5\"\22\2\u00b8\u00b9\7\20\2\2\u00b9\u00ba\7\24\2\2\u00ba\u00bb\5\"\22"+
+		"\2\u00bb\u00bc\7\25\2\2\u00bc\u00c5\3\2\2\2\u00bd\u00be\7\20\2\2\u00be"+
+		"\u00c5\5\6\4\2\u00bf\u00c0\7\20\2\2\u00c0\u00c1\7\24\2\2\u00c1\u00c2\5"+
+		"\6\4\2\u00c2\u00c3\7\25\2\2\u00c3\u00c5\3\2\2\2\u00c4\u00b6\3\2\2\2\u00c4"+
+		"\u00b8\3\2\2\2\u00c4\u00bd\3\2\2\2\u00c4\u00bf\3\2\2\2\u00c5%\3\2\2\2"+
+		"\u00c6\u00c9\7\30\2\2\u00c7\u00c9\7\22\2\2\u00c8\u00c6\3\2\2\2\u00c8\u00c7"+
+		"\3\2\2\2\u00c9\'\3\2\2\2\u00ca\u00cb\5\6\4\2\u00cb)\3\2\2\2\20/\67;?G"+
+		"^nw\u0090\u009c\u00a8\u00ad\u00c4\u00c8";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

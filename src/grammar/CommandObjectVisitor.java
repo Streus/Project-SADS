@@ -54,7 +54,7 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 		return new VariableAssignmentCommand(name, visit(ctx.expr()));
 	}
 	
-	@Override public CommandObject<Object> visitAssignUserAlphabet(SequenceAnalyzerParser.AssignUserAlphabetContext ctx) { 
+	@Override public CommandObject<Object> visitAssignUserAlphabetOfStrings(SequenceAnalyzerParser.AssignUserAlphabetOfStringsContext ctx) { 
 		if(debugFlag == true) {
 			System.out.println("Visiting AssignUserAlphabet");
 		}
@@ -64,6 +64,21 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 		for(int i=0; ctx.STRING_LITERAL(i)!=null; i++) {
 			String character = ctx.STRING_LITERAL(i).getText().substring(1, ctx.STRING_LITERAL(i).getText().length()-1);
 			System.out.println("STRING_LITERAL "+(i+1)+" = "+character);
+		}
+		
+		return visitChildren(ctx); 
+		}
+	
+	@Override public CommandObject<Object> visitAssignUserAlphabetOfInt(SequenceAnalyzerParser.AssignUserAlphabetOfIntContext ctx) { 
+		if(debugFlag == true) {
+			System.out.println("Visiting AssignUserAlphabet");
+		}
+		
+		System.out.println(ctx.getText());
+		
+		for(int i=0; ctx.INT(i)!=null; i++) {
+			String character = ctx.INT(i).getText();
+			System.out.println("INT "+(i+1)+" = "+character);
 		}
 		
 		return visitChildren(ctx); 
