@@ -72,7 +72,7 @@ public class Editor
 			}
 		};
 		
-		area.getDocument().addDocumentListener(changesListener);
+		this.area.getDocument().addDocumentListener(changesListener);
 	}
 	
 	/**
@@ -234,5 +234,10 @@ public class Editor
 			}
 		}
 		return true;
+	}
+	
+	public boolean isUnsaved()
+	{
+		return unsavedChanges;
 	}
 }
