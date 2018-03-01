@@ -65,7 +65,7 @@ wordct	:	'wc' LP arg1=expr COMMA arg2=expr RP	#WordCountOfExpression
 		
 //input must be in format concat (data , data) or concat (data , data , index)	
 concat	:	'concat' LP arg1=expr COMMA arg2=expr RP			#ConcatOn2Expressions
-		|	'concat' LP arg1=expr COMMA arg2=expr COMMA INT RP	#ConcatOn2ExpressionsAtIndex
+		|	'concat' LP arg1=expr COMMA arg2=expr COMMA literal RP	#ConcatOn2ExpressionsAtIndex
 		;
 		
 assignment	:	varName=ID ':=' expr  												#AssignVariableOfExpression	

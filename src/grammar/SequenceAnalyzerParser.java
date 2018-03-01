@@ -1153,7 +1153,9 @@ public class SequenceAnalyzerParser extends Parser {
 		public TerminalNode COMMA(int i) {
 			return getToken(SequenceAnalyzerParser.COMMA, i);
 		}
-		public TerminalNode INT() { return getToken(SequenceAnalyzerParser.INT, 0); }
+		public LiteralContext literal() {
+			return getRuleContext(LiteralContext.class,0);
+		}
 		public TerminalNode RP() { return getToken(SequenceAnalyzerParser.RP, 0); }
 		public List<ExprContext> expr() {
 			return getRuleContexts(ExprContext.class);
@@ -1219,7 +1221,7 @@ public class SequenceAnalyzerParser extends Parser {
 				setState(138);
 				match(COMMA);
 				setState(139);
-				match(INT);
+				literal();
 				setState(140);
 				match(RP);
 				}
@@ -1859,7 +1861,7 @@ public class SequenceAnalyzerParser extends Parser {
 		"\7\n\2\2\u0081\u0082\7\24\2\2\u0082\u0083\5(\25\2\u0083\u0084\7\26\2\2"+
 		"\u0084\u0085\5(\25\2\u0085\u0086\7\25\2\2\u0086\u0091\3\2\2\2\u0087\u0088"+
 		"\7\n\2\2\u0088\u0089\7\24\2\2\u0089\u008a\5(\25\2\u008a\u008b\7\26\2\2"+
-		"\u008b\u008c\5(\25\2\u008c\u008d\7\26\2\2\u008d\u008e\7\22\2\2\u008e\u008f"+
+		"\u008b\u008c\5(\25\2\u008c\u008d\7\26\2\2\u008d\u008e\5&\24\2\u008e\u008f"+
 		"\7\25\2\2\u008f\u0091\3\2\2\2\u0090\u0080\3\2\2\2\u0090\u0087\3\2\2\2"+
 		"\u0091\35\3\2\2\2\u0092\u0093\7\21\2\2\u0093\u0094\7\13\2\2\u0094\u00ae"+
 		"\5(\25\2\u0095\u0096\7\21\2\2\u0096\u0097\7\13\2\2\u0097\u009c\7\f\2\2"+
