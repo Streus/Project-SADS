@@ -155,37 +155,7 @@ public class MainWindow
 			{
 				tabbedPane.setSelectedIndex(1);
 				
-				//if there are unresolved changes, abort opening a new file
-				if(!resolveUnsavedChanges())
-					return;
-				
-				//dump the contents of the editor
-				editorArea.setText("");
-				
-				//user selects file
-				JFileChooser chooser = new JFileChooser();
-				chooser.setDialogType(JFileChooser.OPEN_DIALOG);
-				int retVal = chooser.showOpenDialog(frmStringSequenceAnalyzer);
-				File f = null;
-				if(retVal == JFileChooser.APPROVE_OPTION)
-					f = chooser.getSelectedFile();
-				else
-					return;
-				
-				//save reference to file for future saves
-				setCurrentBatch(f);
-				
-				//dump file contents into the editorArea
-				try
-				{
-					BufferedReader reader = new BufferedReader(new FileReader(f));
-					editorArea.read(reader, reader);
-					editorArea.getDocument().addDocumentListener(changesListener);
-					reader.close();
-				}
-				catch (IOException e){ e.printStackTrace(); }
-				
-				unsavedChanges = false;
+				editors.get(0).open();
 			}
 		});
 		mnFile.add(mntmOpenBatch);
@@ -201,9 +171,7 @@ public class MainWindow
 			 */
 			public void actionPerformed(ActionEvent e)
 			{
-				//save the contents of editorArea to currentBatch, ifex
-				save(currentBatch, editorArea.getText());
-				unsavedChanges = false;
+				editors.get(0).save();
 			}
 		});
 		mnFile.add(mntmSaveBatch);
@@ -216,8 +184,7 @@ public class MainWindow
 			 */
 			public void actionPerformed(ActionEvent e)
 			{
-				//save the contents of the editorArea to a user-defined file
-				setCurrentBatch(saveAs(editorArea.getText()));
+				editors.get(0).saveAs();
 			}
 		});
 		mnFile.add(mntmSaveBatchAs);
@@ -233,7 +200,8 @@ public class MainWindow
 			 */
 			public void actionPerformed(ActionEvent e)
 			{
-				save(currentOutputDump, outputArea.getText());
+				//TODO saving results
+				//save(currentOutputDump, outputArea.getText());
 			}
 		});
 		mnFile.add(mntmSaveResults);
@@ -246,7 +214,8 @@ public class MainWindow
 			 */
 			public void actionPerformed(ActionEvent e)
 			{
-				currentOutputDump = saveAs(outputArea.getText());
+				//TODO saving results
+				//currentOutputDump = saveAs(outputArea.getText());
 			}
 		});
 		mnFile.add(mntmSaveResultsAs);
@@ -356,7 +325,7 @@ public class MainWindow
 			 */
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				sendInToOut(); //TODO remove debug
+				sendInToOut();
 			}
 		});
 		cli_view.add(btnEnter, "cell 2 3");
@@ -395,7 +364,7 @@ public class MainWindow
 		editorWordWrap.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e)
 			{
-				
+				//TODO editor word wrap
 			}
 		});
 		editorToolBar.add(editorWordWrap);
@@ -409,7 +378,6 @@ public class MainWindow
 		
 		editorArea = new JTextPane();
 		editorArea.setFont(new Font("Courier New", Font.PLAIN, 13));
-		editorArea.getDocument().addDocumentListener(changesListener);
 		editorArea.addCaretListener(new CaretListener() {
 			/**
 			 * Update caret status bar in the editor tab
@@ -507,54 +475,6 @@ public class MainWindow
 		catch (IOException ioe){ ioe.printStackTrace(); }
 		
 		return f;
-	}
-	*/
-	
-	/**
-	 * Set the file currently being edited in the editor
-	 */
-	/*
-	private void setCurrentBatch(File f)
-	{
-		currentBatch = f;
-		if(f != null)
-			lblFilename.setText(currentBatch.getName());
-		else
-			lblFilename.setText("???");
-	}
-	*/
-	
-	/**
-	 * Check for unsaved changes in the Editor
-	 * 
-	 * @return whether the situation was resolved
-	 */
-	/*
-	private boolean resolveUnsavedChanges()
-	{
-		//check if any changes have not been saved
-		if(unsavedChanges)
-		{
-			int option = JOptionPane.showConfirmDialog(frmStringSequenceAnalyzer, "There are unsaved changes. Would you like to save?", "Save?", JOptionPane.YES_NO_CANCEL_OPTION);
-			switch(option)
-			{
-			case JOptionPane.YES_OPTION:
-				//save the contents of editorArea
-				save(currentBatch, editorArea.getText());
-				unsavedChanges = false;
-				break;
-				
-			case JOptionPane.NO_OPTION:
-				//just continue with the opening procedure
-				
-				break;
-				
-			case JOptionPane.CANCEL_OPTION:
-				//back out of opening a file
-				return false;
-			}
-		}
-		return true;
 	}
 	*/
 	
