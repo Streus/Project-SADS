@@ -1,7 +1,10 @@
 package engine;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
+
 import engine.SymbolTable;
+import gui.Console;
 
 /**
  * AlphabetSymbolTable 
@@ -14,13 +17,13 @@ import engine.SymbolTable;
  */
 public class AlphabetSymbolTable {
 
-	private String currAlphabet = "currAlphabet";
-	SymbolTable<String, ArrayList<String>> AlphaSymbolTable = new SymbolTable<String, ArrayList<String>>();
+	private static String currAlphabet = "currAlphabet";
+	static SymbolTable<String, ArrayList<Object>> AlphaSymbolTable = new SymbolTable<String, ArrayList<Object>>();
 	
 	//default
 	public AlphabetSymbolTable() {
 		
-		ArrayList<String> defaultAlphabet = new ArrayList<>();
+		ArrayList<Object> defaultAlphabet = new ArrayList<>();
 		defaultAlphabet.add("1");
 		defaultAlphabet.add("0");
 		
@@ -28,17 +31,17 @@ public class AlphabetSymbolTable {
 	}
 	
 	//user defined alphabet
-	public AlphabetSymbolTable(ArrayList<String> constructorAlpha) {
+	public AlphabetSymbolTable(ArrayList<Object> constructorAlpha) {
 		
 		AlphaSymbolTable.addSymbol(currAlphabet, constructorAlpha);
 	}
 	
-	public ArrayList<String> getCurrentAlphabet() {
-		ArrayList<String> currAlpha = AlphaSymbolTable.get(currAlphabet);
+	public static ArrayList<Object> getCurrentAlphabet() {
+		ArrayList<Object> currAlpha = AlphaSymbolTable.get(currAlphabet);
 		return currAlpha;
 	}
 	
-	public void setCurrentAlphabet(ArrayList<String> newAlphabet) {   //change to boolean? how to check success/failure?
+	public static void setCurrentAlphabet(ArrayList<Object> newAlphabet) {   //change to boolean? how to check success/failure?
 		AlphaSymbolTable.addSymbol(currAlphabet, newAlphabet);
 	}
 	
@@ -46,12 +49,12 @@ public class AlphabetSymbolTable {
 	 * Method to determine if a specific character 
 	 * exists in the current alphabet 
 	 * 
-	 * @param c - the char to be checked
+	 * @param s - the String to be checked
 	 * @return true if char exists in alphabet, false otherwise
 	 */
-	public boolean isInAlphabet(String s) {
+	public boolean isInAlphabet(Object s) {
 		
-		 ArrayList<String> checkArray = AlphaSymbolTable.get("currAlphabet");
+		 ArrayList<Object> checkArray = AlphaSymbolTable.get("currAlphabet");
 		 int x = checkArray.indexOf(s);  
 				 
 		 if (x == -1) {
@@ -59,6 +62,37 @@ public class AlphabetSymbolTable {
 		 }
 		 else return true;
 	 }
+	
+	public static void printAlphabet() {
+		ArrayList<Object> printAlpha = getCurrentAlphabet();
+		String alphabetString = printAlpha.stream().map(Object::toString).collect(Collectors.joining(", "));
+		System.out.print("Current Alphabet: " + alphabetString);
+		
+	}
+	
+//	public static void main(String[] args) {
+//		ArrayList<Object> stringAlpha = new ArrayList<Object>();
+//		stringAlpha.add("1");
+//		stringAlpha.add("0");
+//		setCurrentAlphabet(stringAlpha);
+//		printAlphabet();
+//		
+//		ArrayList<Object> intAlpha = new ArrayList<Object>();
+//		int one = 1;
+//		int zero = 0;
+//		intAlpha.add(one);
+//		intAlpha.add(zero);
+//		setCurrentAlphabet(intAlpha);
+//		printAlphabet();
+//		
+//		Object first = intAlpha.get(1);
+//		boolean check = first instanceof Integer;
+//		System.out.print(check);
+//		
+//		System.out.print(stringAlpha.get(1) instanceof String);
+//	}
 }
+
+
 
  

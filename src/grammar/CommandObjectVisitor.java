@@ -1,6 +1,10 @@
 package grammar;
 
+import java.util.ArrayList;
+
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
+
+import engine.AlphabetSymbolTable;
 import gui.Console;
 
 public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObject>
@@ -58,14 +62,17 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 		if(debugFlag == true) {
 			System.out.println("Visiting AssignUserAlphabet");
 		}
-		
+		ArrayList<Object> stringAlpha = new ArrayList<Object>();
 		System.out.println(ctx.getText());
 		
 		for(int i=0; ctx.STRING_LITERAL(i)!=null; i++) {
 			String character = ctx.STRING_LITERAL(i).getText().substring(1, ctx.STRING_LITERAL(i).getText().length()-1);
 			System.out.println("STRING_LITERAL "+(i+1)+" = "+character);
+			stringAlpha.add(character);
 		}
 		
+		AlphabetSymbolTable.setCurrentAlphabet(stringAlpha);
+		AlphabetSymbolTable.printAlphabet();
 		return visitChildren(ctx); 
 		}
 	
@@ -73,14 +80,17 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 		if(debugFlag == true) {
 			System.out.println("Visiting AssignUserAlphabet");
 		}
-		
+		ArrayList<Object> intAlpha = new ArrayList<Object>();
 		System.out.println(ctx.getText());
 		
 		for(int i=0; ctx.INT(i)!=null; i++) {
 			String character = ctx.INT(i).getText();
 			System.out.println("INT "+(i+1)+" = "+character);
+			int intChar = Integer.valueOf(character);
+			intAlpha.add(intChar);	
 		}
-		
+		AlphabetSymbolTable.setCurrentAlphabet(intAlpha);
+		AlphabetSymbolTable.printAlphabet();
 		return visitChildren(ctx); 
 		}
 	
