@@ -97,15 +97,17 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 	@Override
     public CommandObject<String> visitSubstitutionOfExpression(SequenceAnalyzerParser.SubstitutionOfExpressionContext ctx)
 	{
-		String target = ctx.arg1.getText();
-		String replacement = ctx.arg2.getText();
+		String startString = ctx.arg1.getText();
+		String rule1 = ctx.arg2.getText();
+		String rule2 = ctx.arg3.getText();
 		
 		if(debugFlag == true){
-			System.out.println("target = " + target);
-			System.out.println("replacement = " + replacement);
+			System.out.println("startString = " + startString);
+			System.out.println("rule1 = " + rule1);
+			System.out.println("rule2 = " + rule2);
 		}
 		
-		return new SubstitutionCommand(visit(ctx.arg1), visit(ctx.arg2));
+		return new SubstitutionCommand(visit(ctx.arg1), visit(ctx.arg2), visit(ctx.arg3));
 	}
 
 	@Override
