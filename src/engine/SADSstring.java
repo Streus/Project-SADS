@@ -25,7 +25,7 @@ abstract public class SADSstring
 		return strFinal;
 	}
 	
-	public String Substitution(tring startStr, String r1, String r2)
+	public String Substitution(String startStr, String r1, String r2)
 	{
 		String strFinal = "";
 	
