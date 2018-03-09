@@ -5,7 +5,7 @@ package engine;
 *  Result: 1101001
 */
 
-abstract public class SADSstring 
+public class SADSstring 
 {
 	public static String Generate1(String rule1, String rule2, String startingString, int length)
 	{
