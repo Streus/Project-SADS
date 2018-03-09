@@ -9,6 +9,9 @@ import engine.PredefinedFunctions.StarProduct;
 import engine.PredefinedFunctions.WordCount;
 import engine.command.CommandResponse;
 import engine.SymbolTable;
+import engine.Concatenation;
+import engine.SADSstring;
+import engine.Compare;
 
 //COMMAND HIERARCHY LEVEL 0
 public abstract class CommandObject<T>
@@ -75,19 +78,22 @@ class AlphabetDefinitionCommand extends VarDefCommand<String>
 
 class SubstitutionCommand extends StringCommand
 {
-	private CommandObject<String> target, replacement;
+	private CommandObject<String> startString, rule1, rule2;
 
-	public SubstitutionCommand (CommandObject<String> target, CommandObject<String> replacement)
+	public SubstitutionCommand (CommandObject<String> startString, CommandObject<String> rule1, CommandObject<String> rule2)
 	{
-		this.target = target;
-		this.replacement = replacement;
+		this.startString = startString;
+		this.rule1 = rule1;
+		this.rule2 = rule2;
 	}
 
 	@Override
 	public String execute()
 	{
-		//TODO
-		return null;
+		SADSstring sad = new SADSstring();
+		
+		CommandResponse resp = new CommandResponse(sad.Substitution(startString.execute(), rule1.execute(), rule2.execute()));
+		return resp.returnVal;
 	}
 }
 
@@ -104,8 +110,10 @@ class CompareCommand extends StringCommand
 	@Override
 	public String execute()
 	{
-		//TODO
-		return null;
+		Compare cmp = new Compare();
+		
+		CommandResponse resp = new CommandResponse(cmp.compareStrings(str1.execute(), str2.execute()));
+		return resp.returnVal;
 	}
 }
 
@@ -230,8 +238,18 @@ class ConcatenationCommand extends PredefinedFunctionCommand
 	@Override
 	public String execute()
 	{
-		//TODO
-		return null;
+		Concatenation concat = new Concatenation();
+		
+		if (index == null)
+		{	
+			CommandResponse resp = new CommandResponse(concat.concat(baseStr.execute(), concatStr.execute()));
+			return resp.returnVal;			
+		}
+		else
+		{
+			CommandResponse resp = new CommandResponse(concat.concatAtIndex(baseStr.execute(), concatStr.execute(), index.execute().intValue()));
+			return resp.returnVal;
+		}
 	}
 }
 
