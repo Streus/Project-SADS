@@ -24,4 +24,22 @@ abstract public class SADSstring
 		}
 		return strFinal;
 	}
+	
+	public String Substitution(tring startStr, String r1, String r2)
+	{
+		String strFinal = "";
+	
+		for (int i = 0; i < startStr.length(); i++)
+		{
+			if(startStr.charAt(i) == '0')
+			{
+				strFinal += r1;
+			}
+			else
+			{
+				strFinal += r2;
+			}
+		}		
+		return strFinal;		
+	}
 }  
