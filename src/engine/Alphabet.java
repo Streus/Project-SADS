@@ -3,7 +3,8 @@ package engine;
 import gui.Console;
 
 /**
- * 
+ * Represents an Alphabet structure, which contains a set of characters, which are arrangements of symbols,
+ * and a set of rules, which are used to generate higher level Alphabets with more complex characters
  * @author Sam 'Streus' Streed
  *
  */
