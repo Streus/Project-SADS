@@ -112,6 +112,10 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 				arrowSplitString[j] = arrowSplitString[j].replaceAll("\"", "");
 			}
 			map.put(arrowSplitString[0], arrowSplitString[1]);
+			if(debugFlag == true) {
+				System.out.println("arrowSplitString[0] = "+arrowSplitString[0]);
+				System.out.println("arrowSplitString[1] = "+arrowSplitString[1]);
+			}
 		}
 		
 		if(debugFlag == true){
@@ -119,7 +123,7 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 			System.out.println("mapping = " + mapping);
 		}
 		
-		return new SubstitutionCommand(visit(ctx.arg1), map);
+		return /*new SubstitutionCommand(visit(ctx.arg1), map)*/null;
 	}
 
 	@Override
