@@ -13,6 +13,7 @@ cmd		:	//first branch of command hierarchy
 		|	predef			//predefined function
 		|	literal			//string literal
 		|	array
+		|	rules
 		|	print			
 		;
 		
@@ -69,15 +70,21 @@ concat	:	'concat' LP arg1=expr COMMA arg2=expr RP			#ConcatOn2Expressions
 		;
 		
 assignment	:	varName=ID ':=' expr  												#AssignVariableOfExpression	
-			|	alphabetName=ID ':=' '{' (STRING_LITERAL ',')*(STRING_LITERAL)'}'	#AssignUserAlphabetOfStrings
-			|	alphabetName=ID ':=' '{' (INT ',')*(INT)'}'							#AssignUserAlphabetOfInt
 			;
 	
 retreival	:	variable=ID		#RetrieveVariable
 			;
 
-array	:	ID '[' INT ']'
+array	:	'def' LP LCB (STRING_LITERAL ',')*(STRING_LITERAL) RCB RP				#AssignUserAlphabetOfStrings		
+		|	'def' LP LCB (STRING_LITERAL ',')*(STRING_LITERAL) RCB ',' (rules)+ RP	#AssignUserAlphabetOfStringsWithRules		
+		|	ID '[' INT ']'										#AccessArray
 		;
+		
+two_d_array	:	'def' LP (LCB (INT ',')*(INT) RCB *(LCB (INT ',')*(INT) RCB	)) RP			#Assign2DArray
+			;
+			
+rules	: 'r' LP (INT ',')* (INT) RP
+		;		
 			
 print	:	'print' array			#PrintArray
 		|	'print' LP array RP		#PrintArrayInParens		
@@ -100,6 +107,8 @@ INT 	:   [0-9]+ ;         // match integers
 STRING	:	(LETTER | INT)+;
 LP		:	'(';			//assigns token name to left parenthesis
 RP		:	')';			//assigns token name to right parenthesis
+LCB		:	'{';			//assigns token name to left curly bracket
+RCB		:	'}';			//assigns token name to right curly bracket
 COMMA	:	',';			//assigns token name to comma
 DBQUOTE	:	'"';
 STRING_LITERAL : '"' (~('"' | '\\' | '\r' | '\n') | '\\' ('"' | '\\'))* '"';

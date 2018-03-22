@@ -222,6 +222,9 @@ public class SequenceAnalyzerParser extends Parser {
 		public ArrayContext array() {
 			return getRuleContext(ArrayContext.class,0);
 		}
+		public RulesContext rules() {
+			return getRuleContext(RulesContext.class,0);
+		}
 		public PrintContext print() {
 			return getRuleContext(PrintContext.class,0);
 		}
@@ -587,6 +590,11 @@ public class SequenceAnalyzerParser extends Parser {
 			setState(77);
 			alpha_mapping();
 			setState(78);
+=======
+			setState(80);
+			match(ALPHA_MAPPING);
+			setState(81);
+>>>>>>> Stashed changes
 			match(RP);
 			}
 		}
@@ -647,6 +655,7 @@ public class SequenceAnalyzerParser extends Parser {
 			_localctx = new ComparisonOfExpressionContext(_localctx);
 			enterOuterAlt(_localctx, 1);
 			{
+<<<<<<< Updated upstream
 			setState(80);
 			match(T__1);
 			setState(81);
@@ -658,6 +667,19 @@ public class SequenceAnalyzerParser extends Parser {
 			setState(84);
 			((ComparisonOfExpressionContext)_localctx).arg2 = expr();
 			setState(85);
+=======
+			setState(83);
+			match(T__1);
+			setState(84);
+			match(LP);
+			setState(85);
+			((ComparisonOfExpressionContext)_localctx).arg1 = expr();
+			setState(86);
+			match(COMMA);
+			setState(87);
+			((ComparisonOfExpressionContext)_localctx).arg2 = expr();
+			setState(88);
+>>>>>>> Stashed changes
 			match(RP);
 			}
 		}
@@ -730,16 +752,26 @@ public class SequenceAnalyzerParser extends Parser {
 		CtContext _localctx = new CtContext(_ctx, getState());
 		enterRule(_localctx, 16, RULE_ct);
 		try {
+<<<<<<< Updated upstream
 			setState(94);
+=======
+			setState(97);
+>>>>>>> Stashed changes
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,5,_ctx) ) {
 			case 1:
 				_localctx = new CuttingTimesOfExpressionContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
+<<<<<<< Updated upstream
 				setState(87);
 				match(T__2);
 				setState(88);
+=======
+				setState(90);
+				match(T__2);
+				setState(91);
+>>>>>>> Stashed changes
 				((CuttingTimesOfExpressionContext)_localctx).arg1 = expr();
 				}
 				break;
@@ -747,6 +779,7 @@ public class SequenceAnalyzerParser extends Parser {
 				_localctx = new CuttingTimesOfExpressionInParensContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
+<<<<<<< Updated upstream
 				setState(89);
 				match(T__2);
 				setState(90);
@@ -754,6 +787,15 @@ public class SequenceAnalyzerParser extends Parser {
 				setState(91);
 				((CuttingTimesOfExpressionInParensContext)_localctx).arg1 = expr();
 				setState(92);
+=======
+				setState(92);
+				match(T__2);
+				setState(93);
+				match(LP);
+				setState(94);
+				((CuttingTimesOfExpressionInParensContext)_localctx).arg1 = expr();
+				setState(95);
+>>>>>>> Stashed changes
 				match(RP);
 				}
 				break;
@@ -816,6 +858,7 @@ public class SequenceAnalyzerParser extends Parser {
 			_localctx = new StarProductOfExpressionsContext(_localctx);
 			enterOuterAlt(_localctx, 1);
 			{
+<<<<<<< Updated upstream
 			setState(96);
 			match(T__3);
 			setState(97);
@@ -827,6 +870,19 @@ public class SequenceAnalyzerParser extends Parser {
 			setState(100);
 			((StarProductOfExpressionsContext)_localctx).arg2 = expr();
 			setState(101);
+=======
+			setState(99);
+			match(T__3);
+			setState(100);
+			match(LP);
+			setState(101);
+			((StarProductOfExpressionsContext)_localctx).arg1 = expr();
+			setState(102);
+			match(COMMA);
+			setState(103);
+			((StarProductOfExpressionsContext)_localctx).arg2 = expr();
+			setState(104);
+>>>>>>> Stashed changes
 			match(RP);
 			}
 		}
@@ -899,16 +955,26 @@ public class SequenceAnalyzerParser extends Parser {
 		BuildContext _localctx = new BuildContext(_ctx, getState());
 		enterRule(_localctx, 20, RULE_build);
 		try {
+<<<<<<< Updated upstream
 			setState(110);
+=======
+			setState(113);
+>>>>>>> Stashed changes
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,6,_ctx) ) {
 			case 1:
 				_localctx = new BuildExpressionContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
+<<<<<<< Updated upstream
 				setState(103);
 				match(T__4);
 				setState(104);
+=======
+				setState(106);
+				match(T__4);
+				setState(107);
+>>>>>>> Stashed changes
 				((BuildExpressionContext)_localctx).arg1 = expr();
 				}
 				break;
@@ -916,6 +982,7 @@ public class SequenceAnalyzerParser extends Parser {
 				_localctx = new BuildExpressionInParensContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
+<<<<<<< Updated upstream
 				setState(105);
 				match(T__4);
 				setState(106);
@@ -923,6 +990,15 @@ public class SequenceAnalyzerParser extends Parser {
 				setState(107);
 				((BuildExpressionInParensContext)_localctx).arg1 = expr();
 				setState(108);
+=======
+				setState(108);
+				match(T__4);
+				setState(109);
+				match(LP);
+				setState(110);
+				((BuildExpressionInParensContext)_localctx).arg1 = expr();
+				setState(111);
+>>>>>>> Stashed changes
 				match(RP);
 				}
 				break;
@@ -997,16 +1073,26 @@ public class SequenceAnalyzerParser extends Parser {
 		SmContext _localctx = new SmContext(_ctx, getState());
 		enterRule(_localctx, 22, RULE_sm);
 		try {
+<<<<<<< Updated upstream
 			setState(119);
+=======
+			setState(122);
+>>>>>>> Stashed changes
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,7,_ctx) ) {
 			case 1:
 				_localctx = new ShiftMaximalityOfExpressionContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
+<<<<<<< Updated upstream
 				setState(112);
 				match(T__5);
 				setState(113);
+=======
+				setState(115);
+				match(T__5);
+				setState(116);
+>>>>>>> Stashed changes
 				((ShiftMaximalityOfExpressionContext)_localctx).arg1 = expr();
 				}
 				break;
@@ -1014,6 +1100,7 @@ public class SequenceAnalyzerParser extends Parser {
 				_localctx = new ShiftMaximalityOfExpressionInParensContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
+<<<<<<< Updated upstream
 				setState(114);
 				match(T__5);
 				setState(115);
@@ -1021,6 +1108,15 @@ public class SequenceAnalyzerParser extends Parser {
 				setState(116);
 				((ShiftMaximalityOfExpressionInParensContext)_localctx).arg1 = expr();
 				setState(117);
+=======
+				setState(117);
+				match(T__5);
+				setState(118);
+				match(LP);
+				setState(119);
+				((ShiftMaximalityOfExpressionInParensContext)_localctx).arg1 = expr();
+				setState(120);
+>>>>>>> Stashed changes
 				match(RP);
 				}
 				break;
@@ -1083,6 +1179,7 @@ public class SequenceAnalyzerParser extends Parser {
 			_localctx = new WordCountOfExpressionContext(_localctx);
 			enterOuterAlt(_localctx, 1);
 			{
+<<<<<<< Updated upstream
 			setState(121);
 			match(T__6);
 			setState(122);
@@ -1094,6 +1191,19 @@ public class SequenceAnalyzerParser extends Parser {
 			setState(125);
 			((WordCountOfExpressionContext)_localctx).arg2 = expr();
 			setState(126);
+=======
+			setState(124);
+			match(T__6);
+			setState(125);
+			match(LP);
+			setState(126);
+			((WordCountOfExpressionContext)_localctx).arg1 = expr();
+			setState(127);
+			match(COMMA);
+			setState(128);
+			((WordCountOfExpressionContext)_localctx).arg2 = expr();
+			setState(129);
+>>>>>>> Stashed changes
 			match(RP);
 			}
 		}
@@ -1184,13 +1294,18 @@ public class SequenceAnalyzerParser extends Parser {
 		ConcatContext _localctx = new ConcatContext(_ctx, getState());
 		enterRule(_localctx, 26, RULE_concat);
 		try {
+<<<<<<< Updated upstream
 			setState(144);
+=======
+			setState(147);
+>>>>>>> Stashed changes
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case T__7:
 				_localctx = new ConcatOn2ExpressionsContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
+<<<<<<< Updated upstream
 				setState(128);
 				match(T__7);
 				setState(129);
@@ -1202,6 +1317,19 @@ public class SequenceAnalyzerParser extends Parser {
 				setState(132);
 				((ConcatOn2ExpressionsContext)_localctx).arg2 = expr();
 				setState(133);
+=======
+				setState(131);
+				match(T__7);
+				setState(132);
+				match(LP);
+				setState(133);
+				((ConcatOn2ExpressionsContext)_localctx).arg1 = expr();
+				setState(134);
+				match(COMMA);
+				setState(135);
+				((ConcatOn2ExpressionsContext)_localctx).arg2 = expr();
+				setState(136);
+>>>>>>> Stashed changes
 				match(RP);
 				}
 				break;
@@ -1209,6 +1337,7 @@ public class SequenceAnalyzerParser extends Parser {
 				_localctx = new ConcatOn2ExpressionsAtIndexContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
+<<<<<<< Updated upstream
 				setState(135);
 				match(T__8);
 				setState(136);
@@ -1224,6 +1353,23 @@ public class SequenceAnalyzerParser extends Parser {
 				setState(141);
 				literal();
 				setState(142);
+=======
+				setState(138);
+				match(T__8);
+				setState(139);
+				match(LP);
+				setState(140);
+				((ConcatOn2ExpressionsAtIndexContext)_localctx).arg1 = expr();
+				setState(141);
+				match(COMMA);
+				setState(142);
+				((ConcatOn2ExpressionsAtIndexContext)_localctx).arg2 = expr();
+				setState(143);
+				match(COMMA);
+				setState(144);
+				literal();
+				setState(145);
+>>>>>>> Stashed changes
 				match(RP);
 				}
 				break;
@@ -1274,143 +1420,20 @@ public class SequenceAnalyzerParser extends Parser {
 			else return visitor.visitChildren(this);
 		}
 	}
-	public static class AssignUserAlphabetOfIntContext extends AssignmentContext {
-		public Token alphabetName;
-		public TerminalNode ID() { return getToken(SequenceAnalyzerParser.ID, 0); }
-		public List<TerminalNode> INT() { return getTokens(SequenceAnalyzerParser.INT); }
-		public TerminalNode INT(int i) {
-			return getToken(SequenceAnalyzerParser.INT, i);
-		}
-		public AssignUserAlphabetOfIntContext(AssignmentContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SequenceAnalyzerListener ) ((SequenceAnalyzerListener)listener).enterAssignUserAlphabetOfInt(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SequenceAnalyzerListener ) ((SequenceAnalyzerListener)listener).exitAssignUserAlphabetOfInt(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SequenceAnalyzerVisitor ) return ((SequenceAnalyzerVisitor<? extends T>)visitor).visitAssignUserAlphabetOfInt(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	public static class AssignUserAlphabetOfStringsContext extends AssignmentContext {
-		public Token alphabetName;
-		public TerminalNode ID() { return getToken(SequenceAnalyzerParser.ID, 0); }
-		public List<TerminalNode> STRING_LITERAL() { return getTokens(SequenceAnalyzerParser.STRING_LITERAL); }
-		public TerminalNode STRING_LITERAL(int i) {
-			return getToken(SequenceAnalyzerParser.STRING_LITERAL, i);
-		}
-		public AssignUserAlphabetOfStringsContext(AssignmentContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SequenceAnalyzerListener ) ((SequenceAnalyzerListener)listener).enterAssignUserAlphabetOfStrings(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SequenceAnalyzerListener ) ((SequenceAnalyzerListener)listener).exitAssignUserAlphabetOfStrings(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SequenceAnalyzerVisitor ) return ((SequenceAnalyzerVisitor<? extends T>)visitor).visitAssignUserAlphabetOfStrings(this);
-			else return visitor.visitChildren(this);
-		}
-	}
 
 	public final AssignmentContext assignment() throws RecognitionException {
 		AssignmentContext _localctx = new AssignmentContext(_ctx, getState());
 		enterRule(_localctx, 28, RULE_assignment);
 		try {
-			int _alt;
-			setState(173);
-			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,11,_ctx) ) {
-			case 1:
-				_localctx = new AssignVariableOfExpressionContext(_localctx);
-				enterOuterAlt(_localctx, 1);
-				{
-				setState(146);
-				((AssignVariableOfExpressionContext)_localctx).varName = match(ID);
-				setState(147);
-				match(T__9);
-				setState(148);
-				expr();
-				}
-				break;
-			case 2:
-				_localctx = new AssignUserAlphabetOfStringsContext(_localctx);
-				enterOuterAlt(_localctx, 2);
-				{
-				setState(149);
-				((AssignUserAlphabetOfStringsContext)_localctx).alphabetName = match(ID);
-				setState(150);
-				match(T__9);
-				setState(151);
-				match(T__10);
-				setState(156);
-				_errHandler.sync(this);
-				_alt = getInterpreter().adaptivePredict(_input,9,_ctx);
-				while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
-					if ( _alt==1 ) {
-						{
-						{
-						setState(152);
-						match(STRING_LITERAL);
-						setState(153);
-						match(COMMA);
-						}
-						} 
-					}
-					setState(158);
-					_errHandler.sync(this);
-					_alt = getInterpreter().adaptivePredict(_input,9,_ctx);
-				}
-				{
-				setState(159);
-				match(STRING_LITERAL);
-				}
-				setState(160);
-				match(T__11);
-				}
-				break;
-			case 3:
-				_localctx = new AssignUserAlphabetOfIntContext(_localctx);
-				enterOuterAlt(_localctx, 3);
-				{
-				setState(161);
-				((AssignUserAlphabetOfIntContext)_localctx).alphabetName = match(ID);
-				setState(162);
-				match(T__9);
-				setState(163);
-				match(T__10);
-				setState(168);
-				_errHandler.sync(this);
-				_alt = getInterpreter().adaptivePredict(_input,10,_ctx);
-				while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
-					if ( _alt==1 ) {
-						{
-						{
-						setState(164);
-						match(INT);
-						setState(165);
-						match(COMMA);
-						}
-						} 
-					}
-					setState(170);
-					_errHandler.sync(this);
-					_alt = getInterpreter().adaptivePredict(_input,10,_ctx);
-				}
-				{
-				setState(171);
-				match(INT);
-				}
-				setState(172);
-				match(T__11);
-				}
-				break;
+			_localctx = new AssignVariableOfExpressionContext(_localctx);
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(149);
+			((AssignVariableOfExpressionContext)_localctx).varName = match(ID);
+			setState(150);
+			match(T__9);
+			setState(151);
+			expr();
 			}
 		}
 		catch (RecognitionException re) {
@@ -1461,7 +1484,7 @@ public class SequenceAnalyzerParser extends Parser {
 			_localctx = new RetrieveVariableContext(_localctx);
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(175);
+			setState(153);
 			((RetrieveVariableContext)_localctx).variable = match(ID);
 			}
 		}
@@ -1477,23 +1500,85 @@ public class SequenceAnalyzerParser extends Parser {
 	}
 
 	public static class ArrayContext extends ParserRuleContext {
-		public TerminalNode ID() { return getToken(SequenceAnalyzerParser.ID, 0); }
-		public TerminalNode INT() { return getToken(SequenceAnalyzerParser.INT, 0); }
 		public ArrayContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_array; }
+	 
+		public ArrayContext() { }
+		public void copyFrom(ArrayContext ctx) {
+			super.copyFrom(ctx);
+		}
+	}
+	public static class AssignUserAlphabetOfStringsWithRulesContext extends ArrayContext {
+		public TerminalNode LP() { return getToken(SequenceAnalyzerParser.LP, 0); }
+		public TerminalNode LCB() { return getToken(SequenceAnalyzerParser.LCB, 0); }
+		public TerminalNode RCB() { return getToken(SequenceAnalyzerParser.RCB, 0); }
+		public TerminalNode RP() { return getToken(SequenceAnalyzerParser.RP, 0); }
+		public List<TerminalNode> STRING_LITERAL() { return getTokens(SequenceAnalyzerParser.STRING_LITERAL); }
+		public TerminalNode STRING_LITERAL(int i) {
+			return getToken(SequenceAnalyzerParser.STRING_LITERAL, i);
+		}
+		public List<RulesContext> rules() {
+			return getRuleContexts(RulesContext.class);
+		}
+		public RulesContext rules(int i) {
+			return getRuleContext(RulesContext.class,i);
+		}
+		public AssignUserAlphabetOfStringsWithRulesContext(ArrayContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SequenceAnalyzerListener ) ((SequenceAnalyzerListener)listener).enterArray(this);
+			if ( listener instanceof SequenceAnalyzerListener ) ((SequenceAnalyzerListener)listener).enterAssignUserAlphabetOfStringsWithRules(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SequenceAnalyzerListener ) ((SequenceAnalyzerListener)listener).exitArray(this);
+			if ( listener instanceof SequenceAnalyzerListener ) ((SequenceAnalyzerListener)listener).exitAssignUserAlphabetOfStringsWithRules(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SequenceAnalyzerVisitor ) return ((SequenceAnalyzerVisitor<? extends T>)visitor).visitArray(this);
+			if ( visitor instanceof SequenceAnalyzerVisitor ) return ((SequenceAnalyzerVisitor<? extends T>)visitor).visitAssignUserAlphabetOfStringsWithRules(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class AccessArrayContext extends ArrayContext {
+		public TerminalNode ID() { return getToken(SequenceAnalyzerParser.ID, 0); }
+		public TerminalNode INT() { return getToken(SequenceAnalyzerParser.INT, 0); }
+		public AccessArrayContext(ArrayContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SequenceAnalyzerListener ) ((SequenceAnalyzerListener)listener).enterAccessArray(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SequenceAnalyzerListener ) ((SequenceAnalyzerListener)listener).exitAccessArray(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof SequenceAnalyzerVisitor ) return ((SequenceAnalyzerVisitor<? extends T>)visitor).visitAccessArray(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class AssignUserAlphabetOfStringsContext extends ArrayContext {
+		public TerminalNode LP() { return getToken(SequenceAnalyzerParser.LP, 0); }
+		public TerminalNode LCB() { return getToken(SequenceAnalyzerParser.LCB, 0); }
+		public TerminalNode RCB() { return getToken(SequenceAnalyzerParser.RCB, 0); }
+		public TerminalNode RP() { return getToken(SequenceAnalyzerParser.RP, 0); }
+		public List<TerminalNode> STRING_LITERAL() { return getTokens(SequenceAnalyzerParser.STRING_LITERAL); }
+		public TerminalNode STRING_LITERAL(int i) {
+			return getToken(SequenceAnalyzerParser.STRING_LITERAL, i);
+		}
+		public AssignUserAlphabetOfStringsContext(ArrayContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SequenceAnalyzerListener ) ((SequenceAnalyzerListener)listener).enterAssignUserAlphabetOfStrings(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SequenceAnalyzerListener ) ((SequenceAnalyzerListener)listener).exitAssignUserAlphabetOfStrings(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof SequenceAnalyzerVisitor ) return ((SequenceAnalyzerVisitor<? extends T>)visitor).visitAssignUserAlphabetOfStrings(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1501,9 +1586,335 @@ public class SequenceAnalyzerParser extends Parser {
 	public final ArrayContext array() throws RecognitionException {
 		ArrayContext _localctx = new ArrayContext(_ctx, getState());
 		enterRule(_localctx, 32, RULE_array);
+		int _la;
 		try {
+			int _alt;
+<<<<<<< Updated upstream
+			setState(173);
+=======
+			setState(192);
+>>>>>>> Stashed changes
+			_errHandler.sync(this);
+			switch ( getInterpreter().adaptivePredict(_input,12,_ctx) ) {
+			case 1:
+<<<<<<< Updated upstream
+				_localctx = new AssignVariableOfExpressionContext(_localctx);
+				enterOuterAlt(_localctx, 1);
+				{
+				setState(146);
+				((AssignVariableOfExpressionContext)_localctx).varName = match(ID);
+				setState(147);
+				match(T__9);
+				setState(148);
+				expr();
+				}
+				break;
+			case 2:
+=======
+>>>>>>> Stashed changes
+				_localctx = new AssignUserAlphabetOfStringsContext(_localctx);
+				enterOuterAlt(_localctx, 1);
+				{
+<<<<<<< Updated upstream
+				setState(149);
+				((AssignUserAlphabetOfStringsContext)_localctx).alphabetName = match(ID);
+				setState(150);
+				match(T__9);
+				setState(151);
+				match(T__10);
+				setState(156);
+=======
+				setState(155);
+				match(T__10);
+				setState(156);
+				match(LP);
+				setState(157);
+				match(LCB);
+				setState(162);
+>>>>>>> Stashed changes
+				_errHandler.sync(this);
+				_alt = getInterpreter().adaptivePredict(_input,9,_ctx);
+				while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
+					if ( _alt==1 ) {
+						{
+						{
+<<<<<<< Updated upstream
+						setState(152);
+						match(STRING_LITERAL);
+						setState(153);
+=======
+						setState(158);
+						match(STRING_LITERAL);
+						setState(159);
+>>>>>>> Stashed changes
+						match(COMMA);
+						}
+						} 
+					}
+<<<<<<< Updated upstream
+					setState(158);
+=======
+					setState(164);
+>>>>>>> Stashed changes
+					_errHandler.sync(this);
+					_alt = getInterpreter().adaptivePredict(_input,9,_ctx);
+				}
+				{
+<<<<<<< Updated upstream
+				setState(159);
+				match(STRING_LITERAL);
+				}
+				setState(160);
+				match(T__11);
+				}
+				break;
+			case 2:
+				_localctx = new AssignUserAlphabetOfStringsWithRulesContext(_localctx);
+				enterOuterAlt(_localctx, 2);
+				{
+<<<<<<< Updated upstream
+				setState(161);
+				((AssignUserAlphabetOfIntContext)_localctx).alphabetName = match(ID);
+				setState(162);
+				match(T__9);
+				setState(163);
+				match(T__10);
+				setState(168);
+=======
+				setState(168);
+				match(T__10);
+				setState(169);
+				match(LP);
+				setState(170);
+				match(LCB);
+				setState(175);
+>>>>>>> Stashed changes
+				_errHandler.sync(this);
+				_alt = getInterpreter().adaptivePredict(_input,10,_ctx);
+				while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
+					if ( _alt==1 ) {
+						{
+						{
+<<<<<<< Updated upstream
+						setState(164);
+						match(INT);
+						setState(165);
+=======
+						setState(171);
+						match(STRING_LITERAL);
+						setState(172);
+>>>>>>> Stashed changes
+						match(COMMA);
+						}
+						} 
+					}
+<<<<<<< Updated upstream
+					setState(170);
+=======
+					setState(177);
+>>>>>>> Stashed changes
+					_errHandler.sync(this);
+					_alt = getInterpreter().adaptivePredict(_input,10,_ctx);
+				}
+				{
+<<<<<<< Updated upstream
+				setState(171);
+				match(INT);
+				}
+				setState(172);
+				match(T__11);
+				}
+				break;
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class Two_d_arrayContext extends ParserRuleContext {
+		public Two_d_arrayContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_two_d_array; }
+	 
+		public Two_d_arrayContext() { }
+		public void copyFrom(Two_d_arrayContext ctx) {
+			super.copyFrom(ctx);
+		}
+	}
+	public static class Assign2DArrayContext extends Two_d_arrayContext {
+		public TerminalNode LP() { return getToken(SequenceAnalyzerParser.LP, 0); }
+		public TerminalNode RP() { return getToken(SequenceAnalyzerParser.RP, 0); }
+		public List<TerminalNode> LCB() { return getTokens(SequenceAnalyzerParser.LCB); }
+		public TerminalNode LCB(int i) {
+			return getToken(SequenceAnalyzerParser.LCB, i);
+		}
+		public List<TerminalNode> INT() { return getTokens(SequenceAnalyzerParser.INT); }
+		public TerminalNode INT(int i) {
+			return getToken(SequenceAnalyzerParser.INT, i);
+		}
+		public List<TerminalNode> RCB() { return getTokens(SequenceAnalyzerParser.RCB); }
+		public TerminalNode RCB(int i) {
+			return getToken(SequenceAnalyzerParser.RCB, i);
+		}
+		public Assign2DArrayContext(Two_d_arrayContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SequenceAnalyzerListener ) ((SequenceAnalyzerListener)listener).enterAssign2DArray(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SequenceAnalyzerListener ) ((SequenceAnalyzerListener)listener).exitAssign2DArray(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof SequenceAnalyzerVisitor ) return ((SequenceAnalyzerVisitor<? extends T>)visitor).visitAssign2DArray(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final Two_d_arrayContext two_d_array() throws RecognitionException {
+		Two_d_arrayContext _localctx = new Two_d_arrayContext(_ctx, getState());
+		enterRule(_localctx, 34, RULE_two_d_array);
+		int _la;
+		try {
+			int _alt;
+			_localctx = new Assign2DArrayContext(_localctx);
 			enterOuterAlt(_localctx, 1);
 			{
+<<<<<<< Updated upstream
+			setState(175);
+			((RetrieveVariableContext)_localctx).variable = match(ID);
+=======
+			setState(194);
+			match(T__10);
+			setState(195);
+			match(LP);
+			{
+			setState(196);
+			match(LCB);
+			setState(201);
+			_errHandler.sync(this);
+			_alt = getInterpreter().adaptivePredict(_input,13,_ctx);
+			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
+				if ( _alt==1 ) {
+					{
+					{
+					setState(197);
+					match(INT);
+					setState(198);
+					match(COMMA);
+					}
+					} 
+				}
+				setState(203);
+				_errHandler.sync(this);
+				_alt = getInterpreter().adaptivePredict(_input,13,_ctx);
+			}
+			{
+			setState(204);
+			match(INT);
+			}
+			setState(208);
+			_errHandler.sync(this);
+			_la = _input.LA(1);
+			while (_la==RCB) {
+				{
+				{
+				setState(205);
+				match(RCB);
+				}
+				}
+				setState(210);
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+			}
+			{
+			setState(211);
+			match(LCB);
+			setState(216);
+			_errHandler.sync(this);
+			_alt = getInterpreter().adaptivePredict(_input,15,_ctx);
+			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
+				if ( _alt==1 ) {
+					{
+					{
+					setState(212);
+					match(INT);
+					setState(213);
+					match(COMMA);
+					}
+					} 
+				}
+				setState(218);
+				_errHandler.sync(this);
+				_alt = getInterpreter().adaptivePredict(_input,15,_ctx);
+			}
+			{
+			setState(219);
+			match(INT);
+			}
+			setState(220);
+			match(RCB);
+			}
+			}
+			setState(222);
+			match(RP);
+>>>>>>> Stashed changes
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class RulesContext extends ParserRuleContext {
+		public TerminalNode LP() { return getToken(SequenceAnalyzerParser.LP, 0); }
+		public TerminalNode RP() { return getToken(SequenceAnalyzerParser.RP, 0); }
+		public List<TerminalNode> INT() { return getTokens(SequenceAnalyzerParser.INT); }
+		public TerminalNode INT(int i) {
+			return getToken(SequenceAnalyzerParser.INT, i);
+		}
+		public RulesContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_rules; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SequenceAnalyzerListener ) ((SequenceAnalyzerListener)listener).enterRules(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SequenceAnalyzerListener ) ((SequenceAnalyzerListener)listener).exitRules(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof SequenceAnalyzerVisitor ) return ((SequenceAnalyzerVisitor<? extends T>)visitor).visitRules(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final RulesContext rules() throws RecognitionException {
+		RulesContext _localctx = new RulesContext(_ctx, getState());
+		enterRule(_localctx, 36, RULE_rules);
+		try {
+			int _alt;
+			enterOuterAlt(_localctx, 1);
+			{
+<<<<<<< Updated upstream
 			setState(177);
 			match(ID);
 			setState(178);
@@ -1619,18 +2030,28 @@ public class SequenceAnalyzerParser extends Parser {
 
 	public final PrintContext print() throws RecognitionException {
 		PrintContext _localctx = new PrintContext(_ctx, getState());
-		enterRule(_localctx, 34, RULE_print);
+		enterRule(_localctx, 38, RULE_print);
 		try {
+<<<<<<< Updated upstream
 			setState(196);
+=======
+			setState(250);
+>>>>>>> Stashed changes
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,12,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,17,_ctx) ) {
 			case 1:
 				_localctx = new PrintArrayContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
+<<<<<<< Updated upstream
 				setState(182);
 				match(T__14);
 				setState(183);
+=======
+				setState(236);
+				match(T__14);
+				setState(237);
+>>>>>>> Stashed changes
 				array();
 				}
 				break;
@@ -1638,6 +2059,7 @@ public class SequenceAnalyzerParser extends Parser {
 				_localctx = new PrintArrayInParensContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
+<<<<<<< Updated upstream
 				setState(184);
 				match(T__14);
 				setState(185);
@@ -1645,6 +2067,15 @@ public class SequenceAnalyzerParser extends Parser {
 				setState(186);
 				array();
 				setState(187);
+=======
+				setState(238);
+				match(T__14);
+				setState(239);
+				match(LP);
+				setState(240);
+				array();
+				setState(241);
+>>>>>>> Stashed changes
 				match(RP);
 				}
 				break;
@@ -1652,9 +2083,15 @@ public class SequenceAnalyzerParser extends Parser {
 				_localctx = new PrintCommandContext(_localctx);
 				enterOuterAlt(_localctx, 3);
 				{
+<<<<<<< Updated upstream
 				setState(189);
 				match(T__14);
 				setState(190);
+=======
+				setState(243);
+				match(T__14);
+				setState(244);
+>>>>>>> Stashed changes
 				cmd();
 				}
 				break;
@@ -1662,6 +2099,7 @@ public class SequenceAnalyzerParser extends Parser {
 				_localctx = new PrintCommandInParensContext(_localctx);
 				enterOuterAlt(_localctx, 4);
 				{
+<<<<<<< Updated upstream
 				setState(191);
 				match(T__14);
 				setState(192);
@@ -1669,6 +2107,15 @@ public class SequenceAnalyzerParser extends Parser {
 				setState(193);
 				cmd();
 				setState(194);
+=======
+				setState(245);
+				match(T__14);
+				setState(246);
+				match(LP);
+				setState(247);
+				cmd();
+				setState(248);
+>>>>>>> Stashed changes
 				match(RP);
 				}
 				break;
@@ -1735,16 +2182,24 @@ public class SequenceAnalyzerParser extends Parser {
 
 	public final LiteralContext literal() throws RecognitionException {
 		LiteralContext _localctx = new LiteralContext(_ctx, getState());
-		enterRule(_localctx, 36, RULE_literal);
+		enterRule(_localctx, 40, RULE_literal);
 		try {
+<<<<<<< Updated upstream
 			setState(200);
+=======
+			setState(254);
+>>>>>>> Stashed changes
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case STRING_LITERAL:
 				_localctx = new StringLiteralContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
+<<<<<<< Updated upstream
 				setState(198);
+=======
+				setState(252);
+>>>>>>> Stashed changes
 				((StringLiteralContext)_localctx).value = match(STRING_LITERAL);
 				}
 				break;
@@ -1752,7 +2207,11 @@ public class SequenceAnalyzerParser extends Parser {
 				_localctx = new IntegerLiteralContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
+<<<<<<< Updated upstream
 				setState(199);
+=======
+				setState(253);
+>>>>>>> Stashed changes
 				((IntegerLiteralContext)_localctx).value = match(INT);
 				}
 				break;
@@ -1804,12 +2263,16 @@ public class SequenceAnalyzerParser extends Parser {
 
 	public final ExprContext expr() throws RecognitionException {
 		ExprContext _localctx = new ExprContext(_ctx, getState());
-		enterRule(_localctx, 38, RULE_expr);
+		enterRule(_localctx, 42, RULE_expr);
 		try {
 			_localctx = new ExpressionOfCommandContext(_localctx);
 			enterOuterAlt(_localctx, 1);
 			{
+<<<<<<< Updated upstream
 			setState(202);
+=======
+			setState(256);
+>>>>>>> Stashed changes
 			cmd();
 			}
 		}
