@@ -243,6 +243,7 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 		return new ConcatenationCommand(visit(ctx.arg1), visit(ctx.arg2));
 	}
 	
+	//Concat at index in invoked by the 'insert' command in concat branch of grammar
 	@Override
     public CommandObject<String> visitConcatOn2ExpressionsAtIndex(SequenceAnalyzerParser.ConcatOn2ExpressionsAtIndexContext ctx)
 	{
