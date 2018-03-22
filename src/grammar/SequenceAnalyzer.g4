@@ -33,7 +33,7 @@ predef	:	ct		//cutting times
 		;
 		
 //input must be in format sub (data , data)
-sub		:	'sub' LP arg1=expr COMMA arg2=expr COMMA arg3=expr RP			#SubstitutionOfExpression
+sub		:	'sub' LP arg1=expr COMMA ALPHA_MAPPING RP			#SubstitutionOfExpression
 		;
 		
 //input must be in format cmp (data , data)
@@ -102,16 +102,8 @@ RP		:	')';			//assigns token name to right parenthesis
 COMMA	:	',';			//assigns token name to comma
 DBQUOTE	:	'"';
 STRING_LITERAL : '"' (~('"' | '\\' | '\r' | '\n') | '\\' ('"' | '\\'))* '"';
-//USER_ALPHA	:	(STRING_LITERAL ',')+;		 // user defined
-//SQUOTE	:	'';
-//SUB		:	'sub';
-//CMP		:	'cmp';
-//CT		:	'ct';
-//SP		:	'sp';
-//BUILD		:	'build';
-//SM		:	'sm';
-//WC		:	'wc';
-//CONCAT	:	'concat';
+ALPHA_MAPPING	: '"' STRING '"' MAPPING_DELIMETER '"' STRING '"' (COMMA '"' STRING '"' MAPPING_DELIMETER '"' STRING '"')*;
+MAPPING_DELIMETER	: '->';
 LETTER	: 	[a-zA-Z]+ ;		//defines letters as lowercase and uppercase
 NEWLINE	:	'\r'? '\n' ;    //return newlines to parser (end-statement signal)
 LN_COMMENT :   '//' .*? '\n' -> skip;	//skips single line comments

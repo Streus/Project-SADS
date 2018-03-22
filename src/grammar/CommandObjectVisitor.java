@@ -1,6 +1,7 @@
 package grammar;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
@@ -98,16 +99,27 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
     public CommandObject<String> visitSubstitutionOfExpression(SequenceAnalyzerParser.SubstitutionOfExpressionContext ctx)
 	{
 		String startString = ctx.arg1.getText();
-		String rule1 = ctx.arg2.getText();
-		String rule2 = ctx.arg3.getText();
+		String mapping = ctx.ALPHA_MAPPING().getText();
+		
+		LinkedHashMap<String,String> map = new LinkedHashMap<String,String>();
+		
+		String [] commaSplitString = mapping.split(",");
+		String [] arrowSplitString;
+		
+		for (int i = 0; i<commaSplitString.length; i++) {
+			arrowSplitString = commaSplitString[i].split("->"); 
+			for(int j = 0; j<arrowSplitString.length; j++) {
+				arrowSplitString[j] = arrowSplitString[j].replaceAll("\"", "");
+			}
+			map.put(arrowSplitString[0], arrowSplitString[1]);
+		}
 		
 		if(debugFlag == true){
 			System.out.println("startString = " + startString);
-			System.out.println("rule1 = " + rule1);
-			System.out.println("rule2 = " + rule2);
+			System.out.println("mapping = " + mapping);
 		}
 		
-		return new SubstitutionCommand(visit(ctx.arg1), visit(ctx.arg2), visit(ctx.arg3));
+		return new SubstitutionCommand(visit(ctx.arg1), map);
 	}
 
 	@Override
