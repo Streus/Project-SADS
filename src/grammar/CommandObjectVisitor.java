@@ -58,37 +58,37 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 		return new VariableAssignmentCommand(name, visit(ctx.expr()));
 	}
 	
-	@Override public CommandObject<Object> visitAssignUserAlphabetOfStrings(SequenceAnalyzerParser.AssignUserAlphabetOfStringsContext ctx) { 
-		if(debugFlag == true) {
-			System.out.println("Visiting AssignUserAlphabet");
-		}
-		ArrayList<Object> stringAlpha = new ArrayList<Object>();
-		System.out.println(ctx.getText());
-		
-		for(int i=0; ctx.STRING_LITERAL(i)!=null; i++) {
-			String character = ctx.STRING_LITERAL(i).getText().substring(1, ctx.STRING_LITERAL(i).getText().length()-1);
-			System.out.println("STRING_LITERAL "+(i+1)+" = "+character);
-			stringAlpha.add(character);
-		}
-		
-		AlphabetSymbolTable.setCurrentAlphabet(stringAlpha);
-		AlphabetSymbolTable.printAlphabet();
-		return visitChildren(ctx); 
-		}
+//	@Override public CommandObject<Object> visitAssignUserAlphabetOfStrings(SequenceAnalyzerParser.AssignUserAlphabetOfStringsContext ctx) { 
+//		if(debugFlag == true) {
+//			System.out.println("Visiting AssignUserAlphabet");
+//		}
+//		ArrayList<Object> stringAlpha = new ArrayList<Object>();
+//		System.out.println(ctx.getText());
+//		
+//		for(int i=0; ctx.STRING_LITERAL(i)!=null; i++) {
+//			String character = ctx.STRING_LITERAL(i).getText().substring(1, ctx.STRING_LITERAL(i).getText().length()-1);
+//			System.out.println("STRING_LITERAL "+(i+1)+" = "+character);
+//			stringAlpha.add(character);
+//		}
+//		
+//		AlphabetSymbolTable.setCurrentAlphabet(stringAlpha);
+//		AlphabetSymbolTable.printAlphabet();
+//		return visitChildren(ctx); 
+//		}
 	
-	@Override public CommandObject<Object> visitAssignUserAlphabetOfInt(SequenceAnalyzerParser.AssignUserAlphabetOfIntContext ctx) { 
+	@Override public CommandObject<Object> visitAssignUserAlphabetOfStrings(SequenceAnalyzerParser.AssignUserAlphabetOfStringsContext ctx) { 
 		if(debugFlag == true) {
 			System.out.println("Visiting AssignUserAlphabet");
 		}
 		ArrayList<Object> intAlpha = new ArrayList<Object>();
 		System.out.println(ctx.getText());
 		
-		for(int i=0; ctx.INT(i)!=null; i++) {
-			String character = ctx.INT(i).getText();
-			System.out.println("INT "+(i+1)+" = "+character);
-			int intChar = Integer.valueOf(character);
-			intAlpha.add(intChar);	
-		}
+//		for(int i=0; ctx.INT(i)!=null; i++) {
+//			String character = ctx.INT(i).getText();
+//			System.out.println("INT "+(i+1)+" = "+character);
+//			int intChar = Integer.valueOf(character);
+//			intAlpha.add(intChar);	
+//		}
 		AlphabetSymbolTable.setCurrentAlphabet(intAlpha);
 		AlphabetSymbolTable.printAlphabet();
 		return visitChildren(ctx); 
@@ -319,41 +319,41 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 		return visitChildren(ctx); 
 	}
 	
-	@Override public CommandObject<Object> visitPrintArray(SequenceAnalyzerParser.PrintArrayContext ctx) { 
-		if(debugFlag == true)
-		{
-			System.out.println("Visiting Print Array");
-		}
-		
-		String arrayName = ctx.array().ID().getText();
-		int arrayIndex = Integer.parseInt(ctx.array().INT().getText());
-		
-		if(debugFlag == true)
-		{
-		System.out.println("arrayName = "+arrayName);
-		System.out.println("arrayIndex = "+arrayIndex);
-		}
-		
-		return visitChildren(ctx); 
-	}
+//	@Override public CommandObject<Object> visitPrintArray(SequenceAnalyzerParser.PrintArrayContext ctx) { 
+//		if(debugFlag == true)
+//		{
+//			System.out.println("Visiting Print Array");
+//		}
+//		
+//		String arrayName = ctx.array().ID().getText();
+//		int arrayIndex = Integer.parseInt(ctx.array().INT().getText());
+//		
+//		if(debugFlag == true)
+//		{
+//		System.out.println("arrayName = "+arrayName);
+//		System.out.println("arrayIndex = "+arrayIndex);
+//		}
+//		
+//		return visitChildren(ctx); 
+//	}
 	
-	@Override public CommandObject<Object> visitPrintArrayInParens(SequenceAnalyzerParser.PrintArrayInParensContext ctx) { 
-		if(debugFlag == true)
-		{
-			System.out.println("Visiting Print Array");
-		}
-		
-		String arrayName = ctx.array().ID().getText();
-		int arrayIndex = Integer.parseInt(ctx.array().INT().getText());
-		
-		if(debugFlag == true)
-		{
-		System.out.println("arrayName = "+arrayName);
-		System.out.println("arrayIndex = "+arrayIndex);
-		}
-		
-		return visitChildren(ctx); 
-	}
+//	@Override public CommandObject<Object> visitPrintArrayInParens(SequenceAnalyzerParser.PrintArrayInParensContext ctx) { 
+//		if(debugFlag == true)
+//		{
+//			System.out.println("Visiting Print Array");
+//		}
+//		
+//		String arrayName = ctx.array().ID().getText();
+//		int arrayIndex = Integer.parseInt(ctx.array().INT().getText());
+//		
+//		if(debugFlag == true)
+//		{
+//		System.out.println("arrayName = "+arrayName);
+//		System.out.println("arrayIndex = "+arrayIndex);
+//		}
+//		
+//		return visitChildren(ctx); 
+//	}
 	
 	@Override public CommandObject<Object> visitRetrieveVariable(SequenceAnalyzerParser.RetrieveVariableContext ctx)
 	{ 

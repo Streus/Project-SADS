@@ -226,30 +226,6 @@ public interface SequenceAnalyzerListener extends ParseTreeListener {
 	 */
 	void exitAssignVariableOfExpression(SequenceAnalyzerParser.AssignVariableOfExpressionContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code AssignUserAlphabetOfStrings}
-	 * labeled alternative in {@link SequenceAnalyzerParser#assignment}.
-	 * @param ctx the parse tree
-	 */
-	void enterAssignUserAlphabetOfStrings(SequenceAnalyzerParser.AssignUserAlphabetOfStringsContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code AssignUserAlphabetOfStrings}
-	 * labeled alternative in {@link SequenceAnalyzerParser#assignment}.
-	 * @param ctx the parse tree
-	 */
-	void exitAssignUserAlphabetOfStrings(SequenceAnalyzerParser.AssignUserAlphabetOfStringsContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code AssignUserAlphabetOfInt}
-	 * labeled alternative in {@link SequenceAnalyzerParser#assignment}.
-	 * @param ctx the parse tree
-	 */
-	void enterAssignUserAlphabetOfInt(SequenceAnalyzerParser.AssignUserAlphabetOfIntContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code AssignUserAlphabetOfInt}
-	 * labeled alternative in {@link SequenceAnalyzerParser#assignment}.
-	 * @param ctx the parse tree
-	 */
-	void exitAssignUserAlphabetOfInt(SequenceAnalyzerParser.AssignUserAlphabetOfIntContext ctx);
-	/**
 	 * Enter a parse tree produced by the {@code RetrieveVariable}
 	 * labeled alternative in {@link SequenceAnalyzerParser#retreival}.
 	 * @param ctx the parse tree
@@ -262,15 +238,63 @@ public interface SequenceAnalyzerListener extends ParseTreeListener {
 	 */
 	void exitRetrieveVariable(SequenceAnalyzerParser.RetrieveVariableContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SequenceAnalyzerParser#array}.
+	 * Enter a parse tree produced by the {@code AssignUserAlphabetOfStrings}
+	 * labeled alternative in {@link SequenceAnalyzerParser#array}.
 	 * @param ctx the parse tree
 	 */
-	void enterArray(SequenceAnalyzerParser.ArrayContext ctx);
+	void enterAssignUserAlphabetOfStrings(SequenceAnalyzerParser.AssignUserAlphabetOfStringsContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SequenceAnalyzerParser#array}.
+	 * Exit a parse tree produced by the {@code AssignUserAlphabetOfStrings}
+	 * labeled alternative in {@link SequenceAnalyzerParser#array}.
 	 * @param ctx the parse tree
 	 */
-	void exitArray(SequenceAnalyzerParser.ArrayContext ctx);
+	void exitAssignUserAlphabetOfStrings(SequenceAnalyzerParser.AssignUserAlphabetOfStringsContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code AssignUserAlphabetOfStringsWithRules}
+	 * labeled alternative in {@link SequenceAnalyzerParser#array}.
+	 * @param ctx the parse tree
+	 */
+	void enterAssignUserAlphabetOfStringsWithRules(SequenceAnalyzerParser.AssignUserAlphabetOfStringsWithRulesContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code AssignUserAlphabetOfStringsWithRules}
+	 * labeled alternative in {@link SequenceAnalyzerParser#array}.
+	 * @param ctx the parse tree
+	 */
+	void exitAssignUserAlphabetOfStringsWithRules(SequenceAnalyzerParser.AssignUserAlphabetOfStringsWithRulesContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code AccessArray}
+	 * labeled alternative in {@link SequenceAnalyzerParser#array}.
+	 * @param ctx the parse tree
+	 */
+	void enterAccessArray(SequenceAnalyzerParser.AccessArrayContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code AccessArray}
+	 * labeled alternative in {@link SequenceAnalyzerParser#array}.
+	 * @param ctx the parse tree
+	 */
+	void exitAccessArray(SequenceAnalyzerParser.AccessArrayContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code Assign2DArray}
+	 * labeled alternative in {@link SequenceAnalyzerParser#two_d_array}.
+	 * @param ctx the parse tree
+	 */
+	void enterAssign2DArray(SequenceAnalyzerParser.Assign2DArrayContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code Assign2DArray}
+	 * labeled alternative in {@link SequenceAnalyzerParser#two_d_array}.
+	 * @param ctx the parse tree
+	 */
+	void exitAssign2DArray(SequenceAnalyzerParser.Assign2DArrayContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link SequenceAnalyzerParser#rules}.
+	 * @param ctx the parse tree
+	 */
+	void enterRules(SequenceAnalyzerParser.RulesContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link SequenceAnalyzerParser#rules}.
+	 * @param ctx the parse tree
+	 */
+	void exitRules(SequenceAnalyzerParser.RulesContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code PrintArray}
 	 * labeled alternative in {@link SequenceAnalyzerParser#print}.

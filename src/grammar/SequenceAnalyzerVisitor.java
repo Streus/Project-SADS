@@ -139,20 +139,6 @@ public interface SequenceAnalyzerVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitAssignVariableOfExpression(SequenceAnalyzerParser.AssignVariableOfExpressionContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code AssignUserAlphabetOfStrings}
-	 * labeled alternative in {@link SequenceAnalyzerParser#assignment}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitAssignUserAlphabetOfStrings(SequenceAnalyzerParser.AssignUserAlphabetOfStringsContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code AssignUserAlphabetOfInt}
-	 * labeled alternative in {@link SequenceAnalyzerParser#assignment}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitAssignUserAlphabetOfInt(SequenceAnalyzerParser.AssignUserAlphabetOfIntContext ctx);
-	/**
 	 * Visit a parse tree produced by the {@code RetrieveVariable}
 	 * labeled alternative in {@link SequenceAnalyzerParser#retreival}.
 	 * @param ctx the parse tree
@@ -160,11 +146,39 @@ public interface SequenceAnalyzerVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitRetrieveVariable(SequenceAnalyzerParser.RetrieveVariableContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SequenceAnalyzerParser#array}.
+	 * Visit a parse tree produced by the {@code AssignUserAlphabetOfStrings}
+	 * labeled alternative in {@link SequenceAnalyzerParser#array}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitArray(SequenceAnalyzerParser.ArrayContext ctx);
+	T visitAssignUserAlphabetOfStrings(SequenceAnalyzerParser.AssignUserAlphabetOfStringsContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code AssignUserAlphabetOfStringsWithRules}
+	 * labeled alternative in {@link SequenceAnalyzerParser#array}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAssignUserAlphabetOfStringsWithRules(SequenceAnalyzerParser.AssignUserAlphabetOfStringsWithRulesContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code AccessArray}
+	 * labeled alternative in {@link SequenceAnalyzerParser#array}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAccessArray(SequenceAnalyzerParser.AccessArrayContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code Assign2DArray}
+	 * labeled alternative in {@link SequenceAnalyzerParser#two_d_array}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAssign2DArray(SequenceAnalyzerParser.Assign2DArrayContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link SequenceAnalyzerParser#rules}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitRules(SequenceAnalyzerParser.RulesContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code PrintArray}
 	 * labeled alternative in {@link SequenceAnalyzerParser#print}.
