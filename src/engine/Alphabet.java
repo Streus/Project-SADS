@@ -1,5 +1,7 @@
 package engine;
 
+import gui.Console;
+
 /**
  * 
  * @author Sam 'Streus' Streed
@@ -7,7 +9,54 @@ package engine;
  */
 public class Alphabet
 {
+	/* Static Variables */
+	
+	private static final int INITAL_LEVEL = 1;
+	
+	/* Static Methods */
+	
+	/**
+	 * Generates an Alphabet at the given level using a given Alphabet as a base.
+	 * If given level is invalid, returns null.
+	 * @param base - original alphabet
+	 * @param level - target level to generate
+	 * @return an Alphabet at the given level
+	 */
+	public static Alphabet generate(Alphabet base, int level)
+	{
+		//level is invalid
+		if(level < INITAL_LEVEL)
+			return null;
+		
+		//you got it, ya weenie
+		if(base.level == level)
+			return base;
+		
+		//it was generated a while back, go get it
+		if(base.level > level)
+		{
+			int count = base.level - level;
+			Alphabet target = base;
+			for(int i = 0; i < count; i++)
+				target = target.parent;
+			return target;
+		}
+		
+		//hey, we actually need to generate it, waddya know?
+		Alphabet result = base;
+		for(int i = 0, c = level - base.level; i < c; i++)
+		{
+			result = new Alphabet(result);
+		}
+		return result;
+	}
+	
 	/* Instance Variables */
+	
+	/**
+	 * The alphabet this alphabet was built from, if one exists
+	 */
+	private Alphabet parent;
 	
 	/**
 	 * List of all the characters that are members of this alphabet
@@ -15,24 +64,57 @@ public class Alphabet
 	private String[] characters;
 	
 	/**
+	 * The rules used to generate higher levels of this Alphabet
+	 */
+	private Rule[] rules;
+	
+	/**
 	 * Used by string building to identify alphabet level
 	 */
 	private int level;
 	
-	/**
-	 * The alphabet this alphabet was built from, if one exists
-	 */
-	private Alphabet parent;
-	
 	/* Instance Methods */
 	
-	public Alphabet(String... chars)
+	public Alphabet(String[] chars)
 	{
+		parent = null;
+		characters = chars;
+		rules = null;
+		level = INITAL_LEVEL;
 		
 	}
-	public Alphabet(Alphabet parent, Rule[] r)
+	public Alphabet(String[] chars, Rule[] r)
 	{
+		parent = null;
 		
+		//set checks
+		if(chars == null || r == null)
+			throw new IllegalArgumentException("Character and Rule sets must be non-null.");
+		if(r.length != chars.length)
+			throw new IllegalArgumentException("Rule count does not match Character count.");
+		
+		characters = chars;
+		rules = r;
+		level = INITAL_LEVEL;
+	}
+	public Alphabet(Alphabet parent)
+	{
+		this.parent = parent;
+		
+		if(parent.rules == null)
+			throw new NullPointerException("Cannot generate a child Alphabet from a parent without a rule set. Give the parent Alphabet a rule set first.");
+		
+		characters = new String[parent.characters.length];
+		
+		//generate characters from parent characters using parent rule set
+		for(int i = 0; i < characters.length; i++)
+		{
+			characters[i] = parent.rules[i].apply(parent.characters);
+		}
+		
+		rules = parent.rules;
+		
+		level = parent.level + 1;
 	}
 	
 	/**
@@ -42,6 +124,11 @@ public class Alphabet
 	 */
 	public boolean contains(String character)
 	{
+		for(int i = 0; i < characters.length; i++)
+		{
+			if(characters[i].equals(character))
+				return true;
+		}
 		return false;
 	}
 	
@@ -62,6 +149,16 @@ public class Alphabet
 	public String getChar(int index) throws IndexOutOfBoundsException
 	{
 		return characters[index];
+	}
+	
+	/**
+	 * Sets the rules for a rule-less Alphabet
+	 * @param r
+	 */
+	private void setRules(Rule[] r)
+	{
+		if(rules == null)
+			rules = r;
 	}
 	
 	/**
@@ -92,17 +189,31 @@ public class Alphabet
 		
 		public Rule(int... chars)
 		{
-			
+			this.chars = chars;
 		}
 		
 		/**
-		 * 
-		 * @param chars
-		 * @return
+		 * Create a new character from a given set of characters using this Rule
+		 * @param chars - the character set to operate from
+		 * @return A new character generated using the given set
 		 */
 		public String apply(String... chars)
 		{
-			return "TODO - Rule#apply()";
+			String c = "";
+			try
+			{
+				for(int i = 0; i < this.chars.length; i++)
+				{
+					c += chars[this.chars[i]];
+				}
+			}
+			catch(IndexOutOfBoundsException ioobe)
+			{
+				System.err.println(ioobe.getMessage());
+				Console.println("Tried to apply invalid rule!", Console.getErr());
+				return "<ERROR>";
+			}
+			return c;
 		}
 		
 		/**
@@ -110,7 +221,17 @@ public class Alphabet
 		 */
 		public String toString()
 		{
-			return "TODO - Rule#toString()";
+			String str = "{ ";
+			if(chars.length > 0)
+			{
+				str += chars[0];
+				for(int i = 1; i < chars.length; i++)
+				{
+					str += ", " + chars[i];
+				}
+			}
+			str += " }";
+			return str;
 		}
 	}
 }
