@@ -9,7 +9,7 @@ public class Concatenation
 		return baseStr + concatStr;
 	}
 	
-	public String concatAtIndex(String baseStr, String concatStr, int index)
+	public String Insert(String baseStr, String concatStr, int index)
 	{		
 		StringBuilder sb = new StringBuilder();
 		sb.append(baseStr);
