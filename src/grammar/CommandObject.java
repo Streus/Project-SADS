@@ -247,7 +247,7 @@ class ConcatenationCommand extends PredefinedFunctionCommand
 		}
 		else
 		{
-			CommandResponse resp = new CommandResponse(concat.concatAtIndex(baseStr.execute(), concatStr.execute(), index.execute().intValue()));
+			CommandResponse resp = new CommandResponse(concat.Insert(baseStr.execute(), concatStr.execute(), index.execute().intValue()));
 			return resp.returnVal;
 		}
 	}
