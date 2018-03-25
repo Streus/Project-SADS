@@ -78,13 +78,13 @@ class AlphabetDefinitionCommand extends VarDefCommand<String>
 
 class SubstitutionCommand extends StringCommand
 {
-	private CommandObject<String> startString, rule1, rule2;
+	private CommandObject<String> startString;
+	private LinkedHashMap<String, String> map;
 
-	public SubstitutionCommand (CommandObject<String> startString, CommandObject<String> rule1, CommandObject<String> rule2)
+	public SubstitutionCommand (CommandObject<String> startString, LinkedHashMap<String, String> map)
 	{
 		this.startString = startString;
-		this.rule1 = rule1;
-		this.rule2 = rule2;
+		this.map = map;
 	}
 
 	@Override
@@ -92,7 +92,7 @@ class SubstitutionCommand extends StringCommand
 	{
 		SADSstring sad = new SADSstring();
 		
-		CommandResponse resp = new CommandResponse(sad.Substitution(startString.execute(), rule1.execute(), rule2.execute()));
+		CommandResponse resp = new CommandResponse(sad.Sub(startString.execute(), map));
 		return resp.returnVal;
 	}
 }
