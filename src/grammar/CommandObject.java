@@ -1,5 +1,5 @@
 package grammar;
-import java.util.List;
+import java.util.*;
 //Command Objects to processed in the Engine
 
 import engine.UniqueSymbolGenerator;
