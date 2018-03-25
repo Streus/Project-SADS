@@ -123,7 +123,7 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 			System.out.println("mapping = " + mapping);
 		}
 		
-		return /*new SubstitutionCommand(visit(ctx.arg1), map)*/null;
+		return new SubstitutionCommand(visit(ctx.arg1), map);
 	}
 
 	@Override
