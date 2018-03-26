@@ -1,6 +1,9 @@
 package gui;
 
 import java.awt.Color;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -25,6 +28,7 @@ public final class Console
 	private static final int ERR = 1; //error
 	private static final int WRN = 2; //warning
 	private static final int HDR = 3; //header
+	private static final int DBG = 4; //debug
 	
 	/* Static Vars */
 	
@@ -50,7 +54,7 @@ public final class Console
 	static
 	{
 		//output
-		styles = new SimpleAttributeSet[4];
+		styles = new SimpleAttributeSet[5];
 		styles[OUT] = new SimpleAttributeSet();
 		StyleConstants.setForeground(styles[OUT], Color.white);
 		
@@ -68,6 +72,11 @@ public final class Console
 		styles[HDR] = new SimpleAttributeSet();
 		StyleConstants.setForeground(styles[HDR], Color.white);
 		StyleConstants.setBold(styles[HDR], true);
+		
+		//debug
+		styles[DBG] = new SimpleAttributeSet();
+		StyleConstants.setForeground(styles[DBG], Color.gray);
+		StyleConstants.setBold(styles[DBG], true);
 	}
 	
 	/* Instance Vars */
@@ -78,6 +87,8 @@ public final class Console
 	
 	// The GUI the Console operates upon
 	private JTextPane front;
+	
+	private PrintStream debugStream;
 	
 	/* Static Methods */
 	
@@ -182,6 +193,14 @@ public final class Console
 		return HDR;
 	}
 	
+	/**
+	 * @return - the output type for redirected debug output
+	 */
+	public static int getDbg()
+	{
+		return DBG;
+	}
+	
 	private static void sendToFront(String text, SimpleAttributeSet set)
 	{
 		try
@@ -202,6 +221,16 @@ public final class Console
 		history.add("");
 		
 		front = null;
+		
+		debugStream = null;
+	}
+	
+	/**
+	 * A PrintStream used to redirect System.out and System.err to the console.
+	 */
+	public PrintStream getDebugStream()
+	{
+		return debugStream;
 	}
 	
 	/**
@@ -272,10 +301,35 @@ public final class Console
 		front.removeStyle("err");
 		front.removeStyle("wrn");
 		front.removeStyle("hdr");
+		front.removeStyle("dbg");
 		this.front = front;
 		front.addStyle("out", null).addAttribute("outStyle", styles[OUT]);
 		front.addStyle("err", null).addAttribute("errStyle", styles[ERR]);
 		front.addStyle("wrn", null).addAttribute("wrnStyle", styles[WRN]);
 		front.addStyle("hdr", null).addAttribute("hdrStyle", styles[HDR]);
+		front.addStyle("dbg", null).addAttribute("dbgStyle", styles[DBG]);
+		
+		if(front != null)
+		{
+			debugStream = new PrintStream(new DebugOutputStream(front, getDbg()));
+		}
+	}
+	
+	private static class DebugOutputStream extends OutputStream
+	{
+		private int textType;
+		private JTextPane area;
+		
+		public DebugOutputStream(JTextPane area, int textType)
+		{
+			this.area = area;
+			this.textType = textType;
+		}
+		
+		@Override
+		public void write(int b) throws IOException
+		{
+			Console.print(String.valueOf((char)b), textType);
+		}
 	}
 }

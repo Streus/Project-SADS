@@ -6,7 +6,6 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
 import javax.swing.JMenu;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -18,12 +17,10 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 
 import javax.swing.JScrollPane;
@@ -36,11 +33,7 @@ import javax.swing.SwingConstants;
 import javax.swing.event.CaretListener;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-import javax.swing.text.BadLocationException;
 import javax.swing.text.JTextComponent;
-import javax.swing.text.Style;
-import javax.swing.text.StyleConstants;
-import javax.swing.text.StyledDocument;
 import javax.swing.event.CaretEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -122,7 +115,7 @@ public class MainWindow
 	 */
 	private void initialize() {
 		frmStringSequenceAnalyzer = new JFrame();
-		frmStringSequenceAnalyzer.setTitle("String Sequence Analyzer - v0.0.1");
+		frmStringSequenceAnalyzer.setTitle("String Sequence Analyzer - v0.1.0");
 		frmStringSequenceAnalyzer.setBounds(100, 100, 800, 600);
 		frmStringSequenceAnalyzer.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
@@ -288,13 +281,13 @@ public class MainWindow
 			{
 				try
 				{
-					File doc = new File("res/doc.html");
+					URI doc = getClass().getResource("/res/doc.html").toURI();
 					if(Desktop.isDesktopSupported())
 					{
-						Desktop.getDesktop().browse(doc.toURI());
+						Desktop.getDesktop().browse(doc);
 					}
 				}
-				catch (IOException e)
+				catch (IOException | URISyntaxException e)
 				{
 					System.err.println(e.getMessage());
 					e.printStackTrace();
