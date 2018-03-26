@@ -33,6 +33,7 @@ import javax.swing.SwingConstants;
 import javax.swing.event.CaretListener;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import javax.swing.text.DefaultCaret;
 import javax.swing.text.JTextComponent;
 import javax.swing.event.CaretEvent;
 import java.awt.event.ActionListener;
@@ -73,6 +74,7 @@ public class MainWindow
 	private JLabel lblFilename;
 	private JTextPane outputArea;
 	private JTextPane editorArea;
+	private JScrollPane scrollPane;
 
 	/**
 	 * Launch the application.
@@ -282,6 +284,10 @@ public class MainWindow
 				try
 				{
 					URI doc = getClass().getResource("/res/doc.html").toURI();
+					
+					if(DEBUG)
+						System.out.println("Doc Resource is at " + doc.toString());
+					
 					if(Desktop.isDesktopSupported())
 					{
 						Desktop.getDesktop().browse(doc);
@@ -337,7 +343,7 @@ public class MainWindow
 		JCheckBox chckbxCliwordwrap = new JCheckBox("Word Wrap");
 		cliToolBar.add(chckbxCliwordwrap);
 		
-		JScrollPane scrollPane = new JScrollPane();
+		scrollPane = new JScrollPane();
 		cli_view.add(scrollPane, "cell 0 1 3 2,grow");
 		
 		outputArea = new JTextPane();
@@ -346,6 +352,9 @@ public class MainWindow
 		outputArea.setFont(new Font("Courier New", Font.PLAIN, 13));
 		outputArea.setEditable(false);
 		scrollPane.setViewportView(outputArea);
+		
+		//auto-scroll
+		((DefaultCaret)outputArea.getCaret()).setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
 		
 		inputLine = new JTextField();
 		inputLine.setFont(new Font("Courier New", Font.PLAIN, 13));
@@ -499,58 +508,6 @@ public class MainWindow
 	{
 		area.setFont(area.getFont().deriveFont((float)size));
 	}
-	
-	/**
-	 * Save the currentBatch. If there is no currentBatch, run saveAs()
-	 */
-	/*
-	private void save(File defaultFile, String source)
-	{
-		if(defaultFile == null)
-		{
-			defaultFile = saveAs(source);
-			return;
-		}
-		
-		//editorArea contents into file
-		try
-		{
-			BufferedWriter writer = new BufferedWriter(new FileWriter(defaultFile));
-			writer.write(source);
-			writer.close();
-		}
-		catch (IOException ioe){ ioe.printStackTrace(); }
-	}
-	*/
-	
-	/**
-	 * Save the contents of editorArea to a file in the file system
-	 */
-	/*
-	private File saveAs(String source)
-	{
-		//user defines save file name and directory
-		JFileChooser chooser = new JFileChooser();
-		chooser.setDialogType(JFileChooser.SAVE_DIALOG);
-		int retVal = chooser.showSaveDialog(frmStringSequenceAnalyzer);
-		File f = null;
-		if(retVal == JFileChooser.APPROVE_OPTION)
-			f = chooser.getSelectedFile();
-		else
-			return null;
-		
-		//editorArea contents into file
-		try
-		{
-			BufferedWriter writer = new BufferedWriter(new FileWriter(f));
-			writer.write(source);
-			writer.close();
-		}
-		catch (IOException ioe){ ioe.printStackTrace(); }
-		
-		return f;
-	}
-	*/
 	
 	private void sendInToOut()
 	{
