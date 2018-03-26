@@ -63,6 +63,8 @@ public class MainWindow
 	//The file to which output dumps will be saved
 	private File currentOutputDump;
 	
+	private DocumentListener changesIndicatorListener;
+	
 	private JFrame frmStringSequenceAnalyzer;
 	private JTextField inputLine;
 	private JButton btnEnter;
@@ -142,6 +144,8 @@ public class MainWindow
 				tabbedPane.setSelectedIndex(1);
 				
 				//TODO open new editor
+				editors.set(0, new Editor(editorArea));
+				editorArea.getDocument().addDocumentListener(changesIndicatorListener);
 			}
 		});
 		mnFile.add(mntmNewBatch);
@@ -155,6 +159,7 @@ public class MainWindow
 				
 				editors.get(0).open();
 				lblFilename.setText(editors.get(0).getFileName());
+				editorArea.getDocument().addDocumentListener(changesIndicatorListener);
 			}
 		});
 		mnFile.add(mntmOpenBatch);
@@ -439,7 +444,7 @@ public class MainWindow
 		
 		editorArea = new JTextPane();
 		editorArea.setFont(new Font("Courier New", Font.PLAIN, 13));
-		editorArea.getDocument().addDocumentListener(new DocumentListener() {
+		changesIndicatorListener = new DocumentListener() {
 			@Override
 			public void removeUpdate(DocumentEvent e)
 			{
@@ -460,7 +465,8 @@ public class MainWindow
 				if(!lblFilename.getText().endsWith(UNSAVED_INDICATOR))
 					lblFilename.setText(lblFilename.getText() + UNSAVED_INDICATOR);
 			}
-		});
+		};
+		editorArea.getDocument().addDocumentListener(changesIndicatorListener);
 		editorArea.addCaretListener(new CaretListener() {
 			/**
 			 * Update caret status bar in the editor tab

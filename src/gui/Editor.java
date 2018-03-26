@@ -176,7 +176,9 @@ public class Editor
 			return false;
 		}
 		
+		area.getDocument().addDocumentListener(changesListener);
 		unsavedChanges = false;
+		
 		return true;
 	}
 	
