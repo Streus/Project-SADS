@@ -1,5 +1,6 @@
 package gui;
 import java.awt.Color;
+import java.awt.Desktop;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -279,6 +280,27 @@ public class MainWindow
 		menuBar.add(mnHelp);
 		
 		JMenuItem mntmDocumentation = new JMenuItem("Documentation");
+		mntmDocumentation.addActionListener(new ActionListener() {
+			/**
+			 * Open Documentation
+			 */
+			public void actionPerformed(ActionEvent arg0)
+			{
+				try
+				{
+					File doc = new File("res/doc.html");
+					if(Desktop.isDesktopSupported())
+					{
+						Desktop.getDesktop().browse(doc.toURI());
+					}
+				}
+				catch (IOException e)
+				{
+					System.err.println(e.getMessage());
+					e.printStackTrace();
+				}
+			}
+		});
 		mnHelp.add(mntmDocumentation);
 		frmStringSequenceAnalyzer.getContentPane().setLayout(new BoxLayout(frmStringSequenceAnalyzer.getContentPane(), BoxLayout.X_AXIS));
 		
