@@ -11,9 +11,7 @@ public class UniqueSymbolGeneratorTest {
 		UniqueSymbolGenerator tester = new UniqueSymbolGenerator();
 		
 		for (int i=1;i<=5;i++) {
-			tester.Generate();
 			assertEquals("Testing symbol generator: ","_Var"+i,tester.Generate("test"));
-			
 		}
 		
 	}

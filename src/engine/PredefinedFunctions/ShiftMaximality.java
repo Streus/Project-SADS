@@ -40,62 +40,67 @@ public class ShiftMaximality {
 	 * @param s - the original string, from which all substrings will be generated
 	 * @return int value 1 if shift maximal, 0 if undetermined, -1 if not shift maximal
 	 */
-	public int shiftMaximal(String s) {
+	public static int shiftMaximal(String s) {
 		
-		s.trim(); 
-		
-		//loop through all substrings of s
-		for (int i=0; i<s.length(); i++) {
+		if(s != null && !s.isEmpty()) {
 			
-			//boolean to keep track of even or odd
-			boolean even = true;
+			s.trim(); 
 			
-			String subS = s.substring(i+1);
-			//find first disagreement, keeping track of the number of 1's
-			//encountered before the disagreement for the original string
-			
-			//default set to n - no disagreement
-			char sDisagreement = 'n';
-			char subDisagreement = 'n';
-		
-			for (int j=0; j<subS.length(); j++) {
+			//loop through all substrings of s
+			for (int i=0; i<s.length(); i++) {
 				
-					char sCompare = s.charAt(j);
-					char subCompare = subS.charAt(j);
+				//boolean to keep track of even or odd
+				boolean even = true;
+				
+				String subS = s.substring(i+1);
+				//find first disagreement, keeping track of the number of 1's
+				//encountered before the disagreement for the original string
+				
+				//default set to n - no disagreement
+				char sDisagreement = 'n';
+				char subDisagreement = 'n';
+			
+				for (int j=0; j<subS.length(); j++) {
 					
-					if (sCompare != subCompare) {
-						subDisagreement = subCompare;
-						sDisagreement = sCompare;
-						break;
+						char sCompare = s.charAt(j);
+						char subCompare = subS.charAt(j);
+						
+						if (sCompare != subCompare) {
+							subDisagreement = subCompare;
+							sDisagreement = sCompare;
+							break;
+						}
+						if (sCompare == '1') even = !even;
 					}
-					if (sCompare == '1') even = !even;
-				}
-				
-			//if number of 1's is even then 1>*>0 // 1>0
-			//if number of 1's is odd then 0>*>1 // 0>1
-			//Note: we only care whether the substring is greater than the original
-			if (subDisagreement != 'n') {
-				
-				if (even) {
-					if (subDisagreement == '1' || subDisagreement == '*' && sDisagreement == '0') return CONSTS.FAILURE;
+					
+				//if number of 1's is even then 1>*>0 // 1>0
+				//if number of 1's is odd then 0>*>1 // 0>1
+				//Note: we only care whether the substring is greater than the original
+				if (subDisagreement != 'n') {
+					
+					if (even) {
+						if (subDisagreement == '1' || subDisagreement == '*' && sDisagreement == '0') return CONSTS.FAILURE;
+					}
+					else {
+						if (subDisagreement == '0' || subDisagreement == '*' && sDisagreement == '1') return CONSTS.FAILURE;
+					}
 				}
 				else {
-					if (subDisagreement == '0' || subDisagreement == '*' && sDisagreement == '1') return CONSTS.FAILURE;
+					//if there is no disagreement it can still be shift maximal if the 
+					//rest of the substrings are less than the original, for infinite strings 
+					//we return 0 if we are done processing and there was an even comparison
+					
+					//TODO: check if we have reached computation limit and return undetermined
+					
+					//return CONSTS.UNDETERMINED;
 				}
-			}
-			else {
-				//if there is no disagreement it can still be shift maximal if the 
-				//rest of the substrings are less than the original, for infinite strings 
-				//we return 0 if we are done processing and there was an even comparison
 				
-				//TODO: check if we have reached computation limit and return undetermined
-				
-				//return CONSTS.UNDETERMINED;
-			}
+			}	
 			
-		}	
-		
-		return CONSTS.SUCCESS;
-		
+			return CONSTS.SUCCESS;
+			
+		} else {
+			return -2;
+		}
 	}
 }

@@ -32,15 +32,15 @@ public class WordCount
 	   	sorted.putAll(map);
 	   	return new LinkedHashMap<String, Integer>(sorted);
 	}
-  public Map<String, Integer> wordCount(String word, int subWordLength) 
-  {
+	public Map<String, Integer> wordCount(String word, int subWordLength) 
+	{
 		Map<String, Integer> map = new HashMap<String, Integer>();
 		String subWord = "";
 		int newStartingIndex = 0;
 		int newEndingIndex = subWordLength;
 		
-        //Goes through the word and finds each subword starting at the beginning index 
-        //and ending at the subWordLength, then realigns the indices for the next subwords
+        	//Goes through the word and finds each subword starting at the beginning index 
+        	//and ending at the subWordLength, then realigns the indices for the next subwords
 		for (int i = 0; i < word.length(); i++)
 		{
 			subWord = word.substring(newStartingIndex, newEndingIndex);
@@ -64,7 +64,6 @@ public class WordCount
 				break;
 			}
 		}
-		
 		return sort(map);
 	}
 }  
