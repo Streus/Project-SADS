@@ -133,6 +133,13 @@ public final class Console
 		{
 			System.err.println("Invalid text style " + ioobe.getMessage() + ".");
 		}
+		catch(NullPointerException npe)
+		{
+			if(type == getErr())
+				System.err.print(s);
+			else
+				System.out.print(s);
+		}
 	}
 	
 	/**
