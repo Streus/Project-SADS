@@ -122,6 +122,13 @@ public final class Console
 		{
 			System.err.println("Invalid text style " + ioobe.getMessage() + ".");
 		}
+		catch(NullPointerException npe)
+		{
+			if(type == getErr())
+				System.err.print(s);
+			else
+				System.out.print(s);
+		}
 	}
 	
 	/**
@@ -182,7 +189,7 @@ public final class Console
 		return HDR;
 	}
 	
-	private static void sendToFront(String text, SimpleAttributeSet set)
+	private static void sendToFront(String text, SimpleAttributeSet set) throws NullPointerException
 	{
 		try
 		{
