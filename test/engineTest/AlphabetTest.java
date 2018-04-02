@@ -53,8 +53,7 @@ public class AlphabetTest {
 	public void advancedDefine()
 	{
 		String[] chars = new String[] {"0", "1"};
-		Rule[] rules = new Rule[] {new Rule(1, 2), new Rule(2, 1)};
-		
+		Rule[] rules = new Rule[] {new Rule(0, 1), new Rule(1, 0)};
 		Alphabet a = new Alphabet(chars, rules);
 		
 		assertTrue("Alphabet should be size " + chars.length + ", Is " + a.size(), a.size() == chars.length);
@@ -62,6 +61,40 @@ public class AlphabetTest {
 		{
 			assertTrue("Alphabet should contain \"" + chars[i] + "\", but it doesn't", a.contains(chars[i]));
 		}
+	}
+	
+	/**
+	 * Tests the capability of the sub-Alphabet constructor
+	 */
+	@Test
+	public void constructorDefine()
+	{
+		String[] chars = new String[] {"0", "1"};
+		Rule[] rules = new Rule[] {new Rule(0, 1), new Rule(1, 0)};
+		Alphabet a = new Alphabet(chars, rules);
+		Alphabet b = new Alphabet(chars);
+		
+		Alphabet c, d;
+		try
+		{
+			c = new Alphabet(a);
+			assertTrue("C is not a child of A", c.isChildOf(a));
+		}
+		catch(NullPointerException npe)
+		{
+			fail("Failed to derive C from A");
+		}
+		
+		try
+		{
+			d = new Alphabet(b);
+		}
+		catch(NullPointerException npe)
+		{
+			return;
+		}
+		
+		fail("Derivation of D from B did not fail");
 	}
 	
 	/**
@@ -73,8 +106,8 @@ public class AlphabetTest {
 		String[] chars = new String[] {"0", "1"};
 		Rule[] rules = new Rule[] {new Rule(0, 1), new Rule(1, 0)};
 		int targetLevel = 2;
-		
 		Alphabet a = new Alphabet(chars, rules);
+		
 		Alphabet b = Alphabet.generate(a, targetLevel);
 		
 		assertTrue("Generated alphabet should be size " + chars.length + ", but is " + b.size(), b.size() == chars.length);
@@ -95,7 +128,6 @@ public class AlphabetTest {
 		String[] chars = new String[] {"0", "1"};
 		Rule[] rules = new Rule[] {new Rule(0, 1), new Rule(1, 0)};
 		int highestLevel = 10, targetLevel = 2;
-		
 		Alphabet a = new Alphabet(chars, rules);
 		a = Alphabet.generate(a, highestLevel);
 		
@@ -119,7 +151,6 @@ public class AlphabetTest {
 		String[] chars = new String[] {"0", "1"};
 		Rule[] rules = new Rule[] {new Rule(0, 1), new Rule(1, 0)};
 		int targetLevel = 2;
-		
 		Alphabet a = Alphabet.generate(new Alphabet(chars, rules), targetLevel);
 		Alphabet b = Alphabet.generate(a, targetLevel);
 		

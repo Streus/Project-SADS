@@ -1,5 +1,7 @@
 package engine;
 
+import org.antlr.v4.runtime.misc.EqualityComparator;
+
 import gui.Console;
 
 /**
@@ -98,7 +100,7 @@ public class Alphabet
 		rules = r;
 		level = INITAL_LEVEL;
 	}
-	public Alphabet(Alphabet parent)
+	public Alphabet(Alphabet parent) throws NullPointerException
 	{
 		this.parent = parent;
 		
@@ -153,6 +155,27 @@ public class Alphabet
 	}
 	
 	/**
+	 * Checks if this Alphabet was generated using the given Alphabet
+	 * @param a - the possible parent alphabet
+	 * @return true if a is a parent, false otherwise
+	 */
+	public boolean isChildOf(Alphabet a)
+	{
+		if(a == this)
+			return false;
+		
+		Alphabet parent = this.parent;
+		while(parent != null)
+		{
+			if(parent.equals(a))
+				return true;
+			
+			parent = parent.parent;
+		}
+		return false;
+	}
+	
+	/**
 	 * Sets the rules for a rule-less Alphabet
 	 * @param r
 	 */
@@ -160,6 +183,20 @@ public class Alphabet
 	{
 		if(rules == null)
 			rules = r;
+	}
+	
+	@Override
+	public boolean equals(Object other)
+	{
+		Alphabet a = (Alphabet)other;
+		if(a.level != this.level)
+			return false;
+		if(!a.characters.equals(this.characters))
+			return false;
+		if(!a.rules.equals(this.rules))
+			return false;
+		
+		return true;
 	}
 	
 	/**
