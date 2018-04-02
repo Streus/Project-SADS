@@ -214,4 +214,10 @@ public interface SequenceAnalyzerVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitExpressionOfCommand(SequenceAnalyzerParser.ExpressionOfCommandContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link SequenceAnalyzerParser#alpha_mapping}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAlpha_mapping(SequenceAnalyzerParser.Alpha_mappingContext ctx);
 }

@@ -355,4 +355,14 @@ public interface SequenceAnalyzerListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitExpressionOfCommand(SequenceAnalyzerParser.ExpressionOfCommandContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link SequenceAnalyzerParser#alpha_mapping}.
+	 * @param ctx the parse tree
+	 */
+	void enterAlpha_mapping(SequenceAnalyzerParser.Alpha_mappingContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link SequenceAnalyzerParser#alpha_mapping}.
+	 * @param ctx the parse tree
+	 */
+	void exitAlpha_mapping(SequenceAnalyzerParser.Alpha_mappingContext ctx);
 }

@@ -99,7 +99,7 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
     public CommandObject<String> visitSubstitutionOfExpression(SequenceAnalyzerParser.SubstitutionOfExpressionContext ctx)
 	{
 		String startString = ctx.arg1.getText();
-		String mapping = ctx.ALPHA_MAPPING().getText();
+		String mapping = ctx.alpha_mapping().getText();
 		
 		LinkedHashMap<String,String> map = new LinkedHashMap<String,String>();
 		

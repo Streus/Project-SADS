@@ -221,4 +221,11 @@ public class SequenceAnalyzerBaseVisitor<T> extends AbstractParseTreeVisitor<T> 
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
 	@Override public T visitExpressionOfCommand(SequenceAnalyzerParser.ExpressionOfCommandContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitAlpha_mapping(SequenceAnalyzerParser.Alpha_mappingContext ctx) { return visitChildren(ctx); }
 }
