@@ -371,6 +371,18 @@ public class SequenceAnalyzerBaseListener implements SequenceAnalyzerListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitExpressionOfCommand(SequenceAnalyzerParser.ExpressionOfCommandContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterAlpha_mapping(SequenceAnalyzerParser.Alpha_mappingContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAlpha_mapping(SequenceAnalyzerParser.Alpha_mappingContext ctx) { }
 
 	/**
 	 * {@inheritDoc}
