@@ -23,6 +23,9 @@ public class AlphabetTest {
 		
 	}
 
+	/**
+	 * Tests the most basic use cases of an Alphabet (no generation/rules)
+	 */
 	@Test
 	public void basicDefine()
 	{
@@ -43,6 +46,9 @@ public class AlphabetTest {
 		}
 	}
 
+	/**
+	 * Tests the character + rule set defining constructor for Alphabet
+	 */
 	@Test
 	public void advancedDefine()
 	{
@@ -58,8 +64,11 @@ public class AlphabetTest {
 		}
 	}
 	
+	/**
+	 * Tests the capability of the generate method to generate higher level alphabets from a base alphabet
+	 */
 	@Test
-	public void basicGenerate()
+	public void basicForwardGenerate()
 	{
 		String[] chars = new String[] {"0", "1"};
 		Rule[] rules = new Rule[] {new Rule(0, 1), new Rule(1, 0)};
@@ -75,5 +84,45 @@ public class AlphabetTest {
 		
 		assertTrue("Generated alphabet should contain \"01\", but it doesn't", b.contains("01"));
 		assertTrue("Generated alphabet should contain \"10\", but it doesn't", b.contains("10"));
+	}
+	
+	/**
+	 * Tests the capability of the generate method to retrieve previously generated alphabet levels from an alphabet hierarchy
+	 */
+	@Test
+	public void backtrackGenerate()
+	{
+		String[] chars = new String[] {"0", "1"};
+		Rule[] rules = new Rule[] {new Rule(0, 1), new Rule(1, 0)};
+		int highestLevel = 10, targetLevel = 2;
+		
+		Alphabet a = new Alphabet(chars, rules);
+		a = Alphabet.generate(a, highestLevel);
+		
+		Alphabet b = Alphabet.generate(a, targetLevel);
+		
+		assertTrue("Generated alphabet should be size " + chars.length + ", but is " + b.size(), b.size() == chars.length);
+		
+		for(int i = 0; i < chars.length; i++)
+			assertFalse("Alphabet should not contain \"" + chars[i] + "\", but it does", b.contains(chars[i]));
+		
+		assertTrue("Generated alphabet should contain \"01\", but it doesn't", b.contains("01"));
+		assertTrue("Generated alphabet should contain \"10\", but it doesn't", b.contains("10"));
+	}
+	
+	/**
+	 * Tests the generate method's ability to bounce back an alphabet reference if the target level is the base's level
+	 */
+	@Test
+	public void reboundGenerate()
+	{
+		String[] chars = new String[] {"0", "1"};
+		Rule[] rules = new Rule[] {new Rule(0, 1), new Rule(1, 0)};
+		int targetLevel = 2;
+		
+		Alphabet a = Alphabet.generate(new Alphabet(chars, rules), targetLevel);
+		Alphabet b = Alphabet.generate(a, targetLevel);
+		
+		assertTrue("A and B should be pointing to the same Alphabet object, but they are not", a == b);
 	}
 }
