@@ -55,6 +55,13 @@ public interface SequenceAnalyzerVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitSubstitutionOfExpression(SequenceAnalyzerParser.SubstitutionOfExpressionContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code SubstitutionOfExpressionWithIterations}
+	 * labeled alternative in {@link SequenceAnalyzerParser#sub}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSubstitutionOfExpressionWithIterations(SequenceAnalyzerParser.SubstitutionOfExpressionWithIterationsContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code ComparisonOfExpression}
 	 * labeled alternative in {@link SequenceAnalyzerParser#cmp}.
 	 * @param ctx the parse tree
