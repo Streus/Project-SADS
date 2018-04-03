@@ -24,8 +24,7 @@ public class DebugCommand extends Command
 	public int execute(String[] args)
 	{
 		MainWindow.DEBUG = !MainWindow.DEBUG;
-		Console.println("Debug Mode is now " + (MainWindow.DEBUG ? "on" : "off") + ".");
-		Console.println("[WARNING] Debug Mode is not fully implemented. Use at your own risk.", Console.getWrn());
+		Console.println("Debug Mode is now " + (MainWindow.DEBUG ? "on" : "off") + ".", Console.getWrn());
 		
 		//redirect out and err, or set them back to the defaults
 		if(defaultOut == null && defaultErr == null)
@@ -50,5 +49,4 @@ public class DebugCommand extends Command
 		
 		return 0;
 	}
-
 }
