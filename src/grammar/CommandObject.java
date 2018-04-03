@@ -21,8 +21,10 @@ public abstract class CommandObject<T>
 	
 	static
 	{
+		String lastExecution = "_lastExecution";
 		symbolGen = new UniqueSymbolGenerator();
 		st = new SymbolTable<String, Object>();
+		st.addSymbol(lastExecution, null);
 	}
 	
 	public abstract T execute();
@@ -52,6 +54,7 @@ class VariableAssignmentCommand extends VarDefCommand<Object>
 	public Object execute()
 	{
 		st.addSymbol(varName, value.execute());	
+		st.addSymbol("_lastExecution", value);
 		return value; //return the value?
 	}
 }
@@ -71,6 +74,7 @@ class AlphabetDefinitionCommand extends VarDefCommand<String>
 	@Override
 	public String execute()
 	{
+		st.addSymbol("_lastExecution", this.charList);
 		return null; //return message to console?
 	}
 	
@@ -91,8 +95,8 @@ class SubstitutionCommand extends StringCommand
 	public String execute()
 	{
 		SADSstring sad = new SADSstring();
-		
 		CommandResponse resp = new CommandResponse(sad.Sub(startString.execute(), map));
+		st.addSymbol("_lastExecution", resp.returnVal);
 		return resp.returnVal;
 	}
 }
@@ -113,6 +117,7 @@ class CompareCommand extends StringCommand
 		Compare cmp = new Compare();
 		
 		CommandResponse resp = new CommandResponse(cmp.compareStrings(str1.execute(), str2.execute()));
+		st.addSymbol("_lastExecution", resp.returnVal);
 		return resp.returnVal;
 	}
 }
@@ -131,8 +136,8 @@ class CuttingTimesCommand extends PredefinedFunctionCommand
 	public String execute()
 	{
 		CuttingTimes ct = new CuttingTimes();		
-		CommandResponse resp = new CommandResponse(ct.cuttingTimes(expr.execute()));
-		
+		CommandResponse resp = new CommandResponse(CuttingTimes.cuttingTimes(expr.execute()));
+		st.addSymbol("_lastExecution", resp.returnVal);
 		return resp.returnVal;
 	}
 }
@@ -152,6 +157,7 @@ class StarProductCommand extends PredefinedFunctionCommand
 	{
 		StarProduct sp = new StarProduct();
 		CommandResponse resp = new CommandResponse(sp.starProduct(str1.execute(), str2.execute()));
+		st.addSymbol("_lastExecution", resp.returnVal);
 		return resp.returnVal;
 	}
 }
@@ -171,7 +177,7 @@ class ShiftMaximalityCommand extends PredefinedFunctionCommand
 	{
 		ShiftMaximality sm = new ShiftMaximality();
 		CommandResponse resp = new CommandResponse(sm.shiftMaximal((String)operand.execute()));
-		
+		st.addSymbol("_lastExecution", resp.returnVal);
 		return resp.returnVal;	
 	}
 }
@@ -193,7 +199,7 @@ class WordCountCommand extends PredefinedFunctionCommand
 		
 		WordCount wc = new WordCount();
 		CommandResponse resp = new CommandResponse(wc.wordCount(str.execute(), index.execute().intValue()));
-		
+		st.addSymbol("_lastExecution", resp.returnVal);
 		return resp.returnVal;	
 	}
 }
@@ -213,6 +219,7 @@ class BuildCommand extends PredefinedFunctionCommand
 	public String execute()
 	{
 		//TODO
+		st.addSymbol("_lastExecution", str);
 		return null;
 	}
 }
@@ -243,11 +250,13 @@ class ConcatenationCommand extends PredefinedFunctionCommand
 		if (index == null)
 		{	
 			CommandResponse resp = new CommandResponse(concat.concat(baseStr.execute(), concatStr.execute()));
+			st.addSymbol("_lastExecution", resp.returnVal);
 			return resp.returnVal;			
 		}
 		else
 		{
 			CommandResponse resp = new CommandResponse(concat.Insert(baseStr.execute(), concatStr.execute(), index.execute().intValue()));
+			st.addSymbol("_lastExecution", resp.returnVal);
 			return resp.returnVal;
 		}
 	}
@@ -265,6 +274,7 @@ class LiteralCommand<S> extends CommandObject<S>
 	@Override
 	public S execute()
 	{
+		st.addSymbol("_lastExecution", value);
 		return value;
 	}
 }
@@ -282,6 +292,7 @@ class ResolveVariable extends CommandObject<Object>
 	public Object execute()
 	{
 		System.out.println((String)st.get(name));
+		st.addSymbol("_lastExecution", st.get(name));
 		return st.get(name);
 	}
 }
