@@ -12,7 +12,7 @@ cmd		:	//first branch of command hierarchy
 		|	strcmd			//string command
 		|	predef			//predefined function
 		|	literal			//string literal
-		|	array
+		|	array_def
 		|	rules
 		|	print			
 		;
@@ -76,19 +76,23 @@ assignment	:	varName=ID ':=' expr  												#AssignVariableOfExpression
 retreival	:	variable=ID		#RetrieveVariable
 			;
 
-array	:	'def' LP LCB (STRING_LITERAL ',')*(STRING_LITERAL) RCB RP				#AssignUserAlphabetOfStrings		
-		|	'def' LP LCB (STRING_LITERAL ',')*(STRING_LITERAL) RCB ',' (rules)+ RP	#AssignUserAlphabetOfStringsWithRules		
-		|	ID '[' INT ']'										#AccessArray
-		;
-		
-two_d_array	:	'def' LP (LCB (INT ',')*(INT) RCB *(LCB (INT ',')*(INT) RCB	)) RP			#Assign2DArray
+array_def	:	'def' LCB (STRING_LITERAL) (COMMA STRING_LITERAL)* RCB						#AssignUserAlphabetOfStrings		
+			|	'def' LP LCB (STRING_LITERAL) (COMMA STRING_LITERAL)* RCB RP				#AssignUserAlphabetOfStringsInParens
+			|	'def' LP LCB (STRING_LITERAL) (COMMA STRING_LITERAL)* RCB COMMA (rules) (COMMA rules)* RP	#AssignUserAlphabetOfStringsWithRules		
 			;
+		
+//two_d_array	:	'def' LP (LCB (INT ',')*(INT) RCB *(LCB (INT ',')*(INT) RCB	)) RP			#Assign2DArray
+//			;
 			
-rules	: 'r' LP (INT ',')* (INT) RP
-		;		
+rules	: 'r' LP (INT) (COMMA INT)* RP
+		;
+
+derive	: 'der' LP array_def COMMA INT RP			#DeriveAlphabet
+		| 'der' LP alphabetName=ID COMMA INT RP		#DeriveAlphabetWithVariable
+		;
 			
-print	:	'print' array			#PrintArray
-		|	'print' LP array RP		#PrintArrayInParens		
+print	:	'print' array_def			#PrintArray
+		|	'print' LP array_def RP		#PrintArrayInParens		
 		|	'print' cmd				#PrintCommand
 		|	'print' LP cmd RP		#PrintCommandInParens
 		;
