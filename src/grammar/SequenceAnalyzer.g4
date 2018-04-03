@@ -34,7 +34,7 @@ predef	:	ct		//cutting times
 		;
 		
 //input must be in format sub (data , data)
-sub		:	'sub' LP arg1=expr COMMA alpha_mapping RP			#SubstitutionOfExpression
+sub		:	'sub' LP arg1=expr COMMA ALPHA_MAPPING RP			#SubstitutionOfExpression
 		;
 		
 //input must be in format cmp (data , data)
@@ -112,6 +112,7 @@ RCB		:	'}';			//assigns token name to right curly bracket
 COMMA	:	',';			//assigns token name to comma
 DBQUOTE	:	'"';
 STRING_LITERAL : '"' (~('"' | '\\' | '\r' | '\n') | '\\' ('"' | '\\'))* '"';
+ALPHA_MAPPING	: '"' STRING '"' MAPPING_DELIMETER '"' STRING '"' (COMMA '"' STRING '"' MAPPING_DELIMETER '"' STRING '"')*;
 MAPPING_DELIMETER	: '->';
 LETTER	: 	[a-zA-Z]+ ;		//defines letters as lowercase and uppercase
 NEWLINE	:	'\r'? '\n' ;    //return newlines to parser (end-statement signal)
