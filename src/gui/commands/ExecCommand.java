@@ -20,6 +20,13 @@ public class ExecCommand extends Command
 	{
 		return "Attempts to execute a command file.";
 	}
+	
+	@Override
+	public String getUsage()
+	{
+		String base = super.getUsage();
+		return base + " <file path>";
+	}
 
 	@Override
 	public int execute(String[] args)

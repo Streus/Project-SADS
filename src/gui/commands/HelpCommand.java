@@ -12,8 +12,14 @@ public class HelpCommand extends Command
 	@Override
 	public String getHelp()
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return "Displays general help for the console. For help with engine commands, go to the Help tab.";
+	}
+	
+	@Override
+	public String getUsage()
+	{
+		String base = super.getUsage();
+		return base + " [command name]";
 	}
 
 	@Override
@@ -28,7 +34,8 @@ public class HelpCommand extends Command
 			{
 				if(commands[i].getName().equalsIgnoreCase(args[1]))
 				{
-					Console.println(commands[i].getName());
+					Console.print("[" + commands[i].getName() + "]", Console.getHdr());
+					Console.println(" - " + commands[i].getUsage());
 					Console.println(commands[i].getHelp());
 					return 0;
 				}
@@ -36,12 +43,15 @@ public class HelpCommand extends Command
 			Console.println("Command: " + args[1] + " does not exist.", Console.getErr());
 			return 1;
 		}
-		//print out help for all commands
+		//print out general help
 		else
 		{
+			Console.println("Usage Key: <> = required arg, [] = optional arg");
+			
 			for(int i = 0; i < commands.length; i++)
 			{
-				Console.println("[" + commands[i].getName() + "]", Console.getHdr());
+				Console.print("\n[" + commands[i].getName() + "]", Console.getHdr());
+				Console.println(" - " + commands[i].getUsage());
 				Console.println("  " + commands[i].getHelp());
 			}
 			return 0;
