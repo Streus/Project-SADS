@@ -125,6 +125,37 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 		
 		return new SubstitutionCommand(visit(ctx.arg1), map);
 	}
+	
+	@Override public CommandObject<String> visitSubstitutionOfExpressionWithIterations(SequenceAnalyzerParser.SubstitutionOfExpressionWithIterationsContext ctx) { 
+		String startString = ctx.arg1.getText();
+		String mapping = ctx.alpha_mapping().getText();
+		int iterations = Integer.parseInt(ctx.INT().getText());
+		
+		LinkedHashMap<String,String> map = new LinkedHashMap<String,String>();
+		
+		String [] commaSplitString = mapping.split(",");
+		String [] arrowSplitString;
+		
+		for (int i = 0; i<commaSplitString.length; i++) {
+			arrowSplitString = commaSplitString[i].split("->"); 
+			for(int j = 0; j<arrowSplitString.length; j++) {
+				arrowSplitString[j] = arrowSplitString[j].replaceAll("\"", "");
+			}
+			map.put(arrowSplitString[0], arrowSplitString[1]);
+			if(debugFlag == true) {
+				System.out.println("arrowSplitString[0] = "+arrowSplitString[0]);
+				System.out.println("arrowSplitString[1] = "+arrowSplitString[1]);
+			}
+		}
+		
+		if(debugFlag == true){
+			System.out.println("startString = " + startString);
+			System.out.println("mapping = " + mapping);
+			System.out.println("iterations = " + iterations);
+		}
+		
+		return new SubstitutionCommand(visit(ctx.arg1), map);
+	}
 
 	@Override
     public CommandObject<String> visitComparisonOfExpression(SequenceAnalyzerParser.ComparisonOfExpressionContext ctx)

@@ -82,6 +82,18 @@ public interface SequenceAnalyzerListener extends ParseTreeListener {
 	 */
 	void exitSubstitutionOfExpression(SequenceAnalyzerParser.SubstitutionOfExpressionContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code SubstitutionOfExpressionWithIterations}
+	 * labeled alternative in {@link SequenceAnalyzerParser#sub}.
+	 * @param ctx the parse tree
+	 */
+	void enterSubstitutionOfExpressionWithIterations(SequenceAnalyzerParser.SubstitutionOfExpressionWithIterationsContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code SubstitutionOfExpressionWithIterations}
+	 * labeled alternative in {@link SequenceAnalyzerParser#sub}.
+	 * @param ctx the parse tree
+	 */
+	void exitSubstitutionOfExpressionWithIterations(SequenceAnalyzerParser.SubstitutionOfExpressionWithIterationsContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code ComparisonOfExpression}
 	 * labeled alternative in {@link SequenceAnalyzerParser#cmp}.
 	 * @param ctx the parse tree
