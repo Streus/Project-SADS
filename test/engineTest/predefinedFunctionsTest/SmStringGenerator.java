@@ -1,5 +1,9 @@
 package engineTest.predefinedFunctionsTest;
 
+import java.util.Scanner;
+
+import engine.PredefinedFunctions.CuttingTimes;
+
 /**
  * Includes various methods to be used in the ShiftMaximalityTest class 
  * 
@@ -198,7 +202,7 @@ public class SmStringGenerator {
 //			System.out.println();
 		}
 		
-		System.out.println("FINAL STRING: " + smString);
+		//System.out.println("FINAL STRING: " + smString);
 		
 		return smString;
 		
@@ -216,10 +220,25 @@ public class SmStringGenerator {
 	//output test for generating functions
 //	public static void main(String[] args) {
 //		
-//		fibonacciGen(50);
+//		Scanner scan = new Scanner(System.in);
+//		System.out.print("Enter the number of Fibonacci digits to be calculated: ");
+//		int i = scan.nextInt();
+//		String fibStr = fibonacciGen(i);
+//		System.out.print("Generating Fibonacci String . . .");
+//		System.out.println();
+//		System.out.println("The Shift Maximal string whose cutting times represent the first" + i + "digits of the fibonacci sequence is: " + fibStr);
+//		System.out.println();
+//		System.out.println("The Cutting Times calculation of this string and resulting fibonacci sequence is: ");
+//		int[] fibArray = CuttingTimes.cuttingTimes(fibStr);
+//		
+//		for (int x=0; x<fibArray.length; x++) {
+//			System.out.print(fibArray[x] + ",");
+//		}
+		
+		
 //		spGen(4);
 //		spGenV2("100101", 4);
 //		spGenV2Fail("100101", 4);
-//
+
 //	}
 }
