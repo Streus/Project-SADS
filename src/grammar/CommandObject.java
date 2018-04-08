@@ -11,6 +11,9 @@ import engine.command.CommandResponse;
 import engine.SymbolTable;
 import engine.Concatenation;
 import engine.SADSstring;
+import engine.Alphabet;
+import engine.Alphabet.Rule;
+import engine.AlphabetSymbolTable;
 import engine.Compare;
 
 //COMMAND HIERARCHY LEVEL 0
@@ -36,6 +39,8 @@ abstract class VarDefCommand<S> extends CommandObject<S> { }
 abstract class StringCommand extends CommandObject<String> { }
 
 abstract class PredefinedFunctionCommand extends CommandObject<String> { }
+
+abstract class AlphabetCommand extends CommandObject<Alphabet> { }
 
 //COMMAND HIERARCHY LEVEL 2
 
@@ -295,4 +300,81 @@ class ResolveVariable extends CommandObject<Object>
 		st.addSymbol("_lastExecution", st.get(name));
 		return st.get(name);
 	}
+}
+
+class DefineRule extends CommandObject<Alphabet.Rule>
+{
+	private int[] chars;
+	
+	public DefineRule(int[] chars)
+	{
+		this.chars = chars;
+	}
+	
+	@Override
+	public Rule execute()
+	{
+		Alphabet.Rule r = new Alphabet.Rule(chars);
+		return r;
+	}
+}
+
+class DefineAlphabet extends AlphabetCommand
+{
+	private String[] chars;
+	
+	private DefineRule[] rules;
+	
+	public DefineAlphabet(String[] chars)
+	{
+		this.chars = chars;
+		rules = null;
+	}
+	
+	public DefineAlphabet(String[] chars, DefineRule[] rules)
+	{
+		this.chars = chars;
+		this.rules = rules;
+	}
+	
+	@Override
+	public Alphabet execute()
+	{
+		Alphabet a;
+		if(rules == null)
+			a = new Alphabet(chars);
+		else
+		{
+			Alphabet.Rule[] rules = new Alphabet.Rule[chars.length];
+			for(int i = 0; i < rules.length; i++)
+				rules[i] = this.rules[i].execute();
+			a = new Alphabet(chars, rules);
+		}
+		
+		//TODO symbol table storage
+		
+		return a;
+	}
+}
+
+class DeriveAlphabet extends AlphabetCommand
+{
+	private AlphabetCommand base;
+	private CommandObject<Integer> targetLevel;
+	
+	public DeriveAlphabet(AlphabetCommand a, CommandObject<Integer> level)
+	{
+		base = a;
+		targetLevel = level;
+	}
+	
+	@Override
+	public Alphabet execute()
+	{
+		
+		Alphabet generated = Alphabet.generate(base.execute(), targetLevel.execute());
+		//TODO symbol table storage
+		return generated;
+	}
+	
 }

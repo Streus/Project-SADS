@@ -81,6 +81,10 @@ public class Alphabet
 	public Alphabet(String[] chars)
 	{
 		parent = null;
+		
+		if(chars == null)
+			throw new IllegalArgumentException("Character Set must be non-null");
+		
 		characters = chars;
 		rules = null;
 		level = INITAL_LEVEL;
