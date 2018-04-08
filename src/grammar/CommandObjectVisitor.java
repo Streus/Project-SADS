@@ -5,6 +5,7 @@ import java.util.LinkedHashMap;
 
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
+import engine.Alphabet;
 import engine.AlphabetSymbolTable;
 import gui.Console;
 
@@ -58,42 +59,6 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 		
 		return new VariableAssignmentCommand(name, visit(ctx.expr()));
 	}
-	
-//	@Override public CommandObject<Object> visitAssignUserAlphabetOfStrings(SequenceAnalyzerParser.AssignUserAlphabetOfStringsContext ctx) { 
-//		if(debugFlag == true) {
-//			System.out.println("Visiting AssignUserAlphabet");
-//		}
-//		ArrayList<Object> stringAlpha = new ArrayList<Object>();
-//		System.out.println(ctx.getText());
-//		
-//		for(int i=0; ctx.STRING_LITERAL(i)!=null; i++) {
-//			String character = ctx.STRING_LITERAL(i).getText().substring(1, ctx.STRING_LITERAL(i).getText().length()-1);
-//			System.out.println("STRING_LITERAL "+(i+1)+" = "+character);
-//			stringAlpha.add(character);
-//		}
-//		
-//		AlphabetSymbolTable.setCurrentAlphabet(stringAlpha);
-//		AlphabetSymbolTable.printAlphabet();
-//		return visitChildren(ctx); 
-//		}
-	
-	@Override public CommandObject<Object> visitAssignUserAlphabetOfStrings(SequenceAnalyzerParser.AssignUserAlphabetOfStringsContext ctx) { 
-		if(debugFlag == true) {
-			System.out.println("Visiting AssignUserAlphabet");
-		}
-		ArrayList<Object> intAlpha = new ArrayList<Object>();
-		System.out.println(ctx.getText());
-		
-//		for(int i=0; ctx.INT(i)!=null; i++) {
-//			String character = ctx.INT(i).getText();
-//			System.out.println("INT "+(i+1)+" = "+character);
-//			int intChar = Integer.valueOf(character);
-//			intAlpha.add(intChar);	
-//		}
-		AlphabetSymbolTable.setCurrentAlphabet(intAlpha);
-		AlphabetSymbolTable.printAlphabet();
-		return visitChildren(ctx); 
-		}
 	
 	@Override
     public CommandObject<String> visitSubstitutionOfExpression(SequenceAnalyzerParser.SubstitutionOfExpressionContext ctx)
@@ -414,6 +379,43 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 		}
 		
 		return new ResolveVariable(name);
+	}
+	
+	/* Alphabet Definition and Derivation */
+	@Override
+	public CommandObject<Alphabet> visitAssignUserAlphabetOfStrings(SequenceAnalyzerParser.AssignUserAlphabetOfStringsContext ctx)
+	{
+		return null;
+	}
+	
+	@Override
+	public CommandObject<Alphabet> visitAssignUserAlphabetOfStringsInParens(SequenceAnalyzerParser.AssignUserAlphabetOfStringsInParensContext ctx)
+	{
+		return null;
+	}
+	
+	@Override
+	public CommandObject<Alphabet> visitAssignUserAlphabetOfStringsWithRules(SequenceAnalyzerParser.AssignUserAlphabetOfStringsWithRulesContext ctx)
+	{
+		return null;
+	}
+	
+	@Override
+	public CommandObject<Alphabet.Rule> visitRules(SequenceAnalyzerParser.RulesContext ctx)
+	{
+		return null;
+	}
+	
+	@Override
+	public CommandObject<Alphabet> visitDeriveAlphabet(SequenceAnalyzerParser.DeriveAlphabetContext ctx)
+	{
+		return null;
+	}
+	
+	@Override
+	public CommandObject<Alphabet> visitDeriveAlphabetWithVariable(SequenceAnalyzerParser.DeriveAlphabetWithVariableContext ctx)
+	{
+		return null;
 	}
 }
 
