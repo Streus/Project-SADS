@@ -1,7 +1,5 @@
 package engine;
 
-import org.antlr.v4.runtime.misc.EqualityComparator;
-
 import gui.Console;
 
 /**
@@ -208,7 +206,14 @@ public class Alphabet
 	 */
 	public String toString()
 	{
-		return "TODO - Alphabet#toString()";
+		String str = "{";
+		str += "\"" + characters[0] + "\"";
+		for(int i = 1; i < characters.length; i++)
+		{
+			str += ", \"" + characters[i]  + "\"";
+		}
+		str += "}";
+		return str;
 	}
 	
 	/* Inner Types */
