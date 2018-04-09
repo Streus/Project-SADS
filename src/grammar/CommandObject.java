@@ -368,6 +368,11 @@ class DeriveAlphabet extends AlphabetCommand
 		targetLevel = level;
 	}
 	
+	public DeriveAlphabet(String variableName, CommandObject<Integer> level)
+	{
+		
+	}
+	
 	@Override
 	public Alphabet execute()
 	{
