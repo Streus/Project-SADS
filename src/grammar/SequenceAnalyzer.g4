@@ -35,8 +35,8 @@ predef	:	ct		//cutting times
 		;
 		
 //input must be in format sub (data , data)
-sub		:	'sub' LP arg1=expr COMMA alpha_mapping RP			#SubstitutionOfExpression
-		|	'sub' LP arg1=expr COMMA alpha_mapping COMMA INT RP			#SubstitutionOfExpressionWithIterations
+sub		:	'sub' LP arg1=expr COMMA alpha_mapping RP							#SubstitutionOfExpression
+		|	'sub' LP arg1=expr COMMA alpha_mapping COMMA iterations=INT RP		#SubstitutionOfExpressionWithIterations
 		;
 		
 //input must be in format cmp (data , data)
@@ -74,7 +74,7 @@ concat	:	'concat' LP arg1=expr COMMA arg2=expr RP			#ConcatOn2Expressions
 assignment	:	varName=ID ':=' expr  												#AssignVariableOfExpression	
 			;
 	
-retreival	:	variable=ID		#RetrieveVariable
+retreival	:	variable=(ID | LAST_COMMAND_CHAR)		#RetrieveVariable		
 			;
 
 array_def	:	'def' LCB (STRING_LITERAL) (COMMA STRING_LITERAL)* RCB						#AssignUserAlphabetOfStrings		
@@ -119,6 +119,7 @@ COMMA	:	',';			//assigns token name to comma
 DBQUOTE	:	'"';
 STRING_LITERAL : '"' (~('"' | '\\' | '\r' | '\n') | '\\' ('"' | '\\'))* '"';
 MAPPING_DELIMETER	: '->';
+LAST_COMMAND_CHAR	:	'_';
 LETTER	: 	[a-zA-Z]+ ;		//defines letters as lowercase and uppercase
 NEWLINE	:	'\r'? '\n' ;    //return newlines to parser (end-statement signal)
 LN_COMMENT :   '//' .*? '\n' -> skip;	//skips single line comments
