@@ -371,7 +371,8 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 //		return visitChildren(ctx); 
 //	}
 	
-	@Override public CommandObject<Object> visitRetrieveVariable(SequenceAnalyzerParser.RetrieveVariableContext ctx)
+	@Override
+	public CommandObject<Object> visitRetrieveVariable(SequenceAnalyzerParser.RetrieveVariableContext ctx)
 	{ 
 		String name = ctx.variable.getText();
 		
@@ -474,12 +475,28 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 	@Override
 	public CommandObject<Alphabet> visitDeriveAlphabet(SequenceAnalyzerParser.DeriveAlphabetContext ctx)
 	{
-		return null;
+		String context = ctx.getText();
+		if(debugFlag)
+		{
+			System.out.println("Visiting Derive Alphabet");
+			System.out.println(context);
+		}
+		
+		AlphabetCommand alpha = (AlphabetCommand) visit(ctx.array_def());
+		return new DeriveAlphabet(alpha, new LiteralCommand<Integer>(Integer.parseInt(ctx.INT().getText())));
 	}
 	
 	@Override
 	public CommandObject<Alphabet> visitDeriveAlphabetWithVariable(SequenceAnalyzerParser.DeriveAlphabetWithVariableContext ctx)
 	{
+		String context = ctx.getText();
+		if(debugFlag)
+		{
+			System.out.println("Visiting Derive Alphabet");
+			System.out.println(context);
+		}
+		
+		//TODO
 		return null;
 	}
 }
