@@ -9,6 +9,7 @@ import org.antlr.v4.runtime.tree.TerminalNode;
 
 import engine.Alphabet;
 import engine.AlphabetSymbolTable;
+import grammar.SequenceAnalyzerParser.RulesContext;
 import gui.Console;
 
 public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObject>
@@ -387,19 +388,67 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 	@Override
 	public CommandObject<Alphabet> visitAssignUserAlphabetOfStrings(SequenceAnalyzerParser.AssignUserAlphabetOfStringsContext ctx)
 	{
-		return null;
+		String alpha = ctx.getText();
+		if(debugFlag)
+		{
+			System.out.println("Visting Assign User Alphabet");
+			System.out.println(alpha);
+		}
+		
+		//get characters
+		List<TerminalNode> literals = ctx.STRING_LITERAL();
+		String[] chars = new String[literals.size()];
+		for(int i = 0; i < literals.size(); i++)
+			chars[i] = literals.get(i).getText().replaceAll("\"", "");
+		
+		//make define CO
+		return new DefineAlphabet(chars);
 	}
 	
 	@Override
 	public CommandObject<Alphabet> visitAssignUserAlphabetOfStringsInParens(SequenceAnalyzerParser.AssignUserAlphabetOfStringsInParensContext ctx)
 	{
-		return null;
+		String alpha = ctx.getText();
+		if(debugFlag)
+		{
+			System.out.println("Visting Assign User Alphabet In Parens");
+			System.out.println(alpha);
+		}
+		
+		//get characters
+		List<TerminalNode> literals = ctx.STRING_LITERAL();
+		String[] chars = new String[literals.size()];
+		for(int i = 0; i < literals.size(); i++)
+			chars[i] = literals.get(i).getText().replaceAll("\"", "");
+		
+		//make define CO
+		return new DefineAlphabet(chars);
 	}
 	
 	@Override
 	public CommandObject<Alphabet> visitAssignUserAlphabetOfStringsWithRules(SequenceAnalyzerParser.AssignUserAlphabetOfStringsWithRulesContext ctx)
 	{
-		return null;
+		String alpha = ctx.getText();
+		if(debugFlag)
+		{
+			System.out.println("Visting Assign User Alphabet With Rules");
+			System.out.println(alpha);
+		}
+		
+		//get characters
+		List<TerminalNode> literals = ctx.STRING_LITERAL();
+		String[] chars = new String[literals.size()];
+		for(int i = 0; i < literals.size(); i++)
+			chars[i] = literals.get(i).getText().replaceAll("\"", "");
+		
+		//get rules
+		List<RulesContext> rules = ctx.rules();
+		DefineRule[] ruleCommands = new DefineRule[rules.size()];
+		for(int i = 0; i < rules.size(); i++)
+			ruleCommands[i] = (DefineRule) visit(rules.get(i));
+		
+		//make define CO
+		return new DefineAlphabet(chars, ruleCommands);
 	}
 	
 	@Override
@@ -412,11 +461,13 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 			System.out.println(rule);
 		}
 		
+		//get rule values
 		List<TerminalNode> ints = ctx.INT();
 		int[] chars = new int[ints.size()];
 		for(int i = 0; i < ints.size(); i++)
 			chars[i] = Integer.parseInt(ints.get(i).getText());
 		
+		//make define CO
 		return new DefineRule(chars);
 	}
 	
