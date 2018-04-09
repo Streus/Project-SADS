@@ -494,10 +494,10 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 		{
 			System.out.println("Visiting Derive Alphabet");
 			System.out.println(context);
+			System.out.println("var name = " + ctx.alphabetName.getText());
 		}
 		
-		//TODO
-		return null;
+		return null;//new DeriveAlphabet();
 	}
 }
 
