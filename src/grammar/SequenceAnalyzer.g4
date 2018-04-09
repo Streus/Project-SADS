@@ -14,7 +14,8 @@ cmd		:	//first branch of command hierarchy
 		|	literal			//string literal
 		|	array_def
 		|	rules
-		|	print			
+		|	print
+		|	derive			
 		;
 		
 vardef	:	assignment		
