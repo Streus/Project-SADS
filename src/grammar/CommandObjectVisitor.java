@@ -2,8 +2,10 @@ package grammar;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
+import org.antlr.v4.runtime.tree.TerminalNode;
 
 import engine.Alphabet;
 import engine.AlphabetSymbolTable;
@@ -403,7 +405,19 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 	@Override
 	public CommandObject<Alphabet.Rule> visitRules(SequenceAnalyzerParser.RulesContext ctx)
 	{
-		return null;
+		String rule = ctx.getText();
+		if(debugFlag)
+		{
+			System.out.println("Visiting Rule");
+			System.out.println(rule);
+		}
+		
+		List<TerminalNode> ints = ctx.INT();
+		int[] chars = new int[ints.size()];
+		for(int i = 0; i < ints.size(); i++)
+			chars[i] = Integer.parseInt(ints.get(i).getText());
+		
+		return new DefineRule(chars);
 	}
 	
 	@Override
