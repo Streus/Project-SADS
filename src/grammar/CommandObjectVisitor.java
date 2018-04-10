@@ -35,9 +35,27 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 			visitResult = visit(ctx.cmd(i));
 			
 			if(visitResult!=null) {
-				executeResult = visitResult.execute();
-				System.out.println("Result = "+executeResult);
-				Console.println(executeResult.toString());
+				//Blacklist to avoid automatic printing of result
+				if(visitResult instanceof PrintCommand || visitResult instanceof VariableAssignmentCommand || visitResult instanceof LiteralCommand) {
+					if(debugFlag == true) {
+						System.out.println("visitResult class: "+visitResult.getClass());
+						System.out.println("Auto Print...");
+						System.out.println("ctx = "+ctx.cmd(i).getText());
+					}
+					visitResult.execute();
+				}
+				//automatically prints normal commands
+				else {
+//					executeResult = visitResult.execute();
+					if(debugFlag == true) {
+						System.out.println("visitResult class: "+visitResult.getClass());
+						System.out.println("Auto Print...");
+						System.out.println("ctx = "+ctx.cmd(i).getText());
+					}
+					//Console.println(executeResult.toString());
+					new PrintCommand(visitResult).execute();
+				}
+				
 			}
 			else {
 				System.out.println("Result = null");
@@ -303,7 +321,7 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 		return new LiteralCommand<Integer>(value);
 	}
 	
-	@Override public CommandObject<Object> visitPrintCommand(SequenceAnalyzerParser.PrintCommandContext ctx) { 
+	@Override public PrintCommand visitPrintCommand(SequenceAnalyzerParser.PrintCommandContext ctx) { 
 		if(debugFlag == true)
 		{
 			System.out.println("Visiting Print Command");
@@ -314,12 +332,13 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 		if(debugFlag == true)
 		{
 			System.out.println("Command = "+command);
+			System.out.println("Force Print...");
 		}
 		
-		return visitChildren(ctx); 
+		return new PrintCommand(visit(ctx.cmd())); 
 	}
 	
-	@Override public CommandObject<Object> visitPrintCommandInParens(SequenceAnalyzerParser.PrintCommandInParensContext ctx) { 
+	@Override public PrintCommand visitPrintCommandInParens(SequenceAnalyzerParser.PrintCommandInParensContext ctx) { 
 		if(debugFlag == true)
 		{
 			System.out.println("Visiting Print CommandInParens");
@@ -330,46 +349,11 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 		if(debugFlag == true)
 		{
 			System.out.println("Command = "+command);
+			System.out.println("Force Print...");
 		}
 		
-		return visitChildren(ctx); 
+		return new PrintCommand(visit(ctx.cmd())); 
 	}
-	
-//	@Override public CommandObject<Object> visitPrintArray(SequenceAnalyzerParser.PrintArrayContext ctx) { 
-//		if(debugFlag == true)
-//		{
-//			System.out.println("Visiting Print Array");
-//		}
-//		
-//		String arrayName = ctx.array().ID().getText();
-//		int arrayIndex = Integer.parseInt(ctx.array().INT().getText());
-//		
-//		if(debugFlag == true)
-//		{
-//		System.out.println("arrayName = "+arrayName);
-//		System.out.println("arrayIndex = "+arrayIndex);
-//		}
-//		
-//		return visitChildren(ctx); 
-//	}
-	
-//	@Override public CommandObject<Object> visitPrintArrayInParens(SequenceAnalyzerParser.PrintArrayInParensContext ctx) { 
-//		if(debugFlag == true)
-//		{
-//			System.out.println("Visiting Print Array");
-//		}
-//		
-//		String arrayName = ctx.array().ID().getText();
-//		int arrayIndex = Integer.parseInt(ctx.array().INT().getText());
-//		
-//		if(debugFlag == true)
-//		{
-//		System.out.println("arrayName = "+arrayName);
-//		System.out.println("arrayIndex = "+arrayIndex);
-//		}
-//		
-//		return visitChildren(ctx); 
-//	}
 	
 	@Override
 	public CommandObject<Object> visitRetrieveVariable(SequenceAnalyzerParser.RetrieveVariableContext ctx)

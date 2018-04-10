@@ -8,6 +8,7 @@ import engine.PredefinedFunctions.ShiftMaximality;
 import engine.PredefinedFunctions.StarProduct;
 import engine.PredefinedFunctions.WordCount;
 import engine.command.CommandResponse;
+import gui.Console;
 import engine.SymbolTable;
 import engine.Concatenation;
 import engine.SADSstring;
@@ -41,6 +42,28 @@ abstract class StringCommand extends CommandObject<String> { }
 abstract class PredefinedFunctionCommand extends CommandObject<String> { }
 
 abstract class AlphabetCommand extends CommandObject<Alphabet> { }
+
+class PrintCommand extends CommandObject<Object>
+{
+	private CommandObject<Object> printString;
+	
+	public PrintCommand (CommandObject<Object> printString) {
+		this.printString = printString;
+	}
+	
+	public String execute() 
+	{
+		Object executedPrintString = printString.execute();
+		if(executedPrintString == null) {
+			Console.print("Null printString");
+		}
+		else {
+			Console.println(executedPrintString.toString());
+		}
+		
+		return null;
+	}
+}
 
 //COMMAND HIERARCHY LEVEL 2
 
@@ -296,7 +319,6 @@ class ResolveVariable extends CommandObject<Object>
 	@Override
 	public Object execute()
 	{
-		System.out.println((String)st.get(name));
 		st.addSymbol("_lastExecution", st.get(name));
 		return st.get(name);
 	}
