@@ -8,7 +8,7 @@ import gui.Console;
  * @author Sam 'Streus' Streed
  *
  */
-public class Alphabet
+public class Alphabet implements Comparable<Alphabet>
 {
 	/* Static Variables */
 	
@@ -199,6 +199,18 @@ public class Alphabet
 			return false;
 		
 		return true;
+	}
+	
+	@Override
+	public int compareTo(Alphabet o)
+	{
+		if(o == null)
+			return 0;
+		else if(o.level < level)
+			return 1;
+		else if(o.level > level)
+			return -1;
+		return 0;
 	}
 	
 	/**

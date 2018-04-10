@@ -481,7 +481,7 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 			System.out.println("var name = " + ctx.alphabetName.getText());
 		}
 		
-		return null;//new DeriveAlphabet();
+		return new DeriveAlphabet(ctx.alphabetName.getText(), new LiteralCommand<Integer>(Integer.parseInt(ctx.INT().getText())));
 	}
 }
 
