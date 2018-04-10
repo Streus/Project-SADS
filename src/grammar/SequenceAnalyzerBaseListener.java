@@ -160,30 +160,6 @@ public class SequenceAnalyzerBaseListener implements SequenceAnalyzerListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterBuildExpression(SequenceAnalyzerParser.BuildExpressionContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitBuildExpression(SequenceAnalyzerParser.BuildExpressionContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterBuildExpressionInParens(SequenceAnalyzerParser.BuildExpressionInParensContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitBuildExpressionInParens(SequenceAnalyzerParser.BuildExpressionInParensContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterShiftMaximalityOfExpression(SequenceAnalyzerParser.ShiftMaximalityOfExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}

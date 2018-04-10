@@ -142,30 +142,6 @@ public interface SequenceAnalyzerListener extends ParseTreeListener {
 	 */
 	void exitStarProductOfExpressions(SequenceAnalyzerParser.StarProductOfExpressionsContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code BuildExpression}
-	 * labeled alternative in {@link SequenceAnalyzerParser#build}.
-	 * @param ctx the parse tree
-	 */
-	void enterBuildExpression(SequenceAnalyzerParser.BuildExpressionContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code BuildExpression}
-	 * labeled alternative in {@link SequenceAnalyzerParser#build}.
-	 * @param ctx the parse tree
-	 */
-	void exitBuildExpression(SequenceAnalyzerParser.BuildExpressionContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code BuildExpressionInParens}
-	 * labeled alternative in {@link SequenceAnalyzerParser#build}.
-	 * @param ctx the parse tree
-	 */
-	void enterBuildExpressionInParens(SequenceAnalyzerParser.BuildExpressionInParensContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code BuildExpressionInParens}
-	 * labeled alternative in {@link SequenceAnalyzerParser#build}.
-	 * @param ctx the parse tree
-	 */
-	void exitBuildExpressionInParens(SequenceAnalyzerParser.BuildExpressionInParensContext ctx);
-	/**
 	 * Enter a parse tree produced by the {@code ShiftMaximalityOfExpression}
 	 * labeled alternative in {@link SequenceAnalyzerParser#sm}.
 	 * @param ctx the parse tree

@@ -195,30 +195,6 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 		
 		return new StarProductCommand(visit(ctx.arg1), visit(ctx.arg2));
 	}
-	
-	@Override
-    public CommandObject<String> visitBuildExpression(SequenceAnalyzerParser.BuildExpressionContext ctx)
-	{
-		String str = ctx.arg1.getText();
-		
-		if(debugFlag == true){
-			System.out.println("expr = " + str);
-		}
-		
-		return new BuildCommand(visit(ctx.arg1));
-	}
-
-	@Override
-    public CommandObject<String> visitBuildExpressionInParens(SequenceAnalyzerParser.BuildExpressionInParensContext ctx)
-	{
-		String str = ctx.arg1.getText();
-		
-		if(debugFlag == true){
-			System.out.println("expr = " + str);
-		}
-		
-		return new BuildCommand(visit(ctx.arg1));
-	}
 
 	@Override
     public CommandObject<String> visitShiftMaximalityOfExpression(SequenceAnalyzerParser.ShiftMaximalityOfExpressionContext ctx)

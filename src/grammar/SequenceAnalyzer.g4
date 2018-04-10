@@ -27,8 +27,7 @@ strcmd	:	sub			//substitution command
 		;
 		
 predef	:	ct		//cutting times
-		|	sp		//star product
-		|	build		
+		|	sp		//star product	
 		|	sm		//shift maximality
 		|	wordct	//word count
 		|	concat	//concatonate
@@ -51,11 +50,6 @@ ct		:	'ct' arg1=expr							#CuttingTimesOfExpression
 //input must be in format sp (data , data)		
 sp		:	'sp' LP arg1=expr COMMA arg2=expr RP	#StarProductOfExpressions
 		;	
-		
-//input must be in format build data or build (data)
-build	:	'build'  arg1=expr			#BuildExpression
-		|	'build' LP arg1=expr RP		#BuildExpressionInParens
-		;
 		
 //input must be in format sm data or sm (data)
 sm		:	'sm' arg1=expr							#ShiftMaximalityOfExpression
@@ -81,9 +75,6 @@ array_def	:	'def' LCB (STRING_LITERAL) (COMMA STRING_LITERAL)* RCB						#AssignU
 			|	'def' LP LCB (STRING_LITERAL) (COMMA STRING_LITERAL)* RCB RP				#AssignUserAlphabetOfStringsInParens
 			|	'def' LP LCB (STRING_LITERAL) (COMMA STRING_LITERAL)* RCB COMMA (rules) (COMMA rules)* RP	#AssignUserAlphabetOfStringsWithRules		
 			;
-		
-//two_d_array	:	'def' LP (LCB (INT ',')*(INT) RCB *(LCB (INT ',')*(INT) RCB	)) RP			#Assign2DArray
-//			;
 			
 rules	: 'r' LP (INT) (COMMA INT)* RP
 		;
