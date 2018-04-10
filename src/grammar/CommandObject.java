@@ -383,25 +383,46 @@ class DeriveAlphabet extends AlphabetCommand
 {
 	private AlphabetCommand base;
 	private CommandObject<Integer> targetLevel;
+	private String variableName;
 	
 	public DeriveAlphabet(AlphabetCommand a, CommandObject<Integer> level)
 	{
 		base = a;
 		targetLevel = level;
+		variableName = "";
 	}
 	
 	public DeriveAlphabet(String variableName, CommandObject<Integer> level)
 	{
-		
+		base = new AlphabetLiteral((Alphabet)st.get(variableName));
+		this.variableName = variableName;
+		targetLevel = level;
 	}
 	
 	@Override
 	public Alphabet execute()
 	{
-		
-		Alphabet generated = Alphabet.generate(base.execute(), targetLevel.execute());
-		//TODO symbol table storage
+		Alphabet start = base.execute();
+		Alphabet generated = Alphabet.generate(start, targetLevel.execute());
+		if(!variableName.equals("") && start.compareTo(generated) == -1)
+			st.addSymbol(variableName, generated);
 		return generated;
 	}
+}
+
+class AlphabetLiteral extends AlphabetCommand
+{
+	private Alphabet alpha;
 	
+	public AlphabetLiteral(Alphabet a)
+	{
+		alpha = a;
+	}
+	
+	@Override
+	public Alphabet execute()
+	{
+		st.addSymbol("_lastExecution", alpha);
+		return alpha;
+	}
 }
