@@ -30,6 +30,7 @@ public class AntlrBridge {
 		catch(ClassCastException cce)
 		{
 			Console.println(cce.getMessage(), Console.getErr());
+			cce.printStackTrace();
 		}
 	}
 
