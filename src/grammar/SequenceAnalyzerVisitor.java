@@ -90,20 +90,6 @@ public interface SequenceAnalyzerVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitStarProductOfExpressions(SequenceAnalyzerParser.StarProductOfExpressionsContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code BuildExpression}
-	 * labeled alternative in {@link SequenceAnalyzerParser#build}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitBuildExpression(SequenceAnalyzerParser.BuildExpressionContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code BuildExpressionInParens}
-	 * labeled alternative in {@link SequenceAnalyzerParser#build}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitBuildExpressionInParens(SequenceAnalyzerParser.BuildExpressionInParensContext ctx);
-	/**
 	 * Visit a parse tree produced by the {@code ShiftMaximalityOfExpression}
 	 * labeled alternative in {@link SequenceAnalyzerParser#sm}.
 	 * @param ctx the parse tree
