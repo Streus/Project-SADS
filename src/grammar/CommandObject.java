@@ -16,6 +16,7 @@ import engine.Alphabet;
 import engine.Alphabet.Rule;
 import engine.AlphabetSymbolTable;
 import engine.Compare;
+import engine.CONSTS;
 
 //COMMAND HIERARCHY LEVEL 0
 public abstract class CommandObject<T>
@@ -25,10 +26,9 @@ public abstract class CommandObject<T>
 	
 	static
 	{
-		String lastExecution = "_lastExecution";
 		symbolGen = new UniqueSymbolGenerator();
 		st = new SymbolTable<String, Object>();
-		st.addSymbol(lastExecution, null);
+		st.addSymbol(CONSTS.LASTEXEC, null);
 	}
 	
 	public abstract T execute();
@@ -56,9 +56,11 @@ class PrintCommand extends CommandObject<Object>
 		Object executedPrintString = printString.execute();
 		if(executedPrintString == null) {
 			Console.print("Null printString");
+			//st.addSymbol(CONSTS.LASTEXEC, "Null printString");
 		}
 		else {
 			Console.println(executedPrintString.toString());
+			//st.addSymbol(CONSTS.LASTEXEC, executedPrintString.toString());
 		}
 		
 		return null;
@@ -82,7 +84,7 @@ class VariableAssignmentCommand extends VarDefCommand<Object>
 	public Object execute()
 	{
 		st.addSymbol(varName, value.execute());	
-		st.addSymbol("_lastExecution", value);
+		st.addSymbol(CONSTS.LASTEXEC, CONSTS.LASTEXECPREFIX + this.getClass() + CONSTS.LASTEXECPREFIX1 + value);
 		return value; //return the value?
 	}
 }
@@ -102,7 +104,7 @@ class AlphabetDefinitionCommand extends VarDefCommand<String>
 	@Override
 	public String execute()
 	{
-		st.addSymbol("_lastExecution", this.charList);
+		st.addSymbol(CONSTS.LASTEXEC, CONSTS.LASTEXECPREFIX + this.getClass());
 		return null; //return message to console?
 	}
 	
@@ -124,7 +126,7 @@ class SubstitutionCommand extends StringCommand
 	{
 		SADSstring sad = new SADSstring();
 		CommandResponse resp = new CommandResponse(sad.Sub(startString.execute(), map));
-		st.addSymbol("_lastExecution", resp.returnVal);
+		st.addSymbol(CONSTS.LASTEXEC, CONSTS.LASTEXECPREFIX + this.getClass() + CONSTS.LASTEXECPREFIX1 + resp.returnVal);
 		return resp.returnVal;
 	}
 }
@@ -145,7 +147,7 @@ class CompareCommand extends StringCommand
 		Compare cmp = new Compare();
 		
 		CommandResponse resp = new CommandResponse(cmp.compareStrings(str1.execute(), str2.execute()));
-		st.addSymbol("_lastExecution", resp.returnVal);
+		st.addSymbol(CONSTS.LASTEXEC, CONSTS.LASTEXECPREFIX + this.getClass() + CONSTS.LASTEXECPREFIX1 + resp.returnVal);
 		return resp.returnVal;
 	}
 }
@@ -165,7 +167,7 @@ class CuttingTimesCommand extends PredefinedFunctionCommand
 	{
 		CuttingTimes ct = new CuttingTimes();		
 		CommandResponse resp = new CommandResponse(CuttingTimes.cuttingTimes(expr.execute()));
-		st.addSymbol("_lastExecution", resp.returnVal);
+		st.addSymbol(CONSTS.LASTEXEC, CONSTS.LASTEXECPREFIX + this.getClass() + CONSTS.LASTEXECPREFIX1 + resp.returnVal);
 		return resp.returnVal;
 	}
 }
@@ -185,7 +187,7 @@ class StarProductCommand extends PredefinedFunctionCommand
 	{
 		StarProduct sp = new StarProduct();
 		CommandResponse resp = new CommandResponse(sp.starProduct(str1.execute(), str2.execute()));
-		st.addSymbol("_lastExecution", resp.returnVal);
+		st.addSymbol(CONSTS.LASTEXEC, CONSTS.LASTEXECPREFIX + this.getClass() + CONSTS.LASTEXECPREFIX1 + resp.returnVal);
 		return resp.returnVal;
 	}
 }
@@ -204,8 +206,8 @@ class ShiftMaximalityCommand extends PredefinedFunctionCommand
 	public String execute()
 	{
 		ShiftMaximality sm = new ShiftMaximality();
-		CommandResponse resp = new CommandResponse(sm.shiftMaximal((String)operand.execute()));
-		st.addSymbol("_lastExecution", resp.returnVal);
+		CommandResponse resp = new CommandResponse(ShiftMaximality.shiftMaximal((String)operand.execute()));
+		st.addSymbol(CONSTS.LASTEXEC, CONSTS.LASTEXECPREFIX + this.getClass() + CONSTS.LASTEXECPREFIX1 + resp.returnVal);
 		return resp.returnVal;	
 	}
 }
@@ -227,7 +229,7 @@ class WordCountCommand extends PredefinedFunctionCommand
 		
 		WordCount wc = new WordCount();
 		CommandResponse resp = new CommandResponse(wc.wordCount(str.execute(), index.execute().intValue()));
-		st.addSymbol("_lastExecution", resp.returnVal);
+		st.addSymbol(CONSTS.LASTEXEC, CONSTS.LASTEXECPREFIX + this.getClass() + CONSTS.LASTEXECPREFIX1 + resp.returnVal);
 		return resp.returnVal;	
 	}
 }
@@ -247,7 +249,7 @@ class BuildCommand extends PredefinedFunctionCommand
 	public String execute()
 	{
 		//TODO
-		st.addSymbol("_lastExecution", str);
+		st.addSymbol(CONSTS.LASTEXEC, CONSTS.LASTEXECPREFIX + this.getClass());
 		return null;
 	}
 }
@@ -278,13 +280,13 @@ class ConcatenationCommand extends PredefinedFunctionCommand
 		if (index == null)
 		{	
 			CommandResponse resp = new CommandResponse(concat.concat(baseStr.execute(), concatStr.execute()));
-			st.addSymbol("_lastExecution", resp.returnVal);
+			st.addSymbol(CONSTS.LASTEXEC, CONSTS.LASTEXECPREFIX + this.getClass() + CONSTS.LASTEXECPREFIX1 + resp.returnVal);
 			return resp.returnVal;			
 		}
 		else
 		{
 			CommandResponse resp = new CommandResponse(concat.Insert(baseStr.execute(), concatStr.execute(), index.execute().intValue()));
-			st.addSymbol("_lastExecution", resp.returnVal);
+			st.addSymbol(CONSTS.LASTEXEC,CONSTS.LASTEXECPREFIX + this.getClass() + CONSTS.LASTEXECPREFIX1 + resp.returnVal);
 			return resp.returnVal;
 		}
 	}
@@ -302,7 +304,7 @@ class LiteralCommand<S> extends CommandObject<S>
 	@Override
 	public S execute()
 	{
-		st.addSymbol("_lastExecution", value);
+		//st.addSymbol(CONSTS.LASTEXEC, value); - gets called after some other commands, messes up the last exec functionality - (last exec wont work for literal commands for now)
 		return value;
 	}
 }
@@ -319,7 +321,6 @@ class ResolveVariable extends CommandObject<Object>
 	@Override
 	public Object execute()
 	{
-		st.addSymbol("_lastExecution", st.get(name));
 		return st.get(name);
 	}
 }
@@ -337,6 +338,7 @@ class DefineRule extends CommandObject<Alphabet.Rule>
 	public Rule execute()
 	{
 		Alphabet.Rule r = new Alphabet.Rule(chars);
+		st.addSymbol(CONSTS.LASTEXEC,CONSTS.LASTEXECPREFIX + this.getClass() + CONSTS.LASTEXECPREFIX1 + r);
 		return r;
 	}
 }
@@ -374,7 +376,7 @@ class DefineAlphabet extends AlphabetCommand
 		}
 		
 		//TODO symbol table storage
-		
+		st.addSymbol(CONSTS.LASTEXEC,CONSTS.LASTEXECPREFIX + this.getClass() + CONSTS.LASTEXECPREFIX1 + a);
 		return a;
 	}
 }
@@ -406,6 +408,8 @@ class DeriveAlphabet extends AlphabetCommand
 		Alphabet generated = Alphabet.generate(start, targetLevel.execute());
 		if(!variableName.equals("") && start.compareTo(generated) == -1)
 			st.addSymbol(variableName, generated);
+		
+		st.addSymbol(CONSTS.LASTEXEC, CONSTS.LASTEXECPREFIX + this.getClass() + CONSTS.LASTEXECPREFIX1 + generated);
 		return generated;
 	}
 }
@@ -422,7 +426,7 @@ class AlphabetLiteral extends AlphabetCommand
 	@Override
 	public Alphabet execute()
 	{
-		st.addSymbol("_lastExecution", alpha);
+		st.addSymbol(CONSTS.LASTEXEC, CONSTS.LASTEXECPREFIX + this.getClass() + CONSTS.LASTEXECPREFIX1 + alpha);
 		return alpha;
 	}
 }

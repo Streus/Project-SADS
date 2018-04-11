@@ -24,6 +24,11 @@ public class CONSTS {
 	
 	public static final int SUCCESS = 1;
 	
+	public static final String LASTEXEC = "_";
+	
+	public static final String LASTEXECPREFIX = "Last command executed: ";
+			
+	public static final String LASTEXECPREFIX1 = ", Return value: ";
 	//private constants
 
 }
