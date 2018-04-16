@@ -112,7 +112,9 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 		return new SubstitutionCommand(visit(ctx.arg1), map);
 	}
 	
-	@Override public CommandObject<String> visitSubstitutionOfExpressionWithIterations(SequenceAnalyzerParser.SubstitutionOfExpressionWithIterationsContext ctx) { 
+	@Override 
+	public CommandObject<String> visitSubstitutionOfExpressionWithIterations(SequenceAnalyzerParser.SubstitutionOfExpressionWithIterationsContext ctx) 
+	{ 
 		String startString = ctx.arg1.getText();
 		String mapping = ctx.alpha_mapping().getText();
 		int iterations = Integer.parseInt(ctx.INT().getText());
@@ -139,8 +141,8 @@ public class CommandObjectVisitor extends SequenceAnalyzerBaseVisitor<CommandObj
 			System.out.println("mapping = " + mapping);
 			System.out.println("iterations = " + iterations);
 		}
-		
-		return new SubstitutionCommand(visit(ctx.arg1), map);
+				
+		return new SubstitutionCommand(visit(ctx.arg1), map, iterations);
 	}
 
 	@Override
