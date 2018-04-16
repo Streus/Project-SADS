@@ -114,20 +114,38 @@ class SubstitutionCommand extends StringCommand
 {
 	private CommandObject<String> startString;
 	private LinkedHashMap<String, String> map;
+	private int iterations;
 
 	public SubstitutionCommand (CommandObject<String> startString, LinkedHashMap<String, String> map)
 	{
 		this.startString = startString;
 		this.map = map;
 	}
+	
+	public SubstitutionCommand (CommandObject<String> startString, LinkedHashMap<String, String> map, int iterations)
+	{
+		this.startString = startString;
+		this.map = map;
+		this.iterations = iterations;
+	}
 
 	@Override
 	public String execute()
 	{
 		SADSstring sad = new SADSstring();
-		CommandResponse resp = new CommandResponse(sad.Sub(startString.execute(), map));
-		st.addSymbol(CONSTS.LASTEXEC, CONSTS.LASTEXECPREFIX + this.getClass() + CONSTS.LASTEXECPREFIX1 + resp.returnVal);
-		return resp.returnVal;
+		
+		if(iterations <= 0)
+		{
+			CommandResponse resp = new CommandResponse(sad.Sub(startString.execute(), map));
+			st.addSymbol(CONSTS.LASTEXEC, CONSTS.LASTEXECPREFIX + this.getClass() + CONSTS.LASTEXECPREFIX1 + resp.returnVal);
+			return resp.returnVal;
+		}
+		else
+		{
+			CommandResponse resp = new CommandResponse(sad.Sub(startString.execute(), map, iterations));
+			st.addSymbol(CONSTS.LASTEXEC, CONSTS.LASTEXECPREFIX + this.getClass() + CONSTS.LASTEXECPREFIX1 + resp.returnVal);
+			return resp.returnVal;
+		}		
 	}
 }
 
